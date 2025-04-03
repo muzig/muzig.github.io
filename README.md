@@ -1,119 +1,49 @@
-# Hi there, I'm Jesse - aka [codeSTACKr][youtube] 👋 
+# 🌟 嘿，我是 muzig! 🌟
 
-[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCDCHcqyeQgJ-jVSd6VJkbCw?logo=youtube&logoColor=red&style=for-the-badge)][youtube]
-[![Website](https://img.shields.io/website?label=codeSTACKr.com&style=for-the-badge&url=https%3A%2F%2Fcodestackr.com)](https://codestackr.com)
-[![Twitter Follow](https://img.shields.io/twitter/follow/codeSTACKr?color=1DA1F2&logo=twitter&style=for-the-badge)](https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fgithub.com%2FcodeSTACKr&screen_name=codeSTACKr)
+## 🎮 游戏开发六年｜Go 语言爱好者｜AI 辅助开发探索者｜嵌入式野生爱好者
 
-[![Visual Studio Marketplace Rating (Stars)](https://img.shields.io/visual-studio-marketplace/stars/codestackr.codestackr-theme?label=codeSTACKr%20VS%20Code%20Theme&logo=visualstudiocode&logoColor=ff652f&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=codestackr.codestackr-theme)
-[![Become A VS Code SuperHero](https://img.shields.io/badge/-Become%20A%20VS%20Code%20SuperHero%20%E2%86%92-gray.svg?colorB=ff652f&style=for-the-badge)](https://vsCodeHero.com)
+毕业六年，我一直在 GO 语言的海洋里畅游，主攻 SLG 游戏后端开发。SLG 是什么？就是那种策略类游戏，像《ROK》那样，需要烧脑布局、步步为营的游戏。我的工作就是让这些游戏的后台跑得飞快，给玩家带来超棒的体验！
 
+除了后端，我还喜欢捣鼓一些提高效率的前端工具。毕竟，效率高一点，就能多挤出时间探索新东西，你说对不对？
 
-## I'm a Husband, Father, Developer, and Teacher!!
+现在，我正在研究怎么用大模型来加速代码编写和工具效率。想象一下，AI 帮你写代码、优化流程，是不是超酷？另外，我也在摸索 MCP 的相关概念，希望能玩出点新花样。
 
-- 🔭 Check out my VS Code course: [Become A VS Code SuperHero!][course]!
-- 🌱 I’m currently learning everything 🤣
-- 👯 I’m looking to collaborate with other content creators
-- 🥅 2022 Goals: Learn more about web3
-- ⚡ Fun fact: I love to draw and play guitar / drums
-- 😻 Check out the NFT collection I created: [CodeCats](https://opensea.io/collection/codecats?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW)
+如果你也喜欢技术、游戏或者效率工具，欢迎来找我聊聊！我们可以一起聊 GO 语言的乐趣，分享游戏开发的日常，或者探讨嵌入式的小趣味。技术世界里，等你一起冒险！🚀
 
-### Connect with me:
+🌳 技能树
 
-[![website](./img/globe-light.svg)](https://codestackr.com#gh-light-mode-only)
-[![website](./img/globe-dark.svg)](https://codestackr.com#gh-dark-mode-only)
-&nbsp;&nbsp;
-[![website](./img/youtube-light.svg)](https://youtube.com/codestackr#gh-light-mode-only)
-[![website](./img/youtube-dark.svg)](https://youtube.com/codestackr#gh-dark-mode-only)
-&nbsp;&nbsp;
-[![website](./img/twitter-light.svg)](https://twitter.com/codestackr#gh-light-mode-only)
-[![website](./img/twitter-dark.svg)](https://twitter.com/codestackr#gh-dark-mode-only)
-&nbsp;&nbsp;
-[![website](./img/linkedin-light.svg)](https://linkedin.com/in/codeSTACKr#gh-light-mode-only)
-[![website](./img/linkedin-dark.svg)](https://linkedin.com/in/codeSTACKr#gh-dark-mode-only)
-&nbsp;&nbsp;
-[![website](./img/instagram-light.svg)](https://instagram.com/codeSTACKr#gh-light-mode-only)
-[![website](./img/instagram-dark.svg)](https://instagram.com/codeSTACKr#gh-dark-mode-only)
+**架构设计**：精通分布式与微服务架构，熟练运用 DDD 领域驱动开发理念。以 Go 语言为核心，熟悉高性能、高可用且支持热更新的游戏服务器架构。
 
-### Languages and Tools:
+**编程语言**：Go 语言运用炉火纯青，能迅速定位并解决复杂技术难题，显著提升开发效率。熟练掌握 Python、JavaScript、Lua、C# 以及 Vue3.0 语言，可根据项目需求灵活选择。在嵌入式场景中，对 C/C++ 和 Rust 语言有深入实践；对 Java 语言也有一定了解，具备跨语言开发能力。
 
-[<img align="left" alt="Visual Studio Code" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="HTML5" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="CSS3" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" style="padding-right:10px;" />][cssplaylist]
-[<img align="left" alt="Sass" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" style="padding-right:10px;" />][cssplaylist]
-[<img align="left" alt="JavaScript" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="padding-right:10px;" />][jsplaylist]
-[<img align="left" alt="React" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="padding-right:10px;" />][reactplaylist]
-[<img align="left" alt="Gatsby" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gatsby/gatsby-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="GraphQL" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="Node.js" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="Deno" width="26px" src="./img/deno-light.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="MongoDB" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="MySQL" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="Git" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="padding-right:10px;" />][webdevplaylist]
-[<img align="left" alt="GitHub" width="26px" src="https://user-images.githubusercontent.com/3369400/139447912-e0f43f33-6d9f-45f8-be46-2df5bbc91289.png" style="padding-right:10px;" />](https://www.youtube.com/playlist?list=PLkwxH9e_vrAJ0WbEsFA9W3I1W-g_BTsbt#gh-dark-mode-only)
-[<img align="left" alt="GitHub" width="26px" src="https://user-images.githubusercontent.com/3369400/139448065-39a229ba-4b06-434b-bc67-616e2ed80c8f.png" style="padding-right:10px;" />](https://www.youtube.com/playlist?list=PLkwxH9e_vrAJ0WbEsFA9W3I1W-g_BTsbt#gh-light-mode-only)
-[<img align="left" alt="Terminal" width="26px" src="./img/terminal-light.svg" />](https://www.youtube.com/playlist?list=PLkwxH9e_vrAJ0WbEsFA9W3I1W-g_BTsbt#gh-light-mode-only)
-[<img align="left" alt="Terminal" width="26px" src="./img/terminal-dark.svg" />](https://www.youtube.com/playlist?list=PLkwxH9e_vrAJ0WbEsFA9W3I1W-g_BTsbt#gh-dark-mode-only)
+**数据库**：熟练运用 MongoDB、Redis、MySQL 等主流数据库，擅长数据库设计，通过合理优化，使数据库查询速度提升 40%。精通事务处理，确保数据的一致性与完整性，为游戏及各类项目的数据存储与管理提供坚实保障。
 
-<br />
-<br />
+**工具链**：熟练使用 Git 进行高效代码版本管理，深度融入 CI/CD 流程，实现自动化构建与部署。 熟练 Docker 与 K8S 容器技术，大幅提升项目部署效率与可扩展性。熟练运用 Prometheus 和 Grafana 监控工具，实时掌握系统运行状态，保障系统稳定。
 
----
+**编码工具**：以 vscode、cursor、vim 为主要编码工具，充分利用 AI 辅助编码提升效率。积极践行 agent、mcp、prompt 等前沿工具，进一步优化开发流程，提高代码质量与开发速度。
 
-### 📺 Latest YouTube Videos
+🎮 业务能力
 
-<!-- YOUTUBE:START -->
-- [Forget Everything you Thought you Knew about Deno | Deno 2 0 Crash Course](https://www.youtube.com/watch?v=7Yo3eO-jitQ)
-- [Stop Googling | Start Chopping!!](https://www.youtube.com/watch?v=bvCYpVqkn54)
-- [Top VS Code Updates over the Past Year | Tips &amp; Tricks 2024 &lpar;Visual Studio Code&rpar;](https://www.youtube.com/watch?v=NBzhtDJFce8)
-- [This VS Code AI Coding Assistant Is A Game Changer!](https://www.youtube.com/watch?v=dNskJAl5dBw)
-- [I Cannot Believe How Powerful This Headless CMS Is!](https://www.youtube.com/watch?v=43Eznupydng)
-<!-- YOUTUBE:END -->
+具备丰富的游戏业务模块设计与开发经验。主导过**寻路系统**，通过优化算法，使角色移动效率提升 30%；独立完成**战斗系统**核心机制搭建，保障战斗流畅性与平衡性；策划并实现**活动系统**，成功吸引大量玩家参与，活动期间用户活跃度提高 50%。在**跨服系统**与排行榜系统方面也有出色表现，增强了游戏的社交互动性与竞技性。
 
-➡️ [more videos...](https://youtube.com/codestackr)
+💡 近期学习
 
----
+- MCP 协议与 AI 联动学习者
 
-### 📕 Latest Blog Posts
+🎯 未来目标
 
-<!-- BLOG-POST-LIST:START -->
-- [Next.js 14: No New APIs &amp; Breaking Changes](https://dev.to/mongodb/nextjs-14-no-new-apis-breaking-changes-3nh3)
-- [Render ATL 2023 Trip Report](https://dev.to/codestackr/render-atl-2023-trip-report-mp4)
-- [Web Development Roadmap 2023](https://dev.to/codestackr/web-development-roadmap-2023-5beo)
-- [Getting Started with MongoDB &amp; Mongoose](https://dev.to/codestackr/getting-started-with-mongodb-mongoose-2h6a)
-- [How To Pass Application Tracking Systems &lpar;ATS&rpar; &amp; Get Interviews - Resume Tips for Software Developer](https://dev.to/codestackr/how-to-pass-application-tracking-systems-ats-get-interviews-resume-tips-for-software-developer-4bmo)
-<!-- BLOG-POST-LIST:END -->
+- 希望通过技术创新，让游戏开发更高效、更有趣！
+- 欢迎一起交流技术心得，或聊聊 SLG 游戏设计的那些事儿～
+- 嵌入式开发业余选手（Arduino / 树莓派轻度用户）
 
-➡️ [more blog posts...](https://codestackr.com)
+📩 联系方式
 
----
+> 欢迎一起聊技术、分享经验，或者合作有趣的项目！
 
-<details>
-  <summary>:zap: Recent GitHub Activity</summary>
-  
-<!--START_SECTION:activity-->
-1. 🗣 Commented on [#68461](https://github.com/vercel/next.js/pull/68461#issuecomment-2266284188) in [vercel/next.js](https://github.com/vercel/next.js)
-2. 🗣 Commented on [#64130](https://github.com/vercel/next.js/pull/64130#issuecomment-2266031546) in [vercel/next.js](https://github.com/vercel/next.js)
-3. 💪 Opened PR [#68461](https://github.com/vercel/next.js/pull/68461) in [vercel/next.js](https://github.com/vercel/next.js)
-4. 🗣 Commented on [#64130](https://github.com/vercel/next.js/pull/64130#issuecomment-2266021755) in [vercel/next.js](https://github.com/vercel/next.js)
-5. 🗣 Commented on [#64130](https://github.com/vercel/next.js/pull/64130#issuecomment-2265702580) in [vercel/next.js](https://github.com/vercel/next.js)
-<!--END_SECTION:activity-->
+微信 / 邮箱：<muzig012046@gmail.com>
 
-</details>
+📕  博客
 
-<details>
-  <summary>:zap: GitHub Stats</summary>
+➡️ [更多博客...][website]
 
-  <img align="left" alt="codeSTACKr's GitHub Stats" src="https://github-readme-stats.vercel.app/api?username=codeSTACKr&show_icons=true&hide_border=false&title_color=ff652f&icon_color=FFE400&bg_color=09131B&text_color=ffffff&border_color=0c1a25" />
-
-</details>
-
-[website]: https://codeSTACKr.com
-[course]: http://vsCodeHero.com
-[twitter]: https://twitter.com/codeSTACKr
-[youtube]: https://youtube.com/codeSTACKr
-[instagram]: https://instagram.com/codeSTACKr
-[linkedin]: https://linkedin.com/in/codeSTACKr
-[webdevplaylist]: https://www.youtube.com/playlist?list=PLkwxH9e_vrAJ0WbEsFA9W3I1W-g_BTsbt
-[jsplaylist]: https://www.youtube.com/playlist?list=PLkwxH9e_vrALRJKu7wfXby3MKeflhTu6B
-[cssplaylist]: https://www.youtube.com/playlist?list=PLkwxH9e_vrALSdvZuEh6gqQdmDoDIoqz4
-[reactplaylist]: https://www.youtube.com/playlist?list=PLkwxH9e_vrAK4TdffpxKY3QGyHCpxFcQ0
+[website]: https://muzig.github.io/starrypen
