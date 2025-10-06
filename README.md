@@ -1,52 +1,49 @@
-# 🌟 嘿，我是 muzig! 🌟
+# muzig | Senior Backend Developer
 
-## 🚀 SLG 游戏后端开发 | AI+开发探索 | Go 语言爱好者 | 嵌入式兴趣者
+## 📋 Personal Profile
 
-## 💡 关于我
+**6+ years of game backend development experience** | **Go language expert** | **Distributed systems architect** | **AI development explorer**
 
-- 6 年+ SLG 游戏后端开发经验，专注高性能服务器架构和优化。
-- 主要使用 Go 语言，熟悉分布式架构、微服务和游戏服务器开发。  
-- 关注 AI 在开发中的应用，探索 MCP + AI 自动化工具链。
-- 对前端工具和嵌入式开发也有一定了解。
+Specializing in SLG game backend development with extensive experience in large-scale high-concurrency system design, microservices architecture, and AI-assisted development toolchain construction.
 
-## 🔥 技术实力
+## 🎯 Core Skills
 
-**架构 & 研发:**
+### Technical Capabilities
 
-- **高并发支持**：应对大规模玩家在线，优化 长连接管理、消息广播、负载均衡 等机制。
-- **分布式架构**：微服务化拆分游戏模块，实践 DDD 领域驱动设计，提高可扩展性和容灾能力。
-- **微服务架构**：设计并优化异步编程，实现多服高效通信，降低跨服开发者编码难度。
-- **AI 辅助开发**：实践 AGENT / MCP / Prompt 结合，运用 dify 实践一套 AI 辅助调试工具链。
-- **热更新能力**：GO 语言支持热更新设计，提升开发效率并减少停机时间
-- **跨服架构能力**：设计并优化跨服通信，提升服务器扩展性与开发者友好度。
+- **Programming Languages**: Go (expert practitioner), Python, Lua, C++
+- **Architecture Design**: Microservices architecture, distributed systems, DDD domain-driven design
+- **Database Technologies**: MongoDB, Redis, MySQL performance optimization and cluster management
+- **DevOps Practices**: Docker containerization, Kubernetes orchestration, CI/CD pipelines
 
-**技术栈:**
+### Business Experience
 
-- 后端：Go > Python > Lua > C++
-- 前端：Vue3 > JavaScript > Flutter
-- 工具：Cursor / Vim
-- 数据库：MongoDB > Redis > MySQL
-- DevOps：Docker / K8S / CI/CD / Prometheus / Grafana
+- **Game Server Development**: SLG game backend architecture design and implementation
+- **Cross-Server Communication**: Designed cross-server communication annotation generators, reducing cross-server development complexity to near local call levels
+- **Performance Optimization**: Server performance tuning, memory management, concurrency control
+- **AI Tool Development**: Built AI-assisted development toolchains based on Dify + MCP, revolutionizing development workflows
 
-**核心业务经验:**
+## 🏆 Project Highlights
 
-- 从 0 到 1 搭建过游戏服务器以及周边，有多个研发项目以及线上项目经验
-- SLG 战斗系统/战斗调试器设计开发
-- 活动系统/排行榜系统等常规业务
-- 寻路算法设计/寻路可视化工具开发
+- **Microservice Decoupling**: DDD-based microservice architecture design, improving system scalability and reducing development complexity
+- **AI Toolchain**: Built AI-assisted development tools, significantly improving team development efficiency
+- **Full-Stack Capabilities**: End-to-end development experience from backend to frontend
 
-## 🎯 研究方向
+## 🔧 Technology Stack
 
-- Vibe Coding 及 AI 辅助开发：尝试 AI 辅助编程工具，拓展开发方式，提高代码质量与开发速度。
-- 优化游戏服务器开发方式：降低服务器开发复杂度，探索 AI 在架构设计与运维中的应用，提升开发体验。
-- AI + MCP 自动化开发工具链：探索 AI 在开发流程中的应用，提升工具链效率，优化代码编写与部署流程。
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) ![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat&logo=lua&logoColor=white) ![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
 
-## 📩 联系 & 交流
+## 🚀 Technical Focus
 
-📧 邮箱：<muzig012046@gmail.com>
+- **Cloud-Native Architecture**: Deep research into Kubernetes, Service Mesh, and other cloud-native technologies to build modern microservice architectures
+- **Performance Engineering**: Focus on system performance tuning, monitoring system construction, improving stability and efficiency of large-scale systems
+- **DevOps Automation**: Perfecting CI/CD pipelines, building intelligent operation monitoring and fault self-healing systems
 
-🌐 博客：[https://muzig.github.io/starrypen](https://muzig.github.io/starrypen)
+## 📩 Contact Me
 
-📝 知乎：[前面直走](https://www.zhihu.com/people/nextleaf)
+📧 **Email**: [muzig012046@gmail.com](mailto:muzig012046@gmail.com)  
+🌐 **Blog**: [https://muzig.github.io/starrypen](https://muzig.github.io/starrypen)  
+📝 **Zhihu**: [前面直走](https://www.zhihu.com/people/nextleaf)
 
-💬 如果你对技术、AI 驱动的开发工具，或者高性能游戏系统有兴趣，随时交流！🔥
+---
+
+**Language**: [English](README.md) | [中文](README-zh.md)
