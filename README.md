@@ -1,49 +1,77 @@
-# muzig | Senior Backend Developer
+# StarryPen 静态网站
 
-## 📋 Personal Profile
+## 本地开发
 
-**6+ years of game backend development experience** | **Go language expert** | **Distributed systems architect** | **AI development explorer**
+```bash
+# 启动开发服务器
+hugo server -D
 
-Specializing in SLG game backend development with extensive experience in large-scale high-concurrency system design, microservices architecture, and AI-assisted development toolchain construction.
+# 访问本地调试地址
+open http://localhost:1313
+```
 
-## 🎯 Core Skills
+## 📂 项目结构
 
-### Technical Capabilities
+```
+.
+├── content/         # 内容文档
+├── themes/          # Hugo主题
+├── static/          # 静态资源
+├── public/          # 构建输出目录
+├── hugo.toml        # 主配置文件
+└── archetypes/      # 内容模板
+```
 
-- **Programming Languages**: Go (expert practitioner), Python, Lua, C++
-- **Architecture Design**: Microservices architecture, distributed systems, DDD domain-driven design
-- **Database Technologies**: MongoDB, Redis, MySQL performance optimization and cluster management
-- **DevOps Practices**: Docker containerization, Kubernetes orchestration, CI/CD pipelines
+## 📝 内容管理
 
-### Business Experience
+创建新文章：
 
-- **Game Server Development**: SLG game backend architecture design and implementation
-- **Cross-Server Communication**: Designed cross-server communication annotation generators, reducing cross-server development complexity to near local call levels
-- **Performance Optimization**: Server performance tuning, memory management, concurrency control
-- **AI Tool Development**: Built AI-assisted development toolchains based on Dify + MCP, revolutionizing development workflows
+```bash
+hugo new content content/posts/<new-content>.md
+```
 
-## 🏆 Project Highlights
+文章元数据模板：
 
-- **Microservice Decoupling**: DDD-based microservice architecture design, improving system scalability and reducing development complexity
-- **AI Toolchain**: Built AI-assisted development tools, significantly improving team development efficiency
-- **Full-Stack Capabilities**: End-to-end development experience from backend to frontend
-
-## 🔧 Technology Stack
-
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) ![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat&logo=lua&logoColor=white) ![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
-
-## 🚀 Technical Focus
-
-- **Cloud-Native Architecture**: Deep research into Kubernetes, Service Mesh, and other cloud-native technologies to build modern microservice architectures
-- **Performance Engineering**: Focus on system performance tuning, monitoring system construction, improving stability and efficiency of large-scale systems
-- **DevOps Automation**: Perfecting CI/CD pipelines, building intelligent operation monitoring and fault self-healing systems
-
-## 📩 Contact Me
-
-📧 **Email**: [muzig012046@gmail.com](mailto:muzig012046@gmail.com)  
-🌐 **Blog**: [https://muzig.github.io/starrypen](https://muzig.github.io/starrypen)  
-📝 **Zhihu**: [前面直走](https://www.zhihu.com/people/nextleaf)
-
+```markdown
 ---
+title: "文章标题"
+date: {{ .Date }}
+draft: true
+tags: ["标签1", "标签2"]
+---
+```
 
-**Language**: [English](README.md) | [中文](README-zh.md)
+## 🎨 主题配置
+
+当前使用[Ananke主题](https://github.com/theNewDynamic/gohugo-theme-ananke)，主要配置项见：
+
+```toml
+[params]
+  primary_color = "#0044ff"  # 主色调
+  show_hero = true           # 显示首页大图
+  social_links = [           # 社交媒体链接
+    { platform = "github", url = "https://github.com/yourprofile" }
+  ]
+```
+
+## 🛠 构建部署
+
+生成生产环境静态文件：
+
+```bash
+hugo --minify
+```
+
+部署到Gitea Pages：
+
+```bash
+git add .
+git commit -m "发布新版本"
+git push
+```
+
+## 📌 注意事项
+
+- 草稿文章需添加`draft: true`头信息
+- 图片资源请存放至`static/images/`目录
+- 修改主题配置后需重启Hugo服务

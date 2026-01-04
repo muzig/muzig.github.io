@@ -1,0 +1,36 @@
+baseURL = 'https://muzig.io'
+languageCode = 'en-us'
+title = 'Welcome to My Blog'
+theme = 'yinyang'
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+[markup.highlight]
+guessSyntax = true
+noClasses = true
+style = "bw"
+tabWidth = 2
+
+[author]
+name = "Muzig"
+homepage = "https://muzig.io/"
+
+# [languages]
+# [languages.en]
+# contentDir = "content/posts"
+# languageName = "English"
+# weight = 1
+
+[params]
+mainSections = ["posts"]
+headTitle = "Muzig"
+disqus = "muzig"         # disqus account name
+twitterCards = true
+# extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
+[[params.socials]]
+name = "About Me"
+link = "https://github.com/muzig"
+postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig's Blog</a></p>"
+# extraCSSFiles = ["css/foo.css", "css/bar.css"]
