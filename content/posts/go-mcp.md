@@ -2,6 +2,8 @@
 date = '2025-04-25T10:09:47+08:00'
 draft = false
 title = '深度解析：官方 Go 语言工具链中的 MCP（Model Context Protocol）实现'
+tags = ['Go', 'MCP', 'AI', 'Protocol']
+categories = ['技术深度']
 +++
 
 ## 什么是 MCP？

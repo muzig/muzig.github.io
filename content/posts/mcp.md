@@ -2,6 +2,8 @@
 date = '2025-04-03T22:21:53+08:00'
 draft = false
 title = 'MCP（Model Context Protocol）'
+tags = ['MCP', 'AI', 'Protocol', 'Architecture']
+categories = ['技术文章']
 +++
 
 - [MCP简介](#mcp简介)

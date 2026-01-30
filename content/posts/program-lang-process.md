@@ -1,7 +1,9 @@
 +++
 date = '2025-08-15T11:24:22+08:00'
 draft = false
-title = 'Program Lang Process'
+title = '编程语言运行流程剖析'
+tags = ['Programming Language', 'Compiler', 'Runtime']
+categories = ['技术深度']
 +++
 
 编程语言要在机器上运行，核心是将人类可读的代码转换为机器能理解的**二进制指令**（0和1），最终由CPU执行。这个过程因语言类型（编译型、解释型等）而有所不同，但本质都是“翻译+执行”的过程。
