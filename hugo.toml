@@ -1,7 +1,9 @@
 baseURL = 'https://muzig.io'
-languageCode = 'en-us'
-title = 'Welcome to My Blog'
+languageCode = 'zh-cn'
+title = 'Muzig 的技术博客'
 theme = 'yinyang'
+description = 'Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章'
+keywords = ['Go', 'Golang', 'AI', 'MCP', '编程语言', '技术博客']
 
 [markup]
 [markup.goldmark]
@@ -26,6 +28,8 @@ homepage = "https://muzig.io/"
 [params]
 mainSections = ["posts"]
 headTitle = "Muzig"
+description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章"
+keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客"]
 disqus = "muzig"         # disqus account name
 twitterCards = true
 # extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
@@ -34,3 +38,12 @@ name = "About Me"
 link = "https://github.com/muzig"
 postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig's Blog</a></p>"
 # extraCSSFiles = ["css/foo.css", "css/bar.css"]
+
+[outputFormats]
+[outputFormats.RSS]
+mediatype = "application/rss+xml"
+baseName = "index"
+
+[outputs]
+home = ["HTML", "RSS"]
+section = ["HTML", "RSS"]

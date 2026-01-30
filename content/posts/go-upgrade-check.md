@@ -1,7 +1,9 @@
 +++
 date = '2025-08-15T11:01:29+08:00'
 draft = false
-title = 'Go Upgrade Check'
+title = 'Go 版本升级检查指南'
+tags = ['Go', 'Upgrade', 'Best Practice']
+categories = ['技术文章']
 +++
 
 - [Go 版本升级的主要考虑因素](#go-版本升级的主要考虑因素)
