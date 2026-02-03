@@ -1,5 +1,5 @@
 +++
-date = '2026-01-31T22:15:00+08:00'
+date = '2026-02-03T15:40:00+08:00'
 draft = false
 title = 'OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥'
 tags = ['OpenClaw', 'AI', 'Agent', '架构', '工具']
@@ -175,7 +175,36 @@ vim ~/.openclaw/openclaw.json
 }
 ```
 
-### 2. 配对 Node 设备
+### 2. 启动 Node 设备
+
+要让一台设备成为 Node，首先要在该设备上启动 Node 守护进程：
+
+**方式一：前台启动（调试/临时使用）**
+```bash
+openclaw node run --host <gateway-host> --port 18789 --display-name "家里 Mac"
+```
+
+**方式二：通过 SSH 隧道连接（Gateway 绑定到 loopback 时）**
+```bash
+# 终端 A：建立隧道（保持运行）
+ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
+
+# 终端 B：通过隧道连接
+export OPENCLAW_GATEWAY_TOKEN="<gateway-token>"
+openclaw node run --host 127.0.0.1 --port 18790 --display-name "办公室 PC"
+```
+
+**方式三：后台服务启动（推荐长期运行）**
+```bash
+openclaw node install --host <gateway-host> --port 18789 --display-name "服务器 Node"
+openclaw node restart
+```
+
+启动后，Node 会自动向 Gateway 发起配对请求。
+
+### 3. 配对 Node 设备
+
+在 Gateway 端批准配对：
 
 ```bash
 # 查看待配对设备
@@ -188,7 +217,7 @@ openclaw nodes approve <device-id>
 openclaw nodes status
 ```
 
-### 3. 跨 Node 调用测试
+### 4. 跨 Node 调用测试
 
 ```bash
 # 在手机上拍照
