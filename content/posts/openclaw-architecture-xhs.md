@@ -1,5 +1,5 @@
 +++
-date = '2026-02-03T15:40:00+08:00'
+date = '2026-02-03T16:40:00+08:00'
 draft = false
 title = 'OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥'
 tags = ['OpenClaw', 'AI', 'Agent', '架构', '工具']
@@ -261,7 +261,109 @@ OpenClaw 的架构设计很清晰：
 
 ---
 
-📌 **延伸阅读**
+## 🔧 常见问题与实战排错
+
+### 1. Node 启动报错 `ECONNREFUSED`
+
+**原因**：Gateway 默认只绑定到 `127.0.0.1`，其他设备无法连接。
+
+**解决**：修改 Gateway 绑定到 LAN：
+```bash
+# 在 Gateway 机器上执行
+openclaw config set gateway.bind lan
+# 然后重启 Gateway
+```
+
+**注意**：`lan` 比 `0.0.0.0` 更安全，只监听局域网地址。
+
+---
+
+### 2. 报错 `pairing required`
+
+**原因**：Node 已连上 Gateway，但需要管理员批准配对。
+
+**解决**：
+```bash
+# 在 Gateway 端查看配对请求（注意是 devices，不是 nodes）
+openclaw devices list
+openclaw devices approve <requestId>
+
+# 或者一键批准所有
+openclaw devices approve --all
+```
+
+---
+
+### 3. Windows 作为 Node 如何设置 Token
+
+**PowerShell**：
+```powershell
+$env:OPENCLAW_GATEWAY_TOKEN="<your-token>"
+openclaw node run --host <gateway-ip> --port 18789 --display-name "Windows PC"
+```
+
+**CMD**：
+```cmd
+set OPENCLAW_GATEWAY_TOKEN=<your-token>
+openclaw node run --host <gateway-ip> --port 18789 --display-name "Windows PC"
+```
+
+**获取 Token**：
+```bash
+# 在 Gateway 端
+openclaw config get gateway.auth.token
+```
+
+---
+
+### 4. 防火墙配置
+
+**测试连通性**（Windows）：
+```powershell
+Test-NetConnection -ComputerName <gateway-ip> -Port 18789
+```
+
+**Mac 端防火墙**（如果 LAN 设备连不上）：
+```bash
+# 检查状态
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+
+# 临时关闭测试（记得开回来）
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+```
+
+---
+
+### 5. 执行命令超时/需要批准
+
+首次在新 Node 上执行命令可能需要**执行批准**。两种方式：
+
+**方式一**：实时批准（Windows 端会弹出提示）
+
+**方式二**：配置免批准（开发环境）：
+```bash
+# 在 Node 机器上
+openclaw approvals allowlist add --node <node-id> "/usr/bin/uname"
+```
+
+---
+
+### 6. 检查 Node 是否连接成功
+
+**Gateway 端查看**：
+```bash
+openclaw nodes status --connected
+openclaw nodes describe --node "Windows PC"
+```
+
+**执行测试命令**：
+```bash
+openclaw nodes run --node "Windows PC" --raw "hostname"
+```
+
+---
+
+## 📌 延伸阅读
 - [OpenClaw 官方文档](https://docs.openclaw.ai)
 - [MCP 协议介绍](/posts/mcp/)
 - [Go 语言 MCP 实现](/posts/go-mcp/)
