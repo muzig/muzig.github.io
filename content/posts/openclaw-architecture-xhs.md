@@ -341,9 +341,28 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 **方式一**：实时批准（Windows 端会弹出提示）
 
 **方式二**：配置免批准（开发环境）：
+
+**Gateway 端统一配置（推荐）**：
 ```bash
-# 在 Node 机器上
-openclaw approvals allowlist add --node <node-id> "/usr/bin/uname"
+# 允许 Node 执行特定命令
+openclaw approvals allowlist add --node "Windows PC" "C:\Windows\System32\dir.exe"
+
+# 允许所有命令（开发环境方便，生产慎用）
+openclaw approvals allowlist add --node "Windows PC" "*"
+```
+
+**Node 端本地配置**：
+在 Node 机器上创建 `~/.openclaw/exec-approvals.json`：
+```json
+{
+  "allowlist": ["*"],
+  "mode": "allowlist"
+}
+```
+
+**全局宽松模式（最危险，仅测试用）**：
+```bash
+openclaw config set tools.exec.security full
 ```
 
 ---
