@@ -2,8 +2,8 @@ baseURL = 'https://muzig.io'
 languageCode = 'zh-cn'
 title = 'Muzig 的技术博客'
 theme = 'yinyang'
-description = 'Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章'
-keywords = ['Go', 'Golang', 'AI', 'MCP', '编程语言', '技术博客']
+description = 'Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章'
+keywords = ['Go', 'Golang', 'AI', 'MCP', '编程语言', '技术博客', 'OpenClaw', 'Moltbot', 'Clawdbot', 'AI Agent', '自动化', '工具链']
 timeZone = 'Asia/Shanghai'
 
 # 启用 sitemap 和其他输出格式
@@ -24,8 +24,8 @@ posts = "/:year/:month/:day/:title/"
 [params]
 mainSections = ["posts"]
 headTitle = "Muzig"
-description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章"
-keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客"]
+description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章"
+keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客", "OpenClaw", "Moltbot", "Clawdbot", "AI Agent", "自动化", "工具链"]
 disqus = "muzig"         # disqus account name
 twitterCards = true
 googleAnalytics = "G-XXXXXXXXX"  # 替换为你的 Google Analytics ID
