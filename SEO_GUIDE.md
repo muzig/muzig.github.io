@@ -67,10 +67,17 @@ posts = "/:year/:month/:day/:title/"
 ## 四、搜索引擎提交
 
 ### 1. Google Search Console
-1. 访问 [Google Search Console](https://search.google.com/search-console/)
-2. 添加网站 `https://muzig.io`
-3. 通过 HTML 文件验证所有权（需要下载并上传验证文件到 `static` 目录）
-4. 提交 sitemap：`https://muzig.io/sitemap.xml`
+
+#### HTML 文件验证（推荐，适用于 GitHub Pages，当前验证：muzig.github.io）
+1. 访问 [Google Search Console](https://search.google.com/search-console/)，添加资源 **`https://muzig.github.io`**
+2. 选择验证方式为 **「HTML 文件」**
+3. 下载 Google 提供的验证文件（形如 `google1234567890abcdef.html`）
+4. 将下载的 **完整文件** 放入本项目的 **`static/`** 目录（不要改文件名）
+5. 提交并推送到 GitHub，等待 Pages 部署完成（通常 1–2 分钟）
+6. 在浏览器访问 **`https://muzig.github.io/验证文件名.html`**，确认能打开且内容与下载文件一致
+7. 回到 Search Console 点击「验证」
+
+验证通过后，在 Search Console 中提交 sitemap：**`https://muzig.github.io/sitemap.xml`**
 
 ### 2. Bing Webmaster Tools
 1. 访问 [Bing Webmaster Tools](https://www.bing.com/webmasters)
