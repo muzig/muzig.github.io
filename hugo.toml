@@ -4,6 +4,38 @@ title = 'Muzig 的技术博客'
 theme = 'yinyang'
 description = 'Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章'
 keywords = ['Go', 'Golang', 'AI', 'MCP', '编程语言', '技术博客']
+timeZone = 'Asia/Shanghai'
+
+# 启用 sitemap 和其他输出格式
+[outputFormats]
+[outputFormats.RSS]
+mediatype = "application/rss+xml"
+baseName = "index"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML", "RSS"]
+
+# 配置 permalinks 以提高 URL 可读性
+[permalinks]
+posts = "/:year/:month/:day/:title/"
+
+# 主题和站点参数
+[params]
+mainSections = ["posts"]
+headTitle = "Muzig"
+description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章"
+keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客"]
+disqus = "muzig"         # disqus account name
+twitterCards = true
+googleAnalytics = "G-XXXXXXXXX"  # 替换为你的 Google Analytics ID
+googleSiteVerification = "eGQlT6FCfJ6ocLk-156f5Fe6mF5-P5rPC9Oj0V5Rpkk"  # Google Search Console 验证
+# extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
+[[params.socials]]
+name = "About Me"
+link = "https://github.com/muzig"
+postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig's Blog</a></p>"
+# extraCSSFiles = ["css/foo.css", "css/bar.css"]
 
 [markup]
 [markup.goldmark]
@@ -24,26 +56,3 @@ homepage = "https://muzig.io/"
 # contentDir = "content/posts"
 # languageName = "English"
 # weight = 1
-
-[params]
-mainSections = ["posts"]
-headTitle = "Muzig"
-description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计等技术文章"
-keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客"]
-disqus = "muzig"         # disqus account name
-twitterCards = true
-# extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
-[[params.socials]]
-name = "About Me"
-link = "https://github.com/muzig"
-postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig's Blog</a></p>"
-# extraCSSFiles = ["css/foo.css", "css/bar.css"]
-
-[outputFormats]
-[outputFormats.RSS]
-mediatype = "application/rss+xml"
-baseName = "index"
-
-[outputs]
-home = ["HTML", "RSS"]
-section = ["HTML", "RSS"]

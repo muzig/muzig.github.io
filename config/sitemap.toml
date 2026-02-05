@@ -1,0 +1,12 @@
+enable = true
+filename = "sitemap.xml"
+priority = 0.5
+changefreq = "weekly"
+
+# 排除不需要的页面
+exclude = [
+  "/tags/",
+  "/categories/",
+  "/page/",
+  "/search/"
+]
