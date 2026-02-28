@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on Muzig 的技术博客</title>
-    <link>https://muzig.io/tags/python/</link>
-    <description>Recent content in Python on Muzig 的技术博客</description>
+    <title>Education on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/education/</link>
+    <description>Recent content in Education on Muzig 的技术博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 28 Feb 2026 21:30:00 +0800</lastBuildDate>
-    <atom:link href="https://muzig.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://muzig.io/tags/education/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Karpathy microGPT：200行纯Python实现完整GPT</title>
       <link>https://muzig.io/2026/02/28/karpathy-microgpt200%E8%A1%8C%E7%BA%AFpython%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4gpt/</link>
       <pubDate>Sat, 28 Feb 2026 21:30:00 +0800</pubDate>
       <guid>https://muzig.io/2026/02/28/karpathy-microgpt200%E8%A1%8C%E7%BA%AFpython%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4gpt/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;The most atomic way to train and run inference for a GPT in pure, dependency-free Python. This file is the complete algorithm. Everything else is just efficiency.&amp;rdquo;&lt;/em&gt; — Andrej Karpathy&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;最近 Andrej Karpathy 发布了一个极简 GPT 实现：&lt;strong&gt;microgpt.py&lt;/strong&gt; —— 仅 200 行纯 Python 代码，无任何外部依赖（只用标准库 &lt;code&gt;os&lt;/code&gt;, &lt;code&gt;math&lt;/code&gt;, &lt;code&gt;random&lt;/code&gt;），却包含了完整的训练、推理流程。&lt;/p&gt;&#xA;&lt;p&gt;这不是玩具代码，而是一个&lt;strong&gt;教学杰作&lt;/strong&gt;：它剥离了所有工程复杂性，让你看到 GPT 的算法本质。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>OpenClaw 修复 Python venv 导致的文件描述符耗尽问题</title>
-      <link>https://muzig.io/2026/02/06/openclaw-%E4%BF%AE%E5%A4%8D-python-venv-%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%80%97%E5%B0%BD%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Fri, 06 Feb 2026 09:48:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/02/06/openclaw-%E4%BF%AE%E5%A4%8D-python-venv-%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%80%97%E5%B0%BD%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;p&gt;当 OpenClaw 的 skills watcher 遇到 Python 虚拟环境时，成千上万的文件监控请求可能导致 macOS 系统出现 &lt;code&gt;EBADF&lt;/code&gt; 错误。本文深入分析这个问题的原因，并介绍官方修复方案。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
