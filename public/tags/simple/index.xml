@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simple on Welcome to My Blog</title>
+    <link>http://localhost:1313/tags/simple/</link>
+    <description>Recent content in Simple on Welcome to My Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Apr 2025 10:09:47 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/simple/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深度解析：官方 Go 语言工具链中的 MCP（Model Context Protocol）实现</title>
+      <link>http://localhost:1313/posts/go-mcp/</link>
+      <pubDate>Fri, 25 Apr 2025 10:09:47 +0800</pubDate>
+      <guid>http://localhost:1313/posts/go-mcp/</guid>
+      <description>&lt;h2 id=&#34;什么是-mcp&#34;&gt;什么是 MCP？&lt;/h2&gt;&#xA;&lt;p&gt;MCP（Model Context Protocol）是一个用于编写模型上下文协议客户端和服务器的 SDK。&lt;/p&gt;&#xA;&lt;p&gt;今天想和大家分享一个有趣的发现 —— 官方 Go 语言工具链中的 MCP（Model Context Protocol）实现。这是一个正在开发中的原型系统，旨在探索客户端/服务器生命周期和绑定的设计空间。&lt;/p&gt;&#xA;&lt;h2 id=&#34;核心特性&#34;&gt;核心特性&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;客户端/服务器架构&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;提供了 &lt;code&gt;NewClient&lt;/code&gt; 和 &lt;code&gt;NewServer&lt;/code&gt; 接口用于创建 MCP 客户端或服务器&lt;/li&gt;&#xA;&lt;li&gt;支持通过 &lt;code&gt;Transport&lt;/code&gt; 实例连接对等端&lt;/li&gt;&#xA;&lt;li&gt;灵活的特性扩展机制，可以通过 &lt;code&gt;Add&amp;lt;feature&amp;gt;&lt;/code&gt; 方法添加新功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;工具系统&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;实现了一个强大的工具定义和处理系统&lt;/li&gt;&#xA;&lt;li&gt;支持通过泛型优雅地定义新工具&lt;/li&gt;&#xA;&lt;li&gt;内置 JSON Schema 支持，用于请求验证&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;传输层抽象&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持多种传输协议&lt;/li&gt;&#xA;&lt;li&gt;包含 SSE（Server-Sent Events）实现&lt;/li&gt;&#xA;&lt;li&gt;计划支持 Streamable HTTP 传输&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-优雅的工具定义&#34;&gt;1. 优雅的工具定义&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;font-weight:bold&#34;&gt;func&lt;/span&gt; MakeTool[TReq &lt;span style=&#34;&#34;&gt;any&lt;/span&gt;](name, description &lt;span style=&#34;&#34;&gt;string&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    handler &lt;span style=&#34;font-weight:bold&#34;&gt;func&lt;/span&gt;(context.Context, *ClientConnection, TReq) ([]Content, &lt;span style=&#34;&#34;&gt;error&lt;/span&gt;)) *Tool&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-json-schema-集成&#34;&gt;2. JSON Schema 集成&lt;/h3&gt;&#xA;&lt;p&gt;包中集成了 JSON Schema 支持，可以：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自动从 Go 类型生成 Schema&lt;/li&gt;&#xA;&lt;li&gt;进行请求验证&lt;/li&gt;&#xA;&lt;li&gt;支持客户端和服务器端验证（规划中）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;未来规划&#34;&gt;未来规划&lt;/h2&gt;&#xA;&lt;p&gt;从代码中的 TODO 注释可以看出，还有一些特性正在规划中：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

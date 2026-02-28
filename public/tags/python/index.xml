@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/python/</link>
+    <description>Recent content in Python on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 06 Feb 2026 09:48:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenClaw 修复 Python venv 导致的文件描述符耗尽问题</title>
+      <link>https://muzig.io/2026/02/06/openclaw-%E4%BF%AE%E5%A4%8D-python-venv-%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%80%97%E5%B0%BD%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 06 Feb 2026 09:48:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/06/openclaw-%E4%BF%AE%E5%A4%8D-python-venv-%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%80%97%E5%B0%BD%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;当 OpenClaw 的 skills watcher 遇到 Python 虚拟环境时，成千上万的文件监控请求可能导致 macOS 系统出现 &lt;code&gt;EBADF&lt;/code&gt; 错误。本文深入分析这个问题的原因，并介绍官方修复方案。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Multi-Agent on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/multi-agent/</link>
+    <description>Recent content in Multi-Agent on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 05 Feb 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/multi-agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title>
+      <link>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</guid>
+      <description>&lt;p&gt;在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？&lt;/p&gt;&#xA;&lt;p&gt;本文将深入解析 &lt;strong&gt;OpenClaw 的多 Agent 架构&lt;/strong&gt;，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;为什么需要多-agent&#34;&gt;为什么需要多 Agent？&lt;/h2&gt;&#xA;&lt;p&gt;想象这样一个场景：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 A&lt;/strong&gt;：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 B&lt;/strong&gt;：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 C&lt;/strong&gt;：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;多 Agent 架构的核心价值&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;维度&lt;/th&gt;&#xA;          &lt;th&gt;单 Agent&lt;/th&gt;&#xA;          &lt;th&gt;多 Agent&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;专业分工&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;通用型，样样通样样松&lt;/td&gt;&#xA;          &lt;td&gt;专业型，各司其职&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;资源隔离&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;共享配置，容易冲突&lt;/td&gt;&#xA;          &lt;td&gt;独立工作区，互不干扰&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;安全边界&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;权限难控制&lt;/td&gt;&#xA;          &lt;td&gt;细粒度工具控制&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;并行处理&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;串行执行&lt;/td&gt;&#xA;          &lt;td&gt;多任务并行&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;openclaw-的-agent-架构&#34;&gt;OpenClaw 的 Agent 架构&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-agent&#34;&gt;什么是 Agent？&lt;/h3&gt;&#xA;&lt;p&gt;在 OpenClaw 中，一个 Agent 是一个&lt;strong&gt;完全隔离的 AI 大脑&lt;/strong&gt;，拥有：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

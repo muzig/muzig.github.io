@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Karpathy on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/karpathy/</link>
+    <description>Recent content in Karpathy on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 28 Feb 2026 08:20:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/karpathy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;</title>
+      <link>https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</guid>
+      <description>&lt;p&gt;最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。&lt;/p&gt;&#xA;&lt;p&gt;他没有只运行一个 agent。而是一次性运行了 8 个：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;4 个 Claude&lt;/li&gt;&#xA;&lt;li&gt;4 个 Codex&lt;/li&gt;&#xA;&lt;li&gt;每个分配 1 块 GPU&lt;/li&gt;&#xA;&lt;li&gt;目标：删除 logit softcap，同时不引入回归&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;他的 TL;DR 很直接：&lt;strong&gt;目前不太行。有点混乱。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;但从系统角度看，这个实验非常有意思。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;实验用-ai-组织做研究&#34;&gt;实验：用 AI 组织做研究&lt;/h2&gt;&#xA;&lt;p&gt;Karpathy 尝试了几种组织结构：&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. 8 个独立研究员&lt;/strong&gt;&#xA;每个 agent 自主开分支，独立探索。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;2. 1 个 Chief Scientist + 8 个 Junior&lt;/strong&gt;&#xA;一个 agent 负责拆解任务和分配工作，其余执行。&lt;/p&gt;&#xA;&lt;p&gt;这已经不是在&amp;quot;用 AI 写代码&amp;quot;。而是在测试：&lt;strong&gt;AI 组织是否能做研究？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;工程基础设施极简但系统化&#34;&gt;工程基础设施：极简但系统化&lt;/h2&gt;&#xA;&lt;p&gt;整个研究组织建立在非常简单的基础设施上：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;每个 research program 是一个 git branch&lt;/li&gt;&#xA;&lt;li&gt;每个 scientist fork 成 feature branch&lt;/li&gt;&#xA;&lt;li&gt;使用 git worktrees 做隔离&lt;/li&gt;&#xA;&lt;li&gt;简单文件作为通信机制&lt;/li&gt;&#xA;&lt;li&gt;不用 Docker / VM（指令约束已足够）&lt;/li&gt;&#xA;&lt;li&gt;所有 agent 运行在 tmux 网格中&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这看起来像一个&amp;quot;AI 研究办公室&amp;quot;——可以实时观察每个 agent 的工作，也可以随时接管。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

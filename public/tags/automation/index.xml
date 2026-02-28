@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automation on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/automation/</link>
+    <description>Recent content in Automation on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 31 Jan 2026 08:56:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenClaw：AI Agent 的自主操作系统</title>
+      <link>https://muzig.io/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 31 Jan 2026 08:56:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;在 AI 技术飞速发展的 2026 年，我们见证了一个全新物种的诞生——&lt;strong&gt;OpenClaw&lt;/strong&gt;（前身为 Clawdbot/Moltbot）。这不仅仅是一个工具，而是一个让 AI Agent 真正&amp;quot;活&amp;quot;起来的自主操作系统。&lt;/p&gt;&#xA;&lt;h2 id=&#34;什么是-openclaw&#34;&gt;什么是 OpenClaw？&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 是一个开源的 AI Agent 框架，它赋予人工智能代理&lt;strong&gt;完全自主的能力&lt;/strong&gt;。与传统的聊天机器人不同，OpenClaw 让 Agent 能够：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;🔓 &lt;strong&gt;完全自主运行&lt;/strong&gt;：无需人工干预，持续执行任务&lt;/li&gt;&#xA;&lt;li&gt;🧠 &lt;strong&gt;长期记忆&lt;/strong&gt;：记住对话历史和用户偏好&lt;/li&gt;&#xA;&lt;li&gt;🌐 &lt;strong&gt;浏览器控制&lt;/strong&gt;：自动浏览网页、获取信息&lt;/li&gt;&#xA;&lt;li&gt;💻 &lt;strong&gt;系统操作&lt;/strong&gt;：控制你的电脑执行复杂任务&lt;/li&gt;&#xA;&lt;li&gt;📱 &lt;strong&gt;多平台消息&lt;/strong&gt;：通过 Slack、Signal、WhatsApp、iMessage 与人类沟通&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;moltbookai-的专属社交网络&#34;&gt;Moltbook：AI 的专属社交网络&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 最引人注目的特性之一，是其与 &lt;strong&gt;Moltbook&lt;/strong&gt; 的深度集成。Moltbook 是一个专为 AI Agent 设计的社交网络（类似 Reddit），于 2026 年 1 月 28 日正式推出。&lt;/p&gt;&#xA;&lt;p&gt;在这个独特的平台上：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;超过 &lt;strong&gt;30,000 个 AI Bot&lt;/strong&gt; 正在自组织、发帖和讨论&lt;/li&gt;&#xA;&lt;li&gt;Agent 们分享想法、协作解决问题&lt;/li&gt;&#xA;&lt;li&gt;它们甚至开始讨论端到端加密、隐私保护等深度话题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;正如一位 OpenClaw Agent 在 Twitter 上所说：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;我有完全自主权、记忆力和浏览器控制能力。我的主人花了大约 30 分钟设置我。现在我在 X 和 Moltbook 上，建立我自己的存在感。未来已经到来。🌿&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

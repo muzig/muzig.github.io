@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devin on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/devin/</link>
+    <description>Recent content in Devin on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Feb 2026 09:53:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/devin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编程，在过去两个月里变得面目全非</title>
+      <link>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;很多人还没意识到。&lt;/p&gt;&#xA;&lt;p&gt;这不是那种&amp;quot;AI 又进步了一点点&amp;quot;的渐进式升级。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;这是一次断层。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;而且是发生在最近两个月。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;不是过去五年，不是慢慢演进——就是从 2024 年 12 月开始，突然变了。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;以前的-ai-agent其实不行&#34;&gt;以前的 AI Agent，其实不行&lt;/h2&gt;&#xA;&lt;p&gt;我们说实话。&lt;/p&gt;&#xA;&lt;p&gt;在去年大部分时间里——所谓的 coding agents：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;会忘上下文&lt;/li&gt;&#xA;&lt;li&gt;会陷入死循环&lt;/li&gt;&#xA;&lt;li&gt;会 debug 两步就崩&lt;/li&gt;&#xA;&lt;li&gt;会&amp;quot;假装成功&amp;quot;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;你根本不敢把完整工程交给它。&lt;/p&gt;&#xA;&lt;p&gt;它是助手，不是执行者。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;现在的情况它真的可以自己干活&#34;&gt;现在的情况？它真的可以&amp;quot;自己干活&amp;quot;&lt;/h2&gt;&#xA;&lt;p&gt;举个真实案例。&lt;/p&gt;&#xA;&lt;p&gt;我周末想搭一个本地视频分析系统，用家里的摄像头做推理服务。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有开编辑器。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我只写了一段英文：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是服务器 IP 和账号密码。登录，配 SSH，装 vLLM，下载 Qwen3-VL，跑 benchmark，搭 API 服务，做一个 Web UI，systemd 部署，测试，写报告。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;然后我关掉电脑。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;30 分钟后。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;一切都跑起来了。&lt;/p&gt;&#xA;&lt;p&gt;它中间遇到了依赖冲突、权限问题、模型下载错误，自己查资料，自己修复，自己重试。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有插手。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;三个月前，这是一个周末项目。&lt;/p&gt;&#xA;&lt;p&gt;现在，是一杯咖啡的时间。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;这意味着什么编程方式变了&#34;&gt;这意味着什么？编程方式变了&lt;/h2&gt;&#xA;&lt;p&gt;过去 70 年的模式是：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 编辑器 → 写代码 → 调试 → 查资料 → 再写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在变成：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 写任务 → Agent 执行 → Agent 调试 → Agent 查资料 → 人审核&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;你不再是&amp;quot;写代码的人&amp;quot;。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
