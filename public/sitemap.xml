@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://muzig.io/</loc>
+    <lastmod>2026-02-28T22:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://muzig.io/posts/</loc>
+    <lastmod>2026-02-28T22:30:00+08:00</lastmod>
+  </url><url>
     <loc>https://muzig.io/categories/</loc>
     <lastmod>2026-02-28T21:30:00+08:00</lastmod>
   </url><url>
@@ -18,12 +24,6 @@
     <lastmod>2026-02-28T21:30:00+08:00</lastmod>
   </url><url>
     <loc>https://muzig.io/tags/llm/</loc>
-    <lastmod>2026-02-28T21:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://muzig.io/</loc>
-    <lastmod>2026-02-28T21:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://muzig.io/posts/</loc>
     <lastmod>2026-02-28T21:30:00+08:00</lastmod>
   </url><url>
     <loc>https://muzig.io/tags/python/</loc>
