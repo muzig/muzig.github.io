@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.1">
+  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="http://localhost:1313/2026/02/26/augmented-llm-%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90llm--retrieval--tools--memory-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" />
+  <link rel="canonical" href="http://localhost:1313/2026/02/26/augmented-llm-%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90llm--retrieval--tools--memory-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="http://localhost:1313/index.xml"
+    title="Muzig 的技术博客"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/localhost:1313\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Augmented LLM 架构解析：LLM \u002b Retrieval \u002b Tools \u002b Memory 实战指南",
+      "headline" : "Augmented LLM 架构解析：LLM \u002b Retrieval \u002b Tools \u002b Memory 实战指南",
+      "description" : " 当大语言模型学会\u0026quot;使用工具\u0026quot;和\u0026quot;记住上下文\u0026quot;，它就不再只是聊天机器人，而是真正的智能助手。\n背景：一个困扰工程师的难题 你是否遇到过这些问题：\nLLM 的知识永远停留在训练数据的截止日期，无法回答最新信息 它会一本正经地\u0026quot;幻觉\u0026quot;出不存在的内容 它能写代码，却无法帮你执行和验证 每次对话都是\u0026quot;全新开始\u0026quot;，无法记住之前的交互 这些问题有一个共同的解决方案：Augmented LLM（增强型大语言模型）。\n本文将深入解析这一架构，并通过 project-knowledge 项目展示如何落地实践。\n核心概念：Augmented LLM 四层架构 公式：Augmented LLM = LLM \u002b Retrieval \u002b Tools \u002b Memory\n这不是简单的叠加，而是一套完整的增强策略——让 LLM 从\u0026quot;能说会道\u0026quot;变成\u0026quot;能说会做\u0026quot;。\n1. LLM：智能核心 LLM 是整个系统的\u0026quot;大脑\u0026quot;，负责：\n理解自然语言输入 进行逻辑推理和决策 生成文本输出 但裸 LLM 有三大痛点：\n知识时效性差（训练数据有截止日期） 幻觉问题（一本正经地胡说八道） 无法行动（只能输出文本，无法操作外部世界） 2. Retrieval：检索增强 解决\u0026quot;知识过时\u0026quot;和\u0026quot;幻觉\u0026quot;的核心组件。\n工作原理：\n用户提问 → 检索外部知识库 → 将相关文档作为上下文 → LLM 基于真实信息生成回答 优势：\n突破知识截止限制，获取最新信息 基于事实回答，大幅减少幻觉 支持专业领域深度知识查询 典型实现：RAG（Retrieval-Augmented Generation）模式\n3. Tools：工具调用 赋予 LLM \u0026ldquo;动手能力\u0026quot;的关键组件。\n可调用的工具类型：\n工具类型 功能 示例 API 调用 访问外部服务 天气查询、数据库操作 代码执行 运行代码解决问题 Python、JavaScript 执行 文件操作 读写本地\/云端文件 文档处理、数据分析 系统命令 与操作系统交互 文件管理、进程控制 工作流程：\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-02-26 14:30:00 \u002b0800 CST",
+      "dateModified" : "2026-02-26 14:30:00 \u002b0800 CST",
+      "url" : "http:\/\/localhost:1313\/2026\/02\/26\/augmented-llm-%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90llm--retrieval--tools--memory-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97\/",
+      "keywords" : [ "AI","LLM","RAG","AI Agent","知识管理", ]
+  }
+</script>
+<title>Augmented LLM 架构解析：LLM &#43; Retrieval &#43; Tools &#43; Memory 实战指南</title>
+  <meta property="og:title" content="Augmented LLM 架构解析：LLM &#43; Retrieval &#43; Tools &#43; Memory 实战指南" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content=" 当大语言模型学会&quot;使用工具&quot;和&quot;记住上下文&quot;，它就不再只是聊天机器人，而是真正的智能助手。
+背景：一个困扰工程师的难题 你是否遇到过这些问题：
+LLM 的知识永远停留在训练数据的截止日期，无法回答最新信息 它会一本正经地&quot;幻觉&quot;出不存在的内容 它能写代码，却无法帮你执行和验证 每次对话都是&quot;全新开始&quot;，无法记住之前的交互 这些问题有一个共同的解决方案：Augmented LLM（增强型大语言模型）。
+本文将深入解析这一架构，并通过 project-knowledge 项目展示如何落地实践。
+核心概念：Augmented LLM 四层架构 公式：Augmented LLM = LLM &#43; Retrieval &#43; Tools &#43; Memory
+这不是简单的叠加，而是一套完整的增强策略——让 LLM 从&quot;能说会道&quot;变成&quot;能说会做&quot;。
+1. LLM：智能核心 LLM 是整个系统的&quot;大脑&quot;，负责：
+理解自然语言输入 进行逻辑推理和决策 生成文本输出 但裸 LLM 有三大痛点：
+知识时效性差（训练数据有截止日期） 幻觉问题（一本正经地胡说八道） 无法行动（只能输出文本，无法操作外部世界） 2. Retrieval：检索增强 解决&quot;知识过时&quot;和&quot;幻觉&quot;的核心组件。
+工作原理：
+用户提问 → 检索外部知识库 → 将相关文档作为上下文 → LLM 基于真实信息生成回答 优势：
+突破知识截止限制，获取最新信息 基于事实回答，大幅减少幻觉 支持专业领域深度知识查询 典型实现：RAG（Retrieval-Augmented Generation）模式
+3. Tools：工具调用 赋予 LLM &ldquo;动手能力&quot;的关键组件。
+可调用的工具类型：
+工具类型 功能 示例 API 调用 访问外部服务 天气查询、数据库操作 代码执行 运行代码解决问题 Python、JavaScript 执行 文件操作 读写本地/云端文件 文档处理、数据分析 系统命令 与操作系统交互 文件管理、进程控制 工作流程：
+"
+  />
+  <meta
+    name="description"
+    content=" 当大语言模型学会&quot;使用工具&quot;和&quot;记住上下文&quot;，它就不再只是聊天机器人，而是真正的智能助手。
+背景：一个困扰工程师的难题 你是否遇到过这些问题：
+LLM 的知识永远停留在训练数据的截止日期，无法回答最新信息 它会一本正经地&quot;幻觉&quot;出不存在的内容 它能写代码，却无法帮你执行和验证 每次对话都是&quot;全新开始&quot;，无法记住之前的交互 这些问题有一个共同的解决方案：Augmented LLM（增强型大语言模型）。
+本文将深入解析这一架构，并通过 project-knowledge 项目展示如何落地实践。
+核心概念：Augmented LLM 四层架构 公式：Augmented LLM = LLM &#43; Retrieval &#43; Tools &#43; Memory
+这不是简单的叠加，而是一套完整的增强策略——让 LLM 从&quot;能说会道&quot;变成&quot;能说会做&quot;。
+1. LLM：智能核心 LLM 是整个系统的&quot;大脑&quot;，负责：
+理解自然语言输入 进行逻辑推理和决策 生成文本输出 但裸 LLM 有三大痛点：
+知识时效性差（训练数据有截止日期） 幻觉问题（一本正经地胡说八道） 无法行动（只能输出文本，无法操作外部世界） 2. Retrieval：检索增强 解决&quot;知识过时&quot;和&quot;幻觉&quot;的核心组件。
+工作原理：
+用户提问 → 检索外部知识库 → 将相关文档作为上下文 → LLM 基于真实信息生成回答 优势：
+突破知识截止限制，获取最新信息 基于事实回答，大幅减少幻觉 支持专业领域深度知识查询 典型实现：RAG（Retrieval-Augmented Generation）模式
+3. Tools：工具调用 赋予 LLM &ldquo;动手能力&quot;的关键组件。
+可调用的工具类型：
+工具类型 功能 示例 API 调用 访问外部服务 天气查询、数据库操作 代码执行 运行代码解决问题 Python、JavaScript 执行 文件操作 读写本地/云端文件 文档处理、数据分析 系统命令 与操作系统交互 文件管理、进程控制 工作流程：
+"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+  
+  
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+          
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() { 
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+      
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+        
+        ensureButtonUpdated();
+      }
+
+      
+      window.toggleTheme = toggleTheme;
+
+      
+      initTheme();
+    })();
+  </script>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Augmented LLM 架构解析：LLM &#43; Retrieval &#43; Tools &#43; Memory 实战指南">
+  <meta name="twitter:description" content="当大语言模型学会&#34;使用工具&#34;和&#34;记住上下文&#34;，它就不再只是聊天机器人，而是真正的智能助手。
+背景：一个困扰工程师的难题 你是否遇到过这些问题：
+LLM 的知识永远停留在训练数据的截止日期，无法回答最新信息 它会一本正经地&#34;幻觉&#34;出不存在的内容 它能写代码，却无法帮你执行和验证 每次对话都是&#34;全新开始&#34;，无法记住之前的交互 这些问题有一个共同的解决方案：Augmented LLM（增强型大语言模型）。
+本文将深入解析这一架构，并通过 project-knowledge 项目展示如何落地实践。
+核心概念：Augmented LLM 四层架构 公式：Augmented LLM = LLM &#43; Retrieval &#43; Tools &#43; Memory
+这不是简单的叠加，而是一套完整的增强策略——让 LLM 从&#34;能说会道&#34;变成&#34;能说会做&#34;。
+1. LLM：智能核心 LLM 是整个系统的&#34;大脑&#34;，负责：
+理解自然语言输入 进行逻辑推理和决策 生成文本输出 但裸 LLM 有三大痛点：
+知识时效性差（训练数据有截止日期） 幻觉问题（一本正经地胡说八道） 无法行动（只能输出文本，无法操作外部世界） 2. Retrieval：检索增强 解决&#34;知识过时&#34;和&#34;幻觉&#34;的核心组件。
+工作原理：
+用户提问 → 检索外部知识库 → 将相关文档作为上下文 → LLM 基于真实信息生成回答 优势：
+突破知识截止限制，获取最新信息 基于事实回答，大幅减少幻觉 支持专业领域深度知识查询 典型实现：RAG（Retrieval-Augmented Generation）模式
+3. Tools：工具调用 赋予 LLM “动手能力&#34;的关键组件。
+可调用的工具类型：
+工具类型 功能 示例 API 调用 访问外部服务 天气查询、数据库操作 代码执行 运行代码解决问题 Python、JavaScript 执行 文件操作 读写本地/云端文件 文档处理、数据分析 系统命令 与操作系统交互 文件管理、进程控制 工作流程：">
+
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+  
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">About Me</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+            
+            <div class="post-tags">
+              <a href="/tags/ai/">
+                AI
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/llm/">
+                LLM
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/rag/">
+                RAG
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/ai-agent/">
+                AI Agent
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">
+                知识管理
+              </a>
+            </div>
+            
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">Augmented LLM 架构解析：LLM &#43; Retrieval &#43; Tools &#43; Memory 实战指南</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime=" 2026-02-26 14:30:00 CST">
+                26 Feb 2026
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+            </div>
+          </div>
+          
+        </header>
+
+
+
+        <div class="post-content markdown-body">
+          
+          <blockquote>
+<p>当大语言模型学会&quot;使用工具&quot;和&quot;记住上下文&quot;，它就不再只是聊天机器人，而是真正的智能助手。</p></blockquote>
+<hr>
+<h2 id="背景一个困扰工程师的难题">背景：一个困扰工程师的难题</h2>
+<p>你是否遇到过这些问题：</p>
+<ul>
+<li>LLM 的知识永远停留在训练数据的截止日期，无法回答最新信息</li>
+<li>它会一本正经地&quot;幻觉&quot;出不存在的内容</li>
+<li>它能写代码，却无法帮你执行和验证</li>
+<li>每次对话都是&quot;全新开始&quot;，无法记住之前的交互</li>
+</ul>
+<p>这些问题有一个共同的解决方案：<strong>Augmented LLM（增强型大语言模型）</strong>。</p>
+<p>本文将深入解析这一架构，并通过 project-knowledge 项目展示如何落地实践。</p>
+<hr>
+<h2 id="核心概念augmented-llm-四层架构">核心概念：Augmented LLM 四层架构</h2>
+<blockquote>
+<p><strong>公式：Augmented LLM = LLM + Retrieval + Tools + Memory</strong></p></blockquote>
+<p>这不是简单的叠加，而是一套完整的<strong>增强策略</strong>——让 LLM 从&quot;能说会道&quot;变成&quot;能说会做&quot;。</p>
+<h3 id="1-llm智能核心">1. LLM：智能核心</h3>
+<p>LLM 是整个系统的&quot;大脑&quot;，负责：</p>
+<ul>
+<li>理解自然语言输入</li>
+<li>进行逻辑推理和决策</li>
+<li>生成文本输出</li>
+</ul>
+<p>但裸 LLM 有三大痛点：</p>
+<ul>
+<li><strong>知识时效性差</strong>（训练数据有截止日期）</li>
+<li><strong>幻觉问题</strong>（一本正经地胡说八道）</li>
+<li><strong>无法行动</strong>（只能输出文本，无法操作外部世界）</li>
+</ul>
+<h3 id="2-retrieval检索增强">2. Retrieval：检索增强</h3>
+<p>解决&quot;知识过时&quot;和&quot;幻觉&quot;的核心组件。</p>
+<p><strong>工作原理</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>用户提问 → 检索外部知识库 → 将相关文档作为上下文 → LLM 基于真实信息生成回答
+</span></span></code></pre></div><p><strong>优势</strong>：</p>
+<ul>
+<li>突破知识截止限制，获取最新信息</li>
+<li>基于事实回答，大幅减少幻觉</li>
+<li>支持专业领域深度知识查询</li>
+</ul>
+<p><strong>典型实现</strong>：RAG（Retrieval-Augmented Generation）模式</p>
+<h3 id="3-tools工具调用">3. Tools：工具调用</h3>
+<p>赋予 LLM &ldquo;动手能力&quot;的关键组件。</p>
+<p><strong>可调用的工具类型</strong>：</p>
+<table>
+  <thead>
+      <tr>
+          <th>工具类型</th>
+          <th>功能</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>API 调用</td>
+          <td>访问外部服务</td>
+          <td>天气查询、数据库操作</td>
+      </tr>
+      <tr>
+          <td>代码执行</td>
+          <td>运行代码解决问题</td>
+          <td>Python、JavaScript 执行</td>
+      </tr>
+      <tr>
+          <td>文件操作</td>
+          <td>读写本地/云端文件</td>
+          <td>文档处理、数据分析</td>
+      </tr>
+      <tr>
+          <td>系统命令</td>
+          <td>与操作系统交互</td>
+          <td>文件管理、进程控制</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>工作流程</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>LLM 决定需要调用工具 → 执行工具并获取结果 → 将结果融入上下文 → 生成最终回答
+</span></span></code></pre></div><h3 id="4-memory记忆系统">4. Memory：记忆系统</h3>
+<p>让 LLM 具备&quot;长期记忆&quot;和&quot;短期记忆&quot;的能力。</p>
+<p><strong>记忆类型</strong>：</p>
+<ul>
+<li><strong>短期记忆</strong>：对话上下文，保持会话连贯性</li>
+<li><strong>长期记忆</strong>：用户偏好、历史交互、积累知识</li>
+<li><strong>结构化记忆</strong>：知识库、向量数据库</li>
+</ul>
+<hr>
+<h2 id="架构优势总结">架构优势总结</h2>
+<table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>解决的问题</th>
+          <th>技术手段</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Retrieval</td>
+          <td>知识时效性、幻觉</td>
+          <td>RAG、向量检索</td>
+      </tr>
+      <tr>
+          <td>Tools</td>
+          <td>无法执行实际任务</td>
+          <td>Function Calling、API 集成</td>
+      </tr>
+      <tr>
+          <td>Memory</td>
+          <td>上下文丢失、个性化</td>
+          <td>向量存储、会话管理</td>
+      </tr>
+  </tbody>
+</table>
+<p>这套架构让 LLM 从<strong>文本生成器</strong>进化为<strong>智能Agent</strong>——不仅能回答问题，还能解决问题。</p>
+<hr>
+<h2 id="实战案例project-knowledge-项目实践">实战案例：project-knowledge 项目实践</h2>
+<blockquote>
+<p>理念：<strong>知识需要在使用时检索，而非事后翻阅</strong></p></blockquote>
+<h3 id="项目背景">项目背景</h3>
+<p>project-knowledge 是一个基于 Augmented LLM 架构的项目知识管理系统，旨在解决游戏开发项目中的知识管理难题：</p>
+<ul>
+<li>代码散落在各处，缺乏统一整理</li>
+<li>新人上手困难，文档陈旧</li>
+<li>经验无法有效传承</li>
+</ul>
+<h3 id="架构实现">架构实现</h3>
+<h4 id="1-llmclaude-code-作为分析引擎">1. LLM：Claude Code 作为分析引擎</h4>
+<p>使用 Anthropic Agent（Claude Code）对项目代码进行自动化分析，生成结构化的知识文档。</p>
+<h4 id="2-retrieval标签化知识索引">2. Retrieval：标签化知识索引</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;entries&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;id&#34;</span>: <span style="font-style:italic">&#34;ui-base&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;title&#34;</span>: <span style="font-style:italic">&#34;UIBase 窗口基类&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;file&#34;</span>: <span style="font-style:italic">&#34;ui-framework/UIBase.md&#34;</span>, 
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;tags&#34;</span>: [<span style="font-style:italic">&#34;UI&#34;</span>, <span style="font-style:italic">&#34;生命周期&#34;</span>, <span style="font-style:italic">&#34;事件驱动&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;summary&#34;</span>: <span style="font-style:italic">&#34;Unity UI 窗口基类，封装生命周期、事件系统、资源加载&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;tagIndex&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&#34;UI&#34;</span>: [<span style="font-style:italic">&#34;ui-base&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&#34;生命周期&#34;</span>: [<span style="font-style:italic">&#34;ui-base&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&#34;事件驱动&#34;</span>: [<span style="font-style:italic">&#34;ui-base&#34;</span>]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>检索设计理念</strong>：</p>
+<ul>
+<li>摘要先行：每个文档包含 <code>summary</code> 字段，快速判断相关性</li>
+<li>标签检索：通过 <code>tagIndex</code> 快速定位相关知识</li>
+<li>关联推荐：相同标签的知识自动关联</li>
+</ul>
+<h4 id="3-tools代码分析工具链">3. Tools：代码分析工具链</h4>
+<ul>
+<li><strong>静态分析</strong>：深度解析核心文件（UIBase.cs、WndMgr.cs）</li>
+<li><strong>架构识别</strong>：自动识别设计模式（模板方法、观察者、状态机）</li>
+<li><strong>生命周期分析</strong>：提取 Unity 组件生命周期方法</li>
+<li><strong>文档生成</strong>：分析后自动生成 Markdown 文档</li>
+</ul>
+<h4 id="4-memory持续知识积累">4. Memory：持续知识积累</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="font-weight:bold">## 学习路线
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### 第一阶段：UI 框架
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span><span style="font-weight:bold">- [x]</span> UIBase.cs 核心原理
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">- [x]</span> WndMgr.cs 窗口管理  
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">- [ ]</span> WndGroup.cs 窗口组
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### 第二阶段：网络通信
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span><span style="font-weight:bold">- [ ]</span> TCP/UDP 连接管理
+</span></span></code></pre></div><ul>
+<li>增量更新：每次代码分析同步更新知识库</li>
+<li>版本控制：通过 Git 管理文档变更历史</li>
+</ul>
+<h3 id="典型使用场景">典型使用场景</h3>
+<table>
+  <thead>
+      <tr>
+          <th>问题</th>
+          <th>检索方式</th>
+          <th>相关文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>窗口怎么显示？</td>
+          <td>标签 &ldquo;UI&rdquo; + &ldquo;生命周期&rdquo;</td>
+          <td>UIBase.md</td>
+      </tr>
+      <tr>
+          <td>弹窗如何管理？</td>
+          <td>标签 &ldquo;UI&rdquo; + &ldquo;弹窗&rdquo;</td>
+          <td>WndMgr.md</td>
+      </tr>
+      <tr>
+          <td>热更新原理？</td>
+          <td>标签 &ldquo;热更新&rdquo; + &ldquo;HybridCLR&rdquo;</td>
+          <td>(待添加)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="技术实现要点">技术实现要点</h2>
+<h3 id="1-检索系统的设计">1. 检索系统的设计</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-style:italic"># 简化的检索流程</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">def</span> retrieve(query: str, knowledge_base: dict) -&gt; list:
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 1. 提取查询标签</span>
+</span></span><span style="display:flex;"><span>    query_tags = extract_tags(query)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 2. 查找相关文档</span>
+</span></span><span style="display:flex;"><span>    relevant_docs = []
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">for</span> tag <span style="font-weight:bold">in</span> query_tags:
+</span></span><span style="display:flex;"><span>        doc_ids = knowledge_base[<span style="font-style:italic">&#39;tagIndex&#39;</span>].get(tag, [])
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">for</span> doc_id <span style="font-weight:bold">in</span> doc_ids:
+</span></span><span style="display:flex;"><span>            doc = find_entry(knowledge_base, doc_id)
+</span></span><span style="display:flex;"><span>            relevant_docs.append(doc)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 3. 返回摘要和原文</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> relevant_docs
+</span></span></code></pre></div><h3 id="2-工具调用的安全考虑">2. 工具调用的安全考虑</h3>
+<ul>
+<li><strong>沙箱执行</strong>：代码在隔离环境中运行</li>
+<li><strong>权限控制</strong>：限制文件系统和网络访问</li>
+<li><strong>超时处理</strong>：防止长时间运行的工具阻塞</li>
+</ul>
+<h3 id="3-记忆系统的持久化">3. 记忆系统的持久化</h3>
+<ul>
+<li><strong>向量存储</strong>：使用 Chroma、Weaviate 等向量数据库</li>
+<li><strong>结构化存储</strong>：JSON/YAML 文件便于人类阅读</li>
+<li><strong>版本管理</strong>：Git 控制变更历史</li>
+</ul>
+<hr>
+<h2 id="常见问题-faq">常见问题 (FAQ)</h2>
+<p><strong>Q1: Augmented LLM 和普通 RAG 有什么区别？</strong></p>
+<p>A: RAG 只是 Retrieval + LLM，而 Augmented LLM 增加了 Tools（工具调用）和 Memory（记忆系统），是更完整的 Agent 架构。</p>
+<p><strong>Q2: 一定要全部实现四个组件吗？</strong></p>
+<p>A: 不一定。根据实际需求，可以先从 Retrieval 开始，逐步添加 Tools 和 Memory。例如：</p>
+<ul>
+<li>问答系统：LLM + Retrieval 即可</li>
+<li>任务助手：需要 + Tools</li>
+<li>个性化助手：需要 + Memory</li>
+</ul>
+<p><strong>Q3: 如何评估增强效果？</strong></p>
+<p>A: 可以从以下维度评估：</p>
+<ul>
+<li>回答准确性（是否基于事实）</li>
+<li>任务完成率（能否执行实际操作）</li>
+<li>上下文连贯性（是否记住之前交互）</li>
+<li>响应延迟（检索和工具调用的开销）</li>
+</ul>
+<hr>
+<h2 id="总结">总结</h2>
+<p>本文核心要点：</p>
+<ol>
+<li><strong>Augmented LLM = LLM + Retrieval + Tools + Memory</strong>，这是让 LLM 真正&quot;智能&quot;起来的架构模式</li>
+<li><strong>Retrieval</strong> 解决知识时效性和幻觉问题</li>
+<li><strong>Tools</strong> 赋予 LLM 执行能力，从&quot;说&quot;到&quot;做&rdquo;</li>
+<li><strong>Memory</strong> 实现个性化交互和持续学习</li>
+<li><strong>project-knowledge</strong> 项目是这一架构的实战范例——知识管理从静态文档变成可检索的智能系统</li>
+</ol>
+<h3 id="关键收获">关键收获</h3>
+<p>Augmented LLM 不是一个神秘的概念，而是一套<strong>可落地的方法论</strong>。无论是构建智能客服、知识管理系统，还是开发 AI Agent，理解这四个组件的职责和协作方式，都是关键的第一步。</p>
+<h3 id="延伸阅读">延伸阅读</h3>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic: Building Effective Agents</a></li>
+<li><a href="https://arxiv.org/abs/2407.01219">RAG 最佳实践指南</a></li>
+<li><a href="https://python.langchain.com/docs/modules/agents/">LangChain Agents 文档</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>💡 <strong>下期预告</strong>：我们将深入探讨如何用 Python 实现一个完整的 Augmented LLM 原型，从零构建你的第一个 AI Agent。</p></blockquote>
+<blockquote>
+<p>📬 欢迎订阅关注，获取更多 AI 工程实践内容！</p></blockquote>
+
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+
+        
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/">编程，在过去两个月里变得面目全非</a></li>
+    
+    <li><a href="/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/">Agent-Orchestrated Development：从写代码的人到编排系统的人</a></li>
+    
+    <li><a href="/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/">OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</a></li>
+    
+  </ul>
+</div>
+
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>

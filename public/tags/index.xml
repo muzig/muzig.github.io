@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/</link>
+    <description>Recent content in Tags on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 28 Feb 2026 08:20:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agent</title>
+      <link>https://muzig.io/tags/agent/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI</title>
+      <link>https://muzig.io/tags/ai/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Karpathy</title>
+      <link>https://muzig.io/tags/karpathy/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/karpathy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工程</title>
+      <link>https://muzig.io/tags/%E5%B7%A5%E7%A8%8B/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E5%B7%A5%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>研究组织</title>
+      <link>https://muzig.io/tags/%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI编程</title>
+      <link>https://muzig.io/tags/ai%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/ai%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cursor</title>
+      <link>https://muzig.io/tags/cursor/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/cursor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>未来趋势</title>
+      <link>https://muzig.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件工程</title>
+      <link>https://muzig.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Devin</title>
+      <link>https://muzig.io/tags/devin/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/devin/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>技术趋势</title>
+      <link>https://muzig.io/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>编程范式</title>
+      <link>https://muzig.io/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI Agent</title>
+      <link>https://muzig.io/tags/ai-agent/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/ai-agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MCP</title>
+      <link>https://muzig.io/tags/mcp/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/mcp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>系统架构</title>
+      <link>https://muzig.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件开发</title>
+      <link>https://muzig.io/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenClaw</title>
+      <link>https://muzig.io/tags/openclaw/</link>
+      <pubDate>Fri, 06 Feb 2026 09:48:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/openclaw/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://muzig.io/tags/python/</link>
+      <pubDate>Fri, 06 Feb 2026 09:48:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://muzig.io/tags/troubleshooting/</link>
+      <pubDate>Fri, 06 Feb 2026 09:48:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/troubleshooting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>https://muzig.io/tags/architecture/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Csharp</title>
+      <link>https://muzig.io/tags/csharp/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/csharp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>https://muzig.io/tags/go/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Multi-Agent</title>
+      <link>https://muzig.io/tags/multi-agent/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/multi-agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unity</title>
+      <link>https://muzig.io/tags/unity/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/unity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>架构设计</title>
+      <link>https://muzig.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>自动化</title>
+      <link>https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Qmd</title>
+      <link>https://muzig.io/tags/qmd/</link>
+      <pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/qmd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>本地运行</title>
+      <link>https://muzig.io/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>语义搜索</title>
+      <link>https://muzig.io/tags/%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2/</link>
+      <pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Edge-Computing</title>
+      <link>https://muzig.io/tags/edge-computing/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/edge-computing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GPU</title>
+      <link>https://muzig.io/tags/gpu/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/gpu/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Inference</title>
+      <link>https://muzig.io/tags/inference/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/inference/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Llama.cpp</title>
+      <link>https://muzig.io/tags/llama.cpp/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/llama.cpp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>https://muzig.io/tags/llm/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VLLM</title>
+      <link>https://muzig.io/tags/vllm/</link>
+      <pubDate>Tue, 03 Feb 2026 17:45:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/vllm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Config</title>
+      <link>https://muzig.io/tags/config/</link>
+      <pubDate>Tue, 03 Feb 2026 17:12:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/config/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node</title>
+      <link>https://muzig.io/tags/node/</link>
+      <pubDate>Tue, 03 Feb 2026 17:12:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/node/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>https://muzig.io/tags/security/</link>
+      <pubDate>Tue, 03 Feb 2026 17:12:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工具</title>
+      <link>https://muzig.io/tags/%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>架构</title>
+      <link>https://muzig.io/tags/%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%9E%B6%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI工具</title>
+      <link>https://muzig.io/tags/ai%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 02 Feb 2026 19:30:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/ai%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工作区设计</title>
+      <link>https://muzig.io/tags/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Mon, 02 Feb 2026 19:30:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>最佳实践</title>
+      <link>https://muzig.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Mon, 02 Feb 2026 19:30:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude Code</title>
+      <link>https://muzig.io/tags/claude-code/</link>
+      <pubDate>Mon, 02 Feb 2026 19:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/claude-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>开发效率</title>
+      <link>https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link>
+      <pubDate>Mon, 02 Feb 2026 19:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>编程助手</title>
+      <link>https://muzig.io/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</link>
+      <pubDate>Mon, 02 Feb 2026 19:00:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Function Calling</title>
+      <link>https://muzig.io/tags/function-calling/</link>
+      <pubDate>Sat, 31 Jan 2026 22:10:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/function-calling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LangChain</title>
+      <link>https://muzig.io/tags/langchain/</link>
+      <pubDate>Sat, 31 Jan 2026 22:10:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/langchain/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Automation</title>
+      <link>https://muzig.io/tags/automation/</link>
+      <pubDate>Sat, 31 Jan 2026 08:56:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/automation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Moltbot</title>
+      <link>https://muzig.io/tags/moltbot/</link>
+      <pubDate>Sat, 31 Jan 2026 08:56:00 +0800</pubDate>
+      <guid>https://muzig.io/tags/moltbot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Core Concepts</title>
+      <link>https://muzig.io/tags/core-concepts/</link>
+      <pubDate>Fri, 15 Aug 2025 12:42:42 +0800</pubDate>
+      <guid>https://muzig.io/tags/core-concepts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Language Design</title>
+      <link>https://muzig.io/tags/language-design/</link>
+      <pubDate>Fri, 15 Aug 2025 12:42:42 +0800</pubDate>
+      <guid>https://muzig.io/tags/language-design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Performance</title>
+      <link>https://muzig.io/tags/performance/</link>
+      <pubDate>Fri, 15 Aug 2025 12:42:42 +0800</pubDate>
+      <guid>https://muzig.io/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming Language</title>
+      <link>https://muzig.io/tags/programming-language/</link>
+      <pubDate>Fri, 15 Aug 2025 12:42:42 +0800</pubDate>
+      <guid>https://muzig.io/tags/programming-language/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Design</title>
+      <link>https://muzig.io/tags/design/</link>
+      <pubDate>Fri, 15 Aug 2025 11:25:31 +0800</pubDate>
+      <guid>https://muzig.io/tags/design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Compiler</title>
+      <link>https://muzig.io/tags/compiler/</link>
+      <pubDate>Fri, 15 Aug 2025 11:24:22 +0800</pubDate>
+      <guid>https://muzig.io/tags/compiler/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Runtime</title>
+      <link>https://muzig.io/tags/runtime/</link>
+      <pubDate>Fri, 15 Aug 2025 11:24:22 +0800</pubDate>
+      <guid>https://muzig.io/tags/runtime/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Best Practice</title>
+      <link>https://muzig.io/tags/best-practice/</link>
+      <pubDate>Fri, 15 Aug 2025 11:01:29 +0800</pubDate>
+      <guid>https://muzig.io/tags/best-practice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Upgrade</title>
+      <link>https://muzig.io/tags/upgrade/</link>
+      <pubDate>Fri, 15 Aug 2025 11:01:29 +0800</pubDate>
+      <guid>https://muzig.io/tags/upgrade/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Protocol</title>
+      <link>https://muzig.io/tags/protocol/</link>
+      <pubDate>Fri, 25 Apr 2025 10:09:47 +0800</pubDate>
+      <guid>https://muzig.io/tags/protocol/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

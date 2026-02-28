@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.1">
+  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/" />
+  <link rel="canonical" href="https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="https://muzig.io/index.xml"
+    title="Muzig 的技术博客"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/muzig.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "AI 编程进入第三阶段：从\u0022写代码\u0022到\u0022建工厂\u0022",
+      "headline" : "AI 编程进入第三阶段：从\u0022写代码\u0022到\u0022建工厂\u0022",
+      "description" : " 这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批\u0026quot;老工程师\u0026quot;意味着什么。\n写在前面 上周看到 Truell 的一段访谈，核心观点很有意思：AI 软件开发已经进入第三阶段。\n作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。\n第一阶段：Tab 时代（补全时代） 人写代码 → AI 补全 → 人继续写 这应该是大多数人接触的第一个 AI 编程能力。\n特征很明确：\n逐字输入代码 AI 做 autocomplete 解决的是低熵、重复性问题 本质是什么？\n提高\u0026quot;写代码\u0026quot;的效率\n说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个键盘增强器。\n第二阶段：同步 Agent 时代（对话式编程） 人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环 这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。\n特征：\n人给 prompt Agent 生成代码 人实时 review \u002b 修正 一问一答循环 本质是什么？\n提高\u0026quot;单个任务\u0026quot;的完成效率\n但这里有两个限制：\n实时交互 → 你必须盯着 本地资源受限 → 跑不了多少 agent 我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但\u0026quot;人机同步\u0026quot;这个瓶颈始终在。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-02-27 00:00:00 \u002b0800 CST",
+      "dateModified" : "2026-02-27 00:00:00 \u002b0800 CST",
+      "url" : "https:\/\/muzig.io\/2026\/02\/27\/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82\/",
+      "keywords" : [ "AI编程","Cursor","Agent","软件工程","未来趋势", ]
+  }
+</script>
+<title>AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;</title>
+  <meta property="og:title" content="AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content=" 这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&quot;老工程师&quot;意味着什么。
+写在前面 上周看到 Truell 的一段访谈，核心观点很有意思：AI 软件开发已经进入第三阶段。
+作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。
+第一阶段：Tab 时代（补全时代） 人写代码 → AI 补全 → 人继续写 这应该是大多数人接触的第一个 AI 编程能力。
+特征很明确：
+逐字输入代码 AI 做 autocomplete 解决的是低熵、重复性问题 本质是什么？
+提高&quot;写代码&quot;的效率
+说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个键盘增强器。
+第二阶段：同步 Agent 时代（对话式编程） 人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环 这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。
+特征：
+人给 prompt Agent 生成代码 人实时 review &#43; 修正 一问一答循环 本质是什么？
+提高&quot;单个任务&quot;的完成效率
+但这里有两个限制：
+实时交互 → 你必须盯着 本地资源受限 → 跑不了多少 agent 我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&quot;人机同步&quot;这个瓶颈始终在。
+"
+  />
+  <meta
+    name="description"
+    content=" 这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&quot;老工程师&quot;意味着什么。
+写在前面 上周看到 Truell 的一段访谈，核心观点很有意思：AI 软件开发已经进入第三阶段。
+作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。
+第一阶段：Tab 时代（补全时代） 人写代码 → AI 补全 → 人继续写 这应该是大多数人接触的第一个 AI 编程能力。
+特征很明确：
+逐字输入代码 AI 做 autocomplete 解决的是低熵、重复性问题 本质是什么？
+提高&quot;写代码&quot;的效率
+说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个键盘增强器。
+第二阶段：同步 Agent 时代（对话式编程） 人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环 这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。
+特征：
+人给 prompt Agent 生成代码 人实时 review &#43; 修正 一问一答循环 本质是什么？
+提高&quot;单个任务&quot;的完成效率
+但这里有两个限制：
+实时交互 → 你必须盯着 本地资源受限 → 跑不了多少 agent 我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&quot;人机同步&quot;这个瓶颈始终在。
+"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+  
+  
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+          
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() { 
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+      
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+        
+        ensureButtonUpdated();
+      }
+
+      
+      window.toggleTheme = toggleTheme;
+
+      
+      initTheme();
+    })();
+  </script>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;">
+  <meta name="twitter:description" content="这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&#34;老工程师&#34;意味着什么。
+写在前面 上周看到 Truell 的一段访谈，核心观点很有意思：AI 软件开发已经进入第三阶段。
+作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。
+第一阶段：Tab 时代（补全时代） 人写代码 → AI 补全 → 人继续写 这应该是大多数人接触的第一个 AI 编程能力。
+特征很明确：
+逐字输入代码 AI 做 autocomplete 解决的是低熵、重复性问题 本质是什么？
+提高&#34;写代码&#34;的效率
+说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个键盘增强器。
+第二阶段：同步 Agent 时代（对话式编程） 人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环 这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。
+特征：
+人给 prompt Agent 生成代码 人实时 review &#43; 修正 一问一答循环 本质是什么？
+提高&#34;单个任务&#34;的完成效率
+但这里有两个限制：
+实时交互 → 你必须盯着 本地资源受限 → 跑不了多少 agent 我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&#34;人机同步&#34;这个瓶颈始终在。">
+
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+  
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">About Me</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+            
+            <div class="post-tags">
+              <a href="/tags/ai%E7%BC%96%E7%A8%8B/">
+                AI编程
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/cursor/">
+                Cursor
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/agent/">
+                Agent
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                软件工程
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/">
+                未来趋势
+              </a>
+            </div>
+            
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime=" 2026-02-27 00:00:00 CST">
+                27 Feb 2026
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+            </div>
+          </div>
+          
+        </header>
+
+
+
+        <div class="post-content markdown-body">
+          
+          <blockquote>
+<p>这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&quot;老工程师&quot;意味着什么。</p></blockquote>
+<hr>
+<h2 id="写在前面">写在前面</h2>
+<p>上周看到 Truell 的一段访谈，核心观点很有意思：<strong>AI 软件开发已经进入第三阶段</strong>。</p>
+<p>作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。</p>
+<hr>
+<h2 id="第一阶段tab-时代补全时代">第一阶段：Tab 时代（补全时代）</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>人写代码 → AI 补全 → 人继续写
+</span></span></code></pre></div><p>这应该是大多数人接触的第一个 AI 编程能力。</p>
+<p><strong>特征很明确</strong>：</p>
+<ul>
+<li>逐字输入代码</li>
+<li>AI 做 autocomplete</li>
+<li>解决的是低熵、重复性问题</li>
+</ul>
+<p><strong>本质是什么？</strong></p>
+<blockquote>
+<p>提高&quot;写代码&quot;的效率</p></blockquote>
+<p>说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个<strong>键盘增强器</strong>。</p>
+<hr>
+<h2 id="第二阶段同步-agent-时代对话式编程">第二阶段：同步 Agent 时代（对话式编程）</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环
+</span></span></code></pre></div><p>这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。</p>
+<p><strong>特征</strong>：</p>
+<ul>
+<li>人给 prompt</li>
+<li>Agent 生成代码</li>
+<li>人实时 review + 修正</li>
+<li>一问一答循环</li>
+</ul>
+<p><strong>本质是什么？</strong></p>
+<blockquote>
+<p>提高&quot;单个任务&quot;的完成效率</p></blockquote>
+<p>但这里有两个限制：</p>
+<ol>
+<li><strong>实时交互</strong> → 你必须盯着</li>
+<li><strong>本地资源受限</strong> → 跑不了多少 agent</li>
+</ol>
+<p>我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&quot;人机同步&quot;这个瓶颈始终在。</p>
+<hr>
+<h2 id="第三阶段云端自治-agent-时代factory-模式">第三阶段：云端自治 Agent 时代（Factory 模式）</h2>
+<p>这是 Truell 重点讲的部分，也是让我最感兴趣的部分。</p>
+<blockquote>
+<p><strong>定义</strong>：Agent 在云端独立运行，在更长时间尺度上完成更大任务，几乎不需要人类实时干预。</p></blockquote>
+<p>人从&quot;操作员&quot;变成&quot;系统设计师&quot;。</p>
+<hr>
+<h3 id="核心变化从写代码到建工厂">核心变化：从&quot;写代码&quot;到&quot;建工厂&quot;</h3>
+<p>Truell 说了这样一句话：</p>
+<blockquote>
+<p>Cursor 不再是帮你写代码，而是帮你构建一个&quot;软件生产工厂&quot;</p></blockquote>
+<p>这个&quot;工厂&quot;由：</p>
+<ul>
+<li><strong>多个 Agent</strong> 组成</li>
+<li><strong>每个 Agent 在独立 VM</strong> 里跑</li>
+<li>可以<strong>并行运行</strong></li>
+<li>产出 <strong>artifacts</strong>（日志 / 视频 / preview）</li>
+</ul>
+<p>开发者变成了：</p>
+<ul>
+<li>定义问题</li>
+<li>设计任务拆解</li>
+<li>设置 review 标准</li>
+<li>审核产出</li>
+</ul>
+<p><strong>这意味着什么？</strong></p>
+<p>以前：人写代码
+现在：人设计任务 + 审核结果</p>
+<hr>
+<h3 id="几个关键数据">几个关键数据</h3>
+<table>
+  <thead>
+      <tr>
+          <th>指标</th>
+          <th>一年前</th>
+          <th>现在</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Tab 用户 vs Agent 用户</td>
+          <td>Tab ≈ 2.5 × Agent</td>
+          <td>Agent ≈ 2 × Tab</td>
+      </tr>
+      <tr>
+          <td>Agent 使用量增长</td>
+          <td>—</td>
+          <td><strong>15 倍</strong></td>
+      </tr>
+      <tr>
+          <td>Cursor 内部 PR</td>
+          <td>—</td>
+          <td><strong>35%</strong> 由云端 Agent 独立完成</td>
+      </tr>
+  </tbody>
+</table>
+<p>这个趋势已经非常明确了。</p>
+<hr>
+<h2 id="第三阶段的核心机制">第三阶段的核心机制</h2>
+<h3 id="1-云端-vm-隔离">1. 云端 VM 隔离</h3>
+<p>每个 Agent：</p>
+<ul>
+<li>独立虚拟机</li>
+<li>独立环境</li>
+<li>可长时间运行</li>
+</ul>
+<p>这解决了本地资源受限的问题。15 倍的使用量增长，没有云端架构支撑是不可能实现的。</p>
+<h3 id="2-产出-artifacts-而不是-diff">2. 产出 artifacts 而不是 diff</h3>
+<p>以前：看 diff 理解改了什么
+现在：看日志、看运行录像、看 live preview</p>
+<p><strong>review 成本大幅降低</strong>。这是很重要的一点——当人从&quot;逐行审查&quot;变成&quot;结果审查&quot;，效率提升是质的飞跃。</p>
+<h3 id="3-人类角色转变">3. 人类角色转变</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>旧模式：人写代码
+</span></span><span style="display:flex;"><span>新模式：人设计任务 + 审核结果
+</span></span></code></pre></div><hr>
+<h2 id="这对你意味着什么">这对你意味着什么</h2>
+<p>你是做：</p>
+<ul>
+<li>Go 后端</li>
+<li>分布式系统</li>
+<li>CI/CD、Docker、K8S</li>
+<li>AI + Agent + MCP 研究</li>
+</ul>
+<p><strong>这个趋势其实非常符合你正在做的事情。</strong></p>
+<p>你现在研究的：</p>
+<ul>
+<li>OpenClaw</li>
+<li>多 Agent 编排</li>
+<li>云部署模型</li>
+<li>Exec orchestration</li>
+<li>工具链自动化</li>
+</ul>
+<p>本质上就是在构建：<strong>&ldquo;软件生产工厂&rdquo;</strong></p>
+<p>你已经在往第三阶段走了。</p>
+<hr>
+<h2 id="真正的难点在哪里">真正的难点在哪里？</h2>
+<p>Truell 提到了一个关键问题：</p>
+<blockquote>
+<p>单人开发能绕过去的问题，在 Agent 工厂里会变成系统级失败</p></blockquote>
+<p>比如：</p>
+<ul>
+<li>flaky test</li>
+<li>环境不一致</li>
+<li>权限问题</li>
+<li>工具链不稳定</li>
+</ul>
+<p>在 Agent 并行执行时会<strong>放大 100 倍</strong>。</p>
+<p>这意味着未来优秀工程师的核心能力将是：</p>
+<ol>
+<li><strong>架构能力</strong></li>
+<li><strong>规范设计能力（Spec）</strong></li>
+<li><strong>自动化环境稳定性建设</strong></li>
+<li><strong>Agent orchestration</strong></li>
+</ol>
+<hr>
+<h2 id="真正的第三时代本质">真正的&quot;第三时代&quot;本质</h2>
+<p>不是：AI 写代码</p>
+<p>而是：<strong>人类构建 AI 生产系统</strong></p>
+<p>这和我之前思考的&quot;未来 1000x engineer 是什么？&ldquo;是同一条路径。</p>
+<hr>
+<h2 id="一个更抽象的理解">一个更抽象的理解</h2>
+<table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>AI =</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>第一代</td>
+          <td>键盘增强器</td>
+      </tr>
+      <tr>
+          <td>第二代</td>
+          <td>编程助手</td>
+      </tr>
+      <tr>
+          <td>第三代</td>
+          <td>软件工厂工人</td>
+      </tr>
+      <tr>
+          <td>第四代（还没到）</td>
+          <td>软件公司</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="总结">总结</h2>
+<ol>
+<li><strong>AI 编程已经进入第三阶段</strong>：从人写代码，到人建工厂</li>
+<li><strong>核心变化是角色转变</strong>：从操作员变成系统设计师</li>
+<li><strong>真正的难点是系统级稳定性</strong>：单人开发的问题会放大 100 倍</li>
+<li><strong>你已经在路上</strong>：多 Agent 编排、云部署、工具链自动化，都是第三阶段的基础设施</li>
+</ol>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XXX">Cursor 创始人 Michael Truell 访谈</a></li>
+<li><a href="https://cursor.sh">Cursor 官方文档</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>💡 <strong>下期预告</strong>：我会详细讲讲如何构建自己的&quot;Agent 工厂&rdquo;，包括多 Agent 编排、任务拆解策略、审查机制设计等实战内容。</p></blockquote>
+<blockquote>
+<p>📬 关注公众号「<strong>你的工程师朋友</strong>」，第一时间获取更新。</p></blockquote>
+
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+
+        
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/">编程，在过去两个月里变得面目全非</a></li>
+    
+    <li><a href="/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/">Agent-Orchestrated Development：从写代码的人到编排系统的人</a></li>
+    
+    <li><a href="/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/">OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</a></li>
+    
+  </ul>
+</div>
+
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>

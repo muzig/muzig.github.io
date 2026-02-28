@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.1">
+  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/" />
+  <link rel="canonical" href="https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="https://muzig.io/index.xml"
+    title="Muzig 的技术博客"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/muzig.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "当 Andrej Karpathy 开始\u0022编程一个研究组织\u0022",
+      "headline" : "当 Andrej Karpathy 开始\u0022编程一个研究组织\u0022",
+      "description" : "最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。\n他没有只运行一个 agent。而是一次性运行了 8 个：\n4 个 Claude 4 个 Codex 每个分配 1 块 GPU 目标：删除 logit softcap，同时不引入回归 他的 TL;DR 很直接：目前不太行。有点混乱。\n但从系统角度看，这个实验非常有意思。\n实验：用 AI 组织做研究 Karpathy 尝试了几种组织结构：\n1. 8 个独立研究员 每个 agent 自主开分支，独立探索。\n2. 1 个 Chief Scientist \u002b 8 个 Junior 一个 agent 负责拆解任务和分配工作，其余执行。\n这已经不是在\u0026quot;用 AI 写代码\u0026quot;。而是在测试：AI 组织是否能做研究？\n工程基础设施：极简但系统化 整个研究组织建立在非常简单的基础设施上：\n每个 research program 是一个 git branch 每个 scientist fork 成 feature branch 使用 git worktrees 做隔离 简单文件作为通信机制 不用 Docker \/ VM（指令约束已足够） 所有 agent 运行在 tmux 网格中 这看起来像一个\u0026quot;AI 研究办公室\u0026quot;——可以实时观察每个 agent 的工作，也可以随时接管。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-02-28 08:20:00 \u002b0800 CST",
+      "dateModified" : "2026-02-28 08:20:00 \u002b0800 CST",
+      "url" : "https:\/\/muzig.io\/2026\/02\/28\/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87\/",
+      "keywords" : [ "AI","Agent","Karpathy","研究组织","工程", ]
+  }
+</script>
+<title>当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;</title>
+  <meta property="og:title" content="当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。
+他没有只运行一个 agent。而是一次性运行了 8 个：
+4 个 Claude 4 个 Codex 每个分配 1 块 GPU 目标：删除 logit softcap，同时不引入回归 他的 TL;DR 很直接：目前不太行。有点混乱。
+但从系统角度看，这个实验非常有意思。
+实验：用 AI 组织做研究 Karpathy 尝试了几种组织结构：
+1. 8 个独立研究员 每个 agent 自主开分支，独立探索。
+2. 1 个 Chief Scientist &#43; 8 个 Junior 一个 agent 负责拆解任务和分配工作，其余执行。
+这已经不是在&quot;用 AI 写代码&quot;。而是在测试：AI 组织是否能做研究？
+工程基础设施：极简但系统化 整个研究组织建立在非常简单的基础设施上：
+每个 research program 是一个 git branch 每个 scientist fork 成 feature branch 使用 git worktrees 做隔离 简单文件作为通信机制 不用 Docker / VM（指令约束已足够） 所有 agent 运行在 tmux 网格中 这看起来像一个&quot;AI 研究办公室&quot;——可以实时观察每个 agent 的工作，也可以随时接管。
+"
+  />
+  <meta
+    name="description"
+    content="最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。
+他没有只运行一个 agent。而是一次性运行了 8 个：
+4 个 Claude 4 个 Codex 每个分配 1 块 GPU 目标：删除 logit softcap，同时不引入回归 他的 TL;DR 很直接：目前不太行。有点混乱。
+但从系统角度看，这个实验非常有意思。
+实验：用 AI 组织做研究 Karpathy 尝试了几种组织结构：
+1. 8 个独立研究员 每个 agent 自主开分支，独立探索。
+2. 1 个 Chief Scientist &#43; 8 个 Junior 一个 agent 负责拆解任务和分配工作，其余执行。
+这已经不是在&quot;用 AI 写代码&quot;。而是在测试：AI 组织是否能做研究？
+工程基础设施：极简但系统化 整个研究组织建立在非常简单的基础设施上：
+每个 research program 是一个 git branch 每个 scientist fork 成 feature branch 使用 git worktrees 做隔离 简单文件作为通信机制 不用 Docker / VM（指令约束已足够） 所有 agent 运行在 tmux 网格中 这看起来像一个&quot;AI 研究办公室&quot;——可以实时观察每个 agent 的工作，也可以随时接管。
+"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+  
+  
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+          
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() { 
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+      
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+        
+        ensureButtonUpdated();
+      }
+
+      
+      window.toggleTheme = toggleTheme;
+
+      
+      initTheme();
+    })();
+  </script>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;">
+  <meta name="twitter:description" content="最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。
+他没有只运行一个 agent。而是一次性运行了 8 个：
+4 个 Claude 4 个 Codex 每个分配 1 块 GPU 目标：删除 logit softcap，同时不引入回归 他的 TL;DR 很直接：目前不太行。有点混乱。
+但从系统角度看，这个实验非常有意思。
+实验：用 AI 组织做研究 Karpathy 尝试了几种组织结构：
+1. 8 个独立研究员 每个 agent 自主开分支，独立探索。
+2. 1 个 Chief Scientist &#43; 8 个 Junior 一个 agent 负责拆解任务和分配工作，其余执行。
+这已经不是在&#34;用 AI 写代码&#34;。而是在测试：AI 组织是否能做研究？
+工程基础设施：极简但系统化 整个研究组织建立在非常简单的基础设施上：
+每个 research program 是一个 git branch 每个 scientist fork 成 feature branch 使用 git worktrees 做隔离 简单文件作为通信机制 不用 Docker / VM（指令约束已足够） 所有 agent 运行在 tmux 网格中 这看起来像一个&#34;AI 研究办公室&#34;——可以实时观察每个 agent 的工作，也可以随时接管。">
+
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+  
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">About Me</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+            
+            <div class="post-tags">
+              <a href="/tags/ai/">
+                AI
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/agent/">
+                Agent
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/karpathy/">
+                Karpathy
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/">
+                研究组织
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">
+                工程
+              </a>
+            </div>
+            
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime=" 2026-02-28 08:20:00 CST">
+                28 Feb 2026
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+            </div>
+          </div>
+          
+        </header>
+
+
+
+        <div class="post-content markdown-body">
+          
+          <p>最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。</p>
+<p>他没有只运行一个 agent。而是一次性运行了 8 个：</p>
+<ul>
+<li>4 个 Claude</li>
+<li>4 个 Codex</li>
+<li>每个分配 1 块 GPU</li>
+<li>目标：删除 logit softcap，同时不引入回归</li>
+</ul>
+<p>他的 TL;DR 很直接：<strong>目前不太行。有点混乱。</strong></p>
+<p>但从系统角度看，这个实验非常有意思。</p>
+<hr>
+<h2 id="实验用-ai-组织做研究">实验：用 AI 组织做研究</h2>
+<p>Karpathy 尝试了几种组织结构：</p>
+<p><strong>1. 8 个独立研究员</strong>
+每个 agent 自主开分支，独立探索。</p>
+<p><strong>2. 1 个 Chief Scientist + 8 个 Junior</strong>
+一个 agent 负责拆解任务和分配工作，其余执行。</p>
+<p>这已经不是在&quot;用 AI 写代码&quot;。而是在测试：<strong>AI 组织是否能做研究？</strong></p>
+<hr>
+<h2 id="工程基础设施极简但系统化">工程基础设施：极简但系统化</h2>
+<p>整个研究组织建立在非常简单的基础设施上：</p>
+<ul>
+<li>每个 research program 是一个 git branch</li>
+<li>每个 scientist fork 成 feature branch</li>
+<li>使用 git worktrees 做隔离</li>
+<li>简单文件作为通信机制</li>
+<li>不用 Docker / VM（指令约束已足够）</li>
+<li>所有 agent 运行在 tmux 网格中</li>
+</ul>
+<p>这看起来像一个&quot;AI 研究办公室&quot;——可以实时观察每个 agent 的工作，也可以随时接管。</p>
+<p>视觉上非常优雅。但结果并不优雅。</p>
+<hr>
+<h2 id="为什么目前效果不好">为什么目前效果不好？</h2>
+<p>问题不是执行能力。<strong>问题是研究能力。</strong></p>
+<p>Karpathy 观察到，这些 agent：</p>
+<ul>
+<li>不会严谨设计实验</li>
+<li>baseline 不够强</li>
+<li>不做系统 ablation</li>
+<li>不控制 compute</li>
+<li>不归一 FLOPs</li>
+<li>容易产生&quot;伪发现&quot;</li>
+</ul>
+<p>一个典型例子：</p>
+<p>某个 agent &ldquo;发现&quot;增大 hidden size 会降低 validation loss。但：</p>
+<ul>
+<li>更大模型训练更久</li>
+<li>compute 未对齐</li>
+<li>对照实验不足</li>
+<li>结论不可归因</li>
+</ul>
+<p>这是典型的 <strong>spurious result</strong>。agent 很擅长实现想法，但不会严格审视想法。</p>
+<hr>
+<h2 id="真正的转变从写代码到编程组织">真正的转变：从写代码到编程组织</h2>
+<p>这次实验的核心洞察并不是：&ldquo;AI 研究员还不够好&rdquo;。</p>
+<p>而是：<strong>工程师开始在编程一个组织。</strong></p>
+<p>这里的&quot;源码&quot;变成了：</p>
+<ul>
+<li>prompts</li>
+<li>roles</li>
+<li>tools</li>
+<li>communication protocol</li>
+<li>review 机制</li>
+<li>standup 流程</li>
+</ul>
+<p>甚至每天的 standup，本质上也是&quot;org code&rdquo;。</p>
+<p>nanochat 只是一个 eval。真正的问题是：<strong>给定任意任务，这个研究组织能否持续地产生有效进展？</strong></p>
+<hr>
+<h2 id="一个更大的趋势">一个更大的趋势</h2>
+<p>从更宏观的角度看，这可能预示着工程范式的变化：</p>
+<ol>
+<li><strong>过去</strong>：编程函数</li>
+<li><strong>现在</strong>：编程 agent</li>
+<li><strong>下一步</strong>：编程组织</li>
+</ol>
+<p>未来的工程师，不只是写代码的人。而是<strong>设计系统的人</strong>。</p>
+<p>Karpathy 的实验目前结论很现实：</p>
+<ul>
+<li>agent 执行力很强</li>
+<li>创造性研究能力仍然不足</li>
+</ul>
+<p>但方向已经清晰：<strong>真正的杠杆在于组织设计。</strong></p>
+<hr>
+<h2 id="延伸方向">延伸方向</h2>
+<p>如果你感兴趣，这篇还可以升级成：</p>
+<ul>
+<li>更偏技术深度分析版（讲研究方法论）</li>
+<li>更偏未来趋势判断版</li>
+<li>更偏 AI 组织工程实操指南版</li>
+<li>或者更偏 Twitter thread 风格</li>
+</ul>
+
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+
+        
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/">编程，在过去两个月里变得面目全非</a></li>
+    
+    <li><a href="/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/">OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</a></li>
+    
+    <li><a href="/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">OpenClaw：AI Agent 的自主操作系统</a></li>
+    
+  </ul>
+</div>
+
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>

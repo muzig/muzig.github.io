@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>未来趋势 on Muzig 的技术博客</title>
+    <link>https://muzig.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/</link>
+    <description>Recent content in 未来趋势 on Muzig 的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Feb 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="https://muzig.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;</title>
+      <link>https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&amp;quot;老工程师&amp;quot;意味着什么。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;上周看到 Truell 的一段访谈，核心观点很有意思：&lt;strong&gt;AI 软件开发已经进入第三阶段&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第一阶段tab-时代补全时代&#34;&gt;第一阶段：Tab 时代（补全时代）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人写代码 → AI 补全 → 人继续写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这应该是大多数人接触的第一个 AI 编程能力。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征很明确&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;逐字输入代码&lt;/li&gt;&#xA;&lt;li&gt;AI 做 autocomplete&lt;/li&gt;&#xA;&lt;li&gt;解决的是低熵、重复性问题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;写代码&amp;quot;的效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个&lt;strong&gt;键盘增强器&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第二阶段同步-agent-时代对话式编程&#34;&gt;第二阶段：同步 Agent 时代（对话式编程）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人给 prompt&lt;/li&gt;&#xA;&lt;li&gt;Agent 生成代码&lt;/li&gt;&#xA;&lt;li&gt;人实时 review + 修正&lt;/li&gt;&#xA;&lt;li&gt;一问一答循环&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;单个任务&amp;quot;的完成效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但这里有两个限制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;实时交互&lt;/strong&gt; → 你必须盯着&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;本地资源受限&lt;/strong&gt; → 跑不了多少 agent&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&amp;quot;人机同步&amp;quot;这个瓶颈始终在。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Agent-Orchestrated Development：从写代码的人到编排系统的人</title>
+      <link>https://muzig.io/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/</guid>
+      <description>&lt;p&gt;Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。&lt;/p&gt;&#xA;&lt;p&gt;Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。&lt;/p&gt;&#xA;&lt;p&gt;这不是科幻，这是正在发生的范式转移。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
