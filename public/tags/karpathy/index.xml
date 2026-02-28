@@ -6,8 +6,15 @@
     <description>Recent content in Karpathy on Muzig 的技术博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 28 Feb 2026 08:20:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 28 Feb 2026 21:30:00 +0800</lastBuildDate>
     <atom:link href="https://muzig.io/tags/karpathy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Karpathy microGPT：200行纯Python实现完整GPT</title>
+      <link>https://muzig.io/2026/02/28/karpathy-microgpt200%E8%A1%8C%E7%BA%AFpython%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4gpt/</link>
+      <pubDate>Sat, 28 Feb 2026 21:30:00 +0800</pubDate>
+      <guid>https://muzig.io/2026/02/28/karpathy-microgpt200%E8%A1%8C%E7%BA%AFpython%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4gpt/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;The most atomic way to train and run inference for a GPT in pure, dependency-free Python. This file is the complete algorithm. Everything else is just efficiency.&amp;rdquo;&lt;/em&gt; — Andrej Karpathy&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;最近 Andrej Karpathy 发布了一个极简 GPT 实现：&lt;strong&gt;microgpt.py&lt;/strong&gt; —— 仅 200 行纯 Python 代码，无任何外部依赖（只用标准库 &lt;code&gt;os&lt;/code&gt;, &lt;code&gt;math&lt;/code&gt;, &lt;code&gt;random&lt;/code&gt;），却包含了完整的训练、推理流程。&lt;/p&gt;&#xA;&lt;p&gt;这不是玩具代码，而是一个&lt;strong&gt;教学杰作&lt;/strong&gt;：它剥离了所有工程复杂性，让你看到 GPT 的算法本质。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;</title>
       <link>https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</link>
