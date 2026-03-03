@@ -1,6 +1,6 @@
 +++
 date = '2026-02-27T00:00:00+08:00'
-draft = true
+draft = false
 title = 'AI 编程进入第三阶段：从"写代码"到"建工厂"'
 tags = ['AI编程', 'Cursor', 'Agent', '软件工程', '未来趋势']
 categories = ['技术深度']
