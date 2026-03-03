@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.1">
+  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://muzig.io/2026/02/28/openclaw-acp-agents%E6%89%93%E9%80%9A-claude-codecodexgemini-cli-%E7%9A%84%E7%BB%88%E6%9E%81%E6%96%B9%E6%A1%88/" />
+  <link rel="canonical" href="https://muzig.io/2026/02/28/openclaw-acp-agents%E6%89%93%E9%80%9A-claude-codecodexgemini-cli-%E7%9A%84%E7%BB%88%E6%9E%81%E6%96%B9%E6%A1%88/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="https://muzig.io/index.xml"
+    title="Muzig 的技术博客"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/muzig.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案",
+      "headline" : "OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案",
+      "description" : "为什么需要 ACP Agents？ 如果你和我一样，在日常开发中频繁使用 Claude Code、Codex、Gemini CLI 等 AI 编程助手，你可能已经遇到了一个痛点：如何在一个统一的界面中调度这些不同的工具？\n每个工具都有自己的交互方式：\nClaude Code 有它自己的终端界面 Codex 通过命令行运行 Gemini CLI 又是另一种体验 OpenClaw 的 ACP (Agent Client Protocol) Agents 正是为了解决这个问题而生。它让你能够通过统一的接口，在 Discord、Telegram 等聊天界面中直接驱动这些外部 AI 编程助手。\n什么是 ACP？ ACP 全称 Agent Client Protocol，是一个标准化的协议，允许 OpenClaw 通过后端插件与外部 coding harnesses 进行通信。\n目前支持的 harnesses 包括：\nPi (由 Anthropic 开发) Claude Code (Anthropic 的终端编程助手) Codex (OpenAI 的代码生成工具) OpenCode (开源编码助手) Gemini CLI (Google 的命令行 AI 工具) ACP vs 原生 Sub-agents 特性 ACP Session Sub-agent Run 运行时 ACP 后端插件 (如 acpx) OpenClaw 原生 sub-agent 运行时 Session Key agent:\u0026lt;agentId\u0026gt;:acp:\u0026lt;uuid\u0026gt; agent:\u0026lt;agentId\u0026gt;:subagent:\u0026lt;uuid\u0026gt; 主命令 \/acp ... \/subagents ... Spawn 工具 sessions_spawn 配合 runtime: \u0026quot;acp\u0026quot; sessions_spawn (默认 runtime) 简单总结：如果你想要外部专业工具的 runtime，用 ACP；如果你想要 OpenClaw 原生的轻量级并发执行，用 sub-agents。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-02-28 22:30:00 \u002b0800 CST",
+      "dateModified" : "2026-02-28 22:30:00 \u002b0800 CST",
+      "url" : "https:\/\/muzig.io\/2026\/02\/28\/openclaw-acp-agents%E6%89%93%E9%80%9A-claude-codecodexgemini-cli-%E7%9A%84%E7%BB%88%E6%9E%81%E6%96%B9%E6%A1%88\/",
+      "keywords" : [ "OpenClaw","ACP","AI Agent","Claude Code","Codex","Gemini CLI","MCP", ]
+  }
+</script>
+<title>OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案</title>
+  <meta property="og:title" content="OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="为什么需要 ACP Agents？ 如果你和我一样，在日常开发中频繁使用 Claude Code、Codex、Gemini CLI 等 AI 编程助手，你可能已经遇到了一个痛点：如何在一个统一的界面中调度这些不同的工具？
+每个工具都有自己的交互方式：
+Claude Code 有它自己的终端界面 Codex 通过命令行运行 Gemini CLI 又是另一种体验 OpenClaw 的 ACP (Agent Client Protocol) Agents 正是为了解决这个问题而生。它让你能够通过统一的接口，在 Discord、Telegram 等聊天界面中直接驱动这些外部 AI 编程助手。
+什么是 ACP？ ACP 全称 Agent Client Protocol，是一个标准化的协议，允许 OpenClaw 通过后端插件与外部 coding harnesses 进行通信。
+目前支持的 harnesses 包括：
+Pi (由 Anthropic 开发) Claude Code (Anthropic 的终端编程助手) Codex (OpenAI 的代码生成工具) OpenCode (开源编码助手) Gemini CLI (Google 的命令行 AI 工具) ACP vs 原生 Sub-agents 特性 ACP Session Sub-agent Run 运行时 ACP 后端插件 (如 acpx) OpenClaw 原生 sub-agent 运行时 Session Key agent:&lt;agentId&gt;:acp:&lt;uuid&gt; agent:&lt;agentId&gt;:subagent:&lt;uuid&gt; 主命令 /acp ... /subagents ... Spawn 工具 sessions_spawn 配合 runtime: &quot;acp&quot; sessions_spawn (默认 runtime) 简单总结：如果你想要外部专业工具的 runtime，用 ACP；如果你想要 OpenClaw 原生的轻量级并发执行，用 sub-agents。
+"
+  />
+  <meta
+    name="description"
+    content="为什么需要 ACP Agents？ 如果你和我一样，在日常开发中频繁使用 Claude Code、Codex、Gemini CLI 等 AI 编程助手，你可能已经遇到了一个痛点：如何在一个统一的界面中调度这些不同的工具？
+每个工具都有自己的交互方式：
+Claude Code 有它自己的终端界面 Codex 通过命令行运行 Gemini CLI 又是另一种体验 OpenClaw 的 ACP (Agent Client Protocol) Agents 正是为了解决这个问题而生。它让你能够通过统一的接口，在 Discord、Telegram 等聊天界面中直接驱动这些外部 AI 编程助手。
+什么是 ACP？ ACP 全称 Agent Client Protocol，是一个标准化的协议，允许 OpenClaw 通过后端插件与外部 coding harnesses 进行通信。
+目前支持的 harnesses 包括：
+Pi (由 Anthropic 开发) Claude Code (Anthropic 的终端编程助手) Codex (OpenAI 的代码生成工具) OpenCode (开源编码助手) Gemini CLI (Google 的命令行 AI 工具) ACP vs 原生 Sub-agents 特性 ACP Session Sub-agent Run 运行时 ACP 后端插件 (如 acpx) OpenClaw 原生 sub-agent 运行时 Session Key agent:&lt;agentId&gt;:acp:&lt;uuid&gt; agent:&lt;agentId&gt;:subagent:&lt;uuid&gt; 主命令 /acp ... /subagents ... Spawn 工具 sessions_spawn 配合 runtime: &quot;acp&quot; sessions_spawn (默认 runtime) 简单总结：如果你想要外部专业工具的 runtime，用 ACP；如果你想要 OpenClaw 原生的轻量级并发执行，用 sub-agents。
+"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+  
+  
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+          
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() { 
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+      
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+        
+        ensureButtonUpdated();
+      }
+
+      
+      window.toggleTheme = toggleTheme;
+
+      
+      initTheme();
+    })();
+  </script>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案">
+  <meta name="twitter:description" content="为什么需要 ACP Agents？ 如果你和我一样，在日常开发中频繁使用 Claude Code、Codex、Gemini CLI 等 AI 编程助手，你可能已经遇到了一个痛点：如何在一个统一的界面中调度这些不同的工具？
+每个工具都有自己的交互方式：
+Claude Code 有它自己的终端界面 Codex 通过命令行运行 Gemini CLI 又是另一种体验 OpenClaw 的 ACP (Agent Client Protocol) Agents 正是为了解决这个问题而生。它让你能够通过统一的接口，在 Discord、Telegram 等聊天界面中直接驱动这些外部 AI 编程助手。
+什么是 ACP？ ACP 全称 Agent Client Protocol，是一个标准化的协议，允许 OpenClaw 通过后端插件与外部 coding harnesses 进行通信。
+目前支持的 harnesses 包括：
+Pi (由 Anthropic 开发) Claude Code (Anthropic 的终端编程助手) Codex (OpenAI 的代码生成工具) OpenCode (开源编码助手) Gemini CLI (Google 的命令行 AI 工具) ACP vs 原生 Sub-agents 特性 ACP Session Sub-agent Run 运行时 ACP 后端插件 (如 acpx) OpenClaw 原生 sub-agent 运行时 Session Key agent:&lt;agentId&gt;:acp:&lt;uuid&gt; agent:&lt;agentId&gt;:subagent:&lt;uuid&gt; 主命令 /acp ... /subagents ... Spawn 工具 sessions_spawn 配合 runtime: &#34;acp&#34; sessions_spawn (默认 runtime) 简单总结：如果你想要外部专业工具的 runtime，用 ACP；如果你想要 OpenClaw 原生的轻量级并发执行，用 sub-agents。">
+
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+  
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">About Me</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+            
+            <div class="post-tags">
+              <a href="/tags/openclaw/">
+                OpenClaw
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/acp/">
+                ACP
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/ai-agent/">
+                AI Agent
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/claude-code/">
+                Claude Code
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/codex/">
+                Codex
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/gemini-cli/">
+                Gemini CLI
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/mcp/">
+                MCP
+              </a>
+            </div>
+            
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime=" 2026-02-28 22:30:00 CST">
+                28 Feb 2026
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+            </div>
+          </div>
+          
+        </header>
+
+
+
+        <div class="post-content markdown-body">
+          
+          <h2 id="为什么需要-acp-agents">为什么需要 ACP Agents？</h2>
+<p>如果你和我一样，在日常开发中频繁使用 Claude Code、Codex、Gemini CLI 等 AI 编程助手，你可能已经遇到了一个痛点：<strong>如何在一个统一的界面中调度这些不同的工具？</strong></p>
+<p>每个工具都有自己的交互方式：</p>
+<ul>
+<li>Claude Code 有它自己的终端界面</li>
+<li>Codex 通过命令行运行</li>
+<li>Gemini CLI 又是另一种体验</li>
+</ul>
+<p><strong>OpenClaw 的 ACP (Agent Client Protocol) Agents</strong> 正是为了解决这个问题而生。它让你能够通过统一的接口，在 Discord、Telegram 等聊天界面中直接驱动这些外部 AI 编程助手。</p>
+<hr>
+<h2 id="什么是-acp">什么是 ACP？</h2>
+<p><strong>ACP</strong> 全称 <strong>Agent Client Protocol</strong>，是一个标准化的协议，允许 OpenClaw 通过后端插件与外部 coding harnesses 进行通信。</p>
+<p>目前支持的 harnesses 包括：</p>
+<ul>
+<li><strong>Pi</strong> (由 Anthropic 开发)</li>
+<li><strong>Claude Code</strong> (Anthropic 的终端编程助手)</li>
+<li><strong>Codex</strong> (OpenAI 的代码生成工具)</li>
+<li><strong>OpenCode</strong> (开源编码助手)</li>
+<li><strong>Gemini CLI</strong> (Google 的命令行 AI 工具)</li>
+</ul>
+<h3 id="acp-vs-原生-sub-agents">ACP vs 原生 Sub-agents</h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>ACP Session</th>
+          <th>Sub-agent Run</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>运行时</strong></td>
+          <td>ACP 后端插件 (如 acpx)</td>
+          <td>OpenClaw 原生 sub-agent 运行时</td>
+      </tr>
+      <tr>
+          <td><strong>Session Key</strong></td>
+          <td><code>agent:&lt;agentId&gt;:acp:&lt;uuid&gt;</code></td>
+          <td><code>agent:&lt;agentId&gt;:subagent:&lt;uuid&gt;</code></td>
+      </tr>
+      <tr>
+          <td><strong>主命令</strong></td>
+          <td><code>/acp ...</code></td>
+          <td><code>/subagents ...</code></td>
+      </tr>
+      <tr>
+          <td><strong>Spawn 工具</strong></td>
+          <td><code>sessions_spawn</code> 配合 <code>runtime: &quot;acp&quot;</code></td>
+          <td><code>sessions_spawn</code> (默认 runtime)</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>简单总结</strong>：如果你想要外部专业工具的 runtime，用 ACP；如果你想要 OpenClaw 原生的轻量级并发执行，用 sub-agents。</p>
+<hr>
+<h2 id="快速上手">快速上手</h2>
+<h3 id="1-配置-acp-后端">1. 配置 ACP 后端</h3>
+<p>首先安装并启用 acpx 插件：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw plugins install @openclaw/acpx
+</span></span><span style="display:flex;"><span>openclaw config set plugins.entries.acpx.enabled true
+</span></span></code></pre></div><p>然后在 OpenClaw 配置中添加 ACP 基础配置：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="font-weight:bold">acp</span>:
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">enabled</span>: <span style="font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">dispatch</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">enabled</span>: <span style="font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">backend</span>: <span style="font-style:italic">&#34;acpx&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">defaultAgent</span>: <span style="font-style:italic">&#34;codex&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">allowedAgents</span>: [<span style="font-style:italic">&#34;pi&#34;</span>, <span style="font-style:italic">&#34;claude&#34;</span>, <span style="font-style:italic">&#34;codex&#34;</span>, <span style="font-style:italic">&#34;opencode&#34;</span>, <span style="font-style:italic">&#34;gemini&#34;</span>]
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">maxConcurrentSessions</span>: 8
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">stream</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">coalesceIdleMs</span>: 300
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">maxChunkChars</span>: 1200
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">runtime</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">ttlMinutes</span>: 120
+</span></span></code></pre></div><p>验证配置是否正确：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/acp doctor
+</span></span></code></pre></div><h3 id="2-启动-acp-session">2. 启动 ACP Session</h3>
+<p>在 Discord（或其他支持的聊天平台）中，你可以用自然语言启动 ACP session：</p>
+<blockquote>
+<p>&ldquo;Start a persistent Codex session in a thread here and keep it focused.&rdquo;</p></blockquote>
+<p>或者使用命令式的方式：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/acp spawn codex --mode persistent --thread auto
+</span></span></code></pre></div><p>常用参数说明：</p>
+<ul>
+<li><code>--mode persistent|oneshot</code>: 持久会话或一次性运行</li>
+<li><code>--thread auto|here|off</code>: 自动绑定/当前线程/不绑定线程</li>
+<li><code>--cwd &lt;path&gt;</code>: 设置工作目录</li>
+<li><code>--label &lt;name&gt;</code>: 给会话设置标签</li>
+</ul>
+<h3 id="3-与-acp-session-交互">3. 与 ACP Session 交互</h3>
+<p>一旦 ACP session 启动并绑定到线程，后续在该线程中的所有消息都会自动路由到这个 session：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你: &#34;帮我重构这个函数，提高可读性&#34;
+</span></span><span style="display:flex;"><span>ACP Agent: [分析代码并提出重构建议]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>你: &#34;把变量名改得更语义化一些&#34;
+</span></span><span style="display:flex;"><span>ACP Agent: [继续基于上下文进行修改]
+</span></span></code></pre></div><h3 id="4-管理-acp-session">4. 管理 ACP Session</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 查看当前 session 状态</span>
+</span></span><span style="display:flex;"><span>/acp status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 调整运行时选项</span>
+</span></span><span style="display:flex;"><span>/acp model anthropic/claude-opus-4-5
+</span></span><span style="display:flex;"><span>/acp permissions strict
+</span></span><span style="display:flex;"><span>/acp timeout 120
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 给运行中的 session 发送指令</span>
+</span></span><span style="display:flex;"><span>/acp steer <span style="font-style:italic">&#34;tighten logging and continue&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 停止当前任务</span>
+</span></span><span style="display:flex;"><span>/acp cancel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 关闭 session 并解绑线程</span>
+</span></span><span style="display:flex;"><span>/acp close
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 列出所有 ACP sessions</span>
+</span></span><span style="display:flex;"><span>/acp sessions
+</span></span></code></pre></div><hr>
+<h2 id="thread-bound-sessions频道无关的持久化">Thread-Bound Sessions：频道无关的持久化</h2>
+<p>ACP 最强大的特性之一是 <strong>Thread-bound sessions</strong>。它的工作原理：</p>
+<ol>
+<li>OpenClaw 将一个 thread 绑定到目标 ACP session</li>
+<li>该 thread 中的后续消息自动路由到绑定的 ACP session</li>
+<li>ACP 输出自动返回到同一个 thread</li>
+<li>取消关注/关闭/归档/超时后，绑定自动解除</li>
+</ol>
+<p>这意味着你可以在 Discord 的一个 thread 里和 Claude Code 持续对话，就像在本地终端使用它一样自然。</p>
+<h3 id="支持的频道">支持的频道</h3>
+<p>目前内置支持 Thread binding 的频道：</p>
+<ul>
+<li><strong>Discord</strong></li>
+</ul>
+<p>其他插件频道可以通过相同的绑定接口添加支持。</p>
+<hr>
+<h2 id="通过-sessions_spawn-程序化启动">通过 sessions_spawn 程序化启动</h2>
+<p>如果你想从 agent turn 或工具调用中启动 ACP session，可以使用 <code>sessions_spawn</code>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;task&#34;</span>: <span style="font-style:italic">&#34;Open the repo and summarize failing tests&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;runtime&#34;</span>: <span style="font-style:italic">&#34;acp&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;codex&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;thread&#34;</span>: <span style="font-weight:bold">true</span>,
+</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;mode&#34;</span>: <span style="font-style:italic">&#34;session&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>关键参数：</p>
+<ul>
+<li><code>task</code> (必需): 初始提示词</li>
+<li><code>runtime</code> (ACP 必需): 必须设置为 <code>&quot;acp&quot;</code></li>
+<li><code>agentId</code> (可选): ACP 目标 harness ID，省略时使用 <code>acp.defaultAgent</code></li>
+<li><code>thread</code> (可选, 默认 false): 是否请求线程绑定</li>
+<li><code>mode</code> (可选): <code>run</code> (一次性) 或 <code>session</code> (持久化)</li>
+<li><code>cwd</code> (可选): 工作目录</li>
+<li><code>label</code> (可选): 操作员可见的标签</li>
+</ul>
+<hr>
+<h2 id="完整命令速查表">完整命令速查表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>功能</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/acp spawn</code></td>
+          <td>创建 ACP session，可选 thread 绑定</td>
+          <td><code>/acp spawn codex --mode persistent --thread auto --cwd /repo</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp cancel</code></td>
+          <td>取消目标 session 的正在执行的 turn</td>
+          <td><code>/acp cancel agent:codex:acp:&lt;uuid&gt;</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp steer</code></td>
+          <td>给运行中的 session 发送指令</td>
+          <td><code>/acp steer --session support inbox prioritize failing tests</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp close</code></td>
+          <td>关闭 session 并解绑 thread</td>
+          <td><code>/acp close</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp status</code></td>
+          <td>显示后端、模式、状态、运行时选项</td>
+          <td><code>/acp status</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp set-mode</code></td>
+          <td>设置目标 session 的运行时模式</td>
+          <td><code>/acp set-mode plan</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp set</code></td>
+          <td>通用运行时配置写入</td>
+          <td><code>/acp set model openai/gpt-5.2</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp cwd</code></td>
+          <td>设置运行时工作目录覆盖</td>
+          <td><code>/acp cwd /Users/user/Projects/repo</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp permissions</code></td>
+          <td>设置审批策略 profile</td>
+          <td><code>/acp permissions strict</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp timeout</code></td>
+          <td>设置运行时超时（秒）</td>
+          <td><code>/acp timeout 120</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp model</code></td>
+          <td>设置运行时模型覆盖</td>
+          <td><code>/acp model anthropic/claude-opus-4-5</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp reset-options</code></td>
+          <td>移除 session 运行时选项覆盖</td>
+          <td><code>/acp reset-options</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp sessions</code></td>
+          <td>从 store 列出最近的 ACP sessions</td>
+          <td><code>/acp sessions</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp doctor</code></td>
+          <td>后端健康、能力、可操作的修复</td>
+          <td><code>/acp doctor</code></td>
+      </tr>
+      <tr>
+          <td><code>/acp install</code></td>
+          <td>打印确定性安装和启用步骤</td>
+          <td><code>/acp install</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="故障排除">故障排除</h2>
+<table>
+  <thead>
+      <tr>
+          <th>症状</th>
+          <th>可能原因</th>
+          <th>解决方案</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ACP runtime backend is not configured</code></td>
+          <td>后端插件缺失或禁用</td>
+          <td>安装并启用后端插件，然后运行 <code>/acp doctor</code></td>
+      </tr>
+      <tr>
+          <td><code>ACP is disabled by policy</code></td>
+          <td>ACP 全局禁用</td>
+          <td>设置 <code>acp.enabled=true</code></td>
+      </tr>
+      <tr>
+          <td><code>ACP dispatch is disabled by policy</code></td>
+          <td>从普通 thread 消息分派禁用</td>
+          <td>设置 <code>acp.dispatch.enabled=true</code></td>
+      </tr>
+      <tr>
+          <td><code>ACP agent &quot;&lt;id&gt;&quot; is not allowed by policy</code></td>
+          <td>Agent 不在允许列表中</td>
+          <td>使用允许的 <code>agentId</code> 或更新 <code>acp.allowedAgents</code></td>
+      </tr>
+      <tr>
+          <td><code>Unable to resolve session target: ...</code></td>
+          <td>Key/ID/Label token 错误</td>
+          <td>运行 <code>/acp sessions</code>，复制精确的 key/label，重试</td>
+      </tr>
+      <tr>
+          <td><code>--thread here requires running /acp spawn inside an active thread</code></td>
+          <td>在 thread 上下文外使用了 <code>--thread here</code></td>
+          <td>移动到目标 thread 或使用 <code>--thread auto/off</code></td>
+      </tr>
+      <tr>
+          <td><code>Only &lt;user-id&gt; can rebind this thread</code></td>
+          <td>其他用户拥有 thread binding</td>
+          <td>以所有者身份重新绑定或使用不同的 thread</td>
+      </tr>
+      <tr>
+          <td><code>Thread bindings are unavailable for &lt;channel&gt;</code></td>
+          <td>适配器缺少 thread binding 能力</td>
+          <td>使用 <code>--thread off</code> 或移动到支持的适配器/频道</td>
+      </tr>
+      <tr>
+          <td><code>Missing ACP metadata for bound session</code></td>
+          <td>过期/删除的 ACP session 元数据</td>
+          <td>使用 <code>/acp spawn</code> 重新创建，然后重新绑定/聚焦 thread</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="实际应用场景">实际应用场景</h2>
+<h3 id="场景-1discord-中的代码审查">场景 1：Discord 中的代码审查</h3>
+<p>在 Discord 的 thread 中启动 Claude Code：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/acp spawn claude --mode persistent --thread here --cwd /path/to/repo
+</span></span></code></pre></div><p>然后直接贴代码片段，让 Claude 帮你审查：</p>
+<blockquote>
+<p>&ldquo;帮我审查这段代码，看看有没有并发安全问题&rdquo;</p></blockquote>
+<h3 id="场景-2并行使用不同工具">场景 2：并行使用不同工具</h3>
+<ul>
+<li>在 Thread A 用 Codex 生成测试代码</li>
+<li>在 Thread B 用 Claude Code 重构旧代码</li>
+<li>在 Thread C 用 Gemini CLI 分析性能</li>
+</ul>
+<p>每个 session 独立运行，互不干扰。</p>
+<h3 id="场景-3团队协作">场景 3：团队协作</h3>
+<p>团队成员可以在同一个 Discord 服务器的不同 thread 中同时使用不同的 AI 工具，所有对话历史都保存在 thread 中，方便后续查阅。</p>
+<hr>
+<h2 id="总结">总结</h2>
+<p>OpenClaw 的 ACP Agents 为我们提供了一种统一、标准化的方式来集成和调度各种外部 AI 编程助手。</p>
+<p><strong>核心要点：</strong></p>
+<ol>
+<li>
+<p><strong>标准化协议</strong>：通过 ACP 协议，OpenClaw 可以与 Pi、Claude Code、Codex、OpenCode、Gemini CLI 等工具无缝集成</p>
+</li>
+<li>
+<p><strong>Thread-bound Sessions</strong>：支持将 ACP session 绑定到 Discord 等平台的 thread，实现持久化、上下文连续的对话体验</p>
+</li>
+<li>
+<p><strong>灵活的控制</strong>：丰富的 <code>/acp</code> 命令集让你可以精细控制每个 session 的行为</p>
+</li>
+<li>
+<p><strong>与 Sub-agents 互补</strong>：ACP 用于外部专业工具 runtime，Sub-agents 用于原生轻量级并发，两者相辅相成</p>
+</li>
+</ol>
+<p>如果你正在寻找一个统一调度多个 AI 编程助手的解决方案，ACP Agents 值得一试。</p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="https://docs.openclaw.ai/tools/acp-agents">OpenClaw ACP Agents 官方文档</a></li>
+<li><a href="https://openclaw.ai/">OpenClaw 官网</a></li>
+<li><a href="https://github.com/openclaw/openclaw">GitHub: openclaw/openclaw</a></li>
+<li><a href="https://agentclientprotocol.com/">Agent Client Protocol</a></li>
+</ol>
+<hr>
+<blockquote>
+<p>💡 <strong>下期预告</strong>：深入探讨 OpenClaw 的 Sub-agents 机制，以及如何设计高效的多 Agent 协作系统</p></blockquote>
+<blockquote>
+<p>📬 <strong>订阅更新</strong>：欢迎 Star <a href="https://github.com/muzig/muzig.github.io">GitHub 仓库</a> 获取最新文章推送</p></blockquote>
+
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+
+        
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/">Agent-Orchestrated Development：从写代码的人到编排系统的人</a></li>
+    
+    <li><a href="/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/">OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</a></li>
+    
+    <li><a href="/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">QMD：OpenClaw 的本地语义搜索解决方案</a></li>
+    
+  </ul>
+</div>
+
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>
