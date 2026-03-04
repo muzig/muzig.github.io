@@ -72,4 +72,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 900000  # 15 分钟，避免 Pages 状态轮询超时
 
