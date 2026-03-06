@@ -1,19 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>工具 on Muzig 的技术博客</title>
-    <link>https://muzig.io/tags/%E5%B7%A5%E5%85%B7/</link>
-    <description>Recent content in 工具 on Muzig 的技术博客</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 03 Feb 2026 16:40:00 +0800</lastBuildDate>
-    <atom:link href="https://muzig.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title>
-      <link>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</link>
-      <pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;💡 一句话总结：OpenClaw 让你的 AI 拥有多个&amp;quot;专家人格&amp;quot;和多个&amp;quot;远程手脚&amp;quot;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;-先讲个场景&#34;&gt;🤔 先讲个场景&lt;/h2&gt;&#xA;&lt;p&gt;想象一下：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;你在家用手机对 AI 说：&amp;ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;AI 自动调用&lt;strong&gt;手机摄像头&lt;/strong&gt;拍照 → &lt;strong&gt;分析模型&lt;/strong&gt;看图 → &lt;strong&gt;写作模型&lt;/strong&gt;生成报告 → &lt;strong&gt;电脑&lt;/strong&gt;发邮件&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;全程无缝衔接，就像有个 24 小时待命的团队 ⚡&lt;/p&gt;&#xA;&lt;p&gt;这就是 OpenClaw 想做的事。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-核心概念agent-vs-node&#34;&gt;🧠 核心概念：Agent vs Node&lt;/h2&gt;&#xA;&lt;p&gt;很多人搞混这两个概念，其实特别简单：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Agent（智能体）&lt;/strong&gt;&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Node（节点）&lt;/strong&gt;&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;是什么&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;不同的&amp;quot;专家大脑&amp;quot;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;不同的&amp;quot;操作终端&amp;quot;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;负责&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;怎么思考、怎么决策&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;在哪执行、用什么工具&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;例子&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;编程专家、写作专家、分析师&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;家里 Mac、办公室 PC、手机&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;记忆口诀：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;🧠 Agent = 能力维度（擅长什么）&#xA;📍 Node = 位置维度（在哪干活）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-多-agent一个平台多种专家&#34;&gt;👥 多 Agent：一个平台，多种专家&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌─────────────────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│    Gateway      │  ← 总指挥&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   （总控制中心）  │&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└────────┬────────┘&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ┌────┴────┬────────┬────────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼         ▼        ▼        ▼&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│编程专家│ │写作专家│ │分析专家│ │客服专家│&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└───────┘ └───────┘ └───────┘ └───────┘&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;实际配置示例&#34;&gt;实际配置示例&lt;/h3&gt;&#xA;&lt;p&gt;在 &lt;code&gt;~/.openclaw/openclaw.json&lt;/code&gt; 中：&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Feb 2026 16:40:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title><link>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</link><pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate><guid>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</guid><description>&lt;blockquote>
+&lt;p>💡 一句话总结：OpenClaw 让你的 AI 拥有多个&amp;quot;专家人格&amp;quot;和多个&amp;quot;远程手脚&amp;quot;&lt;/p>&lt;/blockquote>
+&lt;h2 id="-先讲个场景">🤔 先讲个场景&lt;/h2>
+&lt;p>想象一下：&lt;/p>
+&lt;ul>
+&lt;li>你在家用手机对 AI 说：&amp;ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&amp;rdquo;&lt;/li>
+&lt;li>AI 自动调用&lt;strong>手机摄像头&lt;/strong>拍照 → &lt;strong>分析模型&lt;/strong>看图 → &lt;strong>写作模型&lt;/strong>生成报告 → &lt;strong>电脑&lt;/strong>发邮件&lt;/li>
+&lt;/ul>
+&lt;p>全程无缝衔接，就像有个 24 小时待命的团队 ⚡&lt;/p>
+&lt;p>这就是 OpenClaw 想做的事。&lt;/p>
+&lt;hr>
+&lt;h2 id="-核心概念agent-vs-node">🧠 核心概念：Agent vs Node&lt;/h2>
+&lt;p>很多人搞混这两个概念，其实特别简单：&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;/th>
+ &lt;th style="text-align: center">&lt;strong>Agent（智能体）&lt;/strong>&lt;/th>
+ &lt;th style="text-align: center">&lt;strong>Node（节点）&lt;/strong>&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;strong>是什么&lt;/strong>&lt;/td>
+ &lt;td style="text-align: center">不同的&amp;quot;专家大脑&amp;quot;&lt;/td>
+ &lt;td style="text-align: center">不同的&amp;quot;操作终端&amp;quot;&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>负责&lt;/strong>&lt;/td>
+ &lt;td style="text-align: center">怎么思考、怎么决策&lt;/td>
+ &lt;td style="text-align: center">在哪执行、用什么工具&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>例子&lt;/strong>&lt;/td>
+ &lt;td style="text-align: center">编程专家、写作专家、分析师&lt;/td>
+ &lt;td style="text-align: center">家里 Mac、办公室 PC、手机&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>记忆口诀：&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>🧠 Agent = 能力维度（擅长什么）
+📍 Node = 位置维度（在哪干活）&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="-多-agent一个平台多种专家">👥 多 Agent：一个平台，多种专家&lt;/h2>
+&lt;p>OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>┌─────────────────┐
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ Gateway │ ← 总指挥
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ （总控制中心） │
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└────────┬────────┘
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ┌────┴────┬────────┬────────┐
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ▼ ▼ ▼ ▼
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│编程专家│ │写作专家│ │分析专家│ │客服专家│
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└───────┘ └───────┘ └───────┘ └───────┘
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="实际配置示例">实际配置示例&lt;/h3>
+&lt;p>在 &lt;code>~/.openclaw/openclaw.json&lt;/code> 中：&lt;/p></description></item></channel></rss>

@@ -1,19 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>工程师视角 on Muzig 的技术博客</title>
-    <link>https://muzig.io/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92/</link>
-    <description>Recent content in 工程师视角 on Muzig 的技术博客</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate>
-    <atom:link href="https://muzig.io/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title>
-      <link>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link>
-      <pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid>
-      <description>&lt;p&gt;我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p&gt;&#xA;&lt;p&gt;作者：&lt;strong&gt;Benjamin Jones&lt;/strong&gt;&#xA;平台：&lt;strong&gt;AI Frontiers&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一句话核心观点&#34;&gt;一句话核心观点&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 不一定让打工人变惨。&#xA;反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;关键就在两个经济机制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;价格下降&lt;/li&gt;&#xA;&lt;li&gt;瓶颈转移（Baumol 成本病）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一为什么ai-越强反而越好&#34;&gt;一、为什么“AI 越强，反而越好”？&lt;/h1&gt;&#xA;&lt;p&gt;很多人直觉是：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但作者说，这只看到了“替代”，没看到“价格”。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-自动化--降低价格&#34;&gt;① 自动化 = 降低价格&lt;/h2&gt;&#xA;&lt;p&gt;机器为什么存在？&#xA;不是为了替代人。&#xA;是为了&lt;strong&gt;降低成本&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;举个简单例子：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人算 4 位数乘法：1 分钟&lt;/li&gt;&#xA;&lt;li&gt;手机算：几乎 0 成本&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;于是结果是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;计算变得“免费”&lt;/li&gt;&#xA;&lt;li&gt;计算行业占 GDP 很小&lt;/li&gt;&#xA;&lt;li&gt;但所有行业都受益&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;关键逻辑：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;价格暴跌意味着：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;消费者获益&lt;/li&gt;&#xA;&lt;li&gt;生活成本下降&lt;/li&gt;&#xA;&lt;li&gt;钱会流向别的地方&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;二真正决定工资的不是被替代&#34;&gt;二、真正决定工资的不是“被替代”&lt;/h1&gt;&#xA;&lt;p&gt;而是 —— 瓶颈在哪里&#xA;这部分是文章最重要的地方。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-农业案例历史证明&#34;&gt;🌽 农业案例（历史证明）&lt;/h2&gt;&#xA;&lt;p&gt;18 世纪：&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工程师视角 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92/</link><description>Recent content in 工程师视角 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title><link>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate><guid>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid><description>&lt;p>我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p>
+&lt;p>作者：&lt;strong>Benjamin Jones&lt;/strong>
+平台：&lt;strong>AI Frontiers&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;h1 id="一句话核心观点">一句话核心观点&lt;/h1>
+&lt;blockquote>
+&lt;p>AI 不一定让打工人变惨。
+反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p>&lt;/blockquote>
+&lt;p>关键就在两个经济机制：&lt;/p>
+&lt;ol>
+&lt;li>价格下降&lt;/li>
+&lt;li>瓶颈转移（Baumol 成本病）&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h1 id="一为什么ai-越强反而越好">一、为什么“AI 越强，反而越好”？&lt;/h1>
+&lt;p>很多人直觉是：&lt;/p>
+&lt;blockquote>
+&lt;p>AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p>&lt;/blockquote>
+&lt;p>但作者说，这只看到了“替代”，没看到“价格”。&lt;/p>
+&lt;h2 id="-自动化--降低价格">① 自动化 = 降低价格&lt;/h2>
+&lt;p>机器为什么存在？
+不是为了替代人。
+是为了&lt;strong>降低成本&lt;/strong>。&lt;/p>
+&lt;p>举个简单例子：&lt;/p>
+&lt;ul>
+&lt;li>人算 4 位数乘法：1 分钟&lt;/li>
+&lt;li>手机算：几乎 0 成本&lt;/li>
+&lt;/ul>
+&lt;p>于是结果是：&lt;/p>
+&lt;ul>
+&lt;li>计算变得“免费”&lt;/li>
+&lt;li>计算行业占 GDP 很小&lt;/li>
+&lt;li>但所有行业都受益&lt;/li>
+&lt;/ul>
+&lt;p>关键逻辑：&lt;/p>
+&lt;blockquote>
+&lt;p>如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p>&lt;/blockquote>
+&lt;p>价格暴跌意味着：&lt;/p>
+&lt;ul>
+&lt;li>消费者获益&lt;/li>
+&lt;li>生活成本下降&lt;/li>
+&lt;li>钱会流向别的地方&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="二真正决定工资的不是被替代">二、真正决定工资的不是“被替代”&lt;/h1>
+&lt;p>而是 —— 瓶颈在哪里
+这部分是文章最重要的地方。&lt;/p>
+&lt;h2 id="-农业案例历史证明">🌽 农业案例（历史证明）&lt;/h2>
+&lt;p>18 世纪：&lt;/p></description></item></channel></rss>

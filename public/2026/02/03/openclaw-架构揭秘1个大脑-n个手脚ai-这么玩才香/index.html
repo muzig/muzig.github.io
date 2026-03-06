@@ -1,704 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Hugo 0.148.1">
-  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="" />
-  <meta property="og:url" content="https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/" />
-  <link rel="canonical" href="https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/" /><link
-    rel="alternate"
-    type="application/atom+xml"
-    href="https://muzig.io/index.xml"
-    title="Muzig 的技术博客"
-  />
-
-  <script type="application/ld+json">
-  {
-      "@context" : "http://schema.org",
-      "@type" : "BlogPosting",
-      "mainEntityOfPage": {
-           "@type": "WebPage",
-           "@id": "https:\/\/muzig.io\/"
-      },
-      "articleSection" : "posts",
-      "name" : "OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥",
-      "headline" : "OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥",
-      "description" : " 💡 一句话总结：OpenClaw 让你的 AI 拥有多个\u0026quot;专家人格\u0026quot;和多个\u0026quot;远程手脚\u0026quot;\n🤔 先讲个场景 想象一下：\n你在家用手机对 AI 说：\u0026ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱\u0026rdquo; AI 自动调用手机摄像头拍照 → 分析模型看图 → 写作模型生成报告 → 电脑发邮件 全程无缝衔接，就像有个 24 小时待命的团队 ⚡\n这就是 OpenClaw 想做的事。\n🧠 核心概念：Agent vs Node 很多人搞混这两个概念，其实特别简单：\nAgent（智能体） Node（节点） 是什么 不同的\u0026quot;专家大脑\u0026quot; 不同的\u0026quot;操作终端\u0026quot; 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：\n🧠 Agent = 能力维度（擅长什么） 📍 Node = 位置维度（在哪干活）\n👥 多 Agent：一个平台，多种专家 OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：\n┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~\/.openclaw\/openclaw.json 中：\n",
-      "inLanguage" : "en-US",
-      "author" : "",
-      "creator" : "",
-      "publisher": "",
-      "accountablePerson" : "",
-      "copyrightHolder" : "",
-      "copyrightYear" : "2026",
-      "datePublished": "2026-02-03 16:40:00 \u002b0800 CST",
-      "dateModified" : "2026-02-03 16:40:00 \u002b0800 CST",
-      "url" : "https:\/\/muzig.io\/2026\/02\/03\/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99\/",
-      "keywords" : [ "OpenClaw","AI","Agent","架构","工具", ]
-  }
-</script>
-<title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title>
-  <meta property="og:title" content="OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥" />
-  <meta property="og:type" content="article" />
-  <meta
-    property="og:description"
-    content=" 💡 一句话总结：OpenClaw 让你的 AI 拥有多个&quot;专家人格&quot;和多个&quot;远程手脚&quot;
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=generator content="Hugo 0.148.1"><meta name=google-site-verification content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content><meta property="og:url" content="https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/"><link rel=canonical href=https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/><link rel=alternate type=application/atom+xml href=https://muzig.io/index.xml title="Muzig 的技术博客"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/muzig.io\/"},"articleSection":"posts","name":"OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥","headline":"OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥","description":" 💡 一句话总结：OpenClaw 让你的 AI 拥有多个\u0026quot;专家人格\u0026quot;和多个\u0026quot;远程手脚\u0026quot;\n🤔 先讲个场景 想象一下：\n你在家用手机对 AI 说：\u0026ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱\u0026rdquo; AI 自动调用手机摄像头拍照 → 分析模型看图 → 写作模型生成报告 → 电脑发邮件 全程无缝衔接，就像有个 24 小时待命的团队 ⚡\n这就是 OpenClaw 想做的事。\n🧠 核心概念：Agent vs Node 很多人搞混这两个概念，其实特别简单：\nAgent（智能体） Node（节点） 是什么 不同的\u0026quot;专家大脑\u0026quot; 不同的\u0026quot;操作终端\u0026quot; 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：\n🧠 Agent = 能力维度（擅长什么） 📍 Node = 位置维度（在哪干活）\n👥 多 Agent：一个平台，多种专家 OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：\n┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~\/.openclaw\/openclaw.json 中：\n","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2026","datePublished":"2026-02-03 16:40:00 \u002b0800 CST","dateModified":"2026-02-03 16:40:00 \u002b0800 CST","url":"https:\/\/muzig.io\/2026\/02\/03\/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99\/","keywords":["OpenClaw","AI","Agent","架构","工具"]}</script><title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title><meta property="og:title" content="OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥"><meta property="og:type" content="article"><meta property="og:description" content=' 💡 一句话总结：OpenClaw 让你的 AI 拥有多个"专家人格"和多个"远程手脚"
 🤔 先讲个场景 想象一下：
 你在家用手机对 AI 说：&ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&rdquo; AI 自动调用手机摄像头拍照 → 分析模型看图 → 写作模型生成报告 → 电脑发邮件 全程无缝衔接，就像有个 24 小时待命的团队 ⚡
 这就是 OpenClaw 想做的事。
 🧠 核心概念：Agent vs Node 很多人搞混这两个概念，其实特别简单：
-Agent（智能体） Node（节点） 是什么 不同的&quot;专家大脑&quot; 不同的&quot;操作终端&quot; 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
+Agent（智能体） Node（节点） 是什么 不同的"专家大脑" 不同的"操作终端" 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
 🧠 Agent = 能力维度（擅长什么） 📍 Node = 位置维度（在哪干活）
 👥 多 Agent：一个平台，多种专家 OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：
 ┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~/.openclaw/openclaw.json 中：
-"
-  />
-  <meta
-    name="description"
-    content=" 💡 一句话总结：OpenClaw 让你的 AI 拥有多个&quot;专家人格&quot;和多个&quot;远程手脚&quot;
+'><meta name=description content=' 💡 一句话总结：OpenClaw 让你的 AI 拥有多个"专家人格"和多个"远程手脚"
 🤔 先讲个场景 想象一下：
 你在家用手机对 AI 说：&ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&rdquo; AI 自动调用手机摄像头拍照 → 分析模型看图 → 写作模型生成报告 → 电脑发邮件 全程无缝衔接，就像有个 24 小时待命的团队 ⚡
 这就是 OpenClaw 想做的事。
 🧠 核心概念：Agent vs Node 很多人搞混这两个概念，其实特别简单：
-Agent（智能体） Node（节点） 是什么 不同的&quot;专家大脑&quot; 不同的&quot;操作终端&quot; 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
+Agent（智能体） Node（节点） 是什么 不同的"专家大脑" 不同的"操作终端" 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
 🧠 Agent = 能力维度（擅长什么） 📍 Node = 位置维度（在哪干活）
 👥 多 Agent：一个平台，多种专家 OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：
 ┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~/.openclaw/openclaw.json 中：
-"
-  />
-  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
-  
-  
-  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
-  
-  
-  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
-  
-   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
-  
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
-    rel="stylesheet"
-  />
-  
-  
-
-  
-  <script data-cfasync="false">
-    (function() {
-      const themeKey = 'theme';
-      const themes = { light: 'light', dark: 'dark', system: 'system' };
-
-      function getSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-      function getStoredTheme() {
-        return localStorage.getItem(themeKey);
-      }
-      function getCurrentTheme() {
-        const stored = getStoredTheme();
-        if (stored && stored !== themes.system) {
-          return stored;
-        }
-        return getSystemTheme();
-      }
-      function setTheme(theme) {
-        const root = document.documentElement;
-        if (theme === themes.system) {
-          theme = getSystemTheme();
-        }
-        if (theme === themes.dark) {
-          root.setAttribute('data-theme', 'dark');
-        } else {
-          root.removeAttribute('data-theme');
-        }
-        updateToggleButton(theme);
-      }
-      function updateToggleButton(theme) {
-        const button = document.getElementById('theme-toggle');
-        if (button) {
-          button.textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-      }
-      function ensureButtonUpdated() {
-        updateToggleButton(getCurrentTheme());
-      }
-      function initTheme() {
-        const stored = getStoredTheme();
-        let theme;
-        if (stored) {
-          theme = stored === themes.system ? getSystemTheme() : stored;
-          setTheme(stored);
-        } else {
-          
-          theme = getSystemTheme();
-          setTheme(themes.system);
-        }
-      }
-      function toggleTheme() { 
-        const current = getStoredTheme() || themes.system;
-        let next;
-        if (current === themes.system) {
-          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
-        } else if (current === themes.dark) {
-          next = themes.light;
-        } else {
-          next = themes.dark;
-        }
-        localStorage.setItem(themeKey, next);
-        setTheme(next);
-      }
-
-      
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        const stored = getStoredTheme();
-        if (!stored || stored === themes.system) {
-          setTheme(themes.system);
-        }
-      });
-
-      
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
-      } else {
-        
-        ensureButtonUpdated();
-      }
-
-      
-      window.toggleTheme = toggleTheme;
-
-      
-      initTheme();
-    })();
-  </script>
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥">
-  <meta name="twitter:description" content="💡 一句话总结：OpenClaw 让你的 AI 拥有多个&#34;专家人格&#34;和多个&#34;远程手脚&#34;
+'><meta property="og:locale" content="zh-cn"><meta property="og:image" content><style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style><style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style><link href=/index.xml rel=alternate type=application/rss+xml title="Muzig 的技术博客"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel=stylesheet><script data-cfasync=false>(function(){const o="theme",e={light:"light",dark:"dark",system:"system"};function t(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}function n(){return localStorage.getItem(o)}function r(){const s=n();return s&&s!==e.system?s:t()}function s(n){const s=document.documentElement;n===e.system&&(n=t()),n===e.dark?s.setAttribute("data-theme","dark"):s.removeAttribute("data-theme"),i(n)}function i(e){const t=document.getElementById("theme-toggle");t&&(t.textContent=e==="dark"?"☀️":"🌙")}function a(){i(r())}function c(){const o=n();let i;o?(i=o===e.system?t():o,s(o)):(i=t(),s(e.system))}function l(){const a=n()||e.system;let i;a===e.system?i=t()==="dark"?e.light:e.dark:a===e.dark?i=e.light:i=e.dark,localStorage.setItem(o,i),s(i)}window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){const o=n();(!o||o===e.system)&&s(e.system)}),document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a):a(),window.toggleTheme=l,c()})()</script><meta name=twitter:card content="summary"><meta name=twitter:title content="OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥"><meta name=twitter:description content='💡 一句话总结：OpenClaw 让你的 AI 拥有多个"专家人格"和多个"远程手脚"
 🤔 先讲个场景 想象一下：
 你在家用手机对 AI 说：“拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱” AI 自动调用手机摄像头拍照 → 分析模型看图 → 写作模型生成报告 → 电脑发邮件 全程无缝衔接，就像有个 24 小时待命的团队 ⚡
 这就是 OpenClaw 想做的事。
 🧠 核心概念：Agent vs Node 很多人搞混这两个概念，其实特别简单：
-Agent（智能体） Node（节点） 是什么 不同的&#34;专家大脑&#34; 不同的&#34;操作终端&#34; 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
+Agent（智能体） Node（节点） 是什么 不同的"专家大脑" 不同的"操作终端" 负责 怎么思考、怎么决策 在哪执行、用什么工具 例子 编程专家、写作专家、分析师 家里 Mac、办公室 PC、手机 记忆口诀：
 🧠 Agent = 能力维度（擅长什么） 📍 Node = 位置维度（在哪干活）
 👥 多 Agent：一个平台，多种专家 OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：
-┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~/.openclaw/openclaw.json 中：">
-
-  
-</head>
-
-
-<body>
-  <article class="post " id="article">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="site-header">
-          
-<header>
-  <div class="header-title">
-    <a href="/"
-      >Muzig</a
-    >
-  </div>
-  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
-</header>
-<div class="row end-md header-items">
-  <div class="header-item-left">
-    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
-      🌙
-    </button>
-  </div>
-
-  
-  <div class="header-item">
-    <a href="https://github.com/muzig" target="_blank">About Me</a>
-  </div>
-  
-</div>
-<div class="row">
-   
-</div>
-<div class="header-line"></div>
-
-        </div>
-
-        <div class="row middle-xs">
-          <div class="col-xs-12">
-            <br \>
-          </div>
-          <div class="col-xs-12">
-            
-            <div class="post-tags">
-              <a href="/tags/openclaw/">
-                OpenClaw
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/ai/">
-                AI
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/agent/">
-                Agent
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/%E6%9E%B6%E6%9E%84/">
-                架构
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/%E5%B7%A5%E5%85%B7/">
-                工具
-              </a>
-            </div>
-            
-          </div>
-        </div>
-
-
-        <header class="post-header">
-          <h1 class="post-title">OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</h1>
-          
-          <div class="row post-desc">
-            <div class="col-xs-6">
-              
-              <time class="post-date" datetime=" 2026-02-03 16:40:00 CST">
-                03 Feb 2026
-              </time>
-              
-            </div>
-            <div class="col-xs-6">
-              
-            </div>
-          </div>
-          
-        </header>
-
-
-
-        <div class="post-content markdown-body">
-          
-          <blockquote>
-<p>💡 一句话总结：OpenClaw 让你的 AI 拥有多个&quot;专家人格&quot;和多个&quot;远程手脚&quot;</p></blockquote>
-<h2 id="-先讲个场景">🤔 先讲个场景</h2>
-<p>想象一下：</p>
-<ul>
-<li>你在家用手机对 AI 说：&ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&rdquo;</li>
-<li>AI 自动调用<strong>手机摄像头</strong>拍照 → <strong>分析模型</strong>看图 → <strong>写作模型</strong>生成报告 → <strong>电脑</strong>发邮件</li>
-</ul>
-<p>全程无缝衔接，就像有个 24 小时待命的团队 ⚡</p>
-<p>这就是 OpenClaw 想做的事。</p>
-<hr>
-<h2 id="-核心概念agent-vs-node">🧠 核心概念：Agent vs Node</h2>
-<p>很多人搞混这两个概念，其实特别简单：</p>
-<table>
-  <thead>
-      <tr>
-          <th></th>
-          <th style="text-align: center"><strong>Agent（智能体）</strong></th>
-          <th style="text-align: center"><strong>Node（节点）</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>是什么</strong></td>
-          <td style="text-align: center">不同的&quot;专家大脑&quot;</td>
-          <td style="text-align: center">不同的&quot;操作终端&quot;</td>
-      </tr>
-      <tr>
-          <td><strong>负责</strong></td>
-          <td style="text-align: center">怎么思考、怎么决策</td>
-          <td style="text-align: center">在哪执行、用什么工具</td>
-      </tr>
-      <tr>
-          <td><strong>例子</strong></td>
-          <td style="text-align: center">编程专家、写作专家、分析师</td>
-          <td style="text-align: center">家里 Mac、办公室 PC、手机</td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>记忆口诀：</strong></p>
-<blockquote>
-<p>🧠 Agent = 能力维度（擅长什么）
-📍 Node = 位置维度（在哪干活）</p></blockquote>
-<hr>
-<h2 id="-多-agent一个平台多种专家">👥 多 Agent：一个平台，多种专家</h2>
-<p>OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>┌─────────────────┐
-</span></span><span style="display:flex;"><span>│    Gateway      │  ← 总指挥
-</span></span><span style="display:flex;"><span>│   （总控制中心）  │
-</span></span><span style="display:flex;"><span>└────────┬────────┘
-</span></span><span style="display:flex;"><span>         │
-</span></span><span style="display:flex;"><span>    ┌────┴────┬────────┬────────┐
-</span></span><span style="display:flex;"><span>    ▼         ▼        ▼        ▼
-</span></span><span style="display:flex;"><span>┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
-</span></span><span style="display:flex;"><span>│编程专家│ │写作专家│ │分析专家│ │客服专家│
-</span></span><span style="display:flex;"><span>└───────┘ └───────┘ └───────┘ └───────┘
-</span></span></code></pre></div><h3 id="实际配置示例">实际配置示例</h3>
-<p>在 <code>~/.openclaw/openclaw.json</code> 中：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;agents&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&#34;defaults&#34;</span>: { <span style="font-weight:bold">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;general&#34;</span> },
-</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&#34;routing&#34;</span>: {
-</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;coding@example.com&#34;</span>: { 
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;pi&#34;</span>, 
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;code&#34;</span> 
-</span></span><span style="display:flex;"><span>      },
-</span></span><span style="display:flex;"><span>      <span style="font-weight:bold">&#34;writing@example.com&#34;</span>: { 
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;writer&#34;</span>, 
-</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;docs&#34;</span> 
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>根据发件人自动路由到不同专家</strong> ✨</p>
-<hr>
-<h2 id="-多-nodeai-的远程手脚">📱 多 Node：AI 的远程手脚</h2>
-<p>你的 AI 不只能在自己电脑上跑，还能控制其他设备：</p>
-<table>
-  <thead>
-      <tr>
-          <th>Node</th>
-          <th>位置</th>
-          <th>能做的事</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>🏠 Node A</td>
-          <td>家里 Mac</td>
-          <td>浏览器、文件、摄像头</td>
-      </tr>
-      <tr>
-          <td>🏢 Node B</td>
-          <td>办公室 PC</td>
-          <td>大屏、内网资源</td>
-      </tr>
-      <tr>
-          <td>📱 Node C</td>
-          <td>手机</td>
-          <td>相机、位置、移动场景</td>
-      </tr>
-      <tr>
-          <td>☁️ Node D</td>
-          <td>服务器</td>
-          <td>24h 在线、定时任务</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="真实场景举例">真实场景举例</h3>
-<p><strong>场景 1：远程监控</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你说：&#34;看看家里猫在干嘛&#34;
-</span></span><span style="display:flex;"><span>→ Agent 调用 Node A（家里 Mac）摄像头
-</span></span><span style="display:flex;"><span>→ 拍照 → 分析 → 回复你
-</span></span></code></pre></div><p><strong>场景 2：跨设备工作流</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你说：&#34;把这份报告发到公司群&#34;
-</span></span><span style="display:flex;"><span>→ Agent 在家里电脑上编辑
-</span></span><span style="display:flex;"><span>→ 调用办公室 Node 发送到企业微信
-</span></span></code></pre></div><p><strong>场景 3：分布式任务</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你说：&#34;分析服务器日志，有问题就打电话通知我&#34;
-</span></span><span style="display:flex;"><span>→ 服务器 Node 持续监控
-</span></span><span style="display:flex;"><span>→ 发现问题 → 手机 Node 拨打电话
-</span></span></code></pre></div><hr>
-<h2 id="-两者组合11--2">🔄 两者组合：1+1 &gt; 2</h2>
-<p>真正的威力在于<strong>Agent + Node 的组合</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>用户请求
-</span></span><span style="display:flex;"><span>    │
-</span></span><span style="display:flex;"><span>    ▼
-</span></span><span style="display:flex;"><span>┌─────────────┐
-</span></span><span style="display:flex;"><span>│   Gateway   │  ← 路由决策
-</span></span><span style="display:flex;"><span>└──────┬──────┘
-</span></span><span style="display:flex;"><span>       │
-</span></span><span style="display:flex;"><span>       ▼
-</span></span><span style="display:flex;"><span>┌──────────────┐
-</span></span><span style="display:flex;"><span>│  Agent 3     │  ← 分析专家
-</span></span><span style="display:flex;"><span>│ （分析意图）  │
-</span></span><span style="display:flex;"><span>└──────┬───────┘
-</span></span><span style="display:flex;"><span>       │
-</span></span><span style="display:flex;"><span>       ▼ 调用
-</span></span><span style="display:flex;"><span>┌──────────────┐
-</span></span><span style="display:flex;"><span>│   Node C     │  ← 手机摄像头
-</span></span><span style="display:flex;"><span>│  （拍照）     │
-</span></span><span style="display:flex;"><span>└──────┬───────┘
-</span></span><span style="display:flex;"><span>       │
-</span></span><span style="display:flex;"><span>       ▼ 返回结果
-</span></span><span style="display:flex;"><span>┌──────────────┐
-</span></span><span style="display:flex;"><span>│  Agent 2     │  ← 写作专家
-</span></span><span style="display:flex;"><span>│ （生成报告）  │
-</span></span><span style="display:flex;"><span>└──────┬───────┘
-</span></span><span style="display:flex;"><span>       │
-</span></span><span style="display:flex;"><span>       ▼ 调用
-</span></span><span style="display:flex;"><span>┌──────────────┐
-</span></span><span style="display:flex;"><span>│   Node D     │  ← 服务器
-</span></span><span style="display:flex;"><span>│ （保存文件）  │
-</span></span><span style="display:flex;"><span>└──────────────┘
-</span></span></code></pre></div><p><strong>一句话：不同的任务用不同的专家，不同的设备干不同的活</strong> 🎯</p>
-<hr>
-<h2 id="-快速上手指南">🚀 快速上手指南</h2>
-<h3 id="1-配置多-agent">1. 配置多 Agent</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 编辑配置文件</span>
-</span></span><span style="display:flex;"><span>vim ~/.openclaw/openclaw.json
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 添加路由规则（根据需求自动分配）</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;agents&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;routing&#34;</span>: {
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;*.code&#34;</span>: { <span style="font-style:italic">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;pi&#34;</span>, <span style="font-style:italic">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;coding&#34;</span> },
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;*.write&#34;</span>: { <span style="font-style:italic">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;writer&#34;</span>, <span style="font-style:italic">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;docs&#34;</span> }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="2-启动-node-设备">2. 启动 Node 设备</h3>
-<p>要让一台设备成为 Node，首先要在该设备上启动 Node 守护进程：</p>
-<p><strong>方式一：前台启动（调试/临时使用）</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw node run --host &lt;gateway-host&gt; --port 18789 --display-name <span style="font-style:italic">&#34;家里 Mac&#34;</span>
-</span></span></code></pre></div><p><strong>方式二：通过 SSH 隧道连接（Gateway 绑定到 loopback 时）</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 终端 A：建立隧道（保持运行）</span>
-</span></span><span style="display:flex;"><span>ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 终端 B：通过隧道连接</span>
-</span></span><span style="display:flex;"><span>export OPENCLAW_GATEWAY_TOKEN=<span style="font-style:italic">&#34;&lt;gateway-token&gt;&#34;</span>
-</span></span><span style="display:flex;"><span>openclaw node run --host 127.0.0.1 --port 18790 --display-name <span style="font-style:italic">&#34;办公室 PC&#34;</span>
-</span></span></code></pre></div><p><strong>方式三：后台服务启动（推荐长期运行）</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw node install --host &lt;gateway-host&gt; --port 18789 --display-name <span style="font-style:italic">&#34;服务器 Node&#34;</span>
-</span></span><span style="display:flex;"><span>openclaw node restart
-</span></span></code></pre></div><p>启动后，Node 会自动向 Gateway 发起配对请求。</p>
-<h3 id="3-配对-node-设备">3. 配对 Node 设备</h3>
-<p>在 Gateway 端批准配对：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 查看待配对设备</span>
-</span></span><span style="display:flex;"><span>openclaw nodes pending
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 批准配对</span>
-</span></span><span style="display:flex;"><span>openclaw nodes approve &lt;device-id&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 查看已配对节点</span>
-</span></span><span style="display:flex;"><span>openclaw nodes status
-</span></span></code></pre></div><h3 id="4-跨-node-调用测试">4. 跨 Node 调用测试</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 在手机上拍照</span>
-</span></span><span style="display:flex;"><span>openclaw nodes camera_snap --node=phone-node --facing=back
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 在服务器上执行命令</span>
-</span></span><span style="display:flex;"><span>openclaw nodes run --node=server-node --command=<span style="font-style:italic">&#34;df -h&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="-关键洞察">💡 关键洞察</h2>
-<table>
-  <thead>
-      <tr>
-          <th>你想实现</th>
-          <th>配置什么</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>不同任务用不同 AI 模式</td>
-          <td><strong>多 Agent</strong></td>
-      </tr>
-      <tr>
-          <td>在不同设备上执行操作</td>
-          <td><strong>多 Node</strong></td>
-      </tr>
-      <tr>
-          <td>复杂工作流（任务+设备组合）</td>
-          <td><strong>两者都用</strong></td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="类比理解-">类比理解 🎭</h3>
-<ul>
-<li><strong>Agent</strong> = 公司里的不同部门（技术部/市场部/设计部）</li>
-<li><strong>Node</strong> = 不同城市的分公司（北京/上海/深圳）</li>
-<li><strong>Gateway</strong> = 总公司调度中心</li>
-</ul>
-<p>一个项目可以：北京技术部开发 → 上海市场部推广 → 深圳分公司执行</p>
-<hr>
-<h2 id="-总结">📝 总结</h2>
-<p>OpenClaw 的架构设计很清晰：</p>
-<ol>
-<li><strong>Agent 解决&quot;谁来做&quot;</strong> —— 不同专家处理不同任务</li>
-<li><strong>Node 解决&quot;在哪做&quot;</strong> —— 不同设备执行不同操作</li>
-<li><strong>Gateway 解决&quot;怎么分配&quot;</strong> —— 智能路由，无缝调度</li>
-</ol>
-<p>这种设计让 AI 从&quot;单机版&quot;变成了&quot;分布式网络版&quot;，能力边界直接翻倍 🚀</p>
-<p><strong>未来已来，只是分布不均。</strong></p>
-<hr>
-<h2 id="-常见问题与实战排错">🔧 常见问题与实战排错</h2>
-<h3 id="1-node-启动报错-econnrefused">1. Node 启动报错 <code>ECONNREFUSED</code></h3>
-<p><strong>原因</strong>：Gateway 默认只绑定到 <code>127.0.0.1</code>，其他设备无法连接。</p>
-<p><strong>解决</strong>：修改 Gateway 绑定到 LAN：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 在 Gateway 机器上执行</span>
-</span></span><span style="display:flex;"><span>openclaw config set gateway.bind lan
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 然后重启 Gateway</span>
-</span></span></code></pre></div><p><strong>注意</strong>：<code>lan</code> 比 <code>0.0.0.0</code> 更安全，只监听局域网地址。</p>
-<hr>
-<h3 id="2-报错-pairing-required">2. 报错 <code>pairing required</code></h3>
-<p><strong>原因</strong>：Node 已连上 Gateway，但需要管理员批准配对。</p>
-<p><strong>解决</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 在 Gateway 端查看配对请求（注意是 devices，不是 nodes）</span>
-</span></span><span style="display:flex;"><span>openclaw devices list
-</span></span><span style="display:flex;"><span>openclaw devices approve &lt;requestId&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 或者一键批准所有</span>
-</span></span><span style="display:flex;"><span>openclaw devices approve --all
-</span></span></code></pre></div><hr>
-<h3 id="3-windows-作为-node-如何设置-token">3. Windows 作为 Node 如何设置 Token</h3>
-<p><strong>PowerShell</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$env:OPENCLAW_GATEWAY_TOKEN=<span style="font-style:italic">&#34;&lt;your-token&gt;&#34;</span>
-</span></span><span style="display:flex;"><span>openclaw node run --host &lt;gateway-ip&gt; --port 18789 --display-name <span style="font-style:italic">&#34;Windows PC&#34;</span>
-</span></span></code></pre></div><p><strong>CMD</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span><span style="font-weight:bold">set</span> OPENCLAW_GATEWAY_TOKEN=&lt;your-token&gt;
-</span></span><span style="display:flex;"><span>openclaw node run --host &lt;gateway-ip&gt; --port 18789 --display-name <span style="font-style:italic">&#34;Windows PC&#34;</span>
-</span></span></code></pre></div><p><strong>获取 Token</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 在 Gateway 端</span>
-</span></span><span style="display:flex;"><span>openclaw config get gateway.auth.token
-</span></span></code></pre></div><hr>
-<h3 id="4-防火墙配置">4. 防火墙配置</h3>
-<p><strong>测试连通性</strong>（Windows）：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Test-NetConnection -ComputerName &lt;gateway-ip&gt; -Port 18789
-</span></span></code></pre></div><p><strong>Mac 端防火墙</strong>（如果 LAN 设备连不上）：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 检查状态</span>
-</span></span><span style="display:flex;"><span>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 临时关闭测试（记得开回来）</span>
-</span></span><span style="display:flex;"><span>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
-</span></span></code></pre></div><hr>
-<h3 id="5-执行命令超时需要批准">5. 执行命令超时/需要批准</h3>
-<p>首次在新 Node 上执行命令可能需要<strong>执行批准</strong>。两种方式：</p>
-<p><strong>方式一</strong>：实时批准（Windows 端会弹出提示）</p>
-<p><strong>方式二</strong>：配置免批准（开发环境）：</p>
-<p><strong>Gateway 端统一配置（推荐）</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-style:italic"># 允许 Node 执行特定命令</span>
-</span></span><span style="display:flex;"><span>openclaw approvals allowlist add --node <span style="font-style:italic">&#34;Windows PC&#34;</span> <span style="font-style:italic">&#34;C:\Windows\System32\dir.exe&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-style:italic"># 允许所有命令（开发环境方便，生产慎用）</span>
-</span></span><span style="display:flex;"><span>openclaw approvals allowlist add --node <span style="font-style:italic">&#34;Windows PC&#34;</span> <span style="font-style:italic">&#34;*&#34;</span>
+┌─────────────────┐ │ Gateway │ ← 总指挥 │ （总控制中心） │ └────────┬────────┘ │ ┌────┴────┬────────┬────────┐ ▼ ▼ ▼ ▼ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ │编程专家│ │写作专家│ │分析专家│ │客服专家│ └───────┘ └───────┘ └───────┘ └───────┘ 实际配置示例 在 ~/.openclaw/openclaw.json 中：'></head><body><article class=post id=article><div class=row><div class=col-xs-12><div class=site-header><header><div class=header-title><a href=/>Muzig</a></div><div class=header-subtitle>Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div></header><div class="row end-md header-items"><div class=header-item-left><button id=theme-toggle onclick=toggleTheme() class=theme-toggle>
+🌙</button></div><div class=header-item><a href=https://github.com/muzig target=_blank>About Me</a></div></div><div class=row></div><div class=header-line></div></div><div class="row middle-xs"><div class=col-xs-12><br \></div><div class=col-xs-12><div class=post-tags><a href=/tags/openclaw/>OpenClaw</a></div><div class=post-tags><a href=/tags/ai/>AI</a></div><div class=post-tags><a href=/tags/agent/>Agent</a></div><div class=post-tags><a href=/tags/%E6%9E%B6%E6%9E%84/>架构</a></div><div class=post-tags><a href=/tags/%E5%B7%A5%E5%85%B7/>工具</a></div></div></div><header class=post-header><h1 class=post-title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</h1><div class="row post-desc"><div class=col-xs-6><time class=post-date datetime="2026-02-03 16:40:00 CST">03 Feb 2026</time></div><div class=col-xs-6></div></div></header><div class="post-content markdown-body"><blockquote><p>💡 一句话总结：OpenClaw 让你的 AI 拥有多个"专家人格"和多个"远程手脚"</p></blockquote><h2 id=-先讲个场景>🤔 先讲个场景</h2><p>想象一下：</p><ul><li>你在家用手机对 AI 说：&ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&rdquo;</li><li>AI 自动调用<strong>手机摄像头</strong>拍照 → <strong>分析模型</strong>看图 → <strong>写作模型</strong>生成报告 → <strong>电脑</strong>发邮件</li></ul><p>全程无缝衔接，就像有个 24 小时待命的团队 ⚡</p><p>这就是 OpenClaw 想做的事。</p><hr><h2 id=-核心概念agent-vs-node>🧠 核心概念：Agent vs Node</h2><p>很多人搞混这两个概念，其实特别简单：</p><table><thead><tr><th></th><th style=text-align:center><strong>Agent（智能体）</strong></th><th style=text-align:center><strong>Node（节点）</strong></th></tr></thead><tbody><tr><td><strong>是什么</strong></td><td style=text-align:center>不同的"专家大脑"</td><td style=text-align:center>不同的"操作终端"</td></tr><tr><td><strong>负责</strong></td><td style=text-align:center>怎么思考、怎么决策</td><td style=text-align:center>在哪执行、用什么工具</td></tr><tr><td><strong>例子</strong></td><td style=text-align:center>编程专家、写作专家、分析师</td><td style=text-align:center>家里 Mac、办公室 PC、手机</td></tr></tbody></table><p><strong>记忆口诀：</strong></p><blockquote><p>🧠 Agent = 能力维度（擅长什么）
+📍 Node = 位置维度（在哪干活）</p></blockquote><hr><h2 id=-多-agent一个平台多种专家>👥 多 Agent：一个平台，多种专家</h2><p>OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>┌─────────────────┐
+</span></span><span style=display:flex><span>│    Gateway      │  ← 总指挥
+</span></span><span style=display:flex><span>│   （总控制中心）  │
+</span></span><span style=display:flex><span>└────────┬────────┘
+</span></span><span style=display:flex><span>         │
+</span></span><span style=display:flex><span>    ┌────┴────┬────────┬────────┐
+</span></span><span style=display:flex><span>    ▼         ▼        ▼        ▼
+</span></span><span style=display:flex><span>┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
+</span></span><span style=display:flex><span>│编程专家│ │写作专家│ │分析专家│ │客服专家│
+</span></span><span style=display:flex><span>└───────┘ └───────┘ └───────┘ └───────┘
+</span></span></code></pre></div><h3 id=实际配置示例>实际配置示例</h3><p>在 <code>~/.openclaw/openclaw.json</code> 中：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-weight:700>&#34;agents&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-weight:700>&#34;defaults&#34;</span>: { <span style=font-weight:700>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;general&#34;</span> },
+</span></span><span style=display:flex><span>    <span style=font-weight:700>&#34;routing&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=font-weight:700>&#34;coding@example.com&#34;</span>: { 
+</span></span><span style=display:flex><span>        <span style=font-weight:700>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;pi&#34;</span>, 
+</span></span><span style=display:flex><span>        <span style=font-weight:700>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;code&#34;</span> 
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>      <span style=font-weight:700>&#34;writing@example.com&#34;</span>: { 
+</span></span><span style=display:flex><span>        <span style=font-weight:700>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;writer&#34;</span>, 
+</span></span><span style=display:flex><span>        <span style=font-weight:700>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;docs&#34;</span> 
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>根据发件人自动路由到不同专家</strong> ✨</p><hr><h2 id=-多-nodeai-的远程手脚>📱 多 Node：AI 的远程手脚</h2><p>你的 AI 不只能在自己电脑上跑，还能控制其他设备：</p><table><thead><tr><th>Node</th><th>位置</th><th>能做的事</th></tr></thead><tbody><tr><td>🏠 Node A</td><td>家里 Mac</td><td>浏览器、文件、摄像头</td></tr><tr><td>🏢 Node B</td><td>办公室 PC</td><td>大屏、内网资源</td></tr><tr><td>📱 Node C</td><td>手机</td><td>相机、位置、移动场景</td></tr><tr><td>☁️ Node D</td><td>服务器</td><td>24h 在线、定时任务</td></tr></tbody></table><h3 id=真实场景举例>真实场景举例</h3><p><strong>场景 1：远程监控</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你说：&#34;看看家里猫在干嘛&#34;
+</span></span><span style=display:flex><span>→ Agent 调用 Node A（家里 Mac）摄像头
+</span></span><span style=display:flex><span>→ 拍照 → 分析 → 回复你
+</span></span></code></pre></div><p><strong>场景 2：跨设备工作流</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你说：&#34;把这份报告发到公司群&#34;
+</span></span><span style=display:flex><span>→ Agent 在家里电脑上编辑
+</span></span><span style=display:flex><span>→ 调用办公室 Node 发送到企业微信
+</span></span></code></pre></div><p><strong>场景 3：分布式任务</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你说：&#34;分析服务器日志，有问题就打电话通知我&#34;
+</span></span><span style=display:flex><span>→ 服务器 Node 持续监控
+</span></span><span style=display:flex><span>→ 发现问题 → 手机 Node 拨打电话
+</span></span></code></pre></div><hr><h2 id=-两者组合11--2>🔄 两者组合：1+1 > 2</h2><p>真正的威力在于<strong>Agent + Node 的组合</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>用户请求
+</span></span><span style=display:flex><span>    │
+</span></span><span style=display:flex><span>    ▼
+</span></span><span style=display:flex><span>┌─────────────┐
+</span></span><span style=display:flex><span>│   Gateway   │  ← 路由决策
+</span></span><span style=display:flex><span>└──────┬──────┘
+</span></span><span style=display:flex><span>       │
+</span></span><span style=display:flex><span>       ▼
+</span></span><span style=display:flex><span>┌──────────────┐
+</span></span><span style=display:flex><span>│  Agent 3     │  ← 分析专家
+</span></span><span style=display:flex><span>│ （分析意图）  │
+</span></span><span style=display:flex><span>└──────┬───────┘
+</span></span><span style=display:flex><span>       │
+</span></span><span style=display:flex><span>       ▼ 调用
+</span></span><span style=display:flex><span>┌──────────────┐
+</span></span><span style=display:flex><span>│   Node C     │  ← 手机摄像头
+</span></span><span style=display:flex><span>│  （拍照）     │
+</span></span><span style=display:flex><span>└──────┬───────┘
+</span></span><span style=display:flex><span>       │
+</span></span><span style=display:flex><span>       ▼ 返回结果
+</span></span><span style=display:flex><span>┌──────────────┐
+</span></span><span style=display:flex><span>│  Agent 2     │  ← 写作专家
+</span></span><span style=display:flex><span>│ （生成报告）  │
+</span></span><span style=display:flex><span>└──────┬───────┘
+</span></span><span style=display:flex><span>       │
+</span></span><span style=display:flex><span>       ▼ 调用
+</span></span><span style=display:flex><span>┌──────────────┐
+</span></span><span style=display:flex><span>│   Node D     │  ← 服务器
+</span></span><span style=display:flex><span>│ （保存文件）  │
+</span></span><span style=display:flex><span>└──────────────┘
+</span></span></code></pre></div><p><strong>一句话：不同的任务用不同的专家，不同的设备干不同的活</strong> 🎯</p><hr><h2 id=-快速上手指南>🚀 快速上手指南</h2><h3 id=1-配置多-agent>1. 配置多 Agent</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 编辑配置文件</span>
+</span></span><span style=display:flex><span>vim ~/.openclaw/openclaw.json
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 添加路由规则（根据需求自动分配）</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;agents&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-style:italic>&#34;routing&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;*.code&#34;</span>: { <span style=font-style:italic>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;pi&#34;</span>, <span style=font-style:italic>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;coding&#34;</span> },
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;*.write&#34;</span>: { <span style=font-style:italic>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;writer&#34;</span>, <span style=font-style:italic>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;docs&#34;</span> }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=2-启动-node-设备>2. 启动 Node 设备</h3><p>要让一台设备成为 Node，首先要在该设备上启动 Node 守护进程：</p><p><strong>方式一：前台启动（调试/临时使用）</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>openclaw node run --host &lt;gateway-host&gt; --port 18789 --display-name <span style=font-style:italic>&#34;家里 Mac&#34;</span>
+</span></span></code></pre></div><p><strong>方式二：通过 SSH 隧道连接（Gateway 绑定到 loopback 时）</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 终端 A：建立隧道（保持运行）</span>
+</span></span><span style=display:flex><span>ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 终端 B：通过隧道连接</span>
+</span></span><span style=display:flex><span>export OPENCLAW_GATEWAY_TOKEN=<span style=font-style:italic>&#34;&lt;gateway-token&gt;&#34;</span>
+</span></span><span style=display:flex><span>openclaw node run --host 127.0.0.1 --port 18790 --display-name <span style=font-style:italic>&#34;办公室 PC&#34;</span>
+</span></span></code></pre></div><p><strong>方式三：后台服务启动（推荐长期运行）</strong></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>openclaw node install --host &lt;gateway-host&gt; --port 18789 --display-name <span style=font-style:italic>&#34;服务器 Node&#34;</span>
+</span></span><span style=display:flex><span>openclaw node restart
+</span></span></code></pre></div><p>启动后，Node 会自动向 Gateway 发起配对请求。</p><h3 id=3-配对-node-设备>3. 配对 Node 设备</h3><p>在 Gateway 端批准配对：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 查看待配对设备</span>
+</span></span><span style=display:flex><span>openclaw nodes pending
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 批准配对</span>
+</span></span><span style=display:flex><span>openclaw nodes approve &lt;device-id&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 查看已配对节点</span>
+</span></span><span style=display:flex><span>openclaw nodes status
+</span></span></code></pre></div><h3 id=4-跨-node-调用测试>4. 跨 Node 调用测试</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 在手机上拍照</span>
+</span></span><span style=display:flex><span>openclaw nodes camera_snap --node=phone-node --facing=back
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 在服务器上执行命令</span>
+</span></span><span style=display:flex><span>openclaw nodes run --node=server-node --command=<span style=font-style:italic>&#34;df -h&#34;</span>
+</span></span></code></pre></div><hr><h2 id=-关键洞察>💡 关键洞察</h2><table><thead><tr><th>你想实现</th><th>配置什么</th></tr></thead><tbody><tr><td>不同任务用不同 AI 模式</td><td><strong>多 Agent</strong></td></tr><tr><td>在不同设备上执行操作</td><td><strong>多 Node</strong></td></tr><tr><td>复杂工作流（任务+设备组合）</td><td><strong>两者都用</strong></td></tr></tbody></table><h3 id=类比理解->类比理解 🎭</h3><ul><li><strong>Agent</strong> = 公司里的不同部门（技术部/市场部/设计部）</li><li><strong>Node</strong> = 不同城市的分公司（北京/上海/深圳）</li><li><strong>Gateway</strong> = 总公司调度中心</li></ul><p>一个项目可以：北京技术部开发 → 上海市场部推广 → 深圳分公司执行</p><hr><h2 id=-总结>📝 总结</h2><p>OpenClaw 的架构设计很清晰：</p><ol><li><strong>Agent 解决"谁来做"</strong> —— 不同专家处理不同任务</li><li><strong>Node 解决"在哪做"</strong> —— 不同设备执行不同操作</li><li><strong>Gateway 解决"怎么分配"</strong> —— 智能路由，无缝调度</li></ol><p>这种设计让 AI 从"单机版"变成了"分布式网络版"，能力边界直接翻倍 🚀</p><p><strong>未来已来，只是分布不均。</strong></p><hr><h2 id=-常见问题与实战排错>🔧 常见问题与实战排错</h2><h3 id=1-node-启动报错-econnrefused>1. Node 启动报错 <code>ECONNREFUSED</code></h3><p><strong>原因</strong>：Gateway 默认只绑定到 <code>127.0.0.1</code>，其他设备无法连接。</p><p><strong>解决</strong>：修改 Gateway 绑定到 LAN：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 在 Gateway 机器上执行</span>
+</span></span><span style=display:flex><span>openclaw config set gateway.bind lan
+</span></span><span style=display:flex><span><span style=font-style:italic># 然后重启 Gateway</span>
+</span></span></code></pre></div><p><strong>注意</strong>：<code>lan</code> 比 <code>0.0.0.0</code> 更安全，只监听局域网地址。</p><hr><h3 id=2-报错-pairing-required>2. 报错 <code>pairing required</code></h3><p><strong>原因</strong>：Node 已连上 Gateway，但需要管理员批准配对。</p><p><strong>解决</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 在 Gateway 端查看配对请求（注意是 devices，不是 nodes）</span>
+</span></span><span style=display:flex><span>openclaw devices list
+</span></span><span style=display:flex><span>openclaw devices approve &lt;requestId&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 或者一键批准所有</span>
+</span></span><span style=display:flex><span>openclaw devices approve --all
+</span></span></code></pre></div><hr><h3 id=3-windows-作为-node-如何设置-token>3. Windows 作为 Node 如何设置 Token</h3><p><strong>PowerShell</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-powershell data-lang=powershell><span style=display:flex><span>$env:OPENCLAW_GATEWAY_TOKEN=<span style=font-style:italic>&#34;&lt;your-token&gt;&#34;</span>
+</span></span><span style=display:flex><span>openclaw node run --host &lt;gateway-ip&gt; --port 18789 --display-name <span style=font-style:italic>&#34;Windows PC&#34;</span>
+</span></span></code></pre></div><p><strong>CMD</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=font-weight:700>set</span> OPENCLAW_GATEWAY_TOKEN=&lt;your-token&gt;
+</span></span><span style=display:flex><span>openclaw node run --host &lt;gateway-ip&gt; --port 18789 --display-name <span style=font-style:italic>&#34;Windows PC&#34;</span>
+</span></span></code></pre></div><p><strong>获取 Token</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 在 Gateway 端</span>
+</span></span><span style=display:flex><span>openclaw config get gateway.auth.token
+</span></span></code></pre></div><hr><h3 id=4-防火墙配置>4. 防火墙配置</h3><p><strong>测试连通性</strong>（Windows）：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-powershell data-lang=powershell><span style=display:flex><span>Test-NetConnection -ComputerName &lt;gateway-ip&gt; -Port 18789
+</span></span></code></pre></div><p><strong>Mac 端防火墙</strong>（如果 LAN 设备连不上）：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 检查状态</span>
+</span></span><span style=display:flex><span>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 临时关闭测试（记得开回来）</span>
+</span></span><span style=display:flex><span>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+</span></span></code></pre></div><hr><h3 id=5-执行命令超时需要批准>5. 执行命令超时/需要批准</h3><p>首次在新 Node 上执行命令可能需要<strong>执行批准</strong>。两种方式：</p><p><strong>方式一</strong>：实时批准（Windows 端会弹出提示）</p><p><strong>方式二</strong>：配置免批准（开发环境）：</p><p><strong>Gateway 端统一配置（推荐）</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=font-style:italic># 允许 Node 执行特定命令</span>
+</span></span><span style=display:flex><span>openclaw approvals allowlist add --node <span style=font-style:italic>&#34;Windows PC&#34;</span> <span style=font-style:italic>&#34;C:\Windows\System32\dir.exe&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic># 允许所有命令（开发环境方便，生产慎用）</span>
+</span></span><span style=display:flex><span>openclaw approvals allowlist add --node <span style=font-style:italic>&#34;Windows PC&#34;</span> <span style=font-style:italic>&#34;*&#34;</span>
 </span></span></code></pre></div><p><strong>Node 端本地配置</strong>：
-在 Node 机器上创建 <code>~/.openclaw/exec-approvals.json</code>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;allowlist&#34;</span>: [<span style="font-style:italic">&#34;*&#34;</span>],
-</span></span><span style="display:flex;"><span>  <span style="font-weight:bold">&#34;mode&#34;</span>: <span style="font-style:italic">&#34;allowlist&#34;</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>全局宽松模式（最危险，仅测试用）</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw config set tools.exec.security full
-</span></span></code></pre></div><hr>
-<h3 id="6-检查-node-是否连接成功">6. 检查 Node 是否连接成功</h3>
-<p><strong>Gateway 端查看</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw nodes status --connected
-</span></span><span style="display:flex;"><span>openclaw nodes describe --node <span style="font-style:italic">&#34;Windows PC&#34;</span>
-</span></span></code></pre></div><p><strong>执行测试命令</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openclaw nodes run --node <span style="font-style:italic">&#34;Windows PC&#34;</span> --raw <span style="font-style:italic">&#34;hostname&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="-延伸阅读">📌 延伸阅读</h2>
-<ul>
-<li><a href="https://docs.openclaw.ai">OpenClaw 官方文档</a></li>
-<li><a href="/posts/mcp/">MCP 协议介绍</a></li>
-<li><a href="/posts/go-mcp/">Go 语言 MCP 实现</a></li>
-</ul>
-<hr>
-<p><em>有问题欢迎评论交流 👇</em></p>
-
-        </div>
-
-        
-        <div class="row">
-          <div class="col-xs-12">
-            
-          </div>
-        </div>
-
-        
-
-<div class="related-content">
-  <h3>Related Posts</h3>
-  <ul>
-    
-    <li><a href="/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">OpenClaw：AI Agent 的自主操作系统</a></li>
-    
-    <li><a href="/2026/02/02/openclaw-%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1%E4%B8%A4%E7%BA%A7-memory-%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">OpenClaw 工作区设计：两级 Memory 与目录组织最佳实践</a></li>
-    
-    <li><a href="/2026/01/31/mcp-vs-langchain-vs-function-callingai-%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/">MCP vs LangChain vs Function Calling：AI 集成方案深度对比</a></li>
-    
-  </ul>
-</div>
-
-
-
-        
-        
-        <div style="height: 50px;"></div>
-        
-        <div class="post-comments">
-          <div id="disqus_thread"></div>
-<script>
-  window.addEventListener("load", () => {
-    (function() {
-      
-      var d = document,
-        s = d.createElement("script");
-      s.src = "https://muzig.disqus.com/embed.js";
-      s.setAttribute("data-timestamp", +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  });
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
->
-
-        </div>
-        
-        
-
-        <div class="site-footer">
-  
-  
-</div>
-
-      </div>
-    </div>
-  </article>
-
-  
-<script>
-  
-  document.addEventListener("DOMContentLoaded", function() {
-    const disqus = document.getElementById('disqus_thread');
-    if (!disqus) {
-      return;
-    }
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        const iframes = disqus.getElementsByTagName('iframe');
-        if (iframes.length > 1) {
-          const commentsIframe = iframes[1];
-          while (disqus.firstChild) {
-            disqus.removeChild(disqus.firstChild);
-          }
-          disqus.appendChild(commentsIframe);
-          observer.disconnect();
-        }
-      });
-    });
-    observer.observe(disqus, { childList: true, subtree: true });
-  });
-</script>
-
-  
-
-</body>
-
-</html>
+在 Node 机器上创建 <code>~/.openclaw/exec-approvals.json</code>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-weight:700>&#34;allowlist&#34;</span>: [<span style=font-style:italic>&#34;*&#34;</span>],
+</span></span><span style=display:flex><span>  <span style=font-weight:700>&#34;mode&#34;</span>: <span style=font-style:italic>&#34;allowlist&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>全局宽松模式（最危险，仅测试用）</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>openclaw config set tools.exec.security full
+</span></span></code></pre></div><hr><h3 id=6-检查-node-是否连接成功>6. 检查 Node 是否连接成功</h3><p><strong>Gateway 端查看</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>openclaw nodes status --connected
+</span></span><span style=display:flex><span>openclaw nodes describe --node <span style=font-style:italic>&#34;Windows PC&#34;</span>
+</span></span></code></pre></div><p><strong>执行测试命令</strong>：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>openclaw nodes run --node <span style=font-style:italic>&#34;Windows PC&#34;</span> --raw <span style=font-style:italic>&#34;hostname&#34;</span>
+</span></span></code></pre></div><hr><h2 id=-延伸阅读>📌 延伸阅读</h2><ul><li><a href=https://docs.openclaw.ai>OpenClaw 官方文档</a></li><li><a href=/posts/mcp/>MCP 协议介绍</a></li><li><a href=/posts/go-mcp/>Go 语言 MCP 实现</a></li></ul><hr><p><em>有问题欢迎评论交流 👇</em></p></div><div class=row><div class=col-xs-12></div></div><div class=related-content><h3>Related Posts</h3><ul><li><a href=/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/>OpenClaw：AI Agent 的自主操作系统</a></li><li><a href=/2026/02/02/openclaw-%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1%E4%B8%A4%E7%BA%A7-memory-%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/>OpenClaw 工作区设计：两级 Memory 与目录组织最佳实践</a></li><li><a href=/2026/01/31/mcp-vs-langchain-vs-function-callingai-%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/>MCP vs LangChain vs Function Calling：AI 集成方案深度对比</a></li></ul></div><div style=height:50px></div><div class=post-comments><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://muzig.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class=site-footer></div></div></div></article><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("disqus_thread");if(!e)return;const t=new MutationObserver(function(n){n.forEach(function(){const s=e.getElementsByTagName("iframe");if(s.length>1){const n=s[1];for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(n),t.disconnect()}})});t.observe(e,{childList:!0,subtree:!0})})</script></body></html>
