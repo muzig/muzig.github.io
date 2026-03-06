@@ -1,19 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>开发效率 on Muzig 的技术博客</title>
-    <link>https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link>
-    <description>Recent content in 开发效率 on Muzig 的技术博客</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 02 Feb 2026 19:00:00 +0800</lastBuildDate>
-    <atom:link href="https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Claude Code 团队使用技巧：10 个核心实践</title>
-      <link>https://muzig.io/2026/02/02/claude-code-%E5%9B%A2%E9%98%9F%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A710-%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5/</link>
-      <pubDate>Mon, 02 Feb 2026 19:00:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/02/02/claude-code-%E5%9B%A2%E9%98%9F%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A710-%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文整理自 Boris Cherny（Claude Code 创建者）在 Twitter/X 上分享的团队内部使用技巧。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Claude Code 是 Anthropic 推出的智能编程助手，其团队在长期使用中总结出了一套高效的工作流程。以下是 10 个核心技巧，帮助你最大化 Claude Code 的生产力。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1--并行处理-do-more-in-parallel&#34;&gt;1. 🔥 并行处理 (Do more in parallel)&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;这是团队认为最大的生产力提升点。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;同时开启 &lt;strong&gt;3-5 个 git worktrees&lt;/strong&gt;，每个运行独立的 Claude 会话：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;# 创建 worktree 示例&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git worktree add .claude/worktrees/my-worktree origin/main&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;个人可以使用多个 git checkouts，但团队偏好 worktrees&lt;/li&gt;&#xA;&lt;li&gt;每个 worktree 完全独立，可以同时处理不同任务&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;2--以计划模式开始复杂任务-plan-mode-first&#34;&gt;2. 📝 以计划模式开始复杂任务 (Plan mode first)&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;核心原则：先计划，后执行。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;对每个复杂任务：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;开启 &lt;strong&gt;Plan Mode&lt;/strong&gt;（&lt;code&gt;plan mode on&lt;/code&gt;，使用 &lt;code&gt;shift+Tab&lt;/code&gt; 切换）&lt;/li&gt;&#xA;&lt;li&gt;倾注精力制定详细计划&lt;/li&gt;&#xA;&lt;li&gt;让 Claude &lt;strong&gt;&amp;ldquo;one-shot&amp;rdquo;&lt;/strong&gt;（一次性）完成实现&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;strong&gt;进阶玩法&lt;/strong&gt;：&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>开发效率 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link><description>Recent content in 开发效率 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Mon, 02 Feb 2026 19:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code 团队使用技巧：10 个核心实践</title><link>https://muzig.io/2026/02/02/claude-code-%E5%9B%A2%E9%98%9F%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A710-%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5/</link><pubDate>Mon, 02 Feb 2026 19:00:00 +0800</pubDate><guid>https://muzig.io/2026/02/02/claude-code-%E5%9B%A2%E9%98%9F%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A710-%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5/</guid><description>&lt;blockquote>
+&lt;p>本文整理自 Boris Cherny（Claude Code 创建者）在 Twitter/X 上分享的团队内部使用技巧。&lt;/p>&lt;/blockquote>
+&lt;p>Claude Code 是 Anthropic 推出的智能编程助手，其团队在长期使用中总结出了一套高效的工作流程。以下是 10 个核心技巧，帮助你最大化 Claude Code 的生产力。&lt;/p>
+&lt;hr>
+&lt;h2 id="1--并行处理-do-more-in-parallel">1. 🔥 并行处理 (Do more in parallel)&lt;/h2>
+&lt;p>&lt;strong>这是团队认为最大的生产力提升点。&lt;/strong>&lt;/p>
+&lt;p>同时开启 &lt;strong>3-5 个 git worktrees&lt;/strong>，每个运行独立的 Claude 会话：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"># 创建 worktree 示例&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git worktree add .claude/worktrees/my-worktree origin/main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>个人可以使用多个 git checkouts，但团队偏好 worktrees&lt;/li>
+&lt;li>每个 worktree 完全独立，可以同时处理不同任务&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2--以计划模式开始复杂任务-plan-mode-first">2. 📝 以计划模式开始复杂任务 (Plan mode first)&lt;/h2>
+&lt;p>&lt;strong>核心原则：先计划，后执行。&lt;/strong>&lt;/p>
+&lt;p>对每个复杂任务：&lt;/p>
+&lt;ol>
+&lt;li>开启 &lt;strong>Plan Mode&lt;/strong>（&lt;code>plan mode on&lt;/code>，使用 &lt;code>shift+Tab&lt;/code> 切换）&lt;/li>
+&lt;li>倾注精力制定详细计划&lt;/li>
+&lt;li>让 Claude &lt;strong>&amp;ldquo;one-shot&amp;rdquo;&lt;/strong>（一次性）完成实现&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>进阶玩法&lt;/strong>：&lt;/p></description></item></channel></rss>

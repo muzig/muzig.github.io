@@ -1,770 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Hugo 0.148.1">
-  <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="" />
-  <meta property="og:url" content="https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/" />
-  <link rel="canonical" href="https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/" /><link
-    rel="alternate"
-    type="application/atom+xml"
-    href="https://muzig.io/index.xml"
-    title="Muzig 的技术博客"
-  />
-
-  <script type="application/ld+json">
-  {
-      "@context" : "http://schema.org",
-      "@type" : "BlogPosting",
-      "mainEntityOfPage": {
-           "@type": "WebPage",
-           "@id": "https:\/\/muzig.io\/"
-      },
-      "articleSection" : "posts",
-      "name" : "OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队",
-      "headline" : "OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队",
-      "description" : "在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？\n本文将深入解析 OpenClaw 的多 Agent 架构，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。\n为什么需要多 Agent？ 想象这样一个场景：\n场景 A：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。 场景 B：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。 场景 C：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。 多 Agent 架构的核心价值：\n维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有：\n",
-      "inLanguage" : "en-US",
-      "author" : "",
-      "creator" : "",
-      "publisher": "",
-      "accountablePerson" : "",
-      "copyrightHolder" : "",
-      "copyrightYear" : "2026",
-      "datePublished": "2026-02-05 00:00:00 \u002b0800 CST",
-      "dateModified" : "2026-02-05 00:00:00 \u002b0800 CST",
-      "url" : "https:\/\/muzig.io\/2026\/02\/05\/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F\/",
-      "keywords" : [ "OpenClaw","AI Agent","Multi-Agent","架构设计","自动化", ]
-  }
-</script>
-<title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title>
-  <meta property="og:title" content="OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队" />
-  <meta property="og:type" content="article" />
-  <meta
-    property="og:description"
-    content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=generator content="Hugo 0.148.1"><meta name=google-site-verification content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content><meta property="og:url" content="https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/"><link rel=canonical href=https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/><link rel=alternate type=application/atom+xml href=https://muzig.io/index.xml title="Muzig 的技术博客"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/muzig.io\/"},"articleSection":"posts","name":"OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队","headline":"OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队","description":"在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？\n本文将深入解析 OpenClaw 的多 Agent 架构，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。\n为什么需要多 Agent？ 想象这样一个场景：\n场景 A：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。 场景 B：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。 场景 C：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。 多 Agent 架构的核心价值：\n维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有：\n","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2026","datePublished":"2026-02-05 00:00:00 \u002b0800 CST","dateModified":"2026-02-05 00:00:00 \u002b0800 CST","url":"https:\/\/muzig.io\/2026\/02\/05\/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F\/","keywords":["OpenClaw","AI Agent","Multi-Agent","架构设计","自动化"]}</script><title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title><meta property="og:title" content="OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队"><meta property="og:type" content="article"><meta property="og:description" content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
 本文将深入解析 OpenClaw 的多 Agent 架构，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。
 为什么需要多 Agent？ 想象这样一个场景：
 场景 A：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。 场景 B：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。 场景 C：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。 多 Agent 架构的核心价值：
 维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有：
-"
-  />
-  <meta
-    name="description"
-    content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
+"><meta name=description content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
 本文将深入解析 OpenClaw 的多 Agent 架构，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。
 为什么需要多 Agent？ 想象这样一个场景：
 场景 A：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。 场景 B：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。 场景 C：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。 多 Agent 架构的核心价值：
 维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有：
-"
-  />
-  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
-  
-  
-  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
-  
-  
-  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
-  
-   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
-  
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
-    rel="stylesheet"
-  />
-  
-  
-
-  
-  <script data-cfasync="false">
-    (function() {
-      const themeKey = 'theme';
-      const themes = { light: 'light', dark: 'dark', system: 'system' };
-
-      function getSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-      function getStoredTheme() {
-        return localStorage.getItem(themeKey);
-      }
-      function getCurrentTheme() {
-        const stored = getStoredTheme();
-        if (stored && stored !== themes.system) {
-          return stored;
-        }
-        return getSystemTheme();
-      }
-      function setTheme(theme) {
-        const root = document.documentElement;
-        if (theme === themes.system) {
-          theme = getSystemTheme();
-        }
-        if (theme === themes.dark) {
-          root.setAttribute('data-theme', 'dark');
-        } else {
-          root.removeAttribute('data-theme');
-        }
-        updateToggleButton(theme);
-      }
-      function updateToggleButton(theme) {
-        const button = document.getElementById('theme-toggle');
-        if (button) {
-          button.textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-      }
-      function ensureButtonUpdated() {
-        updateToggleButton(getCurrentTheme());
-      }
-      function initTheme() {
-        const stored = getStoredTheme();
-        let theme;
-        if (stored) {
-          theme = stored === themes.system ? getSystemTheme() : stored;
-          setTheme(stored);
-        } else {
-          
-          theme = getSystemTheme();
-          setTheme(themes.system);
-        }
-      }
-      function toggleTheme() { 
-        const current = getStoredTheme() || themes.system;
-        let next;
-        if (current === themes.system) {
-          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
-        } else if (current === themes.dark) {
-          next = themes.light;
-        } else {
-          next = themes.dark;
-        }
-        localStorage.setItem(themeKey, next);
-        setTheme(next);
-      }
-
-      
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        const stored = getStoredTheme();
-        if (!stored || stored === themes.system) {
-          setTheme(themes.system);
-        }
-      });
-
-      
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
-      } else {
-        
-        ensureButtonUpdated();
-      }
-
-      
-      window.toggleTheme = toggleTheme;
-
-      
-      initTheme();
-    })();
-  </script>
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队">
-  <meta name="twitter:description" content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
+"><meta property="og:locale" content="zh-cn"><meta property="og:image" content><style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style><style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style><link href=/index.xml rel=alternate type=application/rss+xml title="Muzig 的技术博客"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel=stylesheet><script data-cfasync=false>(function(){const o="theme",e={light:"light",dark:"dark",system:"system"};function t(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}function n(){return localStorage.getItem(o)}function r(){const s=n();return s&&s!==e.system?s:t()}function s(n){const s=document.documentElement;n===e.system&&(n=t()),n===e.dark?s.setAttribute("data-theme","dark"):s.removeAttribute("data-theme"),i(n)}function i(e){const t=document.getElementById("theme-toggle");t&&(t.textContent=e==="dark"?"☀️":"🌙")}function a(){i(r())}function c(){const o=n();let i;o?(i=o===e.system?t():o,s(o)):(i=t(),s(e.system))}function l(){const a=n()||e.system;let i;a===e.system?i=t()==="dark"?e.light:e.dark:a===e.dark?i=e.light:i=e.dark,localStorage.setItem(o,i),s(i)}window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){const o=n();(!o||o===e.system)&&s(e.system)}),document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a):a(),window.toggleTheme=l,c()})()</script><meta name=twitter:card content="summary"><meta name=twitter:title content="OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队"><meta name=twitter:description content="在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？
 本文将深入解析 OpenClaw 的多 Agent 架构，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。
 为什么需要多 Agent？ 想象这样一个场景：
 场景 A：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。 场景 B：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。 场景 C：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。 多 Agent 架构的核心价值：
-维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有：">
-
-  
-</head>
-
-
-<body>
-  <article class="post " id="article">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="site-header">
-          
-<header>
-  <div class="header-title">
-    <a href="/"
-      >Muzig</a
-    >
-  </div>
-  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
-</header>
-<div class="row end-md header-items">
-  <div class="header-item-left">
-    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
-      🌙
-    </button>
-  </div>
-
-  
-  <div class="header-item">
-    <a href="https://github.com/muzig" target="_blank">About Me</a>
-  </div>
-  
-</div>
-<div class="row">
-   
-</div>
-<div class="header-line"></div>
-
-        </div>
-
-        <div class="row middle-xs">
-          <div class="col-xs-12">
-            <br \>
-          </div>
-          <div class="col-xs-12">
-            
-            <div class="post-tags">
-              <a href="/tags/openclaw/">
-                OpenClaw
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/ai-agent/">
-                AI Agent
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/multi-agent/">
-                Multi-Agent
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
-                架构设计
-              </a>
-            </div>
-            
-            <div class="post-tags">
-              <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">
-                自动化
-              </a>
-            </div>
-            
-          </div>
-        </div>
-
-
-        <header class="post-header">
-          <h1 class="post-title">OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</h1>
-          
-          <div class="row post-desc">
-            <div class="col-xs-6">
-              
-              <time class="post-date" datetime=" 2026-02-05 00:00:00 CST">
-                05 Feb 2026
-              </time>
-              
-            </div>
-            <div class="col-xs-6">
-              
-            </div>
-          </div>
-          
-        </header>
-
-
-
-        <div class="post-content markdown-body">
-          
-          <p>在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？</p>
-<p>本文将深入解析 <strong>OpenClaw 的多 Agent 架构</strong>，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。</p>
-<hr>
-<h2 id="为什么需要多-agent">为什么需要多 Agent？</h2>
-<p>想象这样一个场景：</p>
-<ul>
-<li><strong>场景 A</strong>：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。</li>
-<li><strong>场景 B</strong>：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。</li>
-<li><strong>场景 C</strong>：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。</li>
-</ul>
-<p><strong>多 Agent 架构的核心价值</strong>：</p>
-<table>
-  <thead>
-      <tr>
-          <th>维度</th>
-          <th>单 Agent</th>
-          <th>多 Agent</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>专业分工</strong></td>
-          <td>通用型，样样通样样松</td>
-          <td>专业型，各司其职</td>
-      </tr>
-      <tr>
-          <td><strong>资源隔离</strong></td>
-          <td>共享配置，容易冲突</td>
-          <td>独立工作区，互不干扰</td>
-      </tr>
-      <tr>
-          <td><strong>安全边界</strong></td>
-          <td>权限难控制</td>
-          <td>细粒度工具控制</td>
-      </tr>
-      <tr>
-          <td><strong>并行处理</strong></td>
-          <td>串行执行</td>
-          <td>多任务并行</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="openclaw-的-agent-架构">OpenClaw 的 Agent 架构</h2>
-<h3 id="什么是-agent">什么是 Agent？</h3>
-<p>在 OpenClaw 中，一个 Agent 是一个<strong>完全隔离的 AI 大脑</strong>，拥有：</p>
-<ul>
-<li><strong>独立工作区</strong>：<code>~/workspaces/&lt;agent&gt;</code> —— 文件、配置、记忆</li>
-<li><strong>独立状态目录</strong>：<code>~/.openclaw/agents/&lt;agent&gt;/agent</code> —— 认证、模型配置</li>
-<li><strong>独立会话存储</strong>：<code>~/.openclaw/agents/&lt;agent&gt;/sessions</code> —— 聊天记录</li>
-<li><strong>独立人格配置</strong>：<code>AGENTS.md</code>、<code>SOUL.md</code>、<code>USER.md</code></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>~/.openclaw/
-</span></span><span style="display:flex;"><span>├── agents/
-</span></span><span style="display:flex;"><span>│   ├── main/           # 主 Agent
-</span></span><span style="display:flex;"><span>│   │   ├── agent/      # 配置和认证
-</span></span><span style="display:flex;"><span>│   │   └── sessions/   # 会话历史
-</span></span><span style="display:flex;"><span>│   ├── helix/          # 项目专用 Agent
-</span></span><span style="display:flex;"><span>│   │   ├── agent/
-</span></span><span style="display:flex;"><span>│   │   └── sessions/
-</span></span><span style="display:flex;"><span>│   └── unity/          # Unity 开发 Agent
-</span></span><span style="display:flex;"><span>│       ├── agent/
-</span></span><span style="display:flex;"><span>│       └── sessions/
-</span></span><span style="display:flex;"><span>└── workspaces/
-</span></span><span style="display:flex;"><span>    ├── clawd/          # main 的工作区
-</span></span><span style="display:flex;"><span>    ├── helix/          # helix 的工作区
-</span></span><span style="display:flex;"><span>    └── unity/          # unity 的工作区
-</span></span></code></pre></div><h3 id="agent-类型">Agent 类型</h3>
-<p>OpenClaw 支持三种类型的 Agent 协作：</p>
-<h4 id="1-主-agentmain-agent">1. 主 Agent（Main Agent）</h4>
-<ul>
-<li>默认 Agent，处理通用任务</li>
-<li>负责协调和派发任务给其他 Agent</li>
-</ul>
-<h4 id="2-专用-agentdedicated-agent">2. 专用 Agent（Dedicated Agent）</h4>
-<ul>
-<li>针对特定领域或项目</li>
-<li>例如：Unity 开发 Agent、家庭管理 Agent</li>
-</ul>
-<h4 id="3-子-agentsub-agent">3. 子 Agent（Sub-Agent）</h4>
-<ul>
-<li>临时 spawned 出来的 Agent</li>
-<li>处理并行任务，完成后自动销毁</li>
-</ul>
-<hr>
-<h2 id="agent-路由机制">Agent 路由机制</h2>
-<h3 id="入站路由gateway-层">入站路由（Gateway 层）</h3>
-<p>当消息进入 OpenClaw 时，Gateway 通过 <strong>bindings</strong> 配置决定路由到哪个 Agent：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// openclaw.json
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  &#34;agents&#34;: {
-</span></span><span style="display:flex;"><span>    &#34;list&#34;: [
-</span></span><span style="display:flex;"><span>      { &#34;id&#34;: &#34;main&#34;, &#34;workspace&#34;: &#34;~/workspaces/clawd&#34; },
-</span></span><span style="display:flex;"><span>      { &#34;id&#34;: &#34;helix&#34;, &#34;workspace&#34;: &#34;~/workspaces/helix&#34; },
-</span></span><span style="display:flex;"><span>      { &#34;id&#34;: &#34;unity&#34;, &#34;workspace&#34;: &#34;~/workspaces/unity&#34; }
-</span></span><span style="display:flex;"><span>    ]
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>  &#34;bindings&#34;: [
-</span></span><span style="display:flex;"><span>    // 按账号路由
-</span></span><span style="display:flex;"><span>    { &#34;agentId&#34;: &#34;main&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8134174815&#34; } },
-</span></span><span style="display:flex;"><span>    { &#34;agentId&#34;: &#34;helix&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8221433362&#34; } },
-</span></span><span style="display:flex;"><span>    { &#34;agentId&#34;: &#34;unity&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8444434740&#34; } },
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    // 按群组路由
-</span></span><span style="display:flex;"><span>    { &#34;agentId&#34;: &#34;unity&#34;, &#34;match&#34;: { 
-</span></span><span style="display:flex;"><span>      &#34;channel&#34;: &#34;whatsapp&#34;, 
-</span></span><span style="display:flex;"><span>      &#34;peer&#34;: { &#34;kind&#34;: &#34;group&#34;, &#34;id&#34;: &#34;xxx@g.us&#34; } 
-</span></span><span style="display:flex;"><span>    }}
-</span></span><span style="display:flex;"><span>  ]
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>路由优先级</strong>（最具体的优先）：</p>
-<ol>
-<li><code>peer</code> 精确匹配（特定 DM/群组）</li>
-<li><code>guildId</code> / <code>teamId</code>（Discord/Slack）</li>
-<li><code>accountId</code> 匹配</li>
-<li>通道级匹配</li>
-<li>默认 Agent</li>
-</ol>
-<h3 id="出站派发agent-主动">出站派发（Agent 主动）</h3>
-<p>主 Agent 可以主动派发任务给其他 Agent，使用 <code>sessions_send</code> 工具：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="font-style:italic">// 伪代码示意</span>
-</span></span><span style="display:flex;"><span>sessions_send(
-</span></span><span style="display:flex;"><span>  agentId: <span style="font-style:italic">&#34;helix&#34;</span>,
-</span></span><span style="display:flex;"><span>  message: <span style="font-style:italic">&#34;检查项目状态并生成报告&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span></code></pre></div><hr>
-<h2 id="子-agent并行任务处理">子 Agent：并行任务处理</h2>
-<h3 id="核心概念">核心概念</h3>
-<p><strong>Sub-Agent</strong> 是从现有 Agent 中 spawned 出来的后台任务：</p>
-<ul>
-<li>在独立 session 中运行：<code>agent:&lt;agentId&gt;:subagent:&lt;uuid&gt;</code></li>
-<li>支持并行处理，不阻塞主 Agent</li>
-<li>完成后自动向请求者汇报结果</li>
-<li>可设置超时、清理策略</li>
-</ul>
-<h3 id="使用场景">使用场景</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你向 main 发送：&#34;帮我同时做三件事：
-</span></span><span style="display:flex;"><span>1. 检查 helix 项目的 git 状态
-</span></span><span style="display:flex;"><span>2. 查询今天的天气
-</span></span><span style="display:flex;"><span>3. 总结一下昨天的会议纪要&#34;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>main 的处理流程：
-</span></span><span style="display:flex;"><span>  ├→ spawn sub-agent A → 检查 helix git 状态
-</span></span><span style="display:flex;"><span>  ├→ spawn sub-agent B → 查询天气
-</span></span><span style="display:flex;"><span>  └→ spawn sub-agent C → 总结会议纪要
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>等待所有子 Agent 完成
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>汇总结果并回复你
-</span></span></code></pre></div><h3 id="配置示例">配置示例</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  &#34;agents&#34;: {
-</span></span><span style="display:flex;"><span>    &#34;defaults&#34;: {
-</span></span><span style="display:flex;"><span>      &#34;subagents&#34;: {
-</span></span><span style="display:flex;"><span>        &#34;model&#34;: &#34;anthropic/claude-sonnet-4-5&#34;,  // 子 Agent 专用模型
-</span></span><span style="display:flex;"><span>        &#34;thinking&#34;: &#34;off&#34;,
-</span></span><span style="display:flex;"><span>        &#34;maxConcurrent&#34;: 4,                      // 最大并发数
-</span></span><span style="display:flex;"><span>        &#34;archiveAfterMinutes&#34;: 60                // 自动归档时间
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>    &#34;list&#34;: [{
-</span></span><span style="display:flex;"><span>      &#34;id&#34;: &#34;main&#34;,
-</span></span><span style="display:flex;"><span>      &#34;subagents&#34;: {
-</span></span><span style="display:flex;"><span>        &#34;allowAgents&#34;: [&#34;helix&#34;, &#34;unity&#34;]  // 允许派发给这些 Agent
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    }]
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h2 id="agent-间通信">Agent 间通信</h2>
-<h3 id="启用通信">启用通信</h3>
-<p>在 <code>openclaw.json</code> 中启用 Agent-to-Agent 通信：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;tools&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;agentToAgent&#34;</span>: {
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;enabled&#34;</span>: true,
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;allow&#34;</span>: [<span style="font-style:italic">&#34;main&#34;</span>, <span style="font-style:italic">&#34;helix&#34;</span>, <span style="font-style:italic">&#34;unity&#34;</span>]  // <span style="">允许通信的</span> Agent <span style="">列表</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="通信工具">通信工具</h3>
-<table>
-  <thead>
-      <tr>
-          <th>工具</th>
-          <th>功能</th>
-          <th>使用场景</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>sessions_send</code></td>
-          <td>向其他 Agent 发送消息</td>
-          <td>派发任务、请求协作</td>
-      </tr>
-      <tr>
-          <td><code>sessions_list</code></td>
-          <td>查看其他 Agent 的会话</td>
-          <td>检查谁在线</td>
-      </tr>
-      <tr>
-          <td><code>sessions_history</code></td>
-          <td>获取其他 Agent 的历史</td>
-          <td>了解上下文</td>
-      </tr>
-      <tr>
-          <td><code>session_status</code></td>
-          <td>查看 Agent 状态</td>
-          <td>检查是否忙碌</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="通信流程示例">通信流程示例</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你 → main: &#34;让 helix 检查项目状态&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main 识别任务应派发给 helix
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main → helix: &#34;检查 git 状态&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>helix 执行 git status
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>helix → main: &#34;返回结果&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main 汇总 → 你: &#34;helix 项目状态正常，最新提交是...&#34;
-</span></span></code></pre></div><hr>
-<h2 id="安全与隔离">安全与隔离</h2>
-<h3 id="工作区隔离">工作区隔离</h3>
-<p>每个 Agent 拥有独立的工作目录，文件互不干扰：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>main:   ~/workspaces/clawd/
-</span></span><span style="display:flex;"><span>helix:  ~/workspaces/helix/
-</span></span><span style="display:flex;"><span>unity:  ~/workspaces/unity/
-</span></span></code></pre></div><h3 id="工具权限控制">工具权限控制</h3>
-<p>可以为每个 Agent 设置不同的工具权限：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;agents&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;list&#34;</span>: [{
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;id&#34;</span>: <span style="font-style:italic">&#34;unity&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;tools&#34;</span>: {
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;allow&#34;</span>: [<span style="font-style:italic">&#34;read&#34;</span>, <span style="font-style:italic">&#34;exec&#34;</span>, <span style="font-style:italic">&#34;sessions_spawn&#34;</span>],
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;deny&#34;</span>: [<span style="font-style:italic">&#34;write&#34;</span>, <span style="font-style:italic">&#34;edit&#34;</span>, <span style="font-style:italic">&#34;apply_patch&#34;</span>, <span style="font-style:italic">&#34;gateway&#34;</span>, <span style="font-style:italic">&#34;cron&#34;</span>]
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    }]
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="沙箱隔离">沙箱隔离</h3>
-<p>支持 Docker 沙箱，限制 Agent 的执行环境：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  &#34;agents&#34;: {
-</span></span><span style="display:flex;"><span>    &#34;list&#34;: [{
-</span></span><span style="display:flex;"><span>      &#34;id&#34;: &#34;unity&#34;,
-</span></span><span style="display:flex;"><span>      &#34;sandbox&#34;: {
-</span></span><span style="display:flex;"><span>        &#34;mode&#34;: &#34;all&#34;,      // 总是沙箱
-</span></span><span style="display:flex;"><span>        &#34;scope&#34;: &#34;agent&#34;    // 每个 Agent 独立容器
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    }]
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h2 id="实战案例unity-开发工作流">实战案例：Unity 开发工作流</h2>
-<h3 id="场景描述">场景描述</h3>
-<p>你正在开发一个 Unity 游戏项目，希望：</p>
-<ul>
-<li>快速询问代码问题 → 主 Agent</li>
-<li>深度技术讨论 → Unity 专用 Agent</li>
-<li>并行检查多个模块 → Sub-Agent</li>
-</ul>
-<h3 id="配置方案">配置方案</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>// openclaw.json
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;agents&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;list&#34;</span>: [
-</span></span><span style="display:flex;"><span>      {
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;id&#34;</span>: <span style="font-style:italic">&#34;main&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;name&#34;</span>: <span style="font-style:italic">&#34;通用助手&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;~/workspaces/clawd&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;model&#34;</span>: <span style="font-style:italic">&#34;anthropic/claude-sonnet-4-5&#34;</span>
-</span></span><span style="display:flex;"><span>      },
-</span></span><span style="display:flex;"><span>      {
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;id&#34;</span>: <span style="font-style:italic">&#34;unity&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;name&#34;</span>: <span style="font-style:italic">&#34;Unity 专家&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;workspace&#34;</span>: <span style="font-style:italic">&#34;~/workspaces/unity&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;model&#34;</span>: <span style="font-style:italic">&#34;anthropic/claude-opus-4-5&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;tools&#34;</span>: {
-</span></span><span style="display:flex;"><span>          <span style="font-style:italic">&#34;allow&#34;</span>: [<span style="font-style:italic">&#34;read&#34;</span>, <span style="font-style:italic">&#34;exec&#34;</span>, <span style="font-style:italic">&#34;sessions_spawn&#34;</span>],
-</span></span><span style="display:flex;"><span>          <span style="font-style:italic">&#34;deny&#34;</span>: [<span style="font-style:italic">&#34;gateway&#34;</span>, <span style="font-style:italic">&#34;cron&#34;</span>]
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    ]
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;bindings&#34;</span>: [
-</span></span><span style="display:flex;"><span>    { <span style="font-style:italic">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;main&#34;</span>, <span style="font-style:italic">&#34;match&#34;</span>: { <span style="font-style:italic">&#34;channel&#34;</span>: <span style="font-style:italic">&#34;telegram&#34;</span>, <span style="font-style:italic">&#34;accountId&#34;</span>: <span style="font-style:italic">&#34;main_bot&#34;</span> } },
-</span></span><span style="display:flex;"><span>    { <span style="font-style:italic">&#34;agentId&#34;</span>: <span style="font-style:italic">&#34;unity&#34;</span>, <span style="font-style:italic">&#34;match&#34;</span>: { <span style="font-style:italic">&#34;channel&#34;</span>: <span style="font-style:italic">&#34;telegram&#34;</span>, <span style="font-style:italic">&#34;accountId&#34;</span>: <span style="font-style:italic">&#34;unity_bot&#34;</span> } }
-</span></span><span style="display:flex;"><span>  ],
-</span></span><span style="display:flex;"><span>  <span style="font-style:italic">&#34;tools&#34;</span>: {
-</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;agentToAgent&#34;</span>: {
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;enabled&#34;</span>: true,
-</span></span><span style="display:flex;"><span>      <span style="font-style:italic">&#34;allow&#34;</span>: [<span style="font-style:italic">&#34;main&#34;</span>, <span style="font-style:italic">&#34;unity&#34;</span>]
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="使用流程">使用流程</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>你 → main: &#34;Unity 项目中如何实现对象池？&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main 识别为 Unity 问题
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main → unity: &#34;解释对象池实现&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>unity 详细回答并给出代码
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>unity → main: &#34;返回结果&#34;
-</span></span><span style="display:flex;"><span>  ↓
-</span></span><span style="display:flex;"><span>main 整理 → 你: &#34;Unity 对象池的最佳实践是...&#34;
-</span></span></code></pre></div><hr>
-<h2 id="最佳实践">最佳实践</h2>
-<h3 id="-推荐做法">✅ 推荐做法</h3>
-<ol>
-<li><strong>明确分工</strong>：每个 Agent 专注一个领域</li>
-<li><strong>合理命名</strong>：Agent ID 要直观（<code>unity</code>、<code>home</code>、<code>work</code>）</li>
-<li><strong>最小权限</strong>：只给 Agent 需要的工具权限</li>
-<li><strong>文档沉淀</strong>：在每个 Agent 的 <code>AGENTS.md</code> 中记录职责</li>
-</ol>
-<h3 id="-避免的错误">❌ 避免的错误</h3>
-<ol>
-<li><strong>过度拆分</strong>：3-5 个 Agent 足够，太多反而难管理</li>
-<li><strong>权限过大</strong>：不要在所有 Agent 上开放危险工具</li>
-<li><strong>循环依赖</strong>：避免 Agent A 调用 B，B 又调用 A</li>
-<li><strong>忽视隔离</strong>：不要把敏感数据放在共享目录</li>
-</ol>
-<h3 id="文档建议">文档建议</h3>
-<p>在每个 Agent 的 <code>AGENTS.md</code> 中添加：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="font-weight:bold">## Agent 协作规则
-</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">### 职责范围
-</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span><span style="font-weight:bold">-</span> 本 Agent 负责：Unity 游戏开发相关任务
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">-</span> 不处理：家庭日程、通用查询
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">### 任务派发
-</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span>当用户提到以下关键词时，派发给对应 Agent：
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">-</span> &#34;Unity&#34; / &#34;游戏&#34; / &#34;C#&#34; → 本 Agent 处理
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">-</span> &#34;helix&#34; / &#34;项目 A&#34; → 派发给 helix Agent
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">-</span> &#34;家庭&#34; / &#34;日程&#34; → 派发给 home Agent
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">### 工具使用
-</span></span></span><span style="display:flex;"><span><span style="font-weight:bold"></span><span style="font-weight:bold">-</span> ✅ 允许：read, exec, sessions_spawn
-</span></span><span style="display:flex;"><span><span style="font-weight:bold">-</span> ❌ 禁止：write（避免意外修改配置文件）
-</span></span></code></pre></div><hr>
-<h2 id="常见问题">常见问题</h2>
-<p><strong>Q1: 子 Agent 和独立 Agent 有什么区别？</strong></p>
-<p>A:</p>
-<ul>
-<li><strong>子 Agent</strong>：临时 spawned，用完即走，适合并行任务</li>
-<li><strong>独立 Agent</strong>：长期运行，有独立身份和配置，适合不同场景</li>
-</ul>
-<p><strong>Q2: Agent 之间能共享数据吗？</strong></p>
-<p>A: 默认隔离，但可以通过：</p>
-<ul>
-<li><code>sessions_send</code> 传递消息</li>
-<li>共享文件目录（不推荐）</li>
-<li>主 Agent 汇总转发</li>
-</ul>
-<p><strong>Q3: 一个 WhatsApp 号能绑定多个 Agent 吗？</strong></p>
-<p>A: 可以，通过 <code>peer</code> 匹配不同 DM/群组，但回复都用同一个号码发送。</p>
-<p><strong>Q4: 子 Agent 失败后怎么办？</strong></p>
-<p>A: 可以设置 <code>runTimeoutSeconds</code> 超时，或使用 <code>cleanup: &quot;delete&quot;</code> 自动清理。</p>
-<hr>
-<h2 id="总结">总结</h2>
-<p>本文核心要点：</p>
-<ol>
-<li><strong>多 Agent 架构</strong>解决了单 Agent 的权限混乱和专业性不足问题</li>
-<li><strong>Agent 路由</strong>通过 bindings 配置实现入站消息的智能分发</li>
-<li><strong>子 Agent</strong>支持并行任务处理，提高整体效率</li>
-<li><strong>Agent 间通信</strong>通过工具调用实现协作，保持隔离性</li>
-<li><strong>安全边界</strong>通过工作区隔离、工具控制、沙箱实现</li>
-</ol>
-<h3 id="关键收获">关键收获</h3>
-<p>多 Agent 不是炫技，而是<strong>让 AI 像团队一样工作</strong>——各司其职、协同配合。从单 Agent 到多 Agent 的演进，本质上是从&quot;万能助手&quot;到&quot;专业团队&quot;的升级。</p>
-<h3 id="延伸阅读">延伸阅读</h3>
-<ul>
-<li><a href="https://docs.openclaw.ai/concepts/multi-agent">OpenClaw 官方文档 - Multi-Agent</a></li>
-<li><a href="https://docs.openclaw.ai/tools/subagents">OpenClaw 子 Agent 文档</a></li>
-<li><a href="https://docs.openclaw.ai/gateway/configuration">OpenClaw 工具配置</a></li>
-</ul>
-<hr>
-<h2 id="参考资料">参考资料</h2>
-<ol>
-<li><a href="https://docs.openclaw.ai/concepts/multi-agent">OpenClaw Multi-Agent Routing</a></li>
-<li><a href="https://docs.openclaw.ai/tools/subagents">OpenClaw Sub-Agents</a></li>
-<li><a href="https://docs.openclaw.ai/tools">OpenClaw Tools Documentation</a></li>
-<li><a href="https://docs.openclaw.ai/gateway/configuration">OpenClaw Configuration</a></li>
-</ol>
-<hr>
-<blockquote>
-<p>💡 <strong>下期预告</strong>：深入解析 OpenClaw 的 Node 系统——如何在多设备间远程控制你的 AI 助手</p></blockquote>
-<blockquote>
-<p>📬 <strong>订阅更新</strong>：关注公众号或订阅 RSS，获取最新技术文章</p></blockquote>
-
-        </div>
-
-        
-        <div class="row">
-          <div class="col-xs-12">
-            
-          </div>
-        </div>
-
-        
-
-<div class="related-content">
-  <h3>Related Posts</h3>
-  <ul>
-    
-    <li><a href="/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">QMD：OpenClaw 的本地语义搜索解决方案</a></li>
-    
-    <li><a href="/2026/02/03/openclaw-node-%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">OpenClaw Node 执行权限配置详解</a></li>
-    
-    <li><a href="/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/">OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</a></li>
-    
-  </ul>
-</div>
-
-
-
-        
-        
-        <div style="height: 50px;"></div>
-        
-        <div class="post-comments">
-          <div id="disqus_thread"></div>
-<script>
-  window.addEventListener("load", () => {
-    (function() {
-      
-      var d = document,
-        s = d.createElement("script");
-      s.src = "https://muzig.disqus.com/embed.js";
-      s.setAttribute("data-timestamp", +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  });
-</script>
-<noscript
-  >Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript"
-    >comments powered by Disqus.</a
-  ></noscript
->
-
-        </div>
-        
-        
-
-        <div class="site-footer">
-  
-  
-</div>
-
-      </div>
-    </div>
-  </article>
-
-  
-<script>
-  
-  document.addEventListener("DOMContentLoaded", function() {
-    const disqus = document.getElementById('disqus_thread');
-    if (!disqus) {
-      return;
-    }
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        const iframes = disqus.getElementsByTagName('iframe');
-        if (iframes.length > 1) {
-          const commentsIframe = iframes[1];
-          while (disqus.firstChild) {
-            disqus.removeChild(disqus.firstChild);
-          }
-          disqus.appendChild(commentsIframe);
-          observer.disconnect();
-        }
-      });
-    });
-    observer.observe(disqus, { childList: true, subtree: true });
-  });
-</script>
-
-  
-
-</body>
-
-</html>
+维度 单 Agent 多 Agent 专业分工 通用型，样样通样样松 专业型，各司其职 资源隔离 共享配置，容易冲突 独立工作区，互不干扰 安全边界 权限难控制 细粒度工具控制 并行处理 串行执行 多任务并行 OpenClaw 的 Agent 架构 什么是 Agent？ 在 OpenClaw 中，一个 Agent 是一个完全隔离的 AI 大脑，拥有："></head><body><article class=post id=article><div class=row><div class=col-xs-12><div class=site-header><header><div class=header-title><a href=/>Muzig</a></div><div class=header-subtitle>Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div></header><div class="row end-md header-items"><div class=header-item-left><button id=theme-toggle onclick=toggleTheme() class=theme-toggle>
+🌙</button></div><div class=header-item><a href=https://github.com/muzig target=_blank>About Me</a></div></div><div class=row></div><div class=header-line></div></div><div class="row middle-xs"><div class=col-xs-12><br \></div><div class=col-xs-12><div class=post-tags><a href=/tags/openclaw/>OpenClaw</a></div><div class=post-tags><a href=/tags/ai-agent/>AI Agent</a></div><div class=post-tags><a href=/tags/multi-agent/>Multi-Agent</a></div><div class=post-tags><a href=/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/>架构设计</a></div><div class=post-tags><a href=/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/>自动化</a></div></div></div><header class=post-header><h1 class=post-title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</h1><div class="row post-desc"><div class=col-xs-6><time class=post-date datetime="2026-02-05 00:00:00 CST">05 Feb 2026</time></div><div class=col-xs-6></div></div></header><div class="post-content markdown-body"><p>在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？</p><p>本文将深入解析 <strong>OpenClaw 的多 Agent 架构</strong>，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。</p><hr><h2 id=为什么需要多-agent>为什么需要多 Agent？</h2><p>想象这样一个场景：</p><ul><li><strong>场景 A</strong>：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。</li><li><strong>场景 B</strong>：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。</li><li><strong>场景 C</strong>：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。</li></ul><p><strong>多 Agent 架构的核心价值</strong>：</p><table><thead><tr><th>维度</th><th>单 Agent</th><th>多 Agent</th></tr></thead><tbody><tr><td><strong>专业分工</strong></td><td>通用型，样样通样样松</td><td>专业型，各司其职</td></tr><tr><td><strong>资源隔离</strong></td><td>共享配置，容易冲突</td><td>独立工作区，互不干扰</td></tr><tr><td><strong>安全边界</strong></td><td>权限难控制</td><td>细粒度工具控制</td></tr><tr><td><strong>并行处理</strong></td><td>串行执行</td><td>多任务并行</td></tr></tbody></table><hr><h2 id=openclaw-的-agent-架构>OpenClaw 的 Agent 架构</h2><h3 id=什么是-agent>什么是 Agent？</h3><p>在 OpenClaw 中，一个 Agent 是一个<strong>完全隔离的 AI 大脑</strong>，拥有：</p><ul><li><strong>独立工作区</strong>：<code>~/workspaces/&lt;agent></code> —— 文件、配置、记忆</li><li><strong>独立状态目录</strong>：<code>~/.openclaw/agents/&lt;agent>/agent</code> —— 认证、模型配置</li><li><strong>独立会话存储</strong>：<code>~/.openclaw/agents/&lt;agent>/sessions</code> —— 聊天记录</li><li><strong>独立人格配置</strong>：<code>AGENTS.md</code>、<code>SOUL.md</code>、<code>USER.md</code></li></ul><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>~/.openclaw/
+</span></span><span style=display:flex><span>├── agents/
+</span></span><span style=display:flex><span>│   ├── main/           # 主 Agent
+</span></span><span style=display:flex><span>│   │   ├── agent/      # 配置和认证
+</span></span><span style=display:flex><span>│   │   └── sessions/   # 会话历史
+</span></span><span style=display:flex><span>│   ├── helix/          # 项目专用 Agent
+</span></span><span style=display:flex><span>│   │   ├── agent/
+</span></span><span style=display:flex><span>│   │   └── sessions/
+</span></span><span style=display:flex><span>│   └── unity/          # Unity 开发 Agent
+</span></span><span style=display:flex><span>│       ├── agent/
+</span></span><span style=display:flex><span>│       └── sessions/
+</span></span><span style=display:flex><span>└── workspaces/
+</span></span><span style=display:flex><span>    ├── clawd/          # main 的工作区
+</span></span><span style=display:flex><span>    ├── helix/          # helix 的工作区
+</span></span><span style=display:flex><span>    └── unity/          # unity 的工作区
+</span></span></code></pre></div><h3 id=agent-类型>Agent 类型</h3><p>OpenClaw 支持三种类型的 Agent 协作：</p><h4 id=1-主-agentmain-agent>1. 主 Agent（Main Agent）</h4><ul><li>默认 Agent，处理通用任务</li><li>负责协调和派发任务给其他 Agent</li></ul><h4 id=2-专用-agentdedicated-agent>2. 专用 Agent（Dedicated Agent）</h4><ul><li>针对特定领域或项目</li><li>例如：Unity 开发 Agent、家庭管理 Agent</li></ul><h4 id=3-子-agentsub-agent>3. 子 Agent（Sub-Agent）</h4><ul><li>临时 spawned 出来的 Agent</li><li>处理并行任务，完成后自动销毁</li></ul><hr><h2 id=agent-路由机制>Agent 路由机制</h2><h3 id=入站路由gateway-层>入站路由（Gateway 层）</h3><p>当消息进入 OpenClaw 时，Gateway 通过 <strong>bindings</strong> 配置决定路由到哪个 Agent：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>// openclaw.json
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  &#34;agents&#34;: {
+</span></span><span style=display:flex><span>    &#34;list&#34;: [
+</span></span><span style=display:flex><span>      { &#34;id&#34;: &#34;main&#34;, &#34;workspace&#34;: &#34;~/workspaces/clawd&#34; },
+</span></span><span style=display:flex><span>      { &#34;id&#34;: &#34;helix&#34;, &#34;workspace&#34;: &#34;~/workspaces/helix&#34; },
+</span></span><span style=display:flex><span>      { &#34;id&#34;: &#34;unity&#34;, &#34;workspace&#34;: &#34;~/workspaces/unity&#34; }
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  &#34;bindings&#34;: [
+</span></span><span style=display:flex><span>    // 按账号路由
+</span></span><span style=display:flex><span>    { &#34;agentId&#34;: &#34;main&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8134174815&#34; } },
+</span></span><span style=display:flex><span>    { &#34;agentId&#34;: &#34;helix&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8221433362&#34; } },
+</span></span><span style=display:flex><span>    { &#34;agentId&#34;: &#34;unity&#34;, &#34;match&#34;: { &#34;channel&#34;: &#34;telegram&#34;, &#34;accountId&#34;: &#34;8444434740&#34; } },
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    // 按群组路由
+</span></span><span style=display:flex><span>    { &#34;agentId&#34;: &#34;unity&#34;, &#34;match&#34;: { 
+</span></span><span style=display:flex><span>      &#34;channel&#34;: &#34;whatsapp&#34;, 
+</span></span><span style=display:flex><span>      &#34;peer&#34;: { &#34;kind&#34;: &#34;group&#34;, &#34;id&#34;: &#34;xxx@g.us&#34; } 
+</span></span><span style=display:flex><span>    }}
+</span></span><span style=display:flex><span>  ]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>路由优先级</strong>（最具体的优先）：</p><ol><li><code>peer</code> 精确匹配（特定 DM/群组）</li><li><code>guildId</code> / <code>teamId</code>（Discord/Slack）</li><li><code>accountId</code> 匹配</li><li>通道级匹配</li><li>默认 Agent</li></ol><h3 id=出站派发agent-主动>出站派发（Agent 主动）</h3><p>主 Agent 可以主动派发任务给其他 Agent，使用 <code>sessions_send</code> 工具：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-go data-lang=go><span style=display:flex><span><span style=font-style:italic>// 伪代码示意</span>
+</span></span><span style=display:flex><span>sessions_send(
+</span></span><span style=display:flex><span>  agentId: <span style=font-style:italic>&#34;helix&#34;</span>,
+</span></span><span style=display:flex><span>  message: <span style=font-style:italic>&#34;检查项目状态并生成报告&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><hr><h2 id=子-agent并行任务处理>子 Agent：并行任务处理</h2><h3 id=核心概念>核心概念</h3><p><strong>Sub-Agent</strong> 是从现有 Agent 中 spawned 出来的后台任务：</p><ul><li>在独立 session 中运行：<code>agent:&lt;agentId>:subagent:&lt;uuid></code></li><li>支持并行处理，不阻塞主 Agent</li><li>完成后自动向请求者汇报结果</li><li>可设置超时、清理策略</li></ul><h3 id=使用场景>使用场景</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你向 main 发送：&#34;帮我同时做三件事：
+</span></span><span style=display:flex><span>1. 检查 helix 项目的 git 状态
+</span></span><span style=display:flex><span>2. 查询今天的天气
+</span></span><span style=display:flex><span>3. 总结一下昨天的会议纪要&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>main 的处理流程：
+</span></span><span style=display:flex><span>  ├→ spawn sub-agent A → 检查 helix git 状态
+</span></span><span style=display:flex><span>  ├→ spawn sub-agent B → 查询天气
+</span></span><span style=display:flex><span>  └→ spawn sub-agent C → 总结会议纪要
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>等待所有子 Agent 完成
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>汇总结果并回复你
+</span></span></code></pre></div><h3 id=配置示例>配置示例</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  &#34;agents&#34;: {
+</span></span><span style=display:flex><span>    &#34;defaults&#34;: {
+</span></span><span style=display:flex><span>      &#34;subagents&#34;: {
+</span></span><span style=display:flex><span>        &#34;model&#34;: &#34;anthropic/claude-sonnet-4-5&#34;,  // 子 Agent 专用模型
+</span></span><span style=display:flex><span>        &#34;thinking&#34;: &#34;off&#34;,
+</span></span><span style=display:flex><span>        &#34;maxConcurrent&#34;: 4,                      // 最大并发数
+</span></span><span style=display:flex><span>        &#34;archiveAfterMinutes&#34;: 60                // 自动归档时间
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    &#34;list&#34;: [{
+</span></span><span style=display:flex><span>      &#34;id&#34;: &#34;main&#34;,
+</span></span><span style=display:flex><span>      &#34;subagents&#34;: {
+</span></span><span style=display:flex><span>        &#34;allowAgents&#34;: [&#34;helix&#34;, &#34;unity&#34;]  // 允许派发给这些 Agent
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }]
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=agent-间通信>Agent 间通信</h2><h3 id=启用通信>启用通信</h3><p>在 <code>openclaw.json</code> 中启用 Agent-to-Agent 通信：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-gdscript3 data-lang=gdscript3><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;tools&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-style:italic>&#34;agentToAgent&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;enabled&#34;</span>: true,
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;allow&#34;</span>: [<span style=font-style:italic>&#34;main&#34;</span>, <span style=font-style:italic>&#34;helix&#34;</span>, <span style=font-style:italic>&#34;unity&#34;</span>]  // <span>允许通信的</span> Agent <span>列表</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=通信工具>通信工具</h3><table><thead><tr><th>工具</th><th>功能</th><th>使用场景</th></tr></thead><tbody><tr><td><code>sessions_send</code></td><td>向其他 Agent 发送消息</td><td>派发任务、请求协作</td></tr><tr><td><code>sessions_list</code></td><td>查看其他 Agent 的会话</td><td>检查谁在线</td></tr><tr><td><code>sessions_history</code></td><td>获取其他 Agent 的历史</td><td>了解上下文</td></tr><tr><td><code>session_status</code></td><td>查看 Agent 状态</td><td>检查是否忙碌</td></tr></tbody></table><h3 id=通信流程示例>通信流程示例</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你 → main: &#34;让 helix 检查项目状态&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main 识别任务应派发给 helix
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main → helix: &#34;检查 git 状态&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>helix 执行 git status
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>helix → main: &#34;返回结果&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main 汇总 → 你: &#34;helix 项目状态正常，最新提交是...&#34;
+</span></span></code></pre></div><hr><h2 id=安全与隔离>安全与隔离</h2><h3 id=工作区隔离>工作区隔离</h3><p>每个 Agent 拥有独立的工作目录，文件互不干扰：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>main:   ~/workspaces/clawd/
+</span></span><span style=display:flex><span>helix:  ~/workspaces/helix/
+</span></span><span style=display:flex><span>unity:  ~/workspaces/unity/
+</span></span></code></pre></div><h3 id=工具权限控制>工具权限控制</h3><p>可以为每个 Agent 设置不同的工具权限：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-gdscript3 data-lang=gdscript3><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;agents&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-style:italic>&#34;list&#34;</span>: [{
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;id&#34;</span>: <span style=font-style:italic>&#34;unity&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;tools&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;allow&#34;</span>: [<span style=font-style:italic>&#34;read&#34;</span>, <span style=font-style:italic>&#34;exec&#34;</span>, <span style=font-style:italic>&#34;sessions_spawn&#34;</span>],
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;deny&#34;</span>: [<span style=font-style:italic>&#34;write&#34;</span>, <span style=font-style:italic>&#34;edit&#34;</span>, <span style=font-style:italic>&#34;apply_patch&#34;</span>, <span style=font-style:italic>&#34;gateway&#34;</span>, <span style=font-style:italic>&#34;cron&#34;</span>]
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }]
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=沙箱隔离>沙箱隔离</h3><p>支持 Docker 沙箱，限制 Agent 的执行环境：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  &#34;agents&#34;: {
+</span></span><span style=display:flex><span>    &#34;list&#34;: [{
+</span></span><span style=display:flex><span>      &#34;id&#34;: &#34;unity&#34;,
+</span></span><span style=display:flex><span>      &#34;sandbox&#34;: {
+</span></span><span style=display:flex><span>        &#34;mode&#34;: &#34;all&#34;,      // 总是沙箱
+</span></span><span style=display:flex><span>        &#34;scope&#34;: &#34;agent&#34;    // 每个 Agent 独立容器
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }]
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=实战案例unity-开发工作流>实战案例：Unity 开发工作流</h2><h3 id=场景描述>场景描述</h3><p>你正在开发一个 Unity 游戏项目，希望：</p><ul><li>快速询问代码问题 → 主 Agent</li><li>深度技术讨论 → Unity 专用 Agent</li><li>并行检查多个模块 → Sub-Agent</li></ul><h3 id=配置方案>配置方案</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-gdscript3 data-lang=gdscript3><span style=display:flex><span>// openclaw.json
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;agents&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-style:italic>&#34;list&#34;</span>: [
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;id&#34;</span>: <span style=font-style:italic>&#34;main&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;name&#34;</span>: <span style=font-style:italic>&#34;通用助手&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;~/workspaces/clawd&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;model&#34;</span>: <span style=font-style:italic>&#34;anthropic/claude-sonnet-4-5&#34;</span>
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;id&#34;</span>: <span style=font-style:italic>&#34;unity&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;name&#34;</span>: <span style=font-style:italic>&#34;Unity 专家&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;workspace&#34;</span>: <span style=font-style:italic>&#34;~/workspaces/unity&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;model&#34;</span>: <span style=font-style:italic>&#34;anthropic/claude-opus-4-5&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=font-style:italic>&#34;tools&#34;</span>: {
+</span></span><span style=display:flex><span>          <span style=font-style:italic>&#34;allow&#34;</span>: [<span style=font-style:italic>&#34;read&#34;</span>, <span style=font-style:italic>&#34;exec&#34;</span>, <span style=font-style:italic>&#34;sessions_spawn&#34;</span>],
+</span></span><span style=display:flex><span>          <span style=font-style:italic>&#34;deny&#34;</span>: [<span style=font-style:italic>&#34;gateway&#34;</span>, <span style=font-style:italic>&#34;cron&#34;</span>]
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;bindings&#34;</span>: [
+</span></span><span style=display:flex><span>    { <span style=font-style:italic>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;main&#34;</span>, <span style=font-style:italic>&#34;match&#34;</span>: { <span style=font-style:italic>&#34;channel&#34;</span>: <span style=font-style:italic>&#34;telegram&#34;</span>, <span style=font-style:italic>&#34;accountId&#34;</span>: <span style=font-style:italic>&#34;main_bot&#34;</span> } },
+</span></span><span style=display:flex><span>    { <span style=font-style:italic>&#34;agentId&#34;</span>: <span style=font-style:italic>&#34;unity&#34;</span>, <span style=font-style:italic>&#34;match&#34;</span>: { <span style=font-style:italic>&#34;channel&#34;</span>: <span style=font-style:italic>&#34;telegram&#34;</span>, <span style=font-style:italic>&#34;accountId&#34;</span>: <span style=font-style:italic>&#34;unity_bot&#34;</span> } }
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>  <span style=font-style:italic>&#34;tools&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=font-style:italic>&#34;agentToAgent&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;enabled&#34;</span>: true,
+</span></span><span style=display:flex><span>      <span style=font-style:italic>&#34;allow&#34;</span>: [<span style=font-style:italic>&#34;main&#34;</span>, <span style=font-style:italic>&#34;unity&#34;</span>]
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=使用流程>使用流程</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>你 → main: &#34;Unity 项目中如何实现对象池？&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main 识别为 Unity 问题
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main → unity: &#34;解释对象池实现&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>unity 详细回答并给出代码
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>unity → main: &#34;返回结果&#34;
+</span></span><span style=display:flex><span>  ↓
+</span></span><span style=display:flex><span>main 整理 → 你: &#34;Unity 对象池的最佳实践是...&#34;
+</span></span></code></pre></div><hr><h2 id=最佳实践>最佳实践</h2><h3 id=-推荐做法>✅ 推荐做法</h3><ol><li><strong>明确分工</strong>：每个 Agent 专注一个领域</li><li><strong>合理命名</strong>：Agent ID 要直观（<code>unity</code>、<code>home</code>、<code>work</code>）</li><li><strong>最小权限</strong>：只给 Agent 需要的工具权限</li><li><strong>文档沉淀</strong>：在每个 Agent 的 <code>AGENTS.md</code> 中记录职责</li></ol><h3 id=-避免的错误>❌ 避免的错误</h3><ol><li><strong>过度拆分</strong>：3-5 个 Agent 足够，太多反而难管理</li><li><strong>权限过大</strong>：不要在所有 Agent 上开放危险工具</li><li><strong>循环依赖</strong>：避免 Agent A 调用 B，B 又调用 A</li><li><strong>忽视隔离</strong>：不要把敏感数据放在共享目录</li></ol><h3 id=文档建议>文档建议</h3><p>在每个 Agent 的 <code>AGENTS.md</code> 中添加：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=font-weight:700>## Agent 协作规则
+</span></span></span><span style=display:flex><span><span style=font-weight:700></span>
+</span></span><span style=display:flex><span><span style=font-weight:700>### 职责范围
+</span></span></span><span style=display:flex><span><span style=font-weight:700></span><span style=font-weight:700>-</span> 本 Agent 负责：Unity 游戏开发相关任务
+</span></span><span style=display:flex><span><span style=font-weight:700>-</span> 不处理：家庭日程、通用查询
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>### 任务派发
+</span></span></span><span style=display:flex><span><span style=font-weight:700></span>当用户提到以下关键词时，派发给对应 Agent：
+</span></span><span style=display:flex><span><span style=font-weight:700>-</span> &#34;Unity&#34; / &#34;游戏&#34; / &#34;C#&#34; → 本 Agent 处理
+</span></span><span style=display:flex><span><span style=font-weight:700>-</span> &#34;helix&#34; / &#34;项目 A&#34; → 派发给 helix Agent
+</span></span><span style=display:flex><span><span style=font-weight:700>-</span> &#34;家庭&#34; / &#34;日程&#34; → 派发给 home Agent
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>### 工具使用
+</span></span></span><span style=display:flex><span><span style=font-weight:700></span><span style=font-weight:700>-</span> ✅ 允许：read, exec, sessions_spawn
+</span></span><span style=display:flex><span><span style=font-weight:700>-</span> ❌ 禁止：write（避免意外修改配置文件）
+</span></span></code></pre></div><hr><h2 id=常见问题>常见问题</h2><p><strong>Q1: 子 Agent 和独立 Agent 有什么区别？</strong></p><p>A:</p><ul><li><strong>子 Agent</strong>：临时 spawned，用完即走，适合并行任务</li><li><strong>独立 Agent</strong>：长期运行，有独立身份和配置，适合不同场景</li></ul><p><strong>Q2: Agent 之间能共享数据吗？</strong></p><p>A: 默认隔离，但可以通过：</p><ul><li><code>sessions_send</code> 传递消息</li><li>共享文件目录（不推荐）</li><li>主 Agent 汇总转发</li></ul><p><strong>Q3: 一个 WhatsApp 号能绑定多个 Agent 吗？</strong></p><p>A: 可以，通过 <code>peer</code> 匹配不同 DM/群组，但回复都用同一个号码发送。</p><p><strong>Q4: 子 Agent 失败后怎么办？</strong></p><p>A: 可以设置 <code>runTimeoutSeconds</code> 超时，或使用 <code>cleanup: "delete"</code> 自动清理。</p><hr><h2 id=总结>总结</h2><p>本文核心要点：</p><ol><li><strong>多 Agent 架构</strong>解决了单 Agent 的权限混乱和专业性不足问题</li><li><strong>Agent 路由</strong>通过 bindings 配置实现入站消息的智能分发</li><li><strong>子 Agent</strong>支持并行任务处理，提高整体效率</li><li><strong>Agent 间通信</strong>通过工具调用实现协作，保持隔离性</li><li><strong>安全边界</strong>通过工作区隔离、工具控制、沙箱实现</li></ol><h3 id=关键收获>关键收获</h3><p>多 Agent 不是炫技，而是<strong>让 AI 像团队一样工作</strong>——各司其职、协同配合。从单 Agent 到多 Agent 的演进，本质上是从"万能助手"到"专业团队"的升级。</p><h3 id=延伸阅读>延伸阅读</h3><ul><li><a href=https://docs.openclaw.ai/concepts/multi-agent>OpenClaw 官方文档 - Multi-Agent</a></li><li><a href=https://docs.openclaw.ai/tools/subagents>OpenClaw 子 Agent 文档</a></li><li><a href=https://docs.openclaw.ai/gateway/configuration>OpenClaw 工具配置</a></li></ul><hr><h2 id=参考资料>参考资料</h2><ol><li><a href=https://docs.openclaw.ai/concepts/multi-agent>OpenClaw Multi-Agent Routing</a></li><li><a href=https://docs.openclaw.ai/tools/subagents>OpenClaw Sub-Agents</a></li><li><a href=https://docs.openclaw.ai/tools>OpenClaw Tools Documentation</a></li><li><a href=https://docs.openclaw.ai/gateway/configuration>OpenClaw Configuration</a></li></ol><hr><blockquote><p>💡 <strong>下期预告</strong>：深入解析 OpenClaw 的 Node 系统——如何在多设备间远程控制你的 AI 助手</p></blockquote><blockquote><p>📬 <strong>订阅更新</strong>：关注公众号或订阅 RSS，获取最新技术文章</p></blockquote></div><div class=row><div class=col-xs-12></div></div><div class=related-content><h3>Related Posts</h3><ul><li><a href=/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>QMD：OpenClaw 的本地语义搜索解决方案</a></li><li><a href=/2026/02/03/openclaw-node-%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/>OpenClaw Node 执行权限配置详解</a></li><li><a href=/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</a></li></ul></div><div style=height:50px></div><div class=post-comments><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://muzig.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class=site-footer></div></div></div></article><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("disqus_thread");if(!e)return;const t=new MutationObserver(function(n){n.forEach(function(){const s=e.getElementsByTagName("iframe");if(s.length>1){const n=s[1];for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(n),t.disconnect()}})});t.observe(e,{childList:!0,subtree:!0})})</script></body></html>

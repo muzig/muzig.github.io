@@ -1,26 +1,94 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>自动化 on Muzig 的技术博客</title>
-    <link>https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
-    <description>Recent content in 自动化 on Muzig 的技术博客</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate>
-    <atom:link href="https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title>
-      <link>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link>
-      <pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid>
-      <description>&lt;p&gt;我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p&gt;&#xA;&lt;p&gt;作者：&lt;strong&gt;Benjamin Jones&lt;/strong&gt;&#xA;平台：&lt;strong&gt;AI Frontiers&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一句话核心观点&#34;&gt;一句话核心观点&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 不一定让打工人变惨。&#xA;反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;关键就在两个经济机制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;价格下降&lt;/li&gt;&#xA;&lt;li&gt;瓶颈转移（Baumol 成本病）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一为什么ai-越强反而越好&#34;&gt;一、为什么“AI 越强，反而越好”？&lt;/h1&gt;&#xA;&lt;p&gt;很多人直觉是：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但作者说，这只看到了“替代”，没看到“价格”。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-自动化--降低价格&#34;&gt;① 自动化 = 降低价格&lt;/h2&gt;&#xA;&lt;p&gt;机器为什么存在？&#xA;不是为了替代人。&#xA;是为了&lt;strong&gt;降低成本&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;举个简单例子：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人算 4 位数乘法：1 分钟&lt;/li&gt;&#xA;&lt;li&gt;手机算：几乎 0 成本&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;于是结果是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;计算变得“免费”&lt;/li&gt;&#xA;&lt;li&gt;计算行业占 GDP 很小&lt;/li&gt;&#xA;&lt;li&gt;但所有行业都受益&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;关键逻辑：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;价格暴跌意味着：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;消费者获益&lt;/li&gt;&#xA;&lt;li&gt;生活成本下降&lt;/li&gt;&#xA;&lt;li&gt;钱会流向别的地方&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;二真正决定工资的不是被替代&#34;&gt;二、真正决定工资的不是“被替代”&lt;/h1&gt;&#xA;&lt;p&gt;而是 —— 瓶颈在哪里&#xA;这部分是文章最重要的地方。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-农业案例历史证明&#34;&gt;🌽 农业案例（历史证明）&lt;/h2&gt;&#xA;&lt;p&gt;18 世纪：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title>
-      <link>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</link>
-      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
-      <guid>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</guid>
-      <description>&lt;p&gt;在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？&lt;/p&gt;&#xA;&lt;p&gt;本文将深入解析 &lt;strong&gt;OpenClaw 的多 Agent 架构&lt;/strong&gt;，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;为什么需要多-agent&#34;&gt;为什么需要多 Agent？&lt;/h2&gt;&#xA;&lt;p&gt;想象这样一个场景：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 A&lt;/strong&gt;：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 B&lt;/strong&gt;：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 C&lt;/strong&gt;：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;多 Agent 架构的核心价值&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;维度&lt;/th&gt;&#xA;          &lt;th&gt;单 Agent&lt;/th&gt;&#xA;          &lt;th&gt;多 Agent&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;专业分工&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;通用型，样样通样样松&lt;/td&gt;&#xA;          &lt;td&gt;专业型，各司其职&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;资源隔离&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;共享配置，容易冲突&lt;/td&gt;&#xA;          &lt;td&gt;独立工作区，互不干扰&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;安全边界&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;权限难控制&lt;/td&gt;&#xA;          &lt;td&gt;细粒度工具控制&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;并行处理&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;串行执行&lt;/td&gt;&#xA;          &lt;td&gt;多任务并行&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;openclaw-的-agent-架构&#34;&gt;OpenClaw 的 Agent 架构&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-agent&#34;&gt;什么是 Agent？&lt;/h3&gt;&#xA;&lt;p&gt;在 OpenClaw 中，一个 Agent 是一个&lt;strong&gt;完全隔离的 AI 大脑&lt;/strong&gt;，拥有：&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>自动化 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/</link><description>Recent content in 自动化 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title><link>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate><guid>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid><description>&lt;p>我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p>
+&lt;p>作者：&lt;strong>Benjamin Jones&lt;/strong>
+平台：&lt;strong>AI Frontiers&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;h1 id="一句话核心观点">一句话核心观点&lt;/h1>
+&lt;blockquote>
+&lt;p>AI 不一定让打工人变惨。
+反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p>&lt;/blockquote>
+&lt;p>关键就在两个经济机制：&lt;/p>
+&lt;ol>
+&lt;li>价格下降&lt;/li>
+&lt;li>瓶颈转移（Baumol 成本病）&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h1 id="一为什么ai-越强反而越好">一、为什么“AI 越强，反而越好”？&lt;/h1>
+&lt;p>很多人直觉是：&lt;/p>
+&lt;blockquote>
+&lt;p>AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p>&lt;/blockquote>
+&lt;p>但作者说，这只看到了“替代”，没看到“价格”。&lt;/p>
+&lt;h2 id="-自动化--降低价格">① 自动化 = 降低价格&lt;/h2>
+&lt;p>机器为什么存在？
+不是为了替代人。
+是为了&lt;strong>降低成本&lt;/strong>。&lt;/p>
+&lt;p>举个简单例子：&lt;/p>
+&lt;ul>
+&lt;li>人算 4 位数乘法：1 分钟&lt;/li>
+&lt;li>手机算：几乎 0 成本&lt;/li>
+&lt;/ul>
+&lt;p>于是结果是：&lt;/p>
+&lt;ul>
+&lt;li>计算变得“免费”&lt;/li>
+&lt;li>计算行业占 GDP 很小&lt;/li>
+&lt;li>但所有行业都受益&lt;/li>
+&lt;/ul>
+&lt;p>关键逻辑：&lt;/p>
+&lt;blockquote>
+&lt;p>如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p>&lt;/blockquote>
+&lt;p>价格暴跌意味着：&lt;/p>
+&lt;ul>
+&lt;li>消费者获益&lt;/li>
+&lt;li>生活成本下降&lt;/li>
+&lt;li>钱会流向别的地方&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="二真正决定工资的不是被替代">二、真正决定工资的不是“被替代”&lt;/h1>
+&lt;p>而是 —— 瓶颈在哪里
+这部分是文章最重要的地方。&lt;/p>
+&lt;h2 id="-农业案例历史证明">🌽 农业案例（历史证明）&lt;/h2>
+&lt;p>18 世纪：&lt;/p></description></item><item><title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title><link>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</link><pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate><guid>https://muzig.io/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</guid><description>&lt;p>在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？&lt;/p>
+&lt;p>本文将深入解析 &lt;strong>OpenClaw 的多 Agent 架构&lt;/strong>，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。&lt;/p>
+&lt;hr>
+&lt;h2 id="为什么需要多-agent">为什么需要多 Agent？&lt;/h2>
+&lt;p>想象这样一个场景：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>场景 A&lt;/strong>：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。&lt;/li>
+&lt;li>&lt;strong>场景 B&lt;/strong>：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。&lt;/li>
+&lt;li>&lt;strong>场景 C&lt;/strong>：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>多 Agent 架构的核心价值&lt;/strong>：&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>维度&lt;/th>
+ &lt;th>单 Agent&lt;/th>
+ &lt;th>多 Agent&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;strong>专业分工&lt;/strong>&lt;/td>
+ &lt;td>通用型，样样通样样松&lt;/td>
+ &lt;td>专业型，各司其职&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>资源隔离&lt;/strong>&lt;/td>
+ &lt;td>共享配置，容易冲突&lt;/td>
+ &lt;td>独立工作区，互不干扰&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>安全边界&lt;/strong>&lt;/td>
+ &lt;td>权限难控制&lt;/td>
+ &lt;td>细粒度工具控制&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>并行处理&lt;/strong>&lt;/td>
+ &lt;td>串行执行&lt;/td>
+ &lt;td>多任务并行&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="openclaw-的-agent-架构">OpenClaw 的 Agent 架构&lt;/h2>
+&lt;h3 id="什么是-agent">什么是 Agent？&lt;/h3>
+&lt;p>在 OpenClaw 中，一个 Agent 是一个&lt;strong>完全隔离的 AI 大脑&lt;/strong>，拥有：&lt;/p></description></item></channel></rss>
