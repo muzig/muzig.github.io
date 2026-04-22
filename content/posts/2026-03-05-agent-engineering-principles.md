@@ -1,9 +1,11 @@
 +++
 date = '2026-03-05T10:00:00+08:00'
 draft = false
-title = '6个反直觉的Agent工程原则'
-tags = ['Agent', 'Claude Code', 'AI工程', '提示词工程']
-categories = ['技术深度']
+title = "6个反直觉的Agent工程原则"
+categories = ["AI工程"]
+series = ["AI 工程观察"]
+articleType = "方法论"
+tags = ["Agent", "AI 工程", "Claude Code", "提示词工程"]
 +++
 
 > 原文来自 @systematicls 的 Twitter，分享了他对 Agent 工程实践的深度思考。

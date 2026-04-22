@@ -1,9 +1,11 @@
 +++
 date = '2026-02-28T08:20:00+08:00'
 draft = false
-title = '当 Andrej Karpathy 开始"编程一个研究组织"'
-tags = ['AI', 'Agent', 'Karpathy', '研究组织', '工程']
-categories = ['技术深度']
+title = "当 Andrej Karpathy 开始\"编程一个研究组织\""
+categories = ["AI工程"]
+series = ["AI 工程观察"]
+articleType = "观点评论"
+tags = ["Agent", "AI 工程", "Karpathy", "软件工程"]
 +++
 
 最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。

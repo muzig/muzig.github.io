@@ -1,9 +1,11 @@
 +++
 date = '2026-02-28T21:30:00+08:00'
 draft = false
-title = 'Karpathy microGPT：200行纯Python实现完整GPT'
-tags = ['LLM', 'GPT', 'Transformer', 'Python', 'Education', 'Karpathy']
-categories = ['技术深度']
+title = "Karpathy microGPT：200行纯Python实现完整GPT"
+categories = ["LLM系统"]
+series = ["LLM 系统拆解"]
+articleType = "深度解析"
+tags = ["LLM", "GPT", "Transformer", "Python", "Karpathy"]
 +++
 
 > *"The most atomic way to train and run inference for a GPT in pure, dependency-free Python. This file is the complete algorithm. Everything else is just efficiency."* — Andrej Karpathy

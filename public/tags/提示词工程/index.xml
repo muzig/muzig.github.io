@@ -1,31 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>提示词工程 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/</link><description>Recent content in 提示词工程 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 05 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>6个反直觉的Agent工程原则</title><link>https://muzig.io/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</link><pubDate>Thu, 05 Mar 2026 10:00:00 +0800</pubDate><guid>https://muzig.io/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</guid><description>&lt;blockquote>
-&lt;p>原文来自 @systematicls 的 Twitter，分享了他对 Agent 工程实践的深度思考。&lt;/p>&lt;/blockquote>
-&lt;p>几条反直觉的观点：&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>上下文是一切&lt;/strong> — 你的 CLAUDE.md 不该是百科全书，而是 IF-ELSE 导航：什么场景读什么规则。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>研究和执行必须分离&lt;/strong> — &amp;ldquo;帮我建认证系统&amp;rdquo; 是错的。正确流程：研究方案 → 决策 → 新上下文执行。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>Agent 天生想讨好你&lt;/strong> — 问&amp;quot;找 bug&amp;quot;，它会编造 bug。用中性提示词，或用对抗 Agent 互相验证。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>Agent 知道怎么开始，不知道怎么结束&lt;/strong> — 用测试 + 截图 + 合同文件定义&amp;quot;完成&amp;quot;。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>规则会越加越乱&lt;/strong> — 定期让 Agent 帮你整理合并，清除矛盾。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>少即是多&lt;/strong> — 简化你的提示词和工作流。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;hr>
-&lt;p>&lt;strong>Bonus&lt;/strong>：如果某个功能真的重要，OpenAI 和 Anthropic 会把它做进产品。所以别焦虑&amp;quot;新工具&amp;quot;，更新 CLI、读更新日志就够了。&lt;/p>
-&lt;hr>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://www.andyvora.com/world-class-agentic-engineer">How To Be A World-Class Agentic Engineer&lt;/a>&lt;/li>
-&lt;li>推文链接：https://x.com/KKaWSB/status/2029269334993088820&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>提示词工程 on Muzig</title>
+    <link>http://localhost:1313/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/</link>
+    <description>Recent content in 提示词工程 on Muzig</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 05 Mar 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>6个反直觉的Agent工程原则</title>
+      <link>http://localhost:1313/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</link>
+      <pubDate>Thu, 05 Mar 2026 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;原文来自 @systematicls 的 Twitter，分享了他对 Agent 工程实践的深度思考。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;几条反直觉的观点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;上下文是一切&lt;/strong&gt; — 你的 CLAUDE.md 不该是百科全书，而是 IF-ELSE 导航：什么场景读什么规则。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;研究和执行必须分离&lt;/strong&gt; — &amp;ldquo;帮我建认证系统&amp;rdquo; 是错的。正确流程：研究方案 → 决策 → 新上下文执行。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Agent 天生想讨好你&lt;/strong&gt; — 问&amp;quot;找 bug&amp;quot;，它会编造 bug。用中性提示词，或用对抗 Agent 互相验证。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Agent 知道怎么开始，不知道怎么结束&lt;/strong&gt; — 用测试 + 截图 + 合同文件定义&amp;quot;完成&amp;quot;。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;规则会越加越乱&lt;/strong&gt; — 定期让 Agent 帮你整理合并，清除矛盾。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;少即是多&lt;/strong&gt; — 简化你的提示词和工作流。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;Bonus&lt;/strong&gt;：如果某个功能真的重要，OpenAI 和 Anthropic 会把它做进产品。所以别焦虑&amp;quot;新工具&amp;quot;，更新 CLI、读更新日志就够了。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.andyvora.com/world-class-agentic-engineer&#34;&gt;How To Be A World-Class Agentic Engineer&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;推文链接：https://x.com/KKaWSB/status/2029269334993088820&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

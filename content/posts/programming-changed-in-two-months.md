@@ -1,10 +1,12 @@
 +++
 date = '2026-02-26T09:53:00+08:00'
 draft = false
-title = '编程，在过去两个月里变得面目全非'
-tags = ['AI', 'Agent', '编程范式', '技术趋势', 'Cursor', 'Devin']
-categories = ['技术深度']
-description = '这不是渐进式升级，是一次断层。从"写代码的人"变成"管理执行流的人"，Agentic Engineering 正在重新定义编程。'
+title = "编程，在过去两个月里变得面目全非"
+description = "这不是渐进式升级，是一次断层。从\"写代码的人\"变成\"管理执行流的人\"，Agentic Engineering 正在重新定义编程。"
+categories = ["AI工程"]
+series = ["AI 工程观察"]
+articleType = "观点评论"
+tags = ["AI 工程", "Agent", "编程范式", "技术趋势", "Cursor", "Devin"]
 +++
 
 > 很多人还没意识到。
@@ -224,4 +226,4 @@ description = '这不是渐进式升级，是一次断层。从"写代码的人"
 
 ---
 
-*本文首发于 [muzig.github.io](https://muzig.github.io)*
+*本文首发于 [muzig.io](https://muzig.io)*

@@ -1,9 +1,11 @@
 +++
 date = '2026-01-31T08:56:00+08:00'
 draft = false
-title = 'OpenClaw：AI Agent 的自主操作系统'
-tags = ['AI', 'Agent', 'OpenClaw', 'Moltbot', 'Automation']
-categories = ['技术深度']
+title = "OpenClaw：AI Agent 的自主操作系统"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "入门指南"
+tags = ["OpenClaw", "Agent", "自动化"]
 +++
 
 在 AI 技术飞速发展的 2026 年，我们见证了一个全新物种的诞生——**OpenClaw**（前身为 Clawdbot/Moltbot）。这不仅仅是一个工具，而是一个让 AI Agent 真正"活"起来的自主操作系统。

@@ -1,9 +1,11 @@
 +++
 date = '2025-08-15T11:25:31+08:00'
 draft = false
-title = '编程语言设计组成解析'
-tags = ['Programming Language', 'Design', 'Core Concepts']
-categories = ['技术深度']
+title = "编程语言设计组成解析"
+categories = ["编程语言"]
+series = ["编程语言原理"]
+articleType = "深度解析"
+tags = ["编程语言", "设计", "核心概念"]
 +++
 
 理解一款编程语言的核心设计，有助于掌握其特性、适用场景和编程范式。以下是编程语言设计中需要关注的核心维度：

@@ -1,9 +1,11 @@
 +++
 date = '2026-03-04T11:30:00+08:00'
 draft = false
-title = 'OpenClaw 小白入门指南：从人工智障到专属助理的进阶之路'
-tags = ['OpenClaw', 'AI Agent', '工具教程', '效率提升']
-categories = ['技术文章']
+title = "OpenClaw 小白入门指南：从人工智障到专属助理的进阶之路"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "入门指南"
+tags = ["OpenClaw", "Agent", "AI 工具", "效率提升"]
 +++
 
 > 跟风装了全网爆火的 OpenClaw，结果爽了不到 1 天就直接放着落灰？别人家的龙虾 24 小时忙着打工，你的龙虾一问三不知？看完这篇，你就知道问题出在哪了。

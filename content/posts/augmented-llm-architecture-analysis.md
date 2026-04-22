@@ -1,9 +1,11 @@
 +++
 date = '2026-02-26T14:30:00+08:00'
 draft = true
-title = 'Augmented LLM 架构解析：LLM + Retrieval + Tools + Memory 实战指南'
-tags = ['AI', 'LLM', 'RAG', 'AI Agent', '知识管理']
-categories = ['技术深度']
+title = "Augmented LLM 架构解析：LLM + Retrieval + Tools + Memory 实战指南"
+categories = ["LLM系统"]
+series = ["LLM 系统拆解"]
+articleType = "深度解析"
+tags = ["LLM", "RAG", "Agent", "知识管理"]
 +++
 
 > 当大语言模型学会"使用工具"和"记住上下文"，它就不再只是聊天机器人，而是真正的智能助手。

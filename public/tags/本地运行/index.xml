@@ -1,32 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>本地运行 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/</link><description>Recent content in 本地运行 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 04 Feb 2026 23:15:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/index.xml" rel="self" type="application/rss+xml"/><item><title>QMD：OpenClaw 的本地语义搜索解决方案</title><link>https://muzig.io/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate><guid>https://muzig.io/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid><description>&lt;!-- 
-写作提示：
-1. 标题要吸引人且包含关键词（SEO 优化）
-2. 开篇引入问题或背景，吸引读者
-3. 使用目录结构让文章清晰易读
-4. 代码示例要完整可运行
-5. 配图说明原理（架构图、流程图、对比表）
-6. 总结要有价值，提炼核心观点
--->
-&lt;h2 id="文章背景--问题引入">文章背景 / 问题引入&lt;/h2>
-&lt;p>如果你在用 OpenClaw，应该已经感受到了 token 消耗的速度 🔥 尤其 Claude 用户，没谈几轮下来就 hit limit 了。而且，很多时候 agent 塞了一堆无关信息进 context，不仅费钱，还影响精准度。&lt;/p>
-&lt;p>有没有办法让 agent &amp;ldquo;精准回忆&amp;rdquo;，同时完全零成本？&lt;/p>
-&lt;p>有。&lt;strong>qmd&lt;/strong> —— 本地运行，免费永久，精准度 95% 以上。&lt;/p>
-&lt;hr>
-&lt;h2 id="核心概念解析">核心概念解析&lt;/h2>
-&lt;h3 id="什么是-qmd">什么是 qmd？&lt;/h3>
-&lt;p>qmd 是 Shopify 创始人 Tobi 做的本地运行的语义搜索引擎，基于 Rust，专为 AI Agent 设计。&lt;/p>
-&lt;p>&lt;strong>GitHub 地址&lt;/strong>: &lt;a href="https://github.com/tobi/qmd">https://github.com/tobi/qmd&lt;/a>&lt;/p>
-&lt;h3 id="核心功能">核心功能&lt;/h3>
-&lt;h4 id="-强大的搜索能力">🔍 强大的搜索能力&lt;/h4>
-&lt;ul>
-&lt;li>搜索 markdown 笔记、会议记录、文档&lt;/li>
-&lt;li>混合搜索：BM25 全文 + 向量语义 + LLM 重排序&lt;/li>
-&lt;li>零 API 成本，完全本地运行（GGUF 模型）&lt;/li>
-&lt;li>MCP 集成，agent 主动回忆，不用手动提醒&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;h2 id="技术实现细节">技术实现细节&lt;/h2>
-&lt;h3 id="快速开始3-步配置10-分钟搞定">快速开始（3 步配置，10 分钟搞定）&lt;/h3>
-&lt;h4 id="第-1-步安装-qmd">第 1 步：安装 qmd&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bun install -g https://github.com/tobi/qmd
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>首次运行会自动下载模型（完全免费，本地运行）：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>本地运行 on Muzig</title>
+    <link>http://localhost:1313/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/</link>
+    <description>Recent content in 本地运行 on Muzig</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 04 Feb 2026 23:15:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>QMD：OpenClaw 的本地语义搜索解决方案</title>
+      <link>http://localhost:1313/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;!-- &#xA;写作提示：&#xA;1. 标题要吸引人且包含关键词（SEO 优化）&#xA;2. 开篇引入问题或背景，吸引读者&#xA;3. 使用目录结构让文章清晰易读&#xA;4. 代码示例要完整可运行&#xA;5. 配图说明原理（架构图、流程图、对比表）&#xA;6. 总结要有价值，提炼核心观点&#xA;--&gt;&#xA;&lt;h2 id=&#34;文章背景--问题引入&#34;&gt;文章背景 / 问题引入&lt;/h2&gt;&#xA;&lt;p&gt;如果你在用 OpenClaw，应该已经感受到了 token 消耗的速度 🔥 尤其 Claude 用户，没谈几轮下来就 hit limit 了。而且，很多时候 agent 塞了一堆无关信息进 context，不仅费钱，还影响精准度。&lt;/p&gt;&#xA;&lt;p&gt;有没有办法让 agent &amp;ldquo;精准回忆&amp;rdquo;，同时完全零成本？&lt;/p&gt;&#xA;&lt;p&gt;有。&lt;strong&gt;qmd&lt;/strong&gt; —— 本地运行，免费永久，精准度 95% 以上。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;核心概念解析&#34;&gt;核心概念解析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-qmd&#34;&gt;什么是 qmd？&lt;/h3&gt;&#xA;&lt;p&gt;qmd 是 Shopify 创始人 Tobi 做的本地运行的语义搜索引擎，基于 Rust，专为 AI Agent 设计。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;GitHub 地址&lt;/strong&gt;: &lt;a href=&#34;https://github.com/tobi/qmd&#34;&gt;https://github.com/tobi/qmd&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心功能&#34;&gt;核心功能&lt;/h3&gt;&#xA;&lt;h4 id=&#34;-强大的搜索能力&#34;&gt;🔍 强大的搜索能力&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;搜索 markdown 笔记、会议记录、文档&lt;/li&gt;&#xA;&lt;li&gt;混合搜索：BM25 全文 + 向量语义 + LLM 重排序&lt;/li&gt;&#xA;&lt;li&gt;零 API 成本，完全本地运行（GGUF 模型）&lt;/li&gt;&#xA;&lt;li&gt;MCP 集成，agent 主动回忆，不用手动提醒&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;技术实现细节&#34;&gt;技术实现细节&lt;/h2&gt;&#xA;&lt;h3 id=&#34;快速开始3-步配置10-分钟搞定&#34;&gt;快速开始（3 步配置，10 分钟搞定）&lt;/h3&gt;&#xA;&lt;h4 id=&#34;第-1-步安装-qmd&#34;&gt;第 1 步：安装 qmd&lt;/h4&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bun install -g https://github.com/tobi/qmd&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首次运行会自动下载模型（完全免费，本地运行）：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,9 +1,11 @@
 +++
 date = '2026-02-06T09:48:00+08:00'
 draft = false
-title = 'OpenClaw 修复 Python venv 导致的文件描述符耗尽问题'
-tags = ['openclaw', 'python', 'troubleshooting']
-categories = ['技术深度']
+title = "OpenClaw 修复 Python venv 导致的文件描述符耗尽问题"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "故障排查"
+tags = ["OpenClaw", "Python", "故障排查"]
 +++
 
 当 OpenClaw 的 skills watcher 遇到 Python 虚拟环境时，成千上万的文件监控请求可能导致 macOS 系统出现 `EBADF` 错误。本文深入分析这个问题的原因，并介绍官方修复方案。

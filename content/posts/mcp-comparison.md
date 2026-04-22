@@ -1,9 +1,11 @@
 +++
 date = '2026-01-31T22:10:00+08:00'
 draft = false
-title = 'MCP vs LangChain vs Function Calling：AI 集成方案深度对比'
-tags = ['MCP', 'AI', 'LangChain', 'Function Calling', 'Architecture']
-categories = ['技术深度']
+title = "MCP vs LangChain vs Function Calling：AI 集成方案深度对比"
+categories = ["MCP"]
+series = ["MCP 技术系列"]
+articleType = "对比分析"
+tags = ["MCP", "LangChain", "Function Calling", "架构设计"]
 +++
 
 - [背景：AI 集成的演进](#背景ai-集成的演进)

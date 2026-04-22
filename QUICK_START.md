@@ -13,8 +13,9 @@
 ```
 
 按照提示选择：
-- 文章分类（技术深度 / 技术文章）
-- 所属系列（MCP / Go / 编程语言 / 其他）
+- 主题分类（如 `AI工程`、`Agent工具链`、`MCP`）
+- 文章形式（如 `深度解析`、`实战教程`、`方法论`）
+- 所属系列（如 `OpenClaw 深度系列`、`MCP 技术系列`）
 
 ### Step 2: 编辑内容
 
@@ -29,6 +30,8 @@ code content/posts/your-article.md
 - ✅ 实战案例
 - ✅ 最佳实践
 - ✅ 总结要点
+
+写作前先快速确认一遍 [CONTENT_SCHEMA.md](/Users/ligang/src/github/muzig.github.io/CONTENT_SCHEMA.md)，避免分类和标签回到旧模型。
 
 ### Step 3: 本地预览
 
@@ -84,6 +87,7 @@ vim CONTENT_TRACKER.md
 |------|------|----------|
 | `CONTENT_PLAN.md` | 长期规划、系列设计、主题库 | 季度更新 |
 | `CONTENT_TRACKER.md` | 文章状态追踪、发布计划 | 每周更新 |
+| `CONTENT_SCHEMA.md` | 分类、系列、标签规范 | 有调整时更新 |
 | `content/posts/_template.md` | 标准文章模板 | 按需优化 |
 | `new-post.sh` | 快速创建文章脚本 | - |
 | `QUICK_START.md` | 本快速指南 | - |
