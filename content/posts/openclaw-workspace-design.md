@@ -1,9 +1,11 @@
 +++
 date = '2026-02-02T19:30:00+08:00'
 draft = false
-title = 'OpenClaw 工作区设计：两级 Memory 与目录组织最佳实践'
-tags = ['OpenClaw', 'AI工具', '工作区设计', '最佳实践']
-categories = ['技术文章']
+title = "OpenClaw 工作区设计：两级 Memory 与目录组织最佳实践"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "实战教程"
+tags = ["OpenClaw", "AI 工具", "工作区设计", "最佳实践"]
 +++
 
 > 本文分享在使用 OpenClaw 过程中总结的工作区设计经验，包括两级 Memory 架构、目录组织策略和多项目管理办法。

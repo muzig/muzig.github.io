@@ -1,9 +1,11 @@
 +++
 date = '2026-02-02T19:00:00+08:00'
 draft = false
-title = 'Claude Code 团队使用技巧：10 个核心实践'
-tags = ['Claude Code', 'AI工具', '开发效率', '编程助手']
-categories = ['技术文章']
+title = "Claude Code 团队使用技巧：10 个核心实践"
+categories = ["Agent工具链"]
+series = ["Claude Code 实战"]
+articleType = "实战教程"
+tags = ["Claude Code", "AI 工具", "开发效率", "编程助手"]
 +++
 
 > 本文整理自 Boris Cherny（Claude Code 创建者）在 Twitter/X 上分享的团队内部使用技巧。

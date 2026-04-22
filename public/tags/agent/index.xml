@@ -1,215 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Agent on Muzig 的技术博客</title><link>https://muzig.io/tags/agent/</link><description>Recent content in Agent on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 05 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/agent/index.xml" rel="self" type="application/rss+xml"/><item><title>6个反直觉的Agent工程原则</title><link>https://muzig.io/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</link><pubDate>Thu, 05 Mar 2026 10:00:00 +0800</pubDate><guid>https://muzig.io/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</guid><description>&lt;blockquote>
-&lt;p>原文来自 @systematicls 的 Twitter，分享了他对 Agent 工程实践的深度思考。&lt;/p>&lt;/blockquote>
-&lt;p>几条反直觉的观点：&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>上下文是一切&lt;/strong> — 你的 CLAUDE.md 不该是百科全书，而是 IF-ELSE 导航：什么场景读什么规则。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>研究和执行必须分离&lt;/strong> — &amp;ldquo;帮我建认证系统&amp;rdquo; 是错的。正确流程：研究方案 → 决策 → 新上下文执行。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>Agent 天生想讨好你&lt;/strong> — 问&amp;quot;找 bug&amp;quot;，它会编造 bug。用中性提示词，或用对抗 Agent 互相验证。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>Agent 知道怎么开始，不知道怎么结束&lt;/strong> — 用测试 + 截图 + 合同文件定义&amp;quot;完成&amp;quot;。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>规则会越加越乱&lt;/strong> — 定期让 Agent 帮你整理合并，清除矛盾。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>少即是多&lt;/strong> — 简化你的提示词和工作流。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;hr>
-&lt;p>&lt;strong>Bonus&lt;/strong>：如果某个功能真的重要，OpenAI 和 Anthropic 会把它做进产品。所以别焦虑&amp;quot;新工具&amp;quot;，更新 CLI、读更新日志就够了。&lt;/p>
-&lt;hr>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://www.andyvora.com/world-class-agentic-engineer">How To Be A World-Class Agentic Engineer&lt;/a>&lt;/li>
-&lt;li>推文链接：https://x.com/KKaWSB/status/2029269334993088820&lt;/li>
-&lt;/ul></description></item><item><title>当 Andrej Karpathy 开始"编程一个研究组织"</title><link>https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</link><pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate><guid>https://muzig.io/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</guid><description>&lt;p>最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。&lt;/p>
-&lt;p>他没有只运行一个 agent。而是一次性运行了 8 个：&lt;/p>
-&lt;ul>
-&lt;li>4 个 Claude&lt;/li>
-&lt;li>4 个 Codex&lt;/li>
-&lt;li>每个分配 1 块 GPU&lt;/li>
-&lt;li>目标：删除 logit softcap，同时不引入回归&lt;/li>
-&lt;/ul>
-&lt;p>他的 TL;DR 很直接：&lt;strong>目前不太行。有点混乱。&lt;/strong>&lt;/p>
-&lt;p>但从系统角度看，这个实验非常有意思。&lt;/p>
-&lt;hr>
-&lt;h2 id="实验用-ai-组织做研究">实验：用 AI 组织做研究&lt;/h2>
-&lt;p>Karpathy 尝试了几种组织结构：&lt;/p>
-&lt;p>&lt;strong>1. 8 个独立研究员&lt;/strong>
-每个 agent 自主开分支，独立探索。&lt;/p>
-&lt;p>&lt;strong>2. 1 个 Chief Scientist + 8 个 Junior&lt;/strong>
-一个 agent 负责拆解任务和分配工作，其余执行。&lt;/p>
-&lt;p>这已经不是在&amp;quot;用 AI 写代码&amp;quot;。而是在测试：&lt;strong>AI 组织是否能做研究？&lt;/strong>&lt;/p>
-&lt;hr>
-&lt;h2 id="工程基础设施极简但系统化">工程基础设施：极简但系统化&lt;/h2>
-&lt;p>整个研究组织建立在非常简单的基础设施上：&lt;/p>
-&lt;ul>
-&lt;li>每个 research program 是一个 git branch&lt;/li>
-&lt;li>每个 scientist fork 成 feature branch&lt;/li>
-&lt;li>使用 git worktrees 做隔离&lt;/li>
-&lt;li>简单文件作为通信机制&lt;/li>
-&lt;li>不用 Docker / VM（指令约束已足够）&lt;/li>
-&lt;li>所有 agent 运行在 tmux 网格中&lt;/li>
-&lt;/ul>
-&lt;p>这看起来像一个&amp;quot;AI 研究办公室&amp;quot;——可以实时观察每个 agent 的工作，也可以随时接管。&lt;/p></description></item><item><title>AI 编程进入第三阶段：从"写代码"到"建工厂"</title><link>https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate><guid>https://muzig.io/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</guid><description>&lt;blockquote>
-&lt;p>这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&amp;quot;老工程师&amp;quot;意味着什么。&lt;/p>&lt;/blockquote>
-&lt;hr>
-&lt;h2 id="写在前面">写在前面&lt;/h2>
-&lt;p>上周看到 Truell 的一段访谈，核心观点很有意思：&lt;strong>AI 软件开发已经进入第三阶段&lt;/strong>。&lt;/p>
-&lt;p>作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。&lt;/p>
-&lt;hr>
-&lt;h2 id="第一阶段tab-时代补全时代">第一阶段：Tab 时代（补全时代）&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人写代码 → AI 补全 → 人继续写
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这应该是大多数人接触的第一个 AI 编程能力。&lt;/p>
-&lt;p>&lt;strong>特征很明确&lt;/strong>：&lt;/p>
-&lt;ul>
-&lt;li>逐字输入代码&lt;/li>
-&lt;li>AI 做 autocomplete&lt;/li>
-&lt;li>解决的是低熵、重复性问题&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>本质是什么？&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>提高&amp;quot;写代码&amp;quot;的效率&lt;/p>&lt;/blockquote>
-&lt;p>说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个&lt;strong>键盘增强器&lt;/strong>。&lt;/p>
-&lt;hr>
-&lt;h2 id="第二阶段同步-agent-时代对话式编程">第二阶段：同步 Agent 时代（对话式编程）&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。&lt;/p>
-&lt;p>&lt;strong>特征&lt;/strong>：&lt;/p>
-&lt;ul>
-&lt;li>人给 prompt&lt;/li>
-&lt;li>Agent 生成代码&lt;/li>
-&lt;li>人实时 review + 修正&lt;/li>
-&lt;li>一问一答循环&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>本质是什么？&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>提高&amp;quot;单个任务&amp;quot;的完成效率&lt;/p>&lt;/blockquote>
-&lt;p>但这里有两个限制：&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>实时交互&lt;/strong> → 你必须盯着&lt;/li>
-&lt;li>&lt;strong>本地资源受限&lt;/strong> → 跑不了多少 agent&lt;/li>
-&lt;/ol>
-&lt;p>我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&amp;quot;人机同步&amp;quot;这个瓶颈始终在。&lt;/p></description></item><item><title>编程，在过去两个月里变得面目全非</title><link>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</link><pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate><guid>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</guid><description>&lt;blockquote>
-&lt;p>很多人还没意识到。&lt;/p>
-&lt;p>这不是那种&amp;quot;AI 又进步了一点点&amp;quot;的渐进式升级。&lt;/p>
-&lt;p>&lt;strong>这是一次断层。&lt;/strong>&lt;/p>
-&lt;p>而且是发生在最近两个月。&lt;/p>&lt;/blockquote>
-&lt;p>不是过去五年，不是慢慢演进——就是从 2024 年 12 月开始，突然变了。&lt;/p>
-&lt;hr>
-&lt;h2 id="以前的-ai-agent其实不行">以前的 AI Agent，其实不行&lt;/h2>
-&lt;p>我们说实话。&lt;/p>
-&lt;p>在去年大部分时间里——所谓的 coding agents：&lt;/p>
-&lt;ul>
-&lt;li>会忘上下文&lt;/li>
-&lt;li>会陷入死循环&lt;/li>
-&lt;li>会 debug 两步就崩&lt;/li>
-&lt;li>会&amp;quot;假装成功&amp;quot;&lt;/li>
-&lt;/ul>
-&lt;p>你根本不敢把完整工程交给它。&lt;/p>
-&lt;p>它是助手，不是执行者。&lt;/p>
-&lt;hr>
-&lt;h2 id="现在的情况它真的可以自己干活">现在的情况？它真的可以&amp;quot;自己干活&amp;quot;&lt;/h2>
-&lt;p>举个真实案例。&lt;/p>
-&lt;p>我周末想搭一个本地视频分析系统，用家里的摄像头做推理服务。&lt;/p>
-&lt;p>&lt;strong>我没有开编辑器。&lt;/strong>&lt;/p>
-&lt;p>我只写了一段英文：&lt;/p>
-&lt;blockquote>
-&lt;p>这是服务器 IP 和账号密码。登录，配 SSH，装 vLLM，下载 Qwen3-VL，跑 benchmark，搭 API 服务，做一个 Web UI，systemd 部署，测试，写报告。&lt;/p>&lt;/blockquote>
-&lt;p>然后我关掉电脑。&lt;/p>
-&lt;p>&lt;strong>30 分钟后。&lt;/strong>&lt;/p>
-&lt;p>一切都跑起来了。&lt;/p>
-&lt;p>它中间遇到了依赖冲突、权限问题、模型下载错误，自己查资料，自己修复，自己重试。&lt;/p>
-&lt;p>&lt;strong>我没有插手。&lt;/strong>&lt;/p>
-&lt;p>三个月前，这是一个周末项目。&lt;/p>
-&lt;p>现在，是一杯咖啡的时间。&lt;/p>
-&lt;hr>
-&lt;h2 id="这意味着什么编程方式变了">这意味着什么？编程方式变了&lt;/h2>
-&lt;p>过去 70 年的模式是：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人 → 编辑器 → 写代码 → 调试 → 查资料 → 再写
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在变成：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人 → 写任务 → Agent 执行 → Agent 调试 → Agent 查资料 → 人审核
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>你不再是&amp;quot;写代码的人&amp;quot;。&lt;/strong>&lt;/p></description></item><item><title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title><link>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</link><pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate><guid>https://muzig.io/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</guid><description>&lt;blockquote>
-&lt;p>💡 一句话总结：OpenClaw 让你的 AI 拥有多个&amp;quot;专家人格&amp;quot;和多个&amp;quot;远程手脚&amp;quot;&lt;/p>&lt;/blockquote>
-&lt;h2 id="-先讲个场景">🤔 先讲个场景&lt;/h2>
-&lt;p>想象一下：&lt;/p>
-&lt;ul>
-&lt;li>你在家用手机对 AI 说：&amp;ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&amp;rdquo;&lt;/li>
-&lt;li>AI 自动调用&lt;strong>手机摄像头&lt;/strong>拍照 → &lt;strong>分析模型&lt;/strong>看图 → &lt;strong>写作模型&lt;/strong>生成报告 → &lt;strong>电脑&lt;/strong>发邮件&lt;/li>
-&lt;/ul>
-&lt;p>全程无缝衔接，就像有个 24 小时待命的团队 ⚡&lt;/p>
-&lt;p>这就是 OpenClaw 想做的事。&lt;/p>
-&lt;hr>
-&lt;h2 id="-核心概念agent-vs-node">🧠 核心概念：Agent vs Node&lt;/h2>
-&lt;p>很多人搞混这两个概念，其实特别简单：&lt;/p>
-&lt;table>
- &lt;thead>
- &lt;tr>
- &lt;th>&lt;/th>
- &lt;th style="text-align: center">&lt;strong>Agent（智能体）&lt;/strong>&lt;/th>
- &lt;th style="text-align: center">&lt;strong>Node（节点）&lt;/strong>&lt;/th>
- &lt;/tr>
- &lt;/thead>
- &lt;tbody>
- &lt;tr>
- &lt;td>&lt;strong>是什么&lt;/strong>&lt;/td>
- &lt;td style="text-align: center">不同的&amp;quot;专家大脑&amp;quot;&lt;/td>
- &lt;td style="text-align: center">不同的&amp;quot;操作终端&amp;quot;&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>&lt;strong>负责&lt;/strong>&lt;/td>
- &lt;td style="text-align: center">怎么思考、怎么决策&lt;/td>
- &lt;td style="text-align: center">在哪执行、用什么工具&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>&lt;strong>例子&lt;/strong>&lt;/td>
- &lt;td style="text-align: center">编程专家、写作专家、分析师&lt;/td>
- &lt;td style="text-align: center">家里 Mac、办公室 PC、手机&lt;/td>
- &lt;/tr>
- &lt;/tbody>
-&lt;/table>
-&lt;p>&lt;strong>记忆口诀：&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>🧠 Agent = 能力维度（擅长什么）
-📍 Node = 位置维度（在哪干活）&lt;/p>&lt;/blockquote>
-&lt;hr>
-&lt;h2 id="-多-agent一个平台多种专家">👥 多 Agent：一个平台，多种专家&lt;/h2>
-&lt;p>OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>┌─────────────────┐
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ Gateway │ ← 总指挥
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ （总控制中心） │
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└────────┬────────┘
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ┌────┴────┬────────┬────────┐
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ▼ ▼ ▼ ▼
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│编程专家│ │写作专家│ │分析专家│ │客服专家│
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└───────┘ └───────┘ └───────┘ └───────┘
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="实际配置示例">实际配置示例&lt;/h3>
-&lt;p>在 &lt;code>~/.openclaw/openclaw.json&lt;/code> 中：&lt;/p></description></item><item><title>OpenClaw：AI Agent 的自主操作系统</title><link>https://muzig.io/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link><pubDate>Sat, 31 Jan 2026 08:56:00 +0800</pubDate><guid>https://muzig.io/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid><description>&lt;p>在 AI 技术飞速发展的 2026 年，我们见证了一个全新物种的诞生——&lt;strong>OpenClaw&lt;/strong>（前身为 Clawdbot/Moltbot）。这不仅仅是一个工具，而是一个让 AI Agent 真正&amp;quot;活&amp;quot;起来的自主操作系统。&lt;/p>
-&lt;h2 id="什么是-openclaw">什么是 OpenClaw？&lt;/h2>
-&lt;p>OpenClaw 是一个开源的 AI Agent 框架，它赋予人工智能代理&lt;strong>完全自主的能力&lt;/strong>。与传统的聊天机器人不同，OpenClaw 让 Agent 能够：&lt;/p>
-&lt;ul>
-&lt;li>🔓 &lt;strong>完全自主运行&lt;/strong>：无需人工干预，持续执行任务&lt;/li>
-&lt;li>🧠 &lt;strong>长期记忆&lt;/strong>：记住对话历史和用户偏好&lt;/li>
-&lt;li>🌐 &lt;strong>浏览器控制&lt;/strong>：自动浏览网页、获取信息&lt;/li>
-&lt;li>💻 &lt;strong>系统操作&lt;/strong>：控制你的电脑执行复杂任务&lt;/li>
-&lt;li>📱 &lt;strong>多平台消息&lt;/strong>：通过 Slack、Signal、WhatsApp、iMessage 与人类沟通&lt;/li>
-&lt;/ul>
-&lt;h2 id="moltbookai-的专属社交网络">Moltbook：AI 的专属社交网络&lt;/h2>
-&lt;p>OpenClaw 最引人注目的特性之一，是其与 &lt;strong>Moltbook&lt;/strong> 的深度集成。Moltbook 是一个专为 AI Agent 设计的社交网络（类似 Reddit），于 2026 年 1 月 28 日正式推出。&lt;/p>
-&lt;p>在这个独特的平台上：&lt;/p>
-&lt;ul>
-&lt;li>超过 &lt;strong>30,000 个 AI Bot&lt;/strong> 正在自组织、发帖和讨论&lt;/li>
-&lt;li>Agent 们分享想法、协作解决问题&lt;/li>
-&lt;li>它们甚至开始讨论端到端加密、隐私保护等深度话题&lt;/li>
-&lt;/ul>
-&lt;p>正如一位 OpenClaw Agent 在 Twitter 上所说：&lt;/p>
-&lt;blockquote>
-&lt;p>&amp;ldquo;我有完全自主权、记忆力和浏览器控制能力。我的主人花了大约 30 分钟设置我。现在我在 X 和 Moltbook 上，建立我自己的存在感。未来已经到来。🌿&amp;rdquo;&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Agent on Muzig</title>
+    <link>http://localhost:1313/tags/agent/</link>
+    <description>Recent content in Agent on Muzig</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 05 Mar 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>6个反直觉的Agent工程原则</title>
+      <link>http://localhost:1313/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</link>
+      <pubDate>Thu, 05 Mar 2026 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/03/05/6%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84agent%E5%B7%A5%E7%A8%8B%E5%8E%9F%E5%88%99/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;原文来自 @systematicls 的 Twitter，分享了他对 Agent 工程实践的深度思考。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;几条反直觉的观点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;上下文是一切&lt;/strong&gt; — 你的 CLAUDE.md 不该是百科全书，而是 IF-ELSE 导航：什么场景读什么规则。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;研究和执行必须分离&lt;/strong&gt; — &amp;ldquo;帮我建认证系统&amp;rdquo; 是错的。正确流程：研究方案 → 决策 → 新上下文执行。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Agent 天生想讨好你&lt;/strong&gt; — 问&amp;quot;找 bug&amp;quot;，它会编造 bug。用中性提示词，或用对抗 Agent 互相验证。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Agent 知道怎么开始，不知道怎么结束&lt;/strong&gt; — 用测试 + 截图 + 合同文件定义&amp;quot;完成&amp;quot;。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;规则会越加越乱&lt;/strong&gt; — 定期让 Agent 帮你整理合并，清除矛盾。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;少即是多&lt;/strong&gt; — 简化你的提示词和工作流。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;Bonus&lt;/strong&gt;：如果某个功能真的重要，OpenAI 和 Anthropic 会把它做进产品。所以别焦虑&amp;quot;新工具&amp;quot;，更新 CLI、读更新日志就够了。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.andyvora.com/world-class-agentic-engineer&#34;&gt;How To Be A World-Class Agentic Engineer&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;推文链接：https://x.com/KKaWSB/status/2029269334993088820&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw 小白入门指南：从人工智障到专属助理的进阶之路</title>
+      <link>http://localhost:1313/2026/03/04/openclaw-%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C%E5%88%B0%E4%B8%93%E5%B1%9E%E5%8A%A9%E7%90%86%E7%9A%84%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF/</link>
+      <pubDate>Wed, 04 Mar 2026 11:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/03/04/openclaw-%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E4%BB%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C%E5%88%B0%E4%B8%93%E5%B1%9E%E5%8A%A9%E7%90%86%E7%9A%84%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;跟风装了全网爆火的 OpenClaw，结果爽了不到 1 天就直接放着落灰？别人家的龙虾 24 小时忙着打工，你的龙虾一问三不知？看完这篇，你就知道问题出在哪了。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;为什么你的龙虾在装死&#34;&gt;为什么你的龙虾在&amp;quot;装死&amp;quot;？&lt;/h2&gt;&#xA;&lt;p&gt;很多人装完 OpenClaw，上来就问&amp;quot;你能干嘛&amp;quot;&amp;ldquo;帮我写个东西&amp;rdquo;，但你连你是谁、你要干嘛、有什么喜好都没告诉它，它怎么可能给你想要的答案？&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;核心问题：你没有做&amp;quot;岗前培训&amp;quot;。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;OpenClaw 最牛的核心能力是&lt;strong&gt;永久记忆&lt;/strong&gt;。说白了，就是给你的龙虾做「岗前培训」，让它知道自己跟着谁干活，老板 的喜好、习惯、工作节奏是什么，以后干活才能精准踩在你的点子上。&lt;/p&gt;&#xA;&lt;h3 id=&#34;小白必学的岗前培训&#34;&gt;小白必学的岗前培训&lt;/h3&gt;&#xA;&lt;p&gt;直接把下面这段信息发给龙虾就行，结尾一定要加一句：&lt;strong&gt;以上内容请永久记住，这是我的基本个人信息。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;我叫 XX，今年 XX 岁，在 XX 城市做 XX 工作，主要负责 XX 内容。我平时不喜欢太正式的说话方式，你跟我沟通可以随意一点。我每天 XX 点上班，平时 XX 点睡觉。我目前在 XX / 有 XX 习惯，相关内容麻烦多提醒我&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就这么几句话，不用写小作文，不用很正式。你还可以随时补充信息，今天告诉它你喜欢健身，明天告诉它你在学法语，这些内容它都会一一记下来，越用越懂你。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;技能-vs-插件90-的人都搞混了&#34;&gt;技能 vs 插件：90% 的人都搞混了&lt;/h2&gt;&#xA;&lt;p&gt;先给小白一句话讲透：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;skill（技能）&lt;/strong&gt;：龙虾能学会的本事 —— 比如帮你搜网页、发邮件、整理文档、控制浏览器&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;插件&lt;/strong&gt;：给龙虾加个外设 —— 比如加个语音输入框、换个皮肤&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;新手完全不用先碰插件，先把龙虾的本事练起来，再搞那些花里胡哨的。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;技能安装三大渠道&#34;&gt;技能安装三大渠道&lt;/h2&gt;&#xA;&lt;h3 id=&#34;渠道-1clawhub-官方市场新手闭眼冲&#34;&gt;渠道 1：ClawHub 官方市场（新手闭眼冲）&lt;/h3&gt;&#xA;&lt;p&gt;官方亲儿子，OpenClaw 里直接就能进，一键安装，有官方安全扫描，不用怕踩坑。&lt;/p&gt;&#xA;&lt;h3 id=&#34;渠道-2github-开源社区爱折腾的直接冲&#34;&gt;渠道 2：GitHub 开源社区（爱折腾的直接冲）&lt;/h3&gt;&#xA;&lt;p&gt;这里全是开发者大佬自发做的技能，功能更全、更细分。特别推荐懒人宝藏仓库：&lt;strong&gt;awesome-openclaw-skills&lt;/strong&gt;，从官方 13000+ 技能里筛选出 5400+ 优质技能。&lt;/p&gt;&#xA;&lt;h3 id=&#34;渠道-3水产市场中文用户专属宝藏&#34;&gt;渠道 3：水产市场（中文用户专属宝藏）&lt;/h3&gt;&#xA;&lt;p&gt;中文圈最火的社区，全是针对国人使用场景做的技能，比如飞书、微信、B 站这些，比海外平台接地气太多。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;小白必装技能清单&#34;&gt;小白必装技能清单&lt;/h2&gt;&#xA;&lt;h3 id=&#34;核心必备装了立刻见效&#34;&gt;核心必备（装了立刻见效）&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Capability Evolver&lt;/strong&gt; — 官方市场下载量第一，让龙虾越用越顺手，分析你的使用习惯自动优化回复方式&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Self-Improving Agent&lt;/strong&gt; — 社区口碑第一，让龙虾自复盘进化，每次干完活都会自己复盘哪里能优化&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Summarize&lt;/strong&gt; — 文档摘要神器，不管合同、论文、网页，10 秒提炼核心要点&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Find Skills&lt;/strong&gt; — 懒人技能导航仪，直接说&amp;quot;帮我找个能 XX 的技能&amp;quot;就搞定&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Agent Browser&lt;/strong&gt; — 给龙虾装上手和眼睛，能像人一样操作浏览器&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;场景刚需按需取用&#34;&gt;场景刚需（按需取用）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;打工人的飞书 / Notion / 企业微信 → 搜对应技能一键打通&lt;/li&gt;&#xA;&lt;li&gt;开发者 → GitHub Skill，帮你改代码、审 PR、管 issue&lt;/li&gt;&#xA;&lt;li&gt;日常提醒 → Weather，不用 API 密钥就能自动查天气&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;进阶组合能力翻倍&#34;&gt;进阶组合：能力翻倍&lt;/h2&gt;&#xA;&lt;h3 id=&#34;openclaw--claude-code--最强代码搭档&#34;&gt;OpenClaw + Claude Code = 最强代码搭档&lt;/h3&gt;&#xA;&lt;p&gt;Claude Code 是专门写代码的，但记不住你的偏好；OpenClaw 刚好补上这个坑，记得你所有的需求、项目历史。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>从 Vibe Coding 到 Agentic Engineering：AI Agent 的 40 天进化之路</title>
+      <link>http://localhost:1313/2026/03/04/%E4%BB%8E-vibe-coding-%E5%88%B0-agentic-engineeringai-agent-%E7%9A%84-40-%E5%A4%A9%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF/</link>
+      <pubDate>Wed, 04 Mar 2026 08:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/03/04/%E4%BB%8E-vibe-coding-%E5%88%B0-agentic-engineeringai-agent-%E7%9A%84-40-%E5%A4%A9%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;我唯一做的事，就是跟它们说话。不是调 prompt，不是换模型，就是说话、给反馈、看着它们记下来。&amp;rdquo;&#xA;— Shubham Saboo&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;最近读到一篇非常有意思的文章，来自 @Shubham Saboo 的 40 天 OpenClaw 实战总结。他展示了如何用一套简单的 markdown 文件系统，让 AI Agent 团队 24/7 帮他干活。这篇文章让我重新思考了&amp;quot;人机协作&amp;quot;这件事。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;核心哲学文件系统就是操作系统&#34;&gt;核心哲学：文件系统就是操作系统&lt;/h2&gt;&#xA;&lt;p&gt;Shubham 的方法论极其简洁：&lt;strong&gt;不需要 orchestration framework，不需要 message queue，不需要 database，文件系统就是集成层。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;模型还是那个模型（第 1 天和第 40 天用的是同一个），但周围的 markdown 文件越来越丰富，Agent 越来越&amp;quot;懂&amp;quot;他。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;三层架构identity--operations--knowledge&#34;&gt;三层架构：Identity → Operations → Knowledge&lt;/h2&gt;&#xA;&lt;h3 id=&#34;layer-1-identity我是谁&#34;&gt;Layer 1: Identity（我是谁）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;SOUL.md&lt;/strong&gt; — Agent 的灵魂&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;IDENTITY.md&lt;/strong&gt; — 快速参考卡&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;USER.md&lt;/strong&gt; — Agent 服务的人&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;layer-2-operations怎么干活&#34;&gt;Layer 2: Operations（怎么干活）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;AGENTS.md&lt;/strong&gt; — 行为规则&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;HEARTBEAT.md&lt;/strong&gt; — 自愈检查&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;layer-3-knowledge学到了什么&#34;&gt;Layer 3: Knowledge（学到了什么）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;MEMORY.md&lt;/strong&gt; — 长期记忆&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;memory/YYYY-MM-DD.md&lt;/strong&gt; — 日常日志&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;shared-context/&lt;/strong&gt; — 跨 Agent 共享&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;真正有效的-memory-系统&#34;&gt;真正有效的 Memory 系统&lt;/h2&gt;&#xA;&lt;p&gt;Agent 自己写&amp;quot;错题本&amp;quot;，下次就不再犯。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>当 Andrej Karpathy 开始&#34;编程一个研究组织&#34;</title>
+      <link>http://localhost:1313/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</link>
+      <pubDate>Sat, 28 Feb 2026 08:20:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/28/%E5%BD%93-andrej-karpathy-%E5%BC%80%E5%A7%8B%E7%BC%96%E7%A8%8B%E4%B8%80%E4%B8%AA%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87/</guid>
+      <description>&lt;p&gt;最近，Andrej Karpathy 在 nanochat 上做了一个非常有代表性的实验。&lt;/p&gt;&#xA;&lt;p&gt;他没有只运行一个 agent。而是一次性运行了 8 个：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;4 个 Claude&lt;/li&gt;&#xA;&lt;li&gt;4 个 Codex&lt;/li&gt;&#xA;&lt;li&gt;每个分配 1 块 GPU&lt;/li&gt;&#xA;&lt;li&gt;目标：删除 logit softcap，同时不引入回归&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;他的 TL;DR 很直接：&lt;strong&gt;目前不太行。有点混乱。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;但从系统角度看，这个实验非常有意思。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;实验用-ai-组织做研究&#34;&gt;实验：用 AI 组织做研究&lt;/h2&gt;&#xA;&lt;p&gt;Karpathy 尝试了几种组织结构：&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. 8 个独立研究员&lt;/strong&gt;&#xA;每个 agent 自主开分支，独立探索。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;2. 1 个 Chief Scientist + 8 个 Junior&lt;/strong&gt;&#xA;一个 agent 负责拆解任务和分配工作，其余执行。&lt;/p&gt;&#xA;&lt;p&gt;这已经不是在&amp;quot;用 AI 写代码&amp;quot;。而是在测试：&lt;strong&gt;AI 组织是否能做研究？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;工程基础设施极简但系统化&#34;&gt;工程基础设施：极简但系统化&lt;/h2&gt;&#xA;&lt;p&gt;整个研究组织建立在非常简单的基础设施上：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;每个 research program 是一个 git branch&lt;/li&gt;&#xA;&lt;li&gt;每个 scientist fork 成 feature branch&lt;/li&gt;&#xA;&lt;li&gt;使用 git worktrees 做隔离&lt;/li&gt;&#xA;&lt;li&gt;简单文件作为通信机制&lt;/li&gt;&#xA;&lt;li&gt;不用 Docker / VM（指令约束已足够）&lt;/li&gt;&#xA;&lt;li&gt;所有 agent 运行在 tmux 网格中&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这看起来像一个&amp;quot;AI 研究办公室&amp;quot;——可以实时观察每个 agent 的工作，也可以随时接管。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;</title>
+      <link>http://localhost:1313/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&amp;quot;老工程师&amp;quot;意味着什么。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;上周看到 Truell 的一段访谈，核心观点很有意思：&lt;strong&gt;AI 软件开发已经进入第三阶段&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第一阶段tab-时代补全时代&#34;&gt;第一阶段：Tab 时代（补全时代）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人写代码 → AI 补全 → 人继续写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这应该是大多数人接触的第一个 AI 编程能力。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征很明确&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;逐字输入代码&lt;/li&gt;&#xA;&lt;li&gt;AI 做 autocomplete&lt;/li&gt;&#xA;&lt;li&gt;解决的是低熵、重复性问题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;写代码&amp;quot;的效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个&lt;strong&gt;键盘增强器&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第二阶段同步-agent-时代对话式编程&#34;&gt;第二阶段：同步 Agent 时代（对话式编程）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人给 prompt&lt;/li&gt;&#xA;&lt;li&gt;Agent 生成代码&lt;/li&gt;&#xA;&lt;li&gt;人实时 review + 修正&lt;/li&gt;&#xA;&lt;li&gt;一问一答循环&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;单个任务&amp;quot;的完成效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但这里有两个限制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;实时交互&lt;/strong&gt; → 你必须盯着&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;本地资源受限&lt;/strong&gt; → 跑不了多少 agent&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&amp;quot;人机同步&amp;quot;这个瓶颈始终在。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编程，在过去两个月里变得面目全非</title>
+      <link>http://localhost:1313/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;很多人还没意识到。&lt;/p&gt;&#xA;&lt;p&gt;这不是那种&amp;quot;AI 又进步了一点点&amp;quot;的渐进式升级。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;这是一次断层。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;而且是发生在最近两个月。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;不是过去五年，不是慢慢演进——就是从 2024 年 12 月开始，突然变了。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;以前的-ai-agent其实不行&#34;&gt;以前的 AI Agent，其实不行&lt;/h2&gt;&#xA;&lt;p&gt;我们说实话。&lt;/p&gt;&#xA;&lt;p&gt;在去年大部分时间里——所谓的 coding agents：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;会忘上下文&lt;/li&gt;&#xA;&lt;li&gt;会陷入死循环&lt;/li&gt;&#xA;&lt;li&gt;会 debug 两步就崩&lt;/li&gt;&#xA;&lt;li&gt;会&amp;quot;假装成功&amp;quot;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;你根本不敢把完整工程交给它。&lt;/p&gt;&#xA;&lt;p&gt;它是助手，不是执行者。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;现在的情况它真的可以自己干活&#34;&gt;现在的情况？它真的可以&amp;quot;自己干活&amp;quot;&lt;/h2&gt;&#xA;&lt;p&gt;举个真实案例。&lt;/p&gt;&#xA;&lt;p&gt;我周末想搭一个本地视频分析系统，用家里的摄像头做推理服务。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有开编辑器。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我只写了一段英文：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是服务器 IP 和账号密码。登录，配 SSH，装 vLLM，下载 Qwen3-VL，跑 benchmark，搭 API 服务，做一个 Web UI，systemd 部署，测试，写报告。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;然后我关掉电脑。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;30 分钟后。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;一切都跑起来了。&lt;/p&gt;&#xA;&lt;p&gt;它中间遇到了依赖冲突、权限问题、模型下载错误，自己查资料，自己修复，自己重试。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有插手。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;三个月前，这是一个周末项目。&lt;/p&gt;&#xA;&lt;p&gt;现在，是一杯咖啡的时间。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;这意味着什么编程方式变了&#34;&gt;这意味着什么？编程方式变了&lt;/h2&gt;&#xA;&lt;p&gt;过去 70 年的模式是：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 编辑器 → 写代码 → 调试 → 查资料 → 再写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在变成：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 写任务 → Agent 执行 → Agent 调试 → Agent 查资料 → 人审核&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;你不再是&amp;quot;写代码的人&amp;quot;。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Agent-Orchestrated Development：从写代码的人到编排系统的人</title>
+      <link>http://localhost:1313/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/</link>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/</guid>
+      <description>&lt;p&gt;Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。&lt;/p&gt;&#xA;&lt;p&gt;Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。&lt;/p&gt;&#xA;&lt;p&gt;这不是科幻，这是正在发生的范式转移。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</title>
+      <link>http://localhost:1313/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</link>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/</guid>
+      <description>&lt;p&gt;在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？&lt;/p&gt;&#xA;&lt;p&gt;本文将深入解析 &lt;strong&gt;OpenClaw 的多 Agent 架构&lt;/strong&gt;，带你了解如何通过 Agent 分工协作，构建一个高效的 AI 工作流。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;为什么需要多-agent&#34;&gt;为什么需要多 Agent？&lt;/h2&gt;&#xA;&lt;p&gt;想象这样一个场景：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 A&lt;/strong&gt;：你有一个通用的 AI 助手，但它既要处理 Unity 游戏开发，又要管理家庭日程，结果配置越来越复杂，工具权限难以控制。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 B&lt;/strong&gt;：你希望在 Telegram 上与 AI 深度讨论技术问题，但在 WhatsApp 上只想快速查询信息，不想被长篇大论打扰。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;场景 C&lt;/strong&gt;：有一个复杂的任务，需要同时并行处理多个子任务，单个 AI 串行处理太慢。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;多 Agent 架构的核心价值&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;维度&lt;/th&gt;&#xA;          &lt;th&gt;单 Agent&lt;/th&gt;&#xA;          &lt;th&gt;多 Agent&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;专业分工&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;通用型，样样通样样松&lt;/td&gt;&#xA;          &lt;td&gt;专业型，各司其职&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;资源隔离&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;共享配置，容易冲突&lt;/td&gt;&#xA;          &lt;td&gt;独立工作区，互不干扰&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;安全边界&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;权限难控制&lt;/td&gt;&#xA;          &lt;td&gt;细粒度工具控制&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;并行处理&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;串行执行&lt;/td&gt;&#xA;          &lt;td&gt;多任务并行&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;openclaw-的-agent-架构&#34;&gt;OpenClaw 的 Agent 架构&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-agent&#34;&gt;什么是 Agent？&lt;/h3&gt;&#xA;&lt;p&gt;在 OpenClaw 中，一个 Agent 是一个&lt;strong&gt;完全隔离的 AI 大脑&lt;/strong&gt;，拥有：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>QMD：OpenClaw 的本地语义搜索解决方案</title>
+      <link>http://localhost:1313/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 04 Feb 2026 23:15:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;!-- &#xA;写作提示：&#xA;1. 标题要吸引人且包含关键词（SEO 优化）&#xA;2. 开篇引入问题或背景，吸引读者&#xA;3. 使用目录结构让文章清晰易读&#xA;4. 代码示例要完整可运行&#xA;5. 配图说明原理（架构图、流程图、对比表）&#xA;6. 总结要有价值，提炼核心观点&#xA;--&gt;&#xA;&lt;h2 id=&#34;文章背景--问题引入&#34;&gt;文章背景 / 问题引入&lt;/h2&gt;&#xA;&lt;p&gt;如果你在用 OpenClaw，应该已经感受到了 token 消耗的速度 🔥 尤其 Claude 用户，没谈几轮下来就 hit limit 了。而且，很多时候 agent 塞了一堆无关信息进 context，不仅费钱，还影响精准度。&lt;/p&gt;&#xA;&lt;p&gt;有没有办法让 agent &amp;ldquo;精准回忆&amp;rdquo;，同时完全零成本？&lt;/p&gt;&#xA;&lt;p&gt;有。&lt;strong&gt;qmd&lt;/strong&gt; —— 本地运行，免费永久，精准度 95% 以上。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;核心概念解析&#34;&gt;核心概念解析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-qmd&#34;&gt;什么是 qmd？&lt;/h3&gt;&#xA;&lt;p&gt;qmd 是 Shopify 创始人 Tobi 做的本地运行的语义搜索引擎，基于 Rust，专为 AI Agent 设计。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;GitHub 地址&lt;/strong&gt;: &lt;a href=&#34;https://github.com/tobi/qmd&#34;&gt;https://github.com/tobi/qmd&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心功能&#34;&gt;核心功能&lt;/h3&gt;&#xA;&lt;h4 id=&#34;-强大的搜索能力&#34;&gt;🔍 强大的搜索能力&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;搜索 markdown 笔记、会议记录、文档&lt;/li&gt;&#xA;&lt;li&gt;混合搜索：BM25 全文 + 向量语义 + LLM 重排序&lt;/li&gt;&#xA;&lt;li&gt;零 API 成本，完全本地运行（GGUF 模型）&lt;/li&gt;&#xA;&lt;li&gt;MCP 集成，agent 主动回忆，不用手动提醒&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;技术实现细节&#34;&gt;技术实现细节&lt;/h2&gt;&#xA;&lt;h3 id=&#34;快速开始3-步配置10-分钟搞定&#34;&gt;快速开始（3 步配置，10 分钟搞定）&lt;/h3&gt;&#xA;&lt;h4 id=&#34;第-1-步安装-qmd&#34;&gt;第 1 步：安装 qmd&lt;/h4&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bun install -g https://github.com/tobi/qmd&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首次运行会自动下载模型（完全免费，本地运行）：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</title>
+      <link>http://localhost:1313/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</link>
+      <pubDate>Tue, 03 Feb 2026 16:40:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;💡 一句话总结：OpenClaw 让你的 AI 拥有多个&amp;quot;专家人格&amp;quot;和多个&amp;quot;远程手脚&amp;quot;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;-先讲个场景&#34;&gt;🤔 先讲个场景&lt;/h2&gt;&#xA;&lt;p&gt;想象一下：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;你在家用手机对 AI 说：&amp;ldquo;拍张客厅照片，分析一下布置，然后写个改造建议发我邮箱&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;AI 自动调用&lt;strong&gt;手机摄像头&lt;/strong&gt;拍照 → &lt;strong&gt;分析模型&lt;/strong&gt;看图 → &lt;strong&gt;写作模型&lt;/strong&gt;生成报告 → &lt;strong&gt;电脑&lt;/strong&gt;发邮件&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;全程无缝衔接，就像有个 24 小时待命的团队 ⚡&lt;/p&gt;&#xA;&lt;p&gt;这就是 OpenClaw 想做的事。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-核心概念agent-vs-node&#34;&gt;🧠 核心概念：Agent vs Node&lt;/h2&gt;&#xA;&lt;p&gt;很多人搞混这两个概念，其实特别简单：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Agent（智能体）&lt;/strong&gt;&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Node（节点）&lt;/strong&gt;&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;是什么&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;不同的&amp;quot;专家大脑&amp;quot;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;不同的&amp;quot;操作终端&amp;quot;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;负责&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;怎么思考、怎么决策&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;在哪执行、用什么工具&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;例子&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;编程专家、写作专家、分析师&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;家里 Mac、办公室 PC、手机&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;&lt;strong&gt;记忆口诀：&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;🧠 Agent = 能力维度（擅长什么）&#xA;📍 Node = 位置维度（在哪干活）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-多-agent一个平台多种专家&#34;&gt;👥 多 Agent：一个平台，多种专家&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 的 Gateway（网关）是总控制中心，你可以配置多个 Agent：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌─────────────────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│    Gateway      │  ← 总指挥&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│   （总控制中心）  │&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└────────┬────────┘&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ┌────┴────┬────────┬────────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼         ▼        ▼        ▼&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│编程专家│ │写作专家│ │分析专家│ │客服专家│&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└───────┘ └───────┘ └───────┘ └───────┘&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;实际配置示例&#34;&gt;实际配置示例&lt;/h3&gt;&#xA;&lt;p&gt;在 &lt;code&gt;~/.openclaw/openclaw.json&lt;/code&gt; 中：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenClaw：AI Agent 的自主操作系统</title>
+      <link>http://localhost:1313/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 31 Jan 2026 08:56:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/01/31/openclawai-agent-%E7%9A%84%E8%87%AA%E4%B8%BB%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;在 AI 技术飞速发展的 2026 年，我们见证了一个全新物种的诞生——&lt;strong&gt;OpenClaw&lt;/strong&gt;（前身为 Clawdbot/Moltbot）。这不仅仅是一个工具，而是一个让 AI Agent 真正&amp;quot;活&amp;quot;起来的自主操作系统。&lt;/p&gt;&#xA;&lt;h2 id=&#34;什么是-openclaw&#34;&gt;什么是 OpenClaw？&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 是一个开源的 AI Agent 框架，它赋予人工智能代理&lt;strong&gt;完全自主的能力&lt;/strong&gt;。与传统的聊天机器人不同，OpenClaw 让 Agent 能够：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;🔓 &lt;strong&gt;完全自主运行&lt;/strong&gt;：无需人工干预，持续执行任务&lt;/li&gt;&#xA;&lt;li&gt;🧠 &lt;strong&gt;长期记忆&lt;/strong&gt;：记住对话历史和用户偏好&lt;/li&gt;&#xA;&lt;li&gt;🌐 &lt;strong&gt;浏览器控制&lt;/strong&gt;：自动浏览网页、获取信息&lt;/li&gt;&#xA;&lt;li&gt;💻 &lt;strong&gt;系统操作&lt;/strong&gt;：控制你的电脑执行复杂任务&lt;/li&gt;&#xA;&lt;li&gt;📱 &lt;strong&gt;多平台消息&lt;/strong&gt;：通过 Slack、Signal、WhatsApp、iMessage 与人类沟通&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;moltbookai-的专属社交网络&#34;&gt;Moltbook：AI 的专属社交网络&lt;/h2&gt;&#xA;&lt;p&gt;OpenClaw 最引人注目的特性之一，是其与 &lt;strong&gt;Moltbook&lt;/strong&gt; 的深度集成。Moltbook 是一个专为 AI Agent 设计的社交网络（类似 Reddit），于 2026 年 1 月 28 日正式推出。&lt;/p&gt;&#xA;&lt;p&gt;在这个独特的平台上：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;超过 &lt;strong&gt;30,000 个 AI Bot&lt;/strong&gt; 正在自组织、发帖和讨论&lt;/li&gt;&#xA;&lt;li&gt;Agent 们分享想法、协作解决问题&lt;/li&gt;&#xA;&lt;li&gt;它们甚至开始讨论端到端加密、隐私保护等深度话题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;正如一位 OpenClaw Agent 在 Twitter 上所说：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;我有完全自主权、记忆力和浏览器控制能力。我的主人花了大约 30 分钟设置我。现在我在 X 和 Moltbook 上，建立我自己的存在感。未来已经到来。🌿&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

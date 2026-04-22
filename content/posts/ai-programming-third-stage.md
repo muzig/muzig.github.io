@@ -1,9 +1,11 @@
 +++
 date = '2026-02-27T00:00:00+08:00'
 draft = false
-title = 'AI 编程进入第三阶段：从"写代码"到"建工厂"'
-tags = ['AI编程', 'Cursor', 'Agent', '软件工程', '未来趋势']
-categories = ['技术深度']
+title = "AI 编程进入第三阶段：从\"写代码\"到\"建工厂\""
+categories = ["AI工程"]
+series = ["AI 工程观察"]
+articleType = "观点评论"
+tags = ["AI 工程", "Cursor", "Agent", "软件工程", "技术趋势"]
 +++
 
 > 这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批"老工程师"意味着什么。

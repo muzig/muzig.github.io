@@ -1,9 +1,11 @@
 +++
 date = '2026-03-04T08:00:00+08:00'
 draft = false
-title = '从 Vibe Coding 到 Agentic Engineering：AI Agent 的 40 天进化之路'
-tags = ['AI Agent', 'OpenClaw', 'Agentic Engineering', '生产力']
-categories = ['技术思考']
+title = "从 Vibe Coding 到 Agentic Engineering：AI Agent 的 40 天进化之路"
+categories = ["AI工程"]
+series = ["OpenClaw 深度系列"]
+articleType = "观点评论"
+tags = ["OpenClaw", "Agent", "Agentic Engineering", "生产力"]
 +++
 
 > "我唯一做的事，就是跟它们说话。不是调 prompt，不是换模型，就是说话、给反馈、看着它们记下来。"

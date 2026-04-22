@@ -1,9 +1,9 @@
 baseURL = 'https://muzig.io'
 languageCode = 'zh-cn'
-title = 'Muzig 的技术博客'
+title = 'Muzig'
 theme = 'yinyang'
-description = 'Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章'
-keywords = ['Go', 'Golang', 'AI', 'MCP', '编程语言', '技术博客', 'OpenClaw', 'Moltbot', 'Clawdbot', 'AI Agent', '自动化', '工具链']
+description = '面向开发者的 AI 工程深度博客，聚焦 Agent 工具链、MCP、Go 工程与编程语言设计。'
+keywords = ['AI 工程', 'Agent', 'MCP', 'Go', '编程语言', 'LLM', 'OpenClaw', 'Claude Code']
 timeZone = 'Asia/Shanghai'
 
 # 启用 sitemap 和其他输出格式
@@ -13,8 +13,13 @@ mediatype = "application/rss+xml"
 baseName = "index"
 
 [outputs]
-home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS"]
 section = ["HTML", "RSS"]
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
 
 # 配置 permalinks 以提高 URL 可读性
 [permalinks]
@@ -24,18 +29,22 @@ posts = "/:year/:month/:day/:title/"
 [params]
 mainSections = ["posts"]
 headTitle = "Muzig"
-description = "Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章"
-keywords = ["Go", "Golang", "AI", "MCP", "编程语言", "技术博客", "OpenClaw", "Moltbot", "Clawdbot", "AI Agent", "自动化", "工具链"]
+description = "面向开发者的 AI 工程深度博客，聚焦 Agent 工具链、MCP、Go 工程与编程语言设计。"
+keywords = ["AI 工程", "Agent", "MCP", "Go", "编程语言", "LLM", "OpenClaw", "Claude Code"]
 disqus = "muzig"         # disqus account name
 twitterCards = true
 googleAnalytics = "G-XXXXXXXXX"  # 替换为你的 Google Analytics ID
 googleSiteVerification = "eGQlT6FCfJ6ocLk-156f5Fe6mF5-P5rPC9Oj0V5Rpkk"  # Google Search Console 验证
+postFooterContent = "<br/><br/><p>订阅更新：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig 的技术博客</a></p>"
 # extraHead = '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxx"></script>'
 [[params.socials]]
-name = "About Me"
+name = "GitHub"
 link = "https://github.com/muzig"
-postFooterContent = "<br/><br/><p>Subscribe to：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig's Blog</a></p>"
 # extraCSSFiles = ["css/foo.css", "css/bar.css"]
+
+[params.author]
+name = "Muzig"
+homepage = "https://github.com/muzig"
 
 [markup]
 [markup.goldmark]
@@ -46,10 +55,6 @@ guessSyntax = true
 noClasses = true
 style = "bw"
 tabWidth = 2
-
-[author]
-name = "Muzig"
-homepage = "https://muzig.io/"
 
 # [languages]
 # [languages.en]

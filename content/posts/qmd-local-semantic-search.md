@@ -1,9 +1,11 @@
 +++
 date = '2026-02-04T23:15:00+08:00'
 draft = false
-title = 'QMD：OpenClaw 的本地语义搜索解决方案'
-tags = ['OpenClaw', 'AI Agent', '语义搜索', '本地运行', 'qmd']
-categories = ['技术文章']
+title = "QMD：OpenClaw 的本地语义搜索解决方案"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "实战教程"
+tags = ["OpenClaw", "Agent", "语义搜索", "本地运行", "QMD"]
 +++
 
 <!-- 

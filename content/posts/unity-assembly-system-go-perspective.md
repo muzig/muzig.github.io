@@ -1,9 +1,11 @@
 +++
 date = '2026-02-05T00:00:00+08:00'
 draft = false
-title = 'Unity 程序集系统详解：从 Go 语言视角理解 asmdef/asmref'
-tags = ['unity', 'csharp', 'go', 'architecture']
-categories = ['技术深度']
+title = "Unity 程序集系统详解：从 Go 语言视角理解 asmdef/asmref"
+categories = ["软件架构"]
+series = ["架构拆解"]
+articleType = "架构拆解"
+tags = ["Unity", "C#", "Go", "架构设计"]
 +++
 
 ## 引言

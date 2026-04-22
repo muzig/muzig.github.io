@@ -1,9 +1,11 @@
 +++
 date = '2026-02-03T17:45:00+08:00'
 draft = false
-title = 'llama.cpp vs vLLM：边缘部署与云端服务的架构抉择'
-tags = ['LLM', 'Inference', 'llama.cpp', 'vLLM', 'Edge-Computing', 'GPU']
-categories = ['技术深度']
+title = "llama.cpp vs vLLM：边缘部署与云端服务的架构抉择"
+categories = ["LLM系统"]
+series = ["LLM 系统拆解"]
+articleType = "对比分析"
+tags = ["LLM", "推理", "llama.cpp", "vLLM", "边缘部署", "GPU"]
 +++
 
 **llama.cpp** 和 **vLLM** 代表了两种截然不同的设计哲学，选择取决于你的部署场景是**边缘单用户**还是**云端高并发**。

@@ -1,9 +1,11 @@
 +++
 date = '2026-02-28T22:30:00+08:00'
 draft = false
-title = 'OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案'
-tags = ['OpenClaw', 'ACP', 'AI Agent', 'Claude Code', 'Codex', 'Gemini CLI', 'MCP']
-categories = ['技术深度']
+title = "OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI 的终极方案"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "实战教程"
+tags = ["OpenClaw", "ACP", "Claude Code", "Codex", "Gemini CLI", "MCP"]
 +++
 
 ## 为什么需要 ACP Agents？

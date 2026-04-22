@@ -1,9 +1,11 @@
 +++
 date = '2025-08-15T11:07:56+08:00'
 draft = false
-title = 'Go 语言设计组成深度解析'
-tags = ['Go', 'Programming Language', 'Design']
-categories = ['技术文章']
+title = "Go 语言设计组成深度解析"
+categories = ["Go工程"]
+series = ["Go 工程实践"]
+articleType = "深度解析"
+tags = ["Go", "编程语言", "设计"]
 +++
 
 作为一门现代系统编程语言，Go 语言的设计体现了简洁性、高效性和实用性的完美平衡。本文将从编程语言设计的理论基础出发，深入剖析 Go 语言的核心组成部分，探讨设计一款编程语言所涉及的各个维度。

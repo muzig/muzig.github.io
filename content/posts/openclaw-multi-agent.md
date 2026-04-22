@@ -1,9 +1,11 @@
 +++
 date = '2026-02-05T00:00:00+08:00'
 draft = false
-title = 'OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队'
-tags = ['OpenClaw', 'AI Agent', 'Multi-Agent', '架构设计', '自动化']
-categories = ['技术深度']
+title = "OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队"
+categories = ["AI工程"]
+series = ["OpenClaw 深度系列"]
+articleType = "架构拆解"
+tags = ["OpenClaw", "Agent", "多 Agent", "架构设计", "自动化"]
 +++
 
 在日常使用 AI 助手时，我们经常会遇到这样的困扰：一个 AI 既要写代码、又要查资料、还要处理日常事务，结果是什么都做但什么都不精。如果能像人类团队一样，让不同的 AI 各自负责擅长的事情，岂不是更高效？

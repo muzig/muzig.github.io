@@ -1,9 +1,11 @@
 +++
 date = '2026-02-03T16:40:00+08:00'
 draft = false
-title = 'OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥'
-tags = ['OpenClaw', 'AI', 'Agent', '架构', '工具']
-categories = ['技术文章']
+title = "OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "架构拆解"
+tags = ["OpenClaw", "Agent", "架构设计", "AI 工具"]
 +++
 
 > 💡 一句话总结：OpenClaw 让你的 AI 拥有多个"专家人格"和多个"远程手脚"

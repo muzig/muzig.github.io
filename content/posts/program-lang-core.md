@@ -1,9 +1,11 @@
 +++
 date = '2025-08-15T12:42:42+08:00'
 draft = false
-title = '编程语言核心要素：性能与演进的关键评估维度'
-tags = ['Programming Language', 'Performance', 'Language Design', 'Core Concepts']
-categories = ['技术深度']
+title = "编程语言核心要素：性能与演进的关键评估维度"
+categories = ["编程语言"]
+series = ["编程语言原理"]
+articleType = "深度解析"
+tags = ["编程语言", "性能", "语言设计", "核心概念"]
 +++
 
 - [1. 性能决定性核心因素](#1-性能决定性核心因素)

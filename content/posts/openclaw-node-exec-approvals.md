@@ -1,9 +1,11 @@
 +++
 date = '2026-02-03T17:12:00+08:00'
 draft = false
-title = 'OpenClaw Node 执行权限配置详解'
-tags = ['OpenClaw', 'Node', 'Security', 'Config']
-categories = ['技术文章']
+title = "OpenClaw Node 执行权限配置详解"
+categories = ["Agent工具链"]
+series = ["OpenClaw 深度系列"]
+articleType = "实战教程"
+tags = ["OpenClaw", "Node", "安全", "配置"]
 +++
 
 在使用 OpenClaw 远程控制 Node（如 Windows PC）时，执行命令的权限管理是一个关键安全问题。本文介绍如何配置 exec-approvals 来实现精细化的命令执行控制。

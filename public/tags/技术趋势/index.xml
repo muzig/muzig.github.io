@@ -1,88 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技术趋势 on Muzig 的技术博客</title><link>https://muzig.io/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/</link><description>Recent content in 技术趋势 on Muzig 的技术博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://muzig.io/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title><link>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate><guid>https://muzig.io/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid><description>&lt;p>我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p>
-&lt;p>作者：&lt;strong>Benjamin Jones&lt;/strong>
-平台：&lt;strong>AI Frontiers&lt;/strong>&lt;/p>
-&lt;hr>
-&lt;h1 id="一句话核心观点">一句话核心观点&lt;/h1>
-&lt;blockquote>
-&lt;p>AI 不一定让打工人变惨。
-反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p>&lt;/blockquote>
-&lt;p>关键就在两个经济机制：&lt;/p>
-&lt;ol>
-&lt;li>价格下降&lt;/li>
-&lt;li>瓶颈转移（Baumol 成本病）&lt;/li>
-&lt;/ol>
-&lt;hr>
-&lt;h1 id="一为什么ai-越强反而越好">一、为什么“AI 越强，反而越好”？&lt;/h1>
-&lt;p>很多人直觉是：&lt;/p>
-&lt;blockquote>
-&lt;p>AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p>&lt;/blockquote>
-&lt;p>但作者说，这只看到了“替代”，没看到“价格”。&lt;/p>
-&lt;h2 id="-自动化--降低价格">① 自动化 = 降低价格&lt;/h2>
-&lt;p>机器为什么存在？
-不是为了替代人。
-是为了&lt;strong>降低成本&lt;/strong>。&lt;/p>
-&lt;p>举个简单例子：&lt;/p>
-&lt;ul>
-&lt;li>人算 4 位数乘法：1 分钟&lt;/li>
-&lt;li>手机算：几乎 0 成本&lt;/li>
-&lt;/ul>
-&lt;p>于是结果是：&lt;/p>
-&lt;ul>
-&lt;li>计算变得“免费”&lt;/li>
-&lt;li>计算行业占 GDP 很小&lt;/li>
-&lt;li>但所有行业都受益&lt;/li>
-&lt;/ul>
-&lt;p>关键逻辑：&lt;/p>
-&lt;blockquote>
-&lt;p>如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p>&lt;/blockquote>
-&lt;p>价格暴跌意味着：&lt;/p>
-&lt;ul>
-&lt;li>消费者获益&lt;/li>
-&lt;li>生活成本下降&lt;/li>
-&lt;li>钱会流向别的地方&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;h1 id="二真正决定工资的不是被替代">二、真正决定工资的不是“被替代”&lt;/h1>
-&lt;p>而是 —— 瓶颈在哪里
-这部分是文章最重要的地方。&lt;/p>
-&lt;h2 id="-农业案例历史证明">🌽 农业案例（历史证明）&lt;/h2>
-&lt;p>18 世纪：&lt;/p></description></item><item><title>编程，在过去两个月里变得面目全非</title><link>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</link><pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate><guid>https://muzig.io/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</guid><description>&lt;blockquote>
-&lt;p>很多人还没意识到。&lt;/p>
-&lt;p>这不是那种&amp;quot;AI 又进步了一点点&amp;quot;的渐进式升级。&lt;/p>
-&lt;p>&lt;strong>这是一次断层。&lt;/strong>&lt;/p>
-&lt;p>而且是发生在最近两个月。&lt;/p>&lt;/blockquote>
-&lt;p>不是过去五年，不是慢慢演进——就是从 2024 年 12 月开始，突然变了。&lt;/p>
-&lt;hr>
-&lt;h2 id="以前的-ai-agent其实不行">以前的 AI Agent，其实不行&lt;/h2>
-&lt;p>我们说实话。&lt;/p>
-&lt;p>在去年大部分时间里——所谓的 coding agents：&lt;/p>
-&lt;ul>
-&lt;li>会忘上下文&lt;/li>
-&lt;li>会陷入死循环&lt;/li>
-&lt;li>会 debug 两步就崩&lt;/li>
-&lt;li>会&amp;quot;假装成功&amp;quot;&lt;/li>
-&lt;/ul>
-&lt;p>你根本不敢把完整工程交给它。&lt;/p>
-&lt;p>它是助手，不是执行者。&lt;/p>
-&lt;hr>
-&lt;h2 id="现在的情况它真的可以自己干活">现在的情况？它真的可以&amp;quot;自己干活&amp;quot;&lt;/h2>
-&lt;p>举个真实案例。&lt;/p>
-&lt;p>我周末想搭一个本地视频分析系统，用家里的摄像头做推理服务。&lt;/p>
-&lt;p>&lt;strong>我没有开编辑器。&lt;/strong>&lt;/p>
-&lt;p>我只写了一段英文：&lt;/p>
-&lt;blockquote>
-&lt;p>这是服务器 IP 和账号密码。登录，配 SSH，装 vLLM，下载 Qwen3-VL，跑 benchmark，搭 API 服务，做一个 Web UI，systemd 部署，测试，写报告。&lt;/p>&lt;/blockquote>
-&lt;p>然后我关掉电脑。&lt;/p>
-&lt;p>&lt;strong>30 分钟后。&lt;/strong>&lt;/p>
-&lt;p>一切都跑起来了。&lt;/p>
-&lt;p>它中间遇到了依赖冲突、权限问题、模型下载错误，自己查资料，自己修复，自己重试。&lt;/p>
-&lt;p>&lt;strong>我没有插手。&lt;/strong>&lt;/p>
-&lt;p>三个月前，这是一个周末项目。&lt;/p>
-&lt;p>现在，是一杯咖啡的时间。&lt;/p>
-&lt;hr>
-&lt;h2 id="这意味着什么编程方式变了">这意味着什么？编程方式变了&lt;/h2>
-&lt;p>过去 70 年的模式是：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人 → 编辑器 → 写代码 → 调试 → 查资料 → 再写
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在变成：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>人 → 写任务 → Agent 执行 → Agent 调试 → Agent 查资料 → 人审核
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>你不再是&amp;quot;写代码的人&amp;quot;。&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术趋势 on Muzig</title>
+    <link>http://localhost:1313/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/</link>
+    <description>Recent content in 技术趋势 on Muzig</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI 不一定让打工人变惨：工程师视角的经济逻辑</title>
+      <link>http://localhost:1313/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</link>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/03/03/ai-%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%AE%A9%E6%89%93%E5%B7%A5%E4%BA%BA%E5%8F%98%E6%83%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A7%86%E8%A7%92%E7%9A%84%E7%BB%8F%E6%B5%8E%E9%80%BB%E8%BE%91/</guid>
+      <description>&lt;p&gt;我用更通俗、偏“工程师视角”的方式给你解释一下这篇文章的核心逻辑。&lt;/p&gt;&#xA;&lt;p&gt;作者：&lt;strong&gt;Benjamin Jones&lt;/strong&gt;&#xA;平台：&lt;strong&gt;AI Frontiers&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一句话核心观点&#34;&gt;一句话核心观点&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 不一定让打工人变惨。&#xA;反而——如果 AI 强到“碾压级别”，劳动者整体可能更好。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;关键就在两个经济机制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;价格下降&lt;/li&gt;&#xA;&lt;li&gt;瓶颈转移（Baumol 成本病）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;一为什么ai-越强反而越好&#34;&gt;一、为什么“AI 越强，反而越好”？&lt;/h1&gt;&#xA;&lt;p&gt;很多人直觉是：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;AI 替代工作 → 人没工作 → 工资下降 → 完蛋&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但作者说，这只看到了“替代”，没看到“价格”。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-自动化--降低价格&#34;&gt;① 自动化 = 降低价格&lt;/h2&gt;&#xA;&lt;p&gt;机器为什么存在？&#xA;不是为了替代人。&#xA;是为了&lt;strong&gt;降低成本&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;举个简单例子：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人算 4 位数乘法：1 分钟&lt;/li&gt;&#xA;&lt;li&gt;手机算：几乎 0 成本&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;于是结果是：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;计算变得“免费”&lt;/li&gt;&#xA;&lt;li&gt;计算行业占 GDP 很小&lt;/li&gt;&#xA;&lt;li&gt;但所有行业都受益&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;关键逻辑：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;如果 AI 极度擅长某件事 → 那件事价格会暴跌&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;价格暴跌意味着：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;消费者获益&lt;/li&gt;&#xA;&lt;li&gt;生活成本下降&lt;/li&gt;&#xA;&lt;li&gt;钱会流向别的地方&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;二真正决定工资的不是被替代&#34;&gt;二、真正决定工资的不是“被替代”&lt;/h1&gt;&#xA;&lt;p&gt;而是 —— 瓶颈在哪里&#xA;这部分是文章最重要的地方。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-农业案例历史证明&#34;&gt;🌽 农业案例（历史证明）&lt;/h2&gt;&#xA;&lt;p&gt;18 世纪：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI 编程进入第三阶段：从&#34;写代码&#34;到&#34;建工厂&#34;</title>
+      <link>http://localhost:1313/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</link>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/27/ai-%E7%BC%96%E7%A8%8B%E8%BF%9B%E5%85%A5%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BB%BA%E5%B7%A5%E5%8E%82/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这是 Michael Truell（Cursor CEO）在最近访谈中提出的观点框架。我结合自己的理解和实践，拆解一下这三个阶段的演进逻辑，以及它对我们这批&amp;quot;老工程师&amp;quot;意味着什么。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;上周看到 Truell 的一段访谈，核心观点很有意思：&lt;strong&gt;AI 软件开发已经进入第三阶段&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;作为一个写了多年 Go、搞过分布式系统、现在又在玩 Agent 编排的人，这个划分让我思考了很久。它不只是技术演进，更是我们这些工程师职业角色的重新定义。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第一阶段tab-时代补全时代&#34;&gt;第一阶段：Tab 时代（补全时代）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人写代码 → AI 补全 → 人继续写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这应该是大多数人接触的第一个 AI 编程能力。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征很明确&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;逐字输入代码&lt;/li&gt;&#xA;&lt;li&gt;AI 做 autocomplete&lt;/li&gt;&#xA;&lt;li&gt;解决的是低熵、重复性问题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;写代码&amp;quot;的效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;说白了，它只是让键盘敲得更快一些。代码的逻辑、结构、架构，仍然是人主导的。AI 在这个阶段扮演的角色，充其量是个&lt;strong&gt;键盘增强器&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第二阶段同步-agent-时代对话式编程&#34;&gt;第二阶段：同步 Agent 时代（对话式编程）&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人给 prompt → Agent 生成代码 → 人 review → 修正 → 循环&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是现在大多数人在用的模式。Cursor 的 Agent 模式、Windsurf、Cline，都属于这个范畴。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特征&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;人给 prompt&lt;/li&gt;&#xA;&lt;li&gt;Agent 生成代码&lt;/li&gt;&#xA;&lt;li&gt;人实时 review + 修正&lt;/li&gt;&#xA;&lt;li&gt;一问一答循环&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;本质是什么？&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;提高&amp;quot;单个任务&amp;quot;的完成效率&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;但这里有两个限制：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;实时交互&lt;/strong&gt; → 你必须盯着&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;本地资源受限&lt;/strong&gt; → 跑不了多少 agent&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我在用 Cursor Agent 的时候，感受特别明显。一个复杂任务拆成十几个子任务，一个一个来，效率有提升，但&amp;quot;人机同步&amp;quot;这个瓶颈始终在。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编程，在过去两个月里变得面目全非</title>
+      <link>http://localhost:1313/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</link>
+      <pubDate>Thu, 26 Feb 2026 09:53:00 +0800</pubDate>
+      <guid>http://localhost:1313/2026/02/26/%E7%BC%96%E7%A8%8B%E5%9C%A8%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E9%87%8C%E5%8F%98%E5%BE%97%E9%9D%A2%E7%9B%AE%E5%85%A8%E9%9D%9E/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;很多人还没意识到。&lt;/p&gt;&#xA;&lt;p&gt;这不是那种&amp;quot;AI 又进步了一点点&amp;quot;的渐进式升级。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;这是一次断层。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;而且是发生在最近两个月。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;不是过去五年，不是慢慢演进——就是从 2024 年 12 月开始，突然变了。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;以前的-ai-agent其实不行&#34;&gt;以前的 AI Agent，其实不行&lt;/h2&gt;&#xA;&lt;p&gt;我们说实话。&lt;/p&gt;&#xA;&lt;p&gt;在去年大部分时间里——所谓的 coding agents：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;会忘上下文&lt;/li&gt;&#xA;&lt;li&gt;会陷入死循环&lt;/li&gt;&#xA;&lt;li&gt;会 debug 两步就崩&lt;/li&gt;&#xA;&lt;li&gt;会&amp;quot;假装成功&amp;quot;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;你根本不敢把完整工程交给它。&lt;/p&gt;&#xA;&lt;p&gt;它是助手，不是执行者。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;现在的情况它真的可以自己干活&#34;&gt;现在的情况？它真的可以&amp;quot;自己干活&amp;quot;&lt;/h2&gt;&#xA;&lt;p&gt;举个真实案例。&lt;/p&gt;&#xA;&lt;p&gt;我周末想搭一个本地视频分析系统，用家里的摄像头做推理服务。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有开编辑器。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我只写了一段英文：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是服务器 IP 和账号密码。登录，配 SSH，装 vLLM，下载 Qwen3-VL，跑 benchmark，搭 API 服务，做一个 Web UI，systemd 部署，测试，写报告。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;然后我关掉电脑。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;30 分钟后。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;一切都跑起来了。&lt;/p&gt;&#xA;&lt;p&gt;它中间遇到了依赖冲突、权限问题、模型下载错误，自己查资料，自己修复，自己重试。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;我没有插手。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;三个月前，这是一个周末项目。&lt;/p&gt;&#xA;&lt;p&gt;现在，是一杯咖啡的时间。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;这意味着什么编程方式变了&#34;&gt;这意味着什么？编程方式变了&lt;/h2&gt;&#xA;&lt;p&gt;过去 70 年的模式是：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 编辑器 → 写代码 → 调试 → 查资料 → 再写&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在变成：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;人 → 写任务 → Agent 执行 → Agent 调试 → Agent 查资料 → 人审核&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;你不再是&amp;quot;写代码的人&amp;quot;。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,11 +1,521 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=generator content="Hugo 0.148.1"><meta name=google-site-verification content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content><meta property="og:url" content="https://muzig.io/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/"><link rel=canonical href=https://muzig.io/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/><link rel=alternate type=application/atom+xml href=https://muzig.io/index.xml title="Muzig 的技术博客"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/muzig.io\/"},"articleSection":"posts","name":"Agent-Orchestrated Development：从写代码的人到编排系统的人","headline":"Agent-Orchestrated Development：从写代码的人到编排系统的人","description":"Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。\nClaude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。\n这不是科幻，这是正在发生的范式转移。\n","inLanguage":"en-US","author":"","creator":"","publisher":"","accountablePerson":"","copyrightHolder":"","copyrightYear":"2026","datePublished":"2026-02-17 00:00:00 \u002b0800 CST","dateModified":"2026-02-17 00:00:00 \u002b0800 CST","url":"https:\/\/muzig.io\/2026\/02\/17\/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA\/","keywords":["AI Agent","软件开发","未来趋势","系统架构","MCP"]}</script><title>Agent-Orchestrated Development：从写代码的人到编排系统的人</title><meta property="og:title" content="Agent-Orchestrated Development：从写代码的人到编排系统的人"><meta property="og:type" content="article"><meta property="og:description" content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.1">
+  
+  <meta name="google-site-verification" content="eGQlT6FCfJ6ocLk-156f5Fe6mF5-P5rPC9Oj0V5Rpkk" />
+  
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Muzig" />
+  <meta property="og:url" content="http://localhost:1313/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/" />
+  <link rel="canonical" href="http://localhost:1313/2026/02/17/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="http://localhost:1313/index.xml"
+    title="Muzig"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/localhost:1313\/2026\/02\/17\/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA\/"
+      },
+      "articleSection" : "AI工程",
+      "name" : "Agent-Orchestrated Development：从写代码的人到编排系统的人",
+      "headline" : "Agent-Orchestrated Development：从写代码的人到编排系统的人",
+      "description" : "Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。\nClaude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。\n这不是科幻，这是正在发生的范式转移。\n",
+      "inLanguage" : "zh-cn",
+      "author" : "Muzig",
+      "creator" : "Muzig",
+      "publisher": "Muzig",
+      "accountablePerson" : "Muzig",
+      "copyrightHolder" : "Muzig",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-02-17 00:00:00 \u002b0800 CST",
+      "dateModified" : "2026-02-17 00:00:00 \u002b0800 CST",
+      "url" : "http:\/\/localhost:1313\/2026\/02\/17\/agent-orchestrated-development%E4%BB%8E%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA%E5%88%B0%E7%BC%96%E6%8E%92%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BA%BA\/",
+      "keywords" : [ "Agent", "AI 工程", "软件工程", "MCP" ]
+  }
+</script>
+<title>Agent-Orchestrated Development：从写代码的人到编排系统的人</title>
+  <meta property="og:title" content="Agent-Orchestrated Development：从写代码的人到编排系统的人" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
 Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。
 这不是科幻，这是正在发生的范式转移。
-"><meta name=description content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
+"
+  />
+  <meta
+    name="description"
+    content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
 Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。
 这不是科幻，这是正在发生的范式转移。
-"><meta property="og:locale" content="zh-cn"><meta property="og:image" content><style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style><style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style><link href=/index.xml rel=alternate type=application/rss+xml title="Muzig 的技术博客"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel=stylesheet><script data-cfasync=false>(function(){const o="theme",e={light:"light",dark:"dark",system:"system"};function t(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}function n(){return localStorage.getItem(o)}function r(){const s=n();return s&&s!==e.system?s:t()}function s(n){const s=document.documentElement;n===e.system&&(n=t()),n===e.dark?s.setAttribute("data-theme","dark"):s.removeAttribute("data-theme"),i(n)}function i(e){const t=document.getElementById("theme-toggle");t&&(t.textContent=e==="dark"?"☀️":"🌙")}function a(){i(r())}function c(){const o=n();let i;o?(i=o===e.system?t():o,s(o)):(i=t(),s(e.system))}function l(){const a=n()||e.system;let i;a===e.system?i=t()==="dark"?e.light:e.dark:a===e.dark?i=e.light:i=e.dark,localStorage.setItem(o,i),s(i)}window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){const o=n();(!o||o===e.system)&&s(e.system)}),document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a):a(),window.toggleTheme=l,c()})()</script><meta name=twitter:card content="summary"><meta name=twitter:title content="Agent-Orchestrated Development：从写代码的人到编排系统的人"><meta name=twitter:description content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
+"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+  
+  
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-taxonomy-row{row-gap:10px}.post-tag-list{margin-top:12px}.post-chip-static{opacity:.8}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+          
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() { 
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+      
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+        
+        ensureButtonUpdated();
+      }
+
+      
+      window.toggleTheme = toggleTheme;
+
+      
+      initTheme();
+    })();
+  </script>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Agent-Orchestrated Development：从写代码的人到编排系统的人">
+  <meta name="twitter:description" content="Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
 Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。
-这不是科幻，这是正在发生的范式转移。"></head><body><article class=post id=article><div class=row><div class=col-xs-12><div class=site-header><header><div class=header-title><a href=/>Muzig</a></div><div class=header-subtitle>Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div></header><div class="row end-md header-items"><div class=header-item-left><button id=theme-toggle onclick=toggleTheme() class=theme-toggle>
-🌙</button></div><div class=header-item><a href=https://github.com/muzig target=_blank>About Me</a></div></div><div class=row></div><div class=header-line></div></div><div class="row middle-xs"><div class=col-xs-12><br \></div><div class=col-xs-12><div class=post-tags><a href=/tags/ai-agent/>AI Agent</a></div><div class=post-tags><a href=/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/>软件开发</a></div><div class=post-tags><a href=/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/>未来趋势</a></div><div class=post-tags><a href=/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/>系统架构</a></div><div class=post-tags><a href=/tags/mcp/>MCP</a></div></div></div><header class=post-header><h1 class=post-title>Agent-Orchestrated Development：从写代码的人到编排系统的人</h1><div class="row post-desc"><div class=col-xs-6><time class=post-date datetime="2026-02-17 00:00:00 CST">17 Feb 2026</time></div><div class=col-xs-6></div></div></header><div class="post-content markdown-body"><p>Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。</p><p>Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。</p><p>这不是科幻，这是正在发生的范式转移。</p><hr><h2 id=一这不是一个段子>一、这不是一个段子</h2><p>让我先还原一下那个场景。</p><p>周五下午，Anthropic 的一位工程师打开 Asana，写下几段 spec。不是那种"做个登录功能"的模糊描述，而是一份结构化的、包含输入输出、边界条件、错误处理策略的技术文档。</p><p>然后他指向看板，对 Claude 说：&ldquo;把这些做完。&rdquo; 就下班了。</p><p>周一早上，他看到：</p><ul><li>任务被自动拆成了 47 个子任务</li><li>12 个子 agent 并行工作了一整个周末</li><li>其中一个 agent 在周六晚上遇到了上下文不清的问题，自己查了 git blame，找到最可能知道答案的同事，在 Slack 上发了消息</li><li>那位同事回复后，agent 继续工作</li><li>最终交付了 3 个 PR，全部通过测试</li></ul><p>这个故事听起来像营销，但背后指向的趋势是真实的。</p><hr><h2 id=二从写代码到写-spec>二、从"写代码"到"写 Spec"</h2><p>传统的软件开发流程是：产品经理写需求文档，工程师理解需求，拆解任务，逐个实现，测试，部署。工程师的核心价值在于"把需求翻译成代码"的能力。</p><p>后来有了 GitHub Copilot 和 ChatGPT，流程变成了：工程师描述需求，AI 生成代码，工程师 review 和调整。工程师的价值开始向"prompt 工程"转移，但本质上还是在单点产出。</p><p>而 Anthropic 工程师展示的，是第三种模式。</p><p>在这种模式下，工程师不写代码，甚至不直接和 AI 对话。他写的是一份 spec——一份足够精确、足够完整、足够结构化，以至于机器可以直接执行的规格说明。</p><p>这份 spec 会被解析成任务图（Task Graph），然后分发给多个专门的 agent：</p><ul><li>有的负责数据库 schema 设计</li><li>有的负责 API 接口实现</li><li>有的负责前端组件</li><li>有的负责测试用例生成</li><li>有的负责文档更新</li></ul><p>它们并行工作，互相协调，自己处理冲突，自己找人问问题。</p><p>工程师从"写代码的人"变成了"设计系统的人"。</p><hr><h2 id=三为什么-spec-成了核心竞争力>三、为什么 Spec 成了核心竞争力</h2><p>这里有一个反直觉的事实：<strong>写 spec 比写代码难得多</strong>。</p><p>代码是写给机器看的，spec 是写给机器、给人、还给其他机器看的。它必须同时满足：</p><p><strong>精确性</strong>。自然语言充满歧义，但机器执行不能有任何模糊空间。你不能说"大概这样"，你必须说清楚"当用户输入为空字符串时，返回 400 错误，错误信息是&rsquo;用户名不能为空&rsquo;，并且记录一条 warn 级别的日志"。</p><p><strong>完整性</strong>。你要预判所有边界情况：正常输入、异常输入、并发情况、依赖服务宕机、网络超时、数据不一致。任何你没写清楚的地方，agent 都会自己猜，而它猜错的概率并不低。</p><p><strong>可验证性</strong>。spec 里要包含验收标准，这样 agent 才能知道自己做对了没有。这不仅仅是"功能能用"，还包括性能指标、安全要求、代码风格。</p><p>当你只指挥一个 agent 时，这些要求还不那么严格——错了可以人工纠正。但当你同时 orchestrate 50 个 agent 时，任何模糊都会被放大 50 倍。想象一下：50 个 agent 并行开发，每个都对你的模糊描述有不同理解，最后拼在一起会是什么结果？</p><p>所以未来的工程师，核心竞争力不是打字快，而是想清楚。想清楚系统的边界在哪里，模块之间如何协作，失败时如何恢复，数据如何流动。</p><p>这些能力，恰恰是一个优秀架构师本来就具备的。</p><hr><h2 id=四那个-slack-消息意味着什么>四、那个 Slack 消息意味着什么</h2><p>故事里最让我震撼的细节是：agent 自己 git blame，找到相关代码的作者，然后在 Slack 上提问。</p><p>这说明什么？</p><p>说明 agent 不再是孤立的语言模型，而是一个接入了组织知识图谱的运行时系统。它知道：</p><ul><li>代码的历史（git history）</li><li>谁对哪个模块最熟悉（blame + 提交频率）</li><li>如何触达这个人（Slack API）</li><li>组织内部的沟通规范（什么时候 @ 人，用什么语气）</li></ul><p>这不是简单的"LLM + 工具调用"，而是一个有<strong>组织上下文</strong>的智能体。它理解的不只是代码，还有"这个代码是如何被组织生产出来的"。</p><p>当 agent 能主动获取上下文、主动沟通、主动学习时，它就不再是一个等待指令的工具，而是一个有自主性的协作者。</p><hr><h2 id=五对后端工程师的机会>五、对后端工程师的机会</h2><p>如果你是做后端开发的，尤其是有分布式系统经验的，你其实比大多数人更接近这个未来。</p><p>想想看，我们现在做微服务架构时做的事情：</p><ul><li>定义服务边界（bounded context）</li><li>设计接口契约（API spec）</li><li>处理分布式事务和最终一致性</li><li>设计熔断、降级、限流策略</li><li>写架构文档和技术方案</li></ul><p>这些技能，和写一份"可执行 spec"所需要的，高度重叠。</p><p>区别在于，以前你写的架构文档是给其他工程师看的，他们理解后去写代码。未来你写的 spec 是直接给 agent 执行的，中间少了"人理解"这个环节，对精确性的要求更高了。</p><p>所以对后端工程师来说，这是一个机会：</p><p>你过去积累的领域建模能力、系统抽象能力、边界划分能力，会在 Agent-Orchestrated Development 的时代变得更加值钱。</p><p>因为你最擅长的，恰恰是这个新模式最需要的——<strong>设计让机器协作的系统</strong>。</p><hr><h2 id=六现实没那么美好>六、现实没那么美好</h2><p>当然，我必须泼点冷水。</p><p>现在的 agent 还不够可靠。它们会幻觉，会误解，会在你意想不到的地方犯错。当你让 50 个 agent 并行工作时，出错的概率不是线性增长，而是指数级增长。</p><p>而且，写一份足够好的 spec 本身就是一件极难的事。大多数工程师其实不擅长写文档，更别说是要精确到机器能执行的文档。</p><p>还有安全、权限、成本、上下文限制等一系列问题没解决。</p><p>所以这个故事在短期内不会成为主流。但它展示了一个确定性的方向：</p><p><strong>让机器写代码，让人设计系统。</strong></p><hr><h2 id=七1000x-工程师是什么样的>七、1000x 工程师是什么样的</h2><p>这个话题最近很火。有人说 AI 会让工程师效率提升 1000 倍，有人说这意味着 99.9% 的工程师要失业。</p><p>我觉得这两种理解都错了。</p><p>真正的 1000x 工程师，不是指他一个人能产出 1000 个人的代码量。而是指他能设计出一个系统，让 1000 个 agent 替他工作。</p><p>这要求的能力是：</p><ul><li>能把复杂系统拆解成可并行化的子任务</li><li>能设计 agent 之间的协作协议</li><li>能把组织知识结构化，让 agent 能理解和使用</li><li>能设计验证和纠错机制，确保 agent 的产出质量</li></ul><p>这和"技术总监"、&ldquo;首席架构师"的要求是一样的。</p><p>所以未来的格局可能是：<strong>少数设计系统的人 + 大量执行任务的 agent</strong>，中间的"普通工程师"这个角色会被压缩。</p><hr><h2 id=八现在能做什么>八、现在能做什么</h2><p>如果你认同这个趋势，现在就可以开始准备：</p><p><strong>第一，练习写 spec。</strong></p><p>不是那种"做个登录功能"一句话需求，而是包含输入输出、边界条件、错误处理、性能要求的完整文档。尝试用 OpenAPI、Terraform、K8s YAML 这类声明式语言描述系统，它们本质上就是可执行的 spec。</p><p><strong>第二，理解 agent 的思维方式。</strong></p><p>多和 AI 协作，观察它在什么情况下会犯错，什么样的描述会让它产生歧义，如何拆解任务能让它做得更好。你要学会"像机器一样思考&rdquo;，才能写出机器能执行的 spec。</p><p><strong>第三，强化架构能力。</strong></p><p>不要只满足于"代码能跑"，要去思考"系统如何演进"。多读优秀的架构设计，练习画架构图，关注模块边界和依赖关系。这些能力在 Agent 时代会更值钱。</p><p><strong>第四，关注工具链。</strong></p><p>DevEx（开发者体验）会越来越重要。设计好的工具链、自动化流程、agent 编排系统，本身就是一种高价值能力。</p><hr><h2 id=九这不是终点>九、这不是终点</h2><p>每次技术范式转移，都会有人恐慌，有人兴奋。</p><p>恐慌的人说：程序员要失业了。</p><p>兴奋的人说：效率要提升 1000 倍了。</p><p>我觉得都不对。</p><p>历史告诉我们，技术不会让某个职业消失，而是会改变这个职业的工作内容。</p><p>以前工程师用汇编语言写程序，后来用高级语言，再后来用框架和库。每次抽象层次的提升，都没有让工程师失业，而是让他们能做更复杂的事情。</p><p>Agent-Orchestrated Development 也是一样。它不会让你失业，但会让"只会写代码"的人失业。</p><p>而那些能设计系统、能抽象复杂问题、能把模糊需求转化成精确 spec 的人，会变得更加稀缺和值钱。</p><hr><h2 id=十写在最后>十、写在最后</h2><p>回到 Anthropic 工程师的故事。</p><p>他之所以能"写个 spec 就下班"，不是因为他用了什么魔法工具，而是因为他写的 spec 足够好——好到机器能直接执行，好到 agent 遇到问题时知道怎么处理，好到整个系统能自运转。</p><p>这种"写好 spec"的能力，本质上就是架构能力。</p><p>所以如果你现在就在做架构设计、领域建模、系统抽象的工作，你已经在往这个方向走了。继续深入，继续思考"如何让机器协作"，你很可能就是未来那个"1000x 工程师"。</p><p>不是因为你能写 1000 倍代码，而是因为你能设计出让 1000 个 agent 替你工作的系统。</p><hr><blockquote><p>💡 思考题：如果你现在要设计一个让 10 个 Agent 并行开发的系统，你的第一份 spec 会描述什么？欢迎在评论区分享你的想法。</p></blockquote><hr><h2 id=参考阅读>参考阅读</h2><ul><li><a href=https://www.anthropic.com/research/building-effective-agents>Anthropic: Building effective agents</a></li><li><a href=https://modelcontextprotocol.io/>Model Context Protocol</a></li><li><a href=https://www.oreilly.com/radar/the-end-of-programming-as-we-know-it/>The End of Programming as We Know It</a></li></ul><hr><p><em>本文发表于 2026-02-17。观点仅代表个人判断，欢迎讨论指正。</em></p></div><div class=row><div class=col-xs-12></div></div><div class=related-content><h3>Related Posts</h3><ul><li><a href=/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/>OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</a></li><li><a href=/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>QMD：OpenClaw 的本地语义搜索解决方案</a></li><li><a href=/2026/01/31/mcp-vs-langchain-vs-function-callingai-%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/>MCP vs LangChain vs Function Calling：AI 集成方案深度对比</a></li></ul></div><div style=height:50px></div><div class=post-comments><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://muzig.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
-<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class=site-footer></div></div></div></article><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("disqus_thread");if(!e)return;const t=new MutationObserver(function(n){n.forEach(function(){const s=e.getElementsByTagName("iframe");if(s.length>1){const n=s[1];for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(n),t.disconnect()}})});t.observe(e,{childList:!0,subtree:!0})})</script></body></html>
+这不是科幻，这是正在发生的范式转移。">
+
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">面向开发者的 AI 工程深度博客，聚焦 Agent 工具链、MCP、Go 工程与编程语言设计。</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+  
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">GitHub</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs post-taxonomy-row">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+            
+            <div class="post-tags post-chip-static">方法论</div>
+            
+            
+            <div class="post-tags">
+              <a href="/categories/ai%E5%B7%A5%E7%A8%8B/">
+                AI工程
+              </a>
+            </div>
+            
+            
+            <div class="post-tags">
+              <a href="/series/ai-%E5%B7%A5%E7%A8%8B%E8%A7%82%E5%AF%9F/">
+                AI 工程观察
+              </a>
+            </div>
+            
+          </div>
+          <div class="col-xs-12 post-tag-list">
+            
+            <div class="post-tags">
+              <a href="/tags/agent/">
+                Agent
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/ai-%E5%B7%A5%E7%A8%8B/">
+                AI 工程
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                软件工程
+              </a>
+            </div>
+            
+            <div class="post-tags">
+              <a href="/tags/mcp/">
+                MCP
+              </a>
+            </div>
+            
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">Agent-Orchestrated Development：从写代码的人到编排系统的人</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime=" 2026-02-17 00:00:00 CST">
+                17 Feb 2026
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="https://github.com/muzig">@Muzig</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+
+
+        <div class="post-content markdown-body">
+          
+          <p>Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。</p>
+<p>Claude 自动拆任务、生成子 agent、并行开发、遇到问题时 git blame 找人、Slack 沟通，最后交付功能。</p>
+<p>这不是科幻，这是正在发生的范式转移。</p>
+<hr>
+<h2 id="一这不是一个段子">一、这不是一个段子</h2>
+<p>让我先还原一下那个场景。</p>
+<p>周五下午，Anthropic 的一位工程师打开 Asana，写下几段 spec。不是那种&quot;做个登录功能&quot;的模糊描述，而是一份结构化的、包含输入输出、边界条件、错误处理策略的技术文档。</p>
+<p>然后他指向看板，对 Claude 说：&ldquo;把这些做完。&rdquo; 就下班了。</p>
+<p>周一早上，他看到：</p>
+<ul>
+<li>任务被自动拆成了 47 个子任务</li>
+<li>12 个子 agent 并行工作了一整个周末</li>
+<li>其中一个 agent 在周六晚上遇到了上下文不清的问题，自己查了 git blame，找到最可能知道答案的同事，在 Slack 上发了消息</li>
+<li>那位同事回复后，agent 继续工作</li>
+<li>最终交付了 3 个 PR，全部通过测试</li>
+</ul>
+<p>这个故事听起来像营销，但背后指向的趋势是真实的。</p>
+<hr>
+<h2 id="二从写代码到写-spec">二、从&quot;写代码&quot;到&quot;写 Spec&quot;</h2>
+<p>传统的软件开发流程是：产品经理写需求文档，工程师理解需求，拆解任务，逐个实现，测试，部署。工程师的核心价值在于&quot;把需求翻译成代码&quot;的能力。</p>
+<p>后来有了 GitHub Copilot 和 ChatGPT，流程变成了：工程师描述需求，AI 生成代码，工程师 review 和调整。工程师的价值开始向&quot;prompt 工程&quot;转移，但本质上还是在单点产出。</p>
+<p>而 Anthropic 工程师展示的，是第三种模式。</p>
+<p>在这种模式下，工程师不写代码，甚至不直接和 AI 对话。他写的是一份 spec——一份足够精确、足够完整、足够结构化，以至于机器可以直接执行的规格说明。</p>
+<p>这份 spec 会被解析成任务图（Task Graph），然后分发给多个专门的 agent：</p>
+<ul>
+<li>有的负责数据库 schema 设计</li>
+<li>有的负责 API 接口实现</li>
+<li>有的负责前端组件</li>
+<li>有的负责测试用例生成</li>
+<li>有的负责文档更新</li>
+</ul>
+<p>它们并行工作，互相协调，自己处理冲突，自己找人问问题。</p>
+<p>工程师从&quot;写代码的人&quot;变成了&quot;设计系统的人&quot;。</p>
+<hr>
+<h2 id="三为什么-spec-成了核心竞争力">三、为什么 Spec 成了核心竞争力</h2>
+<p>这里有一个反直觉的事实：<strong>写 spec 比写代码难得多</strong>。</p>
+<p>代码是写给机器看的，spec 是写给机器、给人、还给其他机器看的。它必须同时满足：</p>
+<p><strong>精确性</strong>。自然语言充满歧义，但机器执行不能有任何模糊空间。你不能说&quot;大概这样&quot;，你必须说清楚&quot;当用户输入为空字符串时，返回 400 错误，错误信息是&rsquo;用户名不能为空&rsquo;，并且记录一条 warn 级别的日志&quot;。</p>
+<p><strong>完整性</strong>。你要预判所有边界情况：正常输入、异常输入、并发情况、依赖服务宕机、网络超时、数据不一致。任何你没写清楚的地方，agent 都会自己猜，而它猜错的概率并不低。</p>
+<p><strong>可验证性</strong>。spec 里要包含验收标准，这样 agent 才能知道自己做对了没有。这不仅仅是&quot;功能能用&quot;，还包括性能指标、安全要求、代码风格。</p>
+<p>当你只指挥一个 agent 时，这些要求还不那么严格——错了可以人工纠正。但当你同时 orchestrate 50 个 agent 时，任何模糊都会被放大 50 倍。想象一下：50 个 agent 并行开发，每个都对你的模糊描述有不同理解，最后拼在一起会是什么结果？</p>
+<p>所以未来的工程师，核心竞争力不是打字快，而是想清楚。想清楚系统的边界在哪里，模块之间如何协作，失败时如何恢复，数据如何流动。</p>
+<p>这些能力，恰恰是一个优秀架构师本来就具备的。</p>
+<hr>
+<h2 id="四那个-slack-消息意味着什么">四、那个 Slack 消息意味着什么</h2>
+<p>故事里最让我震撼的细节是：agent 自己 git blame，找到相关代码的作者，然后在 Slack 上提问。</p>
+<p>这说明什么？</p>
+<p>说明 agent 不再是孤立的语言模型，而是一个接入了组织知识图谱的运行时系统。它知道：</p>
+<ul>
+<li>代码的历史（git history）</li>
+<li>谁对哪个模块最熟悉（blame + 提交频率）</li>
+<li>如何触达这个人（Slack API）</li>
+<li>组织内部的沟通规范（什么时候 @ 人，用什么语气）</li>
+</ul>
+<p>这不是简单的&quot;LLM + 工具调用&quot;，而是一个有<strong>组织上下文</strong>的智能体。它理解的不只是代码，还有&quot;这个代码是如何被组织生产出来的&quot;。</p>
+<p>当 agent 能主动获取上下文、主动沟通、主动学习时，它就不再是一个等待指令的工具，而是一个有自主性的协作者。</p>
+<hr>
+<h2 id="五对后端工程师的机会">五、对后端工程师的机会</h2>
+<p>如果你是做后端开发的，尤其是有分布式系统经验的，你其实比大多数人更接近这个未来。</p>
+<p>想想看，我们现在做微服务架构时做的事情：</p>
+<ul>
+<li>定义服务边界（bounded context）</li>
+<li>设计接口契约（API spec）</li>
+<li>处理分布式事务和最终一致性</li>
+<li>设计熔断、降级、限流策略</li>
+<li>写架构文档和技术方案</li>
+</ul>
+<p>这些技能，和写一份&quot;可执行 spec&quot;所需要的，高度重叠。</p>
+<p>区别在于，以前你写的架构文档是给其他工程师看的，他们理解后去写代码。未来你写的 spec 是直接给 agent 执行的，中间少了&quot;人理解&quot;这个环节，对精确性的要求更高了。</p>
+<p>所以对后端工程师来说，这是一个机会：</p>
+<p>你过去积累的领域建模能力、系统抽象能力、边界划分能力，会在 Agent-Orchestrated Development 的时代变得更加值钱。</p>
+<p>因为你最擅长的，恰恰是这个新模式最需要的——<strong>设计让机器协作的系统</strong>。</p>
+<hr>
+<h2 id="六现实没那么美好">六、现实没那么美好</h2>
+<p>当然，我必须泼点冷水。</p>
+<p>现在的 agent 还不够可靠。它们会幻觉，会误解，会在你意想不到的地方犯错。当你让 50 个 agent 并行工作时，出错的概率不是线性增长，而是指数级增长。</p>
+<p>而且，写一份足够好的 spec 本身就是一件极难的事。大多数工程师其实不擅长写文档，更别说是要精确到机器能执行的文档。</p>
+<p>还有安全、权限、成本、上下文限制等一系列问题没解决。</p>
+<p>所以这个故事在短期内不会成为主流。但它展示了一个确定性的方向：</p>
+<p><strong>让机器写代码，让人设计系统。</strong></p>
+<hr>
+<h2 id="七1000x-工程师是什么样的">七、1000x 工程师是什么样的</h2>
+<p>这个话题最近很火。有人说 AI 会让工程师效率提升 1000 倍，有人说这意味着 99.9% 的工程师要失业。</p>
+<p>我觉得这两种理解都错了。</p>
+<p>真正的 1000x 工程师，不是指他一个人能产出 1000 个人的代码量。而是指他能设计出一个系统，让 1000 个 agent 替他工作。</p>
+<p>这要求的能力是：</p>
+<ul>
+<li>能把复杂系统拆解成可并行化的子任务</li>
+<li>能设计 agent 之间的协作协议</li>
+<li>能把组织知识结构化，让 agent 能理解和使用</li>
+<li>能设计验证和纠错机制，确保 agent 的产出质量</li>
+</ul>
+<p>这和&quot;技术总监&quot;、&ldquo;首席架构师&quot;的要求是一样的。</p>
+<p>所以未来的格局可能是：<strong>少数设计系统的人 + 大量执行任务的 agent</strong>，中间的&quot;普通工程师&quot;这个角色会被压缩。</p>
+<hr>
+<h2 id="八现在能做什么">八、现在能做什么</h2>
+<p>如果你认同这个趋势，现在就可以开始准备：</p>
+<p><strong>第一，练习写 spec。</strong></p>
+<p>不是那种&quot;做个登录功能&quot;一句话需求，而是包含输入输出、边界条件、错误处理、性能要求的完整文档。尝试用 OpenAPI、Terraform、K8s YAML 这类声明式语言描述系统，它们本质上就是可执行的 spec。</p>
+<p><strong>第二，理解 agent 的思维方式。</strong></p>
+<p>多和 AI 协作，观察它在什么情况下会犯错，什么样的描述会让它产生歧义，如何拆解任务能让它做得更好。你要学会&quot;像机器一样思考&rdquo;，才能写出机器能执行的 spec。</p>
+<p><strong>第三，强化架构能力。</strong></p>
+<p>不要只满足于&quot;代码能跑&quot;，要去思考&quot;系统如何演进&quot;。多读优秀的架构设计，练习画架构图，关注模块边界和依赖关系。这些能力在 Agent 时代会更值钱。</p>
+<p><strong>第四，关注工具链。</strong></p>
+<p>DevEx（开发者体验）会越来越重要。设计好的工具链、自动化流程、agent 编排系统，本身就是一种高价值能力。</p>
+<hr>
+<h2 id="九这不是终点">九、这不是终点</h2>
+<p>每次技术范式转移，都会有人恐慌，有人兴奋。</p>
+<p>恐慌的人说：程序员要失业了。</p>
+<p>兴奋的人说：效率要提升 1000 倍了。</p>
+<p>我觉得都不对。</p>
+<p>历史告诉我们，技术不会让某个职业消失，而是会改变这个职业的工作内容。</p>
+<p>以前工程师用汇编语言写程序，后来用高级语言，再后来用框架和库。每次抽象层次的提升，都没有让工程师失业，而是让他们能做更复杂的事情。</p>
+<p>Agent-Orchestrated Development 也是一样。它不会让你失业，但会让&quot;只会写代码&quot;的人失业。</p>
+<p>而那些能设计系统、能抽象复杂问题、能把模糊需求转化成精确 spec 的人，会变得更加稀缺和值钱。</p>
+<hr>
+<h2 id="十写在最后">十、写在最后</h2>
+<p>回到 Anthropic 工程师的故事。</p>
+<p>他之所以能&quot;写个 spec 就下班&quot;，不是因为他用了什么魔法工具，而是因为他写的 spec 足够好——好到机器能直接执行，好到 agent 遇到问题时知道怎么处理，好到整个系统能自运转。</p>
+<p>这种&quot;写好 spec&quot;的能力，本质上就是架构能力。</p>
+<p>所以如果你现在就在做架构设计、领域建模、系统抽象的工作，你已经在往这个方向走了。继续深入，继续思考&quot;如何让机器协作&quot;，你很可能就是未来那个&quot;1000x 工程师&quot;。</p>
+<p>不是因为你能写 1000 倍代码，而是因为你能设计出让 1000 个 agent 替你工作的系统。</p>
+<hr>
+<blockquote>
+<p>💡 思考题：如果你现在要设计一个让 10 个 Agent 并行开发的系统，你的第一份 spec 会描述什么？欢迎在评论区分享你的想法。</p></blockquote>
+<hr>
+<h2 id="参考阅读">参考阅读</h2>
+<ul>
+<li><a href="https://www.anthropic.com/research/building-effective-agents">Anthropic: Building effective agents</a></li>
+<li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li>
+<li><a href="https://www.oreilly.com/radar/the-end-of-programming-as-we-know-it/">The End of Programming as We Know It</a></li>
+</ul>
+<hr>
+<p><em>本文发表于 2026-02-17。观点仅代表个人判断，欢迎讨论指正。</em></p>
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><br/><p>订阅更新：<a target='_blank' href='https://mailchi.mp/a1a0d59e7a19/muzig'>Muzig 的技术博客</a></p>
+          </div>
+        </div>
+
+        
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="/2026/02/05/openclaw-%E5%A4%9A-agent-%E6%9E%B6%E6%9E%84%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84-ai-%E5%8D%8F%E4%BD%9C%E5%9B%A2%E9%98%9F/">OpenClaw 多 Agent 架构深度解析：打造你的 AI 协作团队</a></li>
+    
+    <li><a href="/2026/02/04/qmdopenclaw-%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%AF%AD%E4%B9%89%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">QMD：OpenClaw 的本地语义搜索解决方案</a></li>
+    
+    <li><a href="/2026/02/03/openclaw-%E6%9E%B6%E6%9E%84%E6%8F%AD%E7%A7%981%E4%B8%AA%E5%A4%A7%E8%84%91-n%E4%B8%AA%E6%89%8B%E8%84%9Aai-%E8%BF%99%E4%B9%88%E7%8E%A9%E6%89%8D%E9%A6%99/">OpenClaw 架构揭秘：1个大脑 N个手脚，AI 这么玩才香 🔥</a></li>
+    
+  </ul>
+</div>
+
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>

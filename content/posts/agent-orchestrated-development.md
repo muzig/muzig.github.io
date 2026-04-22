@@ -1,9 +1,11 @@
 +++
 date = '2026-02-17T00:00:00+08:00'
 draft = false
-title = 'Agent-Orchestrated Development：从写代码的人到编排系统的人'
-tags = ['AI Agent', '软件开发', '未来趋势', '系统架构', 'MCP']
-categories = ['技术深度']
+title = "Agent-Orchestrated Development：从写代码的人到编排系统的人"
+categories = ["AI工程"]
+series = ["AI 工程观察"]
+articleType = "方法论"
+tags = ["Agent", "AI 工程", "软件工程", "MCP"]
 +++
 
 Anthropic 的工程师写了一个 spec，把 Claude 指向 Asana 看板，然后回家了。
