@@ -1,53 +1,43 @@
-# Muzig
+# Muzig · Digital Field Notes
 
-> 面向开发者的 AI 工程深度博客，聚焦 Agent 工具链、MCP、Go 工程与编程语言设计。
+一个不使用统一文章主题的静态技术博客。每篇文章都是一份独立、可直接发布的单文件 HTML；内容和视觉可以一起演进。
 
-## 站点定位
+## 目录约定
 
-这个仓库承载的是 `Muzig` 的独立技术博客，不是产品官网，也不是零散笔记仓库。
-
-当前内容主轴：
-
-- `AI工程`：Agent 协作、工作流、工程方法论
-- `Agent工具链`：OpenClaw、Claude Code、Codex、Cursor 等工具实践
-- `MCP`：协议原理、生态对比、实现细节
-- `Go工程`：工具链、升级、性能与工程实践
-- `编程语言`：语言设计、运行时、编译流程
-- `LLM系统`：推理、架构、训练与部署取舍
-
-## 内容模型
-
-仓库内统一采用下面这套内容模型：
-
-- `categories`：主题域，只表达“写的是什么”
-- `series`：系列归属，用于组织连续内容
-- `articleType`：文章形式，例如 `深度解析`、`实战教程`
-- `tags`：检索关键词，只保留产品名、协议名、技术概念
-
-规范细节见 [CONTENT_SCHEMA.md](/Users/ligang/src/github/muzig.github.io/CONTENT_SCHEMA.md)。
-
-## 本地开发
-
-```bash
-# 本地预览（包含草稿）
-hugo server -D
-
-# 新建文章
-./new-post.sh "文章标题"
-
-# 构建生产版本
-hugo --minify
+```text
+public/
+├── index.html                         # 首页与文章索引
+├── posts/_template/index.html         # 新文章起始模板
+└── YYYY/MM/DD/article-slug/index.html # 独立文章
 ```
 
-## 写作入口
+`public/` 是线上站点的唯一发布源。`content/`、Hugo 配置和主题仅作为旧内容存档保留，不再参与部署。
 
-- [QUICK_START.md](/Users/ligang/src/github/muzig.github.io/QUICK_START.md)
-- [CONTENT_SCHEMA.md](/Users/ligang/src/github/muzig.github.io/CONTENT_SCHEMA.md)
-- [content/posts/_template.md](/Users/ligang/src/github/muzig.github.io/content/posts/_template.md)
-- [CONTENT_PLAN.md](/Users/ligang/src/github/muzig.github.io/CONTENT_PLAN.md)
+## 新建文章
 
-## 站点信息
+```bash
+./new-post.sh "文章标题" english-url-slug
+```
 
-- 博客主页：`https://muzig.io`
-- RSS：`https://muzig.io/index.xml`
-- GitHub：`https://github.com/muzig`
+脚本会创建一份包含完整 HTML、内联 CSS 和 SEO 元信息的文章。生成后：
+
+1. 直接编辑对应的 `index.html`，并按主题自由调整视觉。
+2. 在 `public/index.html` 的文章网格中增加入口。
+3. 本地预览：
+
+```bash
+python3 -m http.server 8080 -d public
+```
+
+访问 <http://localhost:8080>。
+
+## 发布
+
+推送到 `main` 或 `master` 后，GitHub Actions 会直接部署 `public/`，不会再运行 Hugo 或覆盖手工 HTML。
+
+## 单文件原则
+
+- 页面逻辑和页面专属样式放在同一个 HTML 文件中。
+- 可以引用站内公共字体或图片；关键阅读体验不依赖构建工具。
+- 每篇文章应保留返回首页的入口、移动端布局、页面标题和 description。
+- 视觉无需统一，但导航语义与可访问性应保持可靠。
