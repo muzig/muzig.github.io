@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="article:published_time" content="{{DATE}}">
+  <title>{{TITLE}} · Muzig</title>
+  <style>
+    :root{--bg:#f7f3e8;--ink:#18211d;--muted:#667068;--accent:#e34c32;--line:#c9cabe;--code:#202823}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Songti SC","Noto Serif CJK SC",Georgia,serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-underline-offset:4px}
+    .page{width:min(100% - 40px,1180px);margin:auto}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ink);font:12px/1.2 "PingFang SC",sans-serif;letter-spacing:.08em}.nav a{text-decoration:none}.nav a:hover{text-decoration:underline}.hero{padding:clamp(75px,12vw,165px) 0 clamp(60px,8vw,110px);border-bottom:1px solid var(--ink);display:grid;grid-template-columns:1fr minmax(190px,25%);gap:clamp(35px,7vw,100px);align-items:end}.kicker{font:11px "PingFang SC",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}.hero h1{font-size:clamp(48px,8vw,110px);line-height:.98;letter-spacing:-.06em;font-weight:500;margin:0}.dek{font-size:clamp(16px,1.5vw,21px);line-height:1.7;margin:0}.meta{display:block;margin-top:28px;color:var(--muted);font:11px "PingFang SC",sans-serif;letter-spacing:.06em}
+    article{display:grid;grid-template-columns:minmax(150px,240px) minmax(0,720px);gap:clamp(35px,7vw,110px);padding:clamp(60px,9vw,120px) 0;margin:auto;justify-content:center}.toc{position:sticky;top:30px;align-self:start;color:var(--muted);font:12px/1.8 "PingFang SC",sans-serif}.toc strong{display:block;color:var(--ink);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}.toc a{display:block;text-decoration:none}.toc a:hover{color:var(--accent)}.content{font-size:clamp(17px,1.4vw,20px);line-height:1.95}.content>*:first-child{margin-top:0}.content h2{font-size:clamp(32px,4vw,52px);line-height:1.12;letter-spacing:-.04em;font-weight:500;margin:2.2em 0 .7em}.content h3{font-size:clamp(23px,2.5vw,31px);line-height:1.25;margin:2em 0 .6em}.content p{margin:0 0 1.4em}.content blockquote{margin:2.4em 0;padding:1em 0 1em clamp(20px,4vw,45px);border-left:5px solid var(--accent);font-size:1.35em;line-height:1.55}.content pre{background:var(--code);color:#eef4e9;padding:24px;overflow:auto;border-radius:2px;font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.content code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em}.content :not(pre)>code{background:#e3e1d7;padding:.15em .35em}.content img{max-width:100%;height:auto}.content hr{border:0;border-top:1px solid var(--line);margin:4em 0}.back{border-top:1px solid var(--ink);padding:45px 0 60px;display:flex;justify-content:space-between;font:12px "PingFang SC",sans-serif}.back a{text-decoration:none}.back a:hover{text-decoration:underline}
+    @media(max-width:760px){.hero{grid-template-columns:1fr}.hero h1{font-size:clamp(45px,14vw,78px)}article{grid-template-columns:1fr}.toc{position:static;border-bottom:1px solid var(--line);padding-bottom:25px}.back{gap:20px;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav"><a href="/">← MUZIG / FIELD NOTES</a><span>{{DATE_LABEL}}</span></nav>
+    <header class="hero">
+      <div><div class="kicker">{{TOPIC}} / Field note</div><h1>{{TITLE}}</h1></div>
+      <p class="dek">{{DESCRIPTION}}<span class="meta">{{DATE_LABEL}} · {{READING_TIME}} 分钟阅读</span></p>
+    </header>
+    <article>
+      <aside class="toc" aria-label="文章目录"><strong>On this page</strong><a href="#part-1">01 / 第一部分</a><a href="#part-2">02 / 第二部分</a><a href="#summary">03 / 总结</a></aside>
+      <main class="content">
+        <p>在这里写开场。直接说清楚问题、背景，以及读者为什么应该继续看下去。</p>
+        <h2 id="part-1">第一部分</h2>
+        <p>每篇文章都可以重新设计这份 HTML。调整颜色、排版、结构或交互，让视觉语言服务于内容，而不是让内容迁就模板。</p>
+        <blockquote>一个值得被单独强调的核心判断。</blockquote>
+        <h2 id="part-2">第二部分</h2>
+        <p>正文内容。代码示例可以直接写在当前文件中：</p>
+        <pre><code>function buildIdea(context) {
+  return context.map(observe).filter(Boolean);
+}</code></pre>
+        <h2 id="summary">总结</h2>
+        <p>用几句话收束全文，并给出下一步行动或延伸阅读。</p>
+      </main>
+    </article>
+    <footer class="back"><a href="/">← 返回全部文章</a><span>© 2026 MUZIG · SINGLE-FILE HTML</span></footer>
+  </div>
+</body>
+</html>
