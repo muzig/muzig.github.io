@@ -1,181 +1,178 @@
-# Hugo 博客 SEO 优化指南
+# 单文件 HTML 博客 SEO 指南
 
-## 一、基础配置优化
+## 1. 适用范围
 
-### 1. 已完成的基础配置
-- ✅ 设置了正确的 `baseURL`、`languageCode`、`title`、`description` 和 `keywords`
-- ✅ 启用了 RSS 输出
-- ✅ 配置了 UTF-8 字符编码
-- ✅ 设置了正确的时区
+本站不再由 Hugo 生成。GitHub Pages 会原样发布 `public/`，所以 SEO 元信息、结构化数据、内部链接和索引文件都必须存在于最终 HTML 或 `public/` 下的静态文件中。
 
-### 2. 推荐的额外配置
+正式文章路径固定为：
 
-#### （1）永久链接结构优化
-已经在 `hugo.toml` 中配置了更友好的 URL 结构：
-```toml
-[permalinks]
-posts = "/:year/:month/:day/:title/"
+```text
+public/YYYY/MM/DD/slug/index.html
 ```
 
-#### （2）启用 Hugo 内置的 SEO 功能
-已经配置了基本的 SEO 参数，包括：
-- Google Analytics 集成
-- 正确的输出格式
-- JSON-LD 结构化数据
+对应 URL 为：
 
-## 二、内容优化
+```text
+https://muzig.io/YYYY/MM/DD/slug/
+```
 
-### 1. 文章标题优化
-- 每个文章标题应包含主要关键词
-- 标题长度建议在 50-60 个字符之间
-- 使用数字和疑问词提高点击率（如："10 个 Go 语言最佳实践"、"如何优化 Hugo 构建速度？"）
+如果以后启用自定义域名，必须一次性同步所有 canonical、Open Graph URL、`robots.txt`、`sitemap.xml` 和 Search Console 资源，不能混用多个主域名。
 
-### 2. 文章内容优化
-- 每篇文章长度建议在 1000-2000 字之间
-- 关键词密度控制在 2-3% 之间
-- 使用语义化的标题标签（H1, H2, H3）
-- 每个段落建议包含 3-5 个句子
-- 使用图片并添加 ALT 属性
+## 2. 每篇文章的 `<head>`
 
-### 3. 图片优化
-- 使用适当的图片格式（WebP 优先）
-- 压缩图片大小，减少加载时间
-- 添加 descriptive 文件名（如："go-language-best-practices.png"）
-- 为每个图片添加 ALT 文本
+每个 `index.html` 至少包含：
 
-## 三、技术优化
+```html
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="清楚说明文章解决什么问题，避免堆砌关键词。">
 
-### 1. 网站速度优化
-- 使用 Hugo 的 minify 功能
-- 启用缓存
-- 使用 CDN 加速
-- 延迟加载图片
-- 压缩 CSS 和 JavaScript
+<link rel="canonical" href="https://muzig.io/YYYY/MM/DD/slug/">
 
-### 2. 移动端优化
-- 确保网站响应式设计
-- 优化移动端加载速度
-- 使用 AMP 格式（可选）
+<meta property="og:type" content="article">
+<meta property="og:title" content="文章标题">
+<meta property="og:description" content="与正文一致的分享摘要">
+<meta property="og:url" content="https://muzig.io/YYYY/MM/DD/slug/">
+<meta property="article:published_time" content="YYYY-MM-DDTHH:MM:SS+08:00">
 
-### 3. 结构化数据
-已经通过主题内置的 `seo.html` 实现了 JSON-LD 结构化数据，包含：
-- 文章标题、描述、日期
-- 作者信息
-- 关键词和标签
-- 网站元数据
+<title>文章标题 · Muzig</title>
+```
 
-## 四、搜索引擎提交
+有合适的分享图时再增加 `og:image`。图片应使用绝对 HTTPS URL，并保证线上可访问；没有合适图片时不要填空地址。
 
-### 1. Google Search Console
+推荐加入 JSON-LD：
 
-#### HTML 文件验证（推荐，当前规范域名：muzig.io）
-1. 访问 [Google Search Console](https://search.google.com/search-console/)，添加资源 **`https://muzig.io`**
-2. 选择验证方式为 **「HTML 文件」**
-3. 下载 Google 提供的验证文件（形如 `google1234567890abcdef.html`）
-4. 将下载的 **完整文件** 放入本项目的 **`static/`** 目录（不要改文件名）
-5. 提交并推送到 GitHub，等待 Pages 部署完成（通常 1–2 分钟）
-6. 在浏览器访问 **`https://muzig.io/验证文件名.html`**，确认能打开且内容与下载文件一致
-7. 回到 Search Console 点击「验证」
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "文章标题",
+  "description": "文章摘要",
+  "datePublished": "YYYY-MM-DDTHH:MM:SS+08:00",
+  "dateModified": "YYYY-MM-DDTHH:MM:SS+08:00",
+  "author": { "@type": "Person", "name": "Muzig" },
+  "mainEntityOfPage": "https://muzig.io/YYYY/MM/DD/slug/"
+}
+</script>
+```
 
-验证通过后，在 Search Console 中提交 sitemap：**`https://muzig.io/sitemap.xml`**
+JSON 必须合法，且内容要与页面可见信息一致。文章更新时同步 `dateModified`。
 
-### 2. Bing Webmaster Tools
-1. 访问 [Bing Webmaster Tools](https://www.bing.com/webmasters)
-2. 添加网站
-3. 验证所有权
-4. 提交 sitemap
+## 3. 内容与语义结构
 
-### 3. 其他搜索引擎
-- 百度搜索资源平台
-- 360 站长平台
-- 神马搜索
+- 每页只有一个 `<h1>`，标题要准确描述主题，不为点击率牺牲含义。
+- 使用 `<main>`、`<article>`、`<header>`、`<nav>`、`<section>`、`<footer>` 等语义元素。
+- 标题按 `h1 → h2 → h3` 组织，避免仅为了字号跳级。
+- 摘要应是自然语言，说明问题、对象和价值；不要机械追求关键词密度。
+- 代码示例使用 `<pre><code>`，表格包含表头，引用标明来源。
+- 图片文件名应可读，内容图片提供准确 `alt`，纯装饰图片使用空 `alt`。
+- 链接文字要能脱离上下文理解，外部新窗口链接使用 `rel="noreferrer"` 或更严格策略。
+- 至少提供一个清晰的返回首页入口，并在相关主题之间建立有意义的内部链接。
 
-## 五、链接建设
+## 4. 单文件与独立视觉
 
-### 1. 内部链接
-- 在文章中引用相关文章
-- 创建页面之间的逻辑连接
-- 使用 breadcrumbs 导航
+每篇文章可以有完全不同的视觉语言，但技术底线一致：
 
-### 2. 外部链接
-- 链接到高质量的外部资源
-- 获取其他网站的反向链接
-- 参与社区和技术讨论
+- 页面专属 CSS 放进当前 HTML 的 `<style>`。
+- 页面专属 JavaScript 放进当前 HTML 的 `<script>`，正文在禁用 JavaScript 时仍应可读。
+- 可引用 `public/fonts/`、`public/images/` 等站内静态资源；不要依赖 Hugo 主题、模板 partial 或构建产物才能显示正文。
+- 字体应使用 `public/fonts/` 中的本地文件或系统字体栈，不得提交 `fonts.googleapis.com`、`fonts.gstatic.com` 等 Google Fonts 外链。
+- 删除所有 Hugo 开发残留，包括 `meta name="generator"`、livereload 脚本和指向 `localhost` 的 URL。
+- 使用响应式布局，避免固定宽度导致移动端横向滚动。
+- 设置图片尺寸或 `aspect-ratio`，减少布局偏移。
+- 为动画提供 `prefers-reduced-motion` 降级。
+- 保持足够颜色对比度、可见焦点和键盘可操作性。
 
-## 六、监控和分析
+SEO 不要求页面长得一致；清晰语义、可访问性、性能和内容质量才是共同约束。
 
-### 1. Google Analytics
-- 已经在配置文件中预留了 Google Analytics ID
-- 替换 `G-XXXXXXXXX` 为你的实际 ID
-- 跟踪网站流量和用户行为
+## 5. 首页、sitemap 与 RSS
 
-### 2. Google Search Console
-- 监控关键词排名
-- 检查网站索引状态
-- 分析搜索流量
+单文件模式没有构建器自动同步索引。每次发布或修改 URL 时需要手工维护：
 
-### 3. 其他工具
-- 使用 Screaming Frog 进行网站爬取分析
-- 使用 GTmetrix 进行性能测试
-- 使用 Ahrefs 或 SEMrush 进行 SEO 分析
+1. `public/index.html`：新增或更新文章入口。
+2. `public/sitemap.xml`：使用正式 HTTPS URL，禁止出现 `localhost`；更新 `lastmod`。
+3. `public/index.xml`：如果继续提供 RSS，同步标题、摘要、链接和发布时间。
+4. 文章内部相关链接：使用最终 URL，不链接到本地文件路径或 Markdown 源文件。
 
-## 七、高级技巧
+删除或迁移已发布 URL 时应保留兼容入口或规划重定向，避免直接制造 404。
 
-### 1. 使用 canonical URL
-主题已经自动生成 canonical URL，避免重复内容问题
+## 6. robots 与站点验证
 
-### 2. 设置 404 页面
-创建自定义的 404 页面，提高用户体验
+`public/robots.txt` 应引用正式 sitemap：
 
-### 3. 使用 HTTPS
-网站已经配置了 HTTPS，这是搜索引擎排名的重要因素
+```text
+User-agent: *
+Allow: /
 
-### 4. 定期更新内容
-- 定期发布新文章
-- 更新旧文章内容
-- 保持网站活跃度
+Sitemap: https://muzig.io/sitemap.xml
+```
 
-## 八、检查清单
+Google Search Console 的 HTML 验证文件直接放在 `public/` 根目录：
 
-### 发布前检查
-- [ ] 文章标题包含主要关键词
-- [ ] 文章内容长度合适
-- [ ] 图片添加了 ALT 属性
-- [ ] 关键词密度合理
-- [ ] 内部链接和外部链接合理
-- [ ] 页面加载速度优化
+```text
+public/googlexxxxxxxxxxxxxxxx.html
+```
 
-### 定期维护检查
-- [ ] 检查死链接
-- [ ] 监控搜索引擎排名
-- [ ] 分析用户行为数据
-- [ ] 更新旧文章内容
-- [ ] 检查网站安全性
+不要放到旧的 `static/`，因为部署不会再复制该目录。部署后先在正式域名打开验证文件，再在 Search Console 提交 `https://muzig.io/sitemap.xml`。
 
-## 九、常用命令
+Bing Webmaster Tools 也提交同一个正式 sitemap。
 
-### 构建生产版本
+## 7. 本地预览与自动检查
+
+启动静态服务器：
+
 ```bash
-hugo --gc --minify
+python3 -m http.server 8080 -d public
 ```
 
-### 本地预览
+运行仓库检查脚本：
+
 ```bash
-hugo server --disableLiveReload --port 1313
+./check-seo.sh
 ```
 
-### 检查网站健康
+自定义正式域名：
+
 ```bash
-hugo config hugo.toml | grep -i error
+SITE_ORIGIN="https://example.com" ./check-seo.sh
 ```
 
-## 十、参考资源
+脚本中的结果含义：
 
-- [Hugo 官方 SEO 文档](https://gohugo.io/content-management/seo/)
-- [Google SEO 初学者指南](https://support.google.com/webmasters/answer/7451184)
-- [Google Search Console 帮助文档](https://support.google.com/webmasters/answer/9308820)
+- `FAIL`：缺少发布必需文件或关键 HTML 结构，应在发布前修复。
+- `WARN`：页面可以显示，但 canonical、分享元信息、语言、索引或可访问性仍需检查。
+- `PASS`：自动规则通过，仍需要浏览器人工检查内容与视觉。
+
+## 8. 发布前检查
+
+- [ ] 文件路径为 `public/YYYY/MM/DD/slug/index.html`
+- [ ] title、description、一个 h1 和正文内容彼此一致
+- [ ] canonical、`og:url`、发布时间使用正式 URL 与时区
+- [ ] HTML 中没有 Hugo generator/livereload、`localhost`、本地绝对路径、Google Fonts 外链或模板占位符
+- [ ] 首页入口、返回首页、目录和内部链接可用
+- [ ] sitemap 与 RSS（如使用）已经同步
+- [ ] 图片 alt、代码块、表格和标题层级正确
+- [ ] 桌面、手机、键盘和 reduced motion 场景可用
+- [ ] 浏览器控制台没有 404 和脚本错误
+- [ ] `./check-seo.sh` 没有 FAIL
+
+## 9. 定期维护
+
+- 在 Search Console 检查索引覆盖、Core Web Vitals 和失效 URL。
+- 定期检查外链、站内链接、sitemap 与首页是否一致。
+- 技术内容发生变化时更新正文、`dateModified` 和必要的摘要。
+- 使用 Lighthouse 或同类工具抽查性能、SEO 和可访问性。
+- 自定义域名、URL 或目录规则变化时，先更新本文档和检查脚本，再迁移页面。
+
+## 参考资料
+
+- [Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)
+- [Open Graph protocol](https://ogp.me/)
+- [Schema.org BlogPosting](https://schema.org/BlogPosting)
 
 ---
 
-**更新日期**: 2026-02-05
-**版本**: 1.0
+更新日期：2026-08-16
+版本：2.0（单文件 HTML）

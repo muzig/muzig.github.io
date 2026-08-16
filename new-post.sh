@@ -28,6 +28,7 @@ DATE_LABEL=$(date '+%Y.%m.%d')
 TARGET_DIR="public/${YEAR}/${MONTH}/${DAY}/${SLUG}"
 FILEPATH="${TARGET_DIR}/index.html"
 TEMPLATE="public/posts/_template/index.html"
+CANONICAL_URL="https://muzig.io/${YEAR}/${MONTH}/${DAY}/${SLUG}/"
 
 if [[ -e "$FILEPATH" ]]; then
   printf "%b文件已存在: %s%b\n" "$YELLOW" "$FILEPATH" "$NC"
@@ -48,14 +49,15 @@ DESCRIPTION="${DESCRIPTION:-在这里填写文章摘要}"
 mkdir -p "$TARGET_DIR"
 cp "$TEMPLATE" "$FILEPATH"
 
-# 使用 Perl 的 \Q...\E 安全替换标题中可能出现的符号。
-TITLE="$TITLE" TOPIC="$TOPIC" DESCRIPTION="$DESCRIPTION" DATE_ISO="$DATE_ISO" DATE_LABEL="$DATE_LABEL" \
+# 一次性替换模板元信息与页面占位值。
+TITLE="$TITLE" TOPIC="$TOPIC" DESCRIPTION="$DESCRIPTION" DATE_ISO="$DATE_ISO" DATE_LABEL="$DATE_LABEL" CANONICAL_URL="$CANONICAL_URL" \
 perl -0pi -e '
   s/\{\{TITLE\}\}/$ENV{TITLE}/g;
   s/\{\{TOPIC\}\}/$ENV{TOPIC}/g;
   s/\{\{DESCRIPTION\}\}/$ENV{DESCRIPTION}/g;
   s/\{\{DATE\}\}/$ENV{DATE_ISO}/g;
   s/\{\{DATE_LABEL\}\}/$ENV{DATE_LABEL}/g;
+  s/\{\{CANONICAL_URL\}\}/$ENV{CANONICAL_URL}/g;
   s/\{\{READING_TIME\}\}/8/g;
 ' "$FILEPATH"
 

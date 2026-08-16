@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://muzig.io/2026/01/30/clawdbot%E5%9F%BA%E4%BA%8E-claude-ai-%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA/" />
+  <link rel="canonical" href="https://muzig.io/2026/01/30/clawdbot%E5%9F%BA%E4%BA%8E-claude-ai-%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="https://muzig.io/index.xml"
+    title="Muzig 的技术博客"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/muzig.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Clawdbot：基于 Claude AI 构建智能对话机器人",
+      "headline" : "Clawdbot：基于 Claude AI 构建智能对话机器人",
+      "description" : "什么是 Clawdbot？ Clawdbot 是基于 Anthropic 的 Claude AI 模型构建的智能对话机器人。名字取自 \u0026ldquo;Claude\u0026rdquo; \u002b \u0026ldquo;Bot\u0026rdquo; 的组合，代表了一种新型的 AI 助手应用模式。\n与传统的规则型机器人不同，Clawdbot 利用大型语言模型的强大理解能力，可以进行自然、流畅的多轮对话，理解上下文，并提供有价值的回答。\n核心特性 1. 自然语言理解 Clawdbot 基于 Claude 模型，具备强大的自然语言处理能力：\n上下文理解：能够记住对话历史，进行连贯的多轮交互 意图识别：准确理解用户的真实需求 多语言支持：支持中文、英文等多种语言 2. 可定制的人格 system_prompt = \u0026#34;\u0026#34;\u0026#34; 你是 Clawdbot，一个友好、专业的 AI 助手。 你的特点是： - 回答准确、简洁 - 善于用简单的语言解释复杂概念 - 当不确定时会诚实说明 \u0026#34;\u0026#34;\u0026#34; 3. 工具调用能力 Clawdbot 支持通过 Claude 的 Tool Use 功能扩展能力：\ntools = [ { \u0026#34;name\u0026#34;: \u0026#34;search_web\u0026#34;, \u0026#34;description\u0026#34;: \u0026#34;搜索网络获取最新信息\u0026#34;, \u0026#34;input_schema\u0026#34;: { \u0026#34;type\u0026#34;: \u0026#34;object\u0026#34;, \u0026#34;properties\u0026#34;: { \u0026#34;query\u0026#34;: { \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;, \u0026#34;description\u0026#34;: \u0026#34;搜索关键词\u0026#34; } }, \u0026#34;required\u0026#34;: [\u0026#34;query\u0026#34;] } } ] 技术实现 基础架构 ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │ 用户端 │────▶│ Clawdbot │────▶│ Claude API │ │ (Discord\/ │◀────│ Server │◀────│ (Anthropic)│ │ Slack等) │ └─────────────┘ └─────────────┘ └─────────────┘ │ ▼ ┌─────────────┐ │ 工具系统 │ │ (扩展能力) │ └─────────────┘ 核心代码实现 1. 初始化 Claude 客户端\n",
+      "inLanguage" : "zh-CN",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2026",
+      "datePublished": "2026-01-30 10:00:00 \u002b0800 CST",
+      "dateModified" : "2026-01-30 10:00:00 \u002b0800 CST",
+      "url" : "https:\/\/muzig.io\/2026\/01\/30\/clawdbot%E5%9F%BA%E4%BA%8E-claude-ai-%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA\/",
+      "keywords" : [ "AI","Claude","Bot","Python" ]
+  }
+</script>
+<title>Clawdbot：基于 Claude AI 构建智能对话机器人</title>
+  <meta property="og:title" content="Clawdbot：基于 Claude AI 构建智能对话机器人" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="什么是 Clawdbot？ Clawdbot 是基于 Anthropic 的 Claude AI 模型构建的智能对话机器人。名字取自 “Claude” + “Bot” 的组合，代表了一种新型的 AI 助手应用模式。 与传统的规则型机器人不同，Clawdbot 利用大型语言模型的强大理解能力，可以进行自然、流畅的多…"
+  />
+  <meta
+    name="description"
+    content="什么是 Clawdbot？ Clawdbot 是基于 Anthropic 的 Claude AI 模型构建的智能对话机器人。名字取自 “Claude” + “Bot” 的组合，代表了一种新型的 AI 助手应用模式。 与传统的规则型机器人不同，Clawdbot 利用大型语言模型的强大理解能力，可以进行自然、流畅的多…"
+  />
+  <meta property="og:locale" content="zh-cn" /><meta property="og:image" content="" />
+
+
+  <style>:root{--bg-color:#ffffff;--text-color:#000000;--link-color:#000000;--border-color:#482936;--secondary-text:#666666;--code-bg:#f6f8fa;--blockquote-color:#57606a;--blockquote-border:#d0d7de;--disqus-bg:white}[data-theme=dark]{--bg-color:#1a1a1a;--text-color:#e0e0e0;--link-color:#b0b0b0;--border-color:#8b5a7a;--secondary-text:#aaaaaa;--code-bg:#2d2d2d;--blockquote-color:#a0a0a0;--blockquote-border:#404040;--disqus-bg:#1a1a1a}body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px;background-color:var(--bg-color);color:var(--text-color)}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:var(--link-color);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:var(--link-color)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--blockquote-color);border-left:.25em solid var(--blockquote-border)}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px;background-color:var(--code-bg)}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:var(--code-bg);border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:var(--code-bg);border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:var(--secondary-text)}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-item-left{margin-left:5px;margin-right:auto}.header-line{width:100%;border-width:2px;border-color:var(--border-color);border-style:solid none none none}.lang-switch{font-weight:600}.theme-toggle{background:0 0;border:none;color:var(--link-color);cursor:pointer;font-weight:600;font-size:inherit;padding:0}.theme-toggle:hover{font-weight:800}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:var(--text-color)2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:var(--text-color)2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:var(--text-color);padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:var(--disqus-bg)}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+
+
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Muzig 的技术博客">
+
+
+
+
+  <script data-cfasync="false">
+    (function() {
+      const themeKey = 'theme';
+      const themes = { light: 'light', dark: 'dark', system: 'system' };
+
+      function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function getStoredTheme() {
+        return localStorage.getItem(themeKey);
+      }
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+        if (stored && stored !== themes.system) {
+          return stored;
+        }
+        return getSystemTheme();
+      }
+      function setTheme(theme) {
+        const root = document.documentElement;
+        if (theme === themes.system) {
+          theme = getSystemTheme();
+        }
+        if (theme === themes.dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        updateToggleButton(theme);
+      }
+      function updateToggleButton(theme) {
+        const button = document.getElementById('theme-toggle');
+        if (button) {
+          button.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+      function ensureButtonUpdated() {
+        updateToggleButton(getCurrentTheme());
+      }
+      function initTheme() {
+        const stored = getStoredTheme();
+        let theme;
+        if (stored) {
+          theme = stored === themes.system ? getSystemTheme() : stored;
+          setTheme(stored);
+        } else {
+
+          theme = getSystemTheme();
+          setTheme(themes.system);
+        }
+      }
+      function toggleTheme() {
+        const current = getStoredTheme() || themes.system;
+        let next;
+        if (current === themes.system) {
+          next = getSystemTheme() === 'dark' ? themes.light : themes.dark;
+        } else if (current === themes.dark) {
+          next = themes.light;
+        } else {
+          next = themes.dark;
+        }
+        localStorage.setItem(themeKey, next);
+        setTheme(next);
+      }
+
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const stored = getStoredTheme();
+        if (!stored || stored === themes.system) {
+          setTheme(themes.system);
+        }
+      });
+
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureButtonUpdated);
+      } else {
+
+        ensureButtonUpdated();
+      }
+
+
+      window.toggleTheme = toggleTheme;
+
+
+      initTheme();
+    })();
+  </script>
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Clawdbot：基于 Claude AI 构建智能对话机器人">
+  <meta name="twitter:description" content="什么是 Clawdbot？ Clawdbot 是基于 Anthropic 的 Claude AI 模型构建的智能对话机器人。名字取自 “Claude” + “Bot” 的组合，代表了一种新型的 AI 助手应用模式。 与传统的规则型机器人不同，Clawdbot 利用大型语言模型的强大理解能力，可以进行自然、流畅的多…">
+
+
+<!-- ARTICLE-DESIGN:BEGIN -->
+<meta name="article-design" content="clawdbot-dialogue">
+<style id="article-design">
+
+@font-face{font-family:Arvo;src:url('/fonts/Arvo.woff2') format('woff2');font-display:swap}
+:root,[data-theme=dark]{--page-bg:#f1e8de;--page-ink:#302821;--page-accent:#cf553a;--page-soft:#c9ded7;--bg-color:#f1e8de;--text-color:#302821;--link-color:#302821;--secondary-text:#302821;--code-bg:#c9ded7;--blockquote-color:#302821;--blockquote-border:#cf553a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0!important;background:var(--page-bg)!important;color:var(--page-ink)!important;font-family:"Songti SC","STSong",Georgia,serif!important;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::selection{background:var(--page-accent);color:var(--page-bg)}a{color:inherit}.post{max-width:none!important;margin:0!important}.post>.row{display:block!important;margin:0!important}.post>.row>.col-xs-12{width:100%!important;max-width:none!important;padding:0!important;flex:none!important}.site-header{width:min(100% - 40px,1240px);margin:0 auto!important;padding:22px 0 15px;border-bottom:1px solid currentColor;position:relative;z-index:3}.site-header header{display:flex;align-items:baseline;gap:20px}.header-title{font:700 15px/1 Arvo,sans-serif!important;margin:0!important;letter-spacing:.08em}.header-title a::after{content:" / HUMAN ↔ MACHINE";font-weight:400;color:var(--page-accent)}.header-subtitle{font:11px/1.4 Arvo,sans-serif;color:inherit!important;opacity:.62}.header-items{position:absolute;right:0;top:17px;margin:0!important;font:11px Arvo,sans-serif}.header-item-left{display:none}.header-line{display:none}.site-header+.row{width:min(100% - 40px,1240px);margin:0 auto!important;padding-top:clamp(45px,7vw,90px);display:block!important}.site-header+.row br{display:none}.site-header+.row .col-xs-12{max-width:none!important;padding:0!important}.post-tags{display:inline-block!important;border:1px solid currentColor!important;border-radius:999px!important;padding:5px 10px!important;margin:0 5px 6px 0!important;font:10px Arvo,sans-serif!important;letter-spacing:.04em}.post-tags a{text-decoration:none!important}
+.post-header{width:min(100% - 40px,1240px);margin:0 auto!important;padding:clamp(22px,4vw,55px) 0 clamp(55px,8vw,110px);position:relative}.post-title{font-family:"Kaiti SC","STKaiti",serif!important;font-size:clamp(46px,8vw,116px)!important;line-height:.98!important;letter-spacing:-.055em!important;font-weight:500!important;margin:0!important;max-width:1120px}.post-desc{margin:34px 0 0!important;font:11px Arvo,sans-serif!important;letter-spacing:.08em;text-transform:uppercase}.post-desc .col-xs-6{padding:0!important}.post-date{font-style:normal!important;font-weight:400!important}.post-content{width:min(100% - 40px,760px);margin:0 auto clamp(80px,10vw,150px)!important;font-family:"Songti SC","STSong",Georgia,serif!important;font-size:clamp(17px,1.35vw,20px)!important;line-height:1.9!important;position:relative}.post-content p{line-height:1.9!important;margin:0 0 1.45em!important}.post-content h2,.post-content h3,.post-content h4{font-family:"Kaiti SC","STKaiti",serif!important;line-height:1.2;scroll-margin-top:30px}.post-content h2{font-size:clamp(32px,4vw,54px);letter-spacing:-.035em;font-weight:500;margin:2.4em 0 .7em}.post-content h2::before{content:attr(data-section);display:block;color:var(--page-accent);font:10px Arvo,sans-serif;letter-spacing:.15em;margin-bottom:10px}.post-content h3{font-size:clamp(23px,2.3vw,31px);font-weight:600;margin:2em 0 .65em}.post-content blockquote{margin:2.2em 0!important;padding:1em 0 1em clamp(20px,4vw,42px)!important;border:0!important;border-left:5px solid var(--page-accent)!important;color:inherit!important;font-size:1.18em}.post-content pre{padding:24px!important;overflow:auto;border-radius:0!important;background:var(--page-ink)!important;color:var(--page-bg)!important;border:1px solid var(--page-accent);font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.post-content code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.post-content :not(pre)>code{background:var(--page-soft)!important;color:var(--page-ink);border-radius:0!important;padding:.15em .35em}.post-content table{display:block;width:100%;overflow:auto;border-collapse:collapse;margin:2em 0;font-size:.88em}.post-content th,.post-content td{padding:12px 14px;border:1px solid color-mix(in srgb,var(--page-ink) 35%,transparent);text-align:left}.post-content th{background:var(--page-soft)}.post-content img{max-width:100%;height:auto;filter:saturate(.88)}.post-content hr{border:0;border-top:1px solid currentColor;opacity:.35;margin:4em 0}.post-content a{text-decoration-color:var(--page-accent)!important;text-decoration-thickness:2px!important}.related-content{width:min(100% - 40px,900px);margin:0 auto 80px!important;border:1px solid currentColor!important;padding:28px!important}.related-content h3{font:500 26px "Kaiti SC","STKaiti",serif;margin-top:0}.related-content li{margin:10px 0!important}.post-comments,.site-footer{width:min(100% - 40px,900px);margin:0 auto}.design-progress{position:fixed;left:0;top:0;width:100%;height:4px;transform:scaleX(0);transform-origin:left;background:var(--page-accent);z-index:20}.design-toc{position:fixed;right:clamp(12px,3vw,48px);top:50%;transform:translateY(-50%);width:170px;z-index:5;font:9px/1.4 Arvo,sans-serif;letter-spacing:.04em}.design-toc strong{display:block;color:var(--page-accent);letter-spacing:.16em;margin-bottom:10px}.design-toc a{display:block;text-decoration:none;padding:5px 0;opacity:.48;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.design-toc a:hover{opacity:1}.design-home{position:fixed;left:18px;bottom:18px;width:44px;height:44px;display:grid;place-items:center;background:var(--page-ink);color:var(--page-bg);border:1px solid var(--page-accent);border-radius:50%;text-decoration:none;z-index:8;font:18px Arvo,sans-serif;transition:transform .25s}.design-home:hover{transform:translateY(-4px)}
+@media(max-width:1120px){.design-toc{display:none}}@media(max-width:700px){.header-subtitle{display:none}.site-header{padding-top:18px}.site-header+.row{padding-top:45px}.post-title{font-size:clamp(42px,13vw,72px)!important}.post-content{width:min(100% - 34px,760px)}.post-content h2{margin-top:2em}.related-content{width:calc(100% - 34px)}.design-home{width:38px;height:38px;left:10px;bottom:10px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.design-home{transition:none}}
+.design-toc{opacity:0;pointer-events:none;transition:opacity .25s ease}.design-toc.is-visible{opacity:1;pointer-events:auto}
+
+.post-header{text-align:center;max-width:980px}.post-title{margin:auto!important}.post-content blockquote{max-width:88%;margin-left:auto!important;border:0!important;background:var(--page-soft);padding:22px 28px!important;border-radius:26px 26px 4px 26px!important}.post-content p:nth-of-type(4n){margin-right:8% !important}.post-content h2{text-align:center}.post-content h2::after{content:' ·';color:var(--page-accent)}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.body.dataset.articleDesign='clawdbot-dialogue';
+  const content=document.querySelector('.post-content');
+  if(!content)return;
+  const progress=document.createElement('div');progress.className='design-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
+  const home=document.createElement('a');home.className='design-home';home.href='/';home.textContent='←';home.setAttribute('aria-label','返回文章首页');document.body.append(home);
+  const headings=[...content.querySelectorAll('h2')];
+  headings.forEach((heading,index)=>{heading.dataset.section=String(index+1).padStart(2,'0');if(!heading.id)heading.id='section-'+(index+1)});
+  let toc=null;if(headings.length>2){toc=document.createElement('aside');toc.className='design-toc';toc.setAttribute('aria-label','文章目录');toc.innerHTML='<strong>ON THIS PAGE</strong>'+headings.map(h=>`<a href="#${h.id}">${h.textContent}</a>`).join('');document.body.append(toc)}
+  const date=document.querySelector('.post-date');if(date){const chars=content.textContent.replace(/\s/g,'').length;date.append(document.createTextNode(` · ${Math.max(1,Math.ceil(chars/500))} MIN READ`))}
+  const update=()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max>0?scrollY/max:0})`;if(toc)toc.classList.toggle('is-visible',content.getBoundingClientRect().top<innerHeight*.72)};update();addEventListener('scroll',update,{passive:true});addEventListener('resize',update);
+});
+</script>
+
+<!-- ARTICLE-DESIGN:END -->
+  <meta property="article:published_time" content="2026-01-30T10:00:00+08:00">
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Muzig</a
+    >
+  </div>
+  <div class="header-subtitle">Muzig 的技术博客，分享 Go 语言、AI 技术、编程语言设计、OpenClaw、Moltbot、Clawdbot 等技术文章</div>
+</header>
+<div class="row end-md header-items">
+  <div class="header-item-left">
+    <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle">
+      🌙
+    </button>
+  </div>
+
+
+  <div class="header-item">
+    <a href="https://github.com/muzig" target="_blank">About Me</a>
+  </div>
+
+</div>
+<div class="row">
+
+</div>
+<div class="header-line"></div>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            <br \>
+          </div>
+          <div class="col-xs-12">
+
+            <div class="post-tags">
+              <a href="/tags/ai/">
+                AI
+              </a>
+            </div>
+
+            <div class="post-tags">
+              <a href="/tags/claude/">
+                Claude
+              </a>
+            </div>
+
+            <div class="post-tags">
+              <a href="/tags/bot/">
+                Bot
+              </a>
+            </div>
+
+            <div class="post-tags">
+              <a href="/tags/python/">
+                Python
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+
+        <header class="post-header">
+          <h1 class="post-title">Clawdbot：基于 Claude AI 构建智能对话机器人</h1>
+
+          <div class="row post-desc">
+            <div class="col-xs-6">
+
+              <time class="post-date" datetime=" 2026-01-30 10:00:00 CST">
+                30 Jan 2026
+              </time>
+
+            </div>
+            <div class="col-xs-6">
+
+            </div>
+          </div>
+
+        </header>
+
+
+
+        <main class="post-content markdown-body">
+
+          <h2 id="什么是-clawdbot">什么是 Clawdbot？</h2>
+<p>Clawdbot 是基于 Anthropic 的 Claude AI 模型构建的智能对话机器人。名字取自 &ldquo;Claude&rdquo; + &ldquo;Bot&rdquo; 的组合，代表了一种新型的 AI 助手应用模式。</p>
+<p>与传统的规则型机器人不同，Clawdbot 利用大型语言模型的强大理解能力，可以进行自然、流畅的多轮对话，理解上下文，并提供有价值的回答。</p>
+<hr>
+<h2 id="核心特性">核心特性</h2>
+<h3 id="1-自然语言理解">1. 自然语言理解</h3>
+<p>Clawdbot 基于 Claude 模型，具备强大的自然语言处理能力：</p>
+<ul>
+<li><strong>上下文理解</strong>：能够记住对话历史，进行连贯的多轮交互</li>
+<li><strong>意图识别</strong>：准确理解用户的真实需求</li>
+<li><strong>多语言支持</strong>：支持中文、英文等多种语言</li>
+</ul>
+<h3 id="2-可定制的人格">2. 可定制的人格</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>system_prompt = <span style="font-style:italic">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">你是 Clawdbot，一个友好、专业的 AI 助手。
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">你的特点是：
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">- 回答准确、简洁
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">- 善于用简单的语言解释复杂概念
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">- 当不确定时会诚实说明
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><h3 id="3-工具调用能力">3. 工具调用能力</h3>
+<p>Clawdbot 支持通过 Claude 的 Tool Use 功能扩展能力：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tools = [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;name&#34;</span>: <span style="font-style:italic">&#34;search_web&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;description&#34;</span>: <span style="font-style:italic">&#34;搜索网络获取最新信息&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;input_schema&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="font-style:italic">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="font-style:italic">&#34;description&#34;</span>: <span style="font-style:italic">&#34;搜索关键词&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;required&#34;</span>: [<span style="font-style:italic">&#34;query&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><hr>
+<h2 id="技术实现">技术实现</h2>
+<h3 id="基础架构">基础架构</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+</span></span><span style="display:flex;"><span>│   用户端     │────▶│  Clawdbot   │────▶│  Claude API │
+</span></span><span style="display:flex;"><span>│  (Discord/  │◀────│   Server    │◀────│  (Anthropic)│
+</span></span><span style="display:flex;"><span>│   Slack等)  │     └─────────────┘     └─────────────┘
+</span></span><span style="display:flex;"><span>└─────────────┘            │
+</span></span><span style="display:flex;"><span>                           ▼
+</span></span><span style="display:flex;"><span>                    ┌─────────────┐
+</span></span><span style="display:flex;"><span>                    │  工具系统    │
+</span></span><span style="display:flex;"><span>                    │  (扩展能力)  │
+</span></span><span style="display:flex;"><span>                    └─────────────┘
+</span></span></code></pre></div><h3 id="核心代码实现">核心代码实现</h3>
+<p><strong>1. 初始化 Claude 客户端</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">import</span> <span style="font-weight:bold">anthropic</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">from</span> <span style="font-weight:bold">typing</span> <span style="font-weight:bold">import</span> List, Dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">class</span> <span style="font-weight:bold">Clawdbot</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">def</span> __init__(self, api_key: str, model: str = <span style="font-style:italic">&#34;claude-sonnet-4-20250514&#34;</span>):
+</span></span><span style="display:flex;"><span>        self.client = anthropic.Anthropic(api_key=api_key)
+</span></span><span style="display:flex;"><span>        self.model = model
+</span></span><span style="display:flex;"><span>        self.conversation_history: List[Dict] = []
+</span></span><span style="display:flex;"><span>        self.system_prompt = <span style="font-style:italic">&#34;你是 Clawdbot，一个智能、友好的 AI 助手。&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">def</span> set_system_prompt(self, prompt: str):
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;&#34;&#34;设置系统提示词，定义机器人人格&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        self.system_prompt = prompt
+</span></span></code></pre></div><p><strong>2. 消息处理</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">def</span> chat(self, user_message: str) -&gt; str:
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;&#34;&#34;处理用户消息并返回回复&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 添加用户消息到历史</span>
+</span></span><span style="display:flex;"><span>    self.conversation_history.append({
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;user&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;content&#34;</span>: user_message
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 调用 Claude API</span>
+</span></span><span style="display:flex;"><span>    response = self.client.messages.create(
+</span></span><span style="display:flex;"><span>        model=self.model,
+</span></span><span style="display:flex;"><span>        max_tokens=4096,
+</span></span><span style="display:flex;"><span>        system=self.system_prompt,
+</span></span><span style="display:flex;"><span>        messages=self.conversation_history
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 提取回复内容</span>
+</span></span><span style="display:flex;"><span>    assistant_message = response.content[0].text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 添加助手回复到历史</span>
+</span></span><span style="display:flex;"><span>    self.conversation_history.append({
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;content&#34;</span>: assistant_message
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> assistant_message
+</span></span></code></pre></div><p><strong>3. 流式响应支持</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">def</span> chat_stream(self, user_message: str):
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;&#34;&#34;流式响应，适合实时显示&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    self.conversation_history.append({
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;user&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic">&#34;content&#34;</span>: user_message
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">with</span> self.client.messages.stream(
+</span></span><span style="display:flex;"><span>        model=self.model,
+</span></span><span style="display:flex;"><span>        max_tokens=4096,
+</span></span><span style="display:flex;"><span>        system=self.system_prompt,
+</span></span><span style="display:flex;"><span>        messages=self.conversation_history
+</span></span><span style="display:flex;"><span>    ) <span style="font-weight:bold">as</span> stream:
+</span></span><span style="display:flex;"><span>        full_response = <span style="font-style:italic">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">for</span> text <span style="font-weight:bold">in</span> stream.text_stream:
+</span></span><span style="display:flex;"><span>            full_response += text
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">yield</span> text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        self.conversation_history.append({
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;content&#34;</span>: full_response
+</span></span><span style="display:flex;"><span>        })
+</span></span></code></pre></div><hr>
+<h2 id="实战案例discord-机器人">实战案例：Discord 机器人</h2>
+<h3 id="环境准备">环境准备</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install anthropic discord.py python-dotenv
+</span></span></code></pre></div><h3 id="完整实现">完整实现</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">import</span> <span style="font-weight:bold">discord</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">import</span> <span style="font-weight:bold">anthropic</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">import</span> <span style="font-weight:bold">os</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">from</span> <span style="font-weight:bold">dotenv</span> <span style="font-weight:bold">import</span> load_dotenv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>load_dotenv()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 初始化客户端</span>
+</span></span><span style="display:flex;"><span>intents = discord.Intents.default()
+</span></span><span style="display:flex;"><span>intents.message_content = <span style="font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>discord_client = discord.Client(intents=intents)
+</span></span><span style="display:flex;"><span>claude_client = anthropic.Anthropic(api_key=os.getenv(<span style="font-style:italic">&#34;ANTHROPIC_API_KEY&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 存储每个频道的对话历史</span>
+</span></span><span style="display:flex;"><span>conversations = {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@discord_client.event
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">async</span> <span style="font-weight:bold">def</span> on_ready():
+</span></span><span style="display:flex;"><span>    print(<span style="font-style:italic">f</span><span style="font-style:italic">&#39;Clawdbot 已上线: </span><span style="font-weight:bold;font-style:italic">{</span>discord_client.user<span style="font-weight:bold;font-style:italic">}</span><span style="font-style:italic">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@discord_client.event
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">async</span> <span style="font-weight:bold">def</span> on_message(message):
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 忽略机器人自己的消息</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">if</span> message.author == discord_client.user:
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic"># 只响应 @机器人 或私信</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">if</span> discord_client.user.mentioned_in(message) <span style="font-weight:bold">or</span> isinstance(message.channel, discord.DMChannel):
+</span></span><span style="display:flex;"><span>        channel_id = str(message.channel.id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 获取或创建对话历史</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">if</span> channel_id <span style="font-weight:bold">not</span> <span style="font-weight:bold">in</span> conversations:
+</span></span><span style="display:flex;"><span>            conversations[channel_id] = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 清理消息内容（移除 @mention）</span>
+</span></span><span style="display:flex;"><span>        content = message.content.replace(<span style="font-style:italic">f</span><span style="font-style:italic">&#39;&lt;@</span><span style="font-weight:bold;font-style:italic">{</span>discord_client.user.id<span style="font-weight:bold;font-style:italic">}</span><span style="font-style:italic">&gt;&#39;</span>, <span style="font-style:italic">&#39;&#39;</span>).strip()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 添加用户消息</span>
+</span></span><span style="display:flex;"><span>        conversations[channel_id].append({
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;user&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;content&#34;</span>: content
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 调用 Claude API</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">async</span> <span style="font-weight:bold">with</span> message.channel.typing():
+</span></span><span style="display:flex;"><span>            response = claude_client.messages.create(
+</span></span><span style="display:flex;"><span>                model=<span style="font-style:italic">&#34;claude-sonnet-4-20250514&#34;</span>,
+</span></span><span style="display:flex;"><span>                max_tokens=2048,
+</span></span><span style="display:flex;"><span>                system=<span style="font-style:italic">&#34;你是 Clawdbot，一个部署在 Discord 的 AI 助手。保持回复简洁友好。&#34;</span>,
+</span></span><span style="display:flex;"><span>                messages=conversations[channel_id][-20:]  <span style="font-style:italic"># 只保留最近 20 条消息</span>
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        reply = response.content[0].text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 添加助手回复到历史</span>
+</span></span><span style="display:flex;"><span>        conversations[channel_id].append({
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;content&#34;</span>: reply
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="font-style:italic"># 发送回复（Discord 限制 2000 字符）</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">if</span> len(reply) &gt; 2000:
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> range(0, len(reply), 2000):
+</span></span><span style="display:flex;"><span>                <span style="font-weight:bold">await</span> message.reply(reply[i:i+2000])
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">await</span> message.reply(reply)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># 运行机器人</span>
+</span></span><span style="display:flex;"><span>discord_client.run(os.getenv(<span style="font-style:italic">&#34;DISCORD_TOKEN&#34;</span>))
+</span></span></code></pre></div><hr>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="-推荐做法">✅ 推荐做法</h3>
+<ol>
+<li><strong>合理管理对话历史</strong>
+<ul>
+<li>设置最大历史长度，避免 token 超限</li>
+<li>可以使用摘要技术压缩长对话</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">def</span> trim_history(self, max_messages: int = 20):
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;&#34;&#34;保持对话历史在合理范围内&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">if</span> len(self.conversation_history) &gt; max_messages:
+</span></span><span style="display:flex;"><span>        self.conversation_history = self.conversation_history[-max_messages:]
+</span></span></code></pre></div><ol start="2">
+<li><strong>错误处理</strong>
+<ul>
+<li>处理 API 限流和网络错误</li>
+<li>提供用户友好的错误提示</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">from</span> <span style="font-weight:bold">anthropic</span> <span style="font-weight:bold">import</span> APIError, RateLimitError
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>    response = self.client.messages.create(...)
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">except</span> RateLimitError:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> <span style="font-style:italic">&#34;请求过于频繁，请稍后再试。&#34;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">except</span> APIError <span style="font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> <span style="font-style:italic">f</span><span style="font-style:italic">&#34;服务暂时不可用：</span><span style="font-weight:bold;font-style:italic">{</span>e.message<span style="font-weight:bold;font-style:italic">}</span><span style="font-style:italic">&#34;</span>
+</span></span></code></pre></div><ol start="3">
+<li><strong>内容安全</strong>
+<ul>
+<li>利用 Claude 内置的安全机制</li>
+<li>添加自定义内容过滤</li>
+</ul>
+</li>
+</ol>
+<h3 id="-避免的错误">❌ 避免的错误</h3>
+<ol>
+<li><strong>不要暴露 API Key</strong> - 使用环境变量管理敏感信息</li>
+<li><strong>不要无限存储对话</strong> - 设置合理的清理机制</li>
+<li><strong>不要忽视速率限制</strong> - 实现请求队列或节流机制</li>
+</ol>
+<hr>
+<h2 id="进阶功能">进阶功能</h2>
+<h3 id="多模态支持">多模态支持</h3>
+<p>Claude 3 支持图像理解，Clawdbot 可以扩展为处理图片：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-weight:bold">def</span> chat_with_image(self, user_message: str, image_url: str) -&gt; str:
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;&#34;&#34;支持图像输入的对话&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    message_content = [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;image&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;source&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;url&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="font-style:italic">&#34;url&#34;</span>: image_url
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;type&#34;</span>: <span style="font-style:italic">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="font-style:italic">&#34;text&#34;</span>: user_message
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    response = self.client.messages.create(
+</span></span><span style="display:flex;"><span>        model=self.model,
+</span></span><span style="display:flex;"><span>        max_tokens=4096,
+</span></span><span style="display:flex;"><span>        messages=[{<span style="font-style:italic">&#34;role&#34;</span>: <span style="font-style:italic">&#34;user&#34;</span>, <span style="font-style:italic">&#34;content&#34;</span>: message_content}]
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">return</span> response.content[0].text
+</span></span></code></pre></div><h3 id="结合-mcp-协议">结合 MCP 协议</h3>
+<p>Clawdbot 可以结合 MCP（Model Context Protocol）扩展能力边界：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="font-style:italic"># 通过 MCP 服务器扩展工具能力</span>
+</span></span><span style="display:flex;"><span>mcp_tools = [
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;file_operations&#34;</span>,    <span style="font-style:italic"># 文件读写</span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;web_search&#34;</span>,         <span style="font-style:italic"># 网络搜索</span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;code_execution&#34;</span>,     <span style="font-style:italic"># 代码执行</span>
+</span></span><span style="display:flex;"><span>    <span style="font-style:italic">&#34;database_query&#34;</span>      <span style="font-style:italic"># 数据库查询</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><hr>
+<h2 id="总结">总结</h2>
+<p>Clawdbot 代表了新一代 AI 对话机器人的发展方向：</p>
+<ol>
+<li><strong>强大的语言理解</strong> - 基于 Claude 的先进 NLP 能力</li>
+<li><strong>灵活可扩展</strong> - 通过工具系统和 MCP 协议扩展功能</li>
+<li><strong>开发友好</strong> - 清晰的 API 设计，易于集成</li>
+<li><strong>安全可靠</strong> - 内置安全机制，保护用户隐私</li>
+</ol>
+<h3 id="关键收获">关键收获</h3>
+<p>通过 Clawdbot 的实现，我们可以看到构建现代 AI 应用的核心要素：选择合适的基础模型、设计良好的对话管理机制、以及提供可扩展的工具系统。</p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="https://docs.anthropic.com/">Anthropic Claude API 文档</a></li>
+<li><a href="https://discordpy.readthedocs.io/">Discord.py 官方文档</a></li>
+<li><a href="https://modelcontextprotocol.io/">MCP 协议规范</a></li>
+</ol>
+        </main>
+
+        <div class="row">
+          <div class="col-xs-12">
+
+          </div>
+        </div>
+
+
+
+<div class="related-content">
+  <h3>Related Posts</h3>
+  <ul>
+
+    <li><a href="/2026/01/29/multi-agent-%E7%B3%BB%E7%BB%9Fai-%E5%8D%8F%E4%BD%9C%E7%9A%84%E6%9C%AA%E6%9D%A5%E4%B8%8E%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">Multi-Agent 系统：AI 协作的未来与实战指南</a></li>
+
+    <li><a href="/2025/04/25/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%AE%98%E6%96%B9-go-%E8%AF%AD%E8%A8%80%E5%B7%A5%E5%85%B7%E9%93%BE%E4%B8%AD%E7%9A%84-mcpmodel-context-protocol%E5%AE%9E%E7%8E%B0/">深度解析：官方 Go 语言工具链中的 MCP（Model Context Protocol）实现</a></li>
+
+    <li><a href="/2025/04/03/mcpmodel-context-protocol/">MCP（Model Context Protocol）</a></li>
+
+  </ul>
+</div>
+
+
+
+
+
+        <div style="height: 50px;"></div>
+
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://muzig.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+
+
+
+        <div class="site-footer">
+
+
+</div>
+
+      </div>
+    </div>
+  </article>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+
+
+</body>
+
+</html>
