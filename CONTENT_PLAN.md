@@ -1,7 +1,5 @@
 # 技术博客内容更新规划
 
-> 注：本文件用于记录选题和长期规划；站点的正式分类、系列和 Front Matter 规范以 [CONTENT_SCHEMA.md](/Users/ligang/src/github/muzig.github.io/CONTENT_SCHEMA.md) 为准。
-
 ## 📌 内容方向定位
 
 基于现有文章分析，博客核心定位：
@@ -10,19 +8,27 @@
 - **系统化知识**：通过系列文章构建完整知识体系
 - **实践与理论结合**：既有原理分析，又有实战案例
 
+### 发布格式约束
+
+本规划中的每个“文章”都指一份手工维护的单文件 HTML：
+
+```text
+public/YYYY/MM/DD/slug/index.html
+```
+
+- `public/` 是唯一发布源；新内容不再写入 `content/*.md`。
+- Hugo 配置、旧 Markdown 和主题只作为历史存档，不参与生产部署。
+- 页面从 `public/posts/_template/index.html` 起步，但每篇文章应发展出与主题匹配的独立视觉语言，而不是套用统一皮肤。
+- 页面专属 CSS 和 JavaScript 内联到当前 HTML；允许引用 `public/fonts/`、`public/images/` 中的站内资源。
+- canonical 与 `og:url` 统一使用 `https://muzig.io`；不得提交 Hugo livereload、`localhost` URL 或 Google Fonts 外链。
+- 每篇内容上线时同时维护 `public/index.html`、`public/sitemap.xml`，以及仍在使用的 `public/index.xml`。
+- `CONTENT_PLAN.md`、`CONTENT_TRACKER.md` 等仓库管理文档仍可使用 Markdown，它们不是对外发布的文章页面。
+
 ---
 
-## 🎯 当前内容主轴
+## 🎯 三大核心主题线
 
-- **AI工程 / Agent工具链**：当前第一主轴，覆盖 Agent 工作流、工具实践、方法论与系统设计
-- **MCP**：协议原理、生态对比、实现与架构设计
-- **Go工程**：工具链、升级、性能与工程实践
-- **编程语言**：语言设计、运行时、编译原理
-- **LLM系统**：推理、RAG、模型系统架构
-
-> 下面保留的是当前仍在维护的选题池。其中 MCP / Go / 编程语言的规划最完整；AI 工程与 Agent 工具链选题会优先结合近期文章和 `CONTENT_TRACKER.md` 滚动扩展。
-
-### 1️⃣ MCP 技术系列（已启动）
+### 1️⃣ MCP 技术深度系列（已启动）
 
 **现有文章**：
 
@@ -119,10 +125,9 @@
 
 ```
 每月产出：4-6 篇文章
-- AI工程 / Agent工具链：2-3 篇
 - MCP 系列：1 篇
-- Go 系列：1-2 篇
-- 编程语言 / LLM 系列：1 篇
+- Go 系列：2-3 篇
+- 编程语言系列：1-2 篇
 
 具体安排：
 第 1 周：研究与资料收集
@@ -282,33 +287,44 @@
 
 ---
 
-## 📝 内容模板（可复用）
+## 📝 单文件 HTML 内容骨架
 
-```markdown
-+++
-date = 'YYYY-MM-DDTHH:MM:SS+08:00'
-draft = false
-title = '文章标题'
-tags = ['标签1', '标签2', '标签3']
-categories = ['AI工程'] # 主题分类
-series = ['AI 工程观察'] # 可选
-articleType = '深度解析'
-+++
+实际创建请运行 `./new-post.sh "文章标题" english-slug`，并直接编辑生成的 `index.html`。下面只表示内容语义，不规定视觉风格：
 
-## 文章背景/问题引入
-
-## 核心概念解析
-
-## 技术实现细节
-
-## 实战案例
-
-## 性能分析/最佳实践
-
-## 总结与展望
-
-## 参考资料
+```html
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="准确概括文章价值的一句话">
+  <link rel="canonical" href="https://muzig.io/YYYY/MM/DD/slug/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="文章标题">
+  <meta property="og:description" content="准确概括文章价值的一句话">
+  <meta property="og:url" content="https://muzig.io/YYYY/MM/DD/slug/">
+  <meta property="article:published_time" content="YYYY-MM-DDTHH:MM:SS+08:00">
+  <title>文章标题 · Muzig</title>
+  <style>
+    /* 为本篇主题设计独立、响应式的视觉系统 */
+  </style>
+</head>
+<body>
+  <nav><a href="/">返回首页</a></nav>
+  <main>
+    <article>
+      <header><h1>文章标题</h1></header>
+      <section aria-labelledby="context"><h2 id="context">问题与背景</h2></section>
+      <section aria-labelledby="concept"><h2 id="concept">核心概念</h2></section>
+      <section aria-labelledby="practice"><h2 id="practice">实战与验证</h2></section>
+      <section aria-labelledby="summary"><h2 id="summary">总结与延伸</h2></section>
+    </article>
+  </main>
+</body>
+</html>
 ```
+
+HTML 是发布载体，不是内容结构的限制。对比型文章可以采用双栏和矩阵，源码解读可以采用代码剧场，趋势观察可以采用时间轴；基础元信息、语义、可访问性和移动端体验保持可靠即可。
 
 ---
 
@@ -341,5 +357,5 @@ articleType = '深度解析'
 
 ---
 
-最后更新：2026-01-16
-下次 Review：2026-04-15
+最后更新：2026-08-16
+下次 Review：2026-10-15

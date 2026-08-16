@@ -82,14 +82,23 @@ learning_english/
   - AI 工具链（Dify + MCP 构建）
   - 微服务解耦架构设计
 - **联系方式**: muzig012046@gmail.com
-- **博客**: https://muzig.github.io/starrypen
+- **博客**: https://muzig.io
 - **GitHub**: https://github.com/muzig/muzig
 
 ## 📝 博客项目
 
-- **路径**: /Users/ligang/src/github/muzig.github.io
-- **用途**: 发布博客文章
-- **规则**: 按照项目文档规则生成博客
+- **路径**: `/Users/muzig/src/muzig.github.io`
+- **用途**: 发布独立设计的技术博客文章
+- **正式主域**: `https://muzig.io/`（canonical、Open Graph、sitemap 和 robots 统一使用）
+- **唯一发布源**: `public/`
+- **文章固定路径**: `public/YYYY/MM/DD/slug/index.html`
+- **创建方式**: `./new-post.sh "文章标题" english-slug`
+- **展示规则**: 每篇文章是一份完整、可独立打开的 HTML；页面专属 CSS/JavaScript 内联，并根据内容采用不同视觉风格
+- **禁止残留**: 不得提交 Hugo generator/livereload、`localhost` URL 或 Google Fonts 外链
+- **同步项**: 发布时更新 `public/index.html`、`public/sitemap.xml`，以及仍在使用的 `public/index.xml`
+- **验证方式**: `python3 -m http.server 8080 -d public` 预览，`./check-seo.sh` 检查
+- **历史说明**: `content/`、`hugo.toml`、`themes/` 和旧 Markdown 仅作存档，不再参与新文章或部署；不要运行 Hugo 覆盖手工 HTML
+- **范围说明**: 博客页面必须使用 HTML；仓库内的规划、追踪和说明文档仍可使用 Markdown
 
 ## 🎯 学习目标
 
@@ -229,4 +238,4 @@ curl -s "https://r.jina.ai/<URL>"
 
 ---
 
-**最后更新: 2026-02-12**
+**最后更新: 2026-08-16**

@@ -1,292 +1,164 @@
-# 📖 快速开始指南
+# 单文件 HTML 博客快速开始
 
-> 开始创作高质量技术博客的 5 分钟指南
+> 新文章从创建到预览、发布的唯一有效流程。
 
----
+## 先记住这条规则
 
-## 🚀 创建新文章（3 步搞定）
+所有线上文章都必须是一份可独立打开的 HTML 文件，固定放在：
 
-### Step 1: 运行创建脚本
+```text
+public/YYYY/MM/DD/slug/index.html
+```
+
+- `public/` 是 GitHub Pages 的唯一发布源。
+- 新文章不再创建 `content/posts/*.md`，也不需要 Front Matter。
+- 不再运行 Hugo 构建或 `hugo server`。
+- `content/`、`hugo.toml`、`themes/` 仅保留为历史资料，不参与新文章创作和部署。
+- 项目管理文档可以继续使用 Markdown；“只使用 HTML”特指对外发布的博客页面。
+
+## 创建新文章
+
+### 1. 运行创建脚本
 
 ```bash
-./new-post.sh "你的文章标题"
+./new-post.sh "你的文章标题" english-url-slug
 ```
 
-按照提示选择：
-- 主题分类（如 `AI工程`、`Agent工具链`、`MCP`）
-- 文章形式（如 `深度解析`、`实战教程`、`方法论`）
-- 所属系列（如 `OpenClaw 深度系列`、`MCP 技术系列`）
-
-### Step 2: 编辑内容
+建议显式提供简短、稳定的英文 slug，例如：
 
 ```bash
-# 使用你喜欢的编辑器
-code content/posts/your-article.md
+./new-post.sh "Agent 记忆系统的三种边界" agent-memory-boundaries
 ```
 
-参考模板结构填充内容：
-- ✅ 背景引入
-- ✅ 核心概念
-- ✅ 实战案例
-- ✅ 最佳实践
-- ✅ 总结要点
+脚本会询问主题和一句话摘要，并在当天目录生成：
 
-写作前先快速确认一遍 [CONTENT_SCHEMA.md](/Users/ligang/src/github/muzig.github.io/CONTENT_SCHEMA.md)，避免分类和标签回到旧模型。
+```text
+public/2026/08/16/agent-memory-boundaries/index.html
+```
 
-### Step 3: 本地预览
+若省略 slug，脚本会尝试从标题生成；纯中文标题可能回退为时间型 slug。发布后不要随意修改 slug，否则旧链接会失效。
+
+### 2. 直接编辑 HTML
 
 ```bash
-# 启动开发服务器（包含草稿）
-hugo server -D
-
-# 浏览器访问
-open http://localhost:1313
+code public/2026/08/16/agent-memory-boundaries/index.html
 ```
 
----
+以 `public/posts/_template/index.html` 为起点，但不要把模板当成统一主题。每篇文章应根据内容选择自己的排版、色彩、信息层次和必要交互。
 
-## 📋 内容管理工作流
+单页至少包含：
 
-### 每周例行（15 分钟）
+- `<!doctype html>`、`<html lang="zh-CN">`、UTF-8 和 viewport。
+- 唯一且准确的 `<title>`、`meta description` 和一个 `<h1>`。
+- 文章正文的 `<main>` / `<article>` 语义结构。
+- 发布日期、返回首页的链接和移动端布局。
+- 页面专属 CSS 放在当前文件的 `<style>` 中；页面专属 JavaScript 放在当前文件的 `<script>` 中。
+- 图片使用有意义的 `alt`；纯装饰图片使用 `alt=""`。
+- 动画兼容 `prefers-reduced-motion`，交互元素可以用键盘操作。
+- 不得保留 Hugo generator、livereload、`localhost` URL 或 Google Fonts 外链等旧构建残留。
+
+字体和图片可以引用 `public/fonts/`、`public/images/` 等站内资源。核心阅读体验不能依赖 Hugo、打包器或运行时模板。
+
+### 3. 更新入口与索引
+
+文章页面完成后：
+
+1. 在 `public/index.html` 增加文章入口，标题、主题、日期和 URL 必须与文章一致。
+2. 更新 `public/sitemap.xml` 中对应的正式 URL 和 `lastmod`。
+3. 若继续提供 RSS，再同步更新 `public/index.xml`。
+4. 在 `CONTENT_TRACKER.md` 记录文章状态和最终路径。
+
+`public/` 中的文件会被原样部署，不存在 `draft = true`。未完成文章请保留在本地未提交改动或独立分支中；不要把草稿提交到默认分支。
+
+## 本地预览
 
 ```bash
-# 1. 更新进度追踪
-vim CONTENT_TRACKER.md
-
-# 2. 检查本周目标
-#    - 查看 CONTENT_TRACKER.md 中的状态
-#    - 更新文章状态（💡 → 📝 → 🔍 → ✅）
-
-# 3. 规划下周任务
-#    - 从 CONTENT_PLAN.md 选择主题
-#    - 在 CONTENT_TRACKER.md 添加到下周计划
+python3 -m http.server 8080 -d public
 ```
 
-### 每月回顾（30 分钟）
+访问 <http://localhost:8080/>，从首页进入文章。不要直接双击 HTML：本地 HTTP 服务更接近线上路径行为。
 
-1. **统计本月产出**
-   - 发布文章数量
-   - 各系列分布
-   - 阅读量反馈
+发布前至少检查桌面端和窄屏：
 
-2. **调整下月计划**
-   - 参考 CONTENT_PLAN.md 的月度节奏
-   - 根据反馈调整主题优先级
-   - 更新 CONTENT_TRACKER.md 下月计划表
+- 首页入口能打开正确页面。
+- 页面内目录、锚点和返回首页链接可用。
+- 正文、代码块、表格和图片不会横向撑破页面。
+- 浏览器控制台没有资源 404 或 JavaScript 错误。
 
-3. **补充灵感池**
-   - 记录新的文章想法
-   - 收集读者反馈
-   - 关注技术趋势
-
----
-
-## 📂 文件说明速查
-
-| 文件 | 用途 | 更新频率 |
-|------|------|----------|
-| `CONTENT_PLAN.md` | 长期规划、系列设计、主题库 | 季度更新 |
-| `CONTENT_TRACKER.md` | 文章状态追踪、发布计划 | 每周更新 |
-| `CONTENT_SCHEMA.md` | 分类、系列、标签规范 | 有调整时更新 |
-| `content/posts/_template.md` | 标准文章模板 | 按需优化 |
-| `new-post.sh` | 快速创建文章脚本 | - |
-| `QUICK_START.md` | 本快速指南 | - |
-
----
-
-## 🎯 内容质量检查清单
-
-### 发布前必查项
-
-```markdown
-- [ ] 标题清晰、包含关键词
-- [ ] 代码示例完整可运行
-- [ ] 配图说明复杂概念
-- [ ] 目录结构清晰
-- [ ] 拼写和语法检查
-- [ ] 参考资料完整
-- [ ] draft = false (准备发布)
-- [ ] 更新 CONTENT_TRACKER.md 状态为 ✅
-```
-
-### 高质量文章标准
-
-**基础要求**（必须）：
-- ✅ 技术准确性
-- ✅ 逻辑清晰
-- ✅ 排版美观
-
-**进阶要求**（推荐）：
-- 🌟 原创洞察
-- 🌟 实战价值
-- 🌟 可重现示例
-- 🌟 性能数据支撑
-- 🌟 配图丰富
-
----
-
-## 🔄 典型工作周期
-
-### 文章创作流程（7-14 天）
-
-```
-Day 1-2:  选题与调研
-  ├─ 从 CONTENT_PLAN.md 选择主题
-  ├─ 收集资料、阅读源码
-  └─ 起草文章大纲
-
-Day 3-5:  撰写初稿
-  ├─ 使用 ./new-post.sh 创建文章
-  ├─ 按模板填充内容
-  ├─ 编写代码示例
-  └─ 状态更新为 📝 Drafting
-
-Day 6-7:  完善优化
-  ├─ Review 文章结构
-  ├─ 补充配图和图表
-  ├─ 运行代码验证
-  └─ 状态更新为 🔍 Review
-
-Day 8-10: 打磨发布
-  ├─ 最终校对
-  ├─ SEO 优化
-  ├─ 设置 draft = false
-  ├─ 发布并推广
-  └─ 状态更新为 ✅ Published
-```
-
----
-
-## 💡 常用命令速查
+## SEO 与结构检查
 
 ```bash
-# 创建新文章
-./new-post.sh "文章标题"
-
-# 本地预览（含草稿）
-hugo server -D
-
-# 本地预览（仅发布文章）
-hugo server
-
-# 构建生产版本
-hugo --minify
-
-# 查看 Hugo 版本
-hugo version
-
-# 列出所有草稿
-grep -r "draft = true" content/posts/
-
-# 列出所有已发布文章
-grep -r "draft = false" content/posts/
+./check-seo.sh
 ```
 
----
+脚本检查 `public/`、日期目录中的文章、基础元信息、canonical、Open Graph、robots 和 sitemap。详细要求见 `SEO_GUIDE.md`。
 
-## 🎨 写作技巧提示
-
-### 标题优化
-
-```
-❌ 不好的标题：
-   "Go 语言学习"
-   "关于 MCP 的一些想法"
-
-✅ 好的标题：
-   "Go 内存管理深度剖析：从分配到回收"
-   "MCP 服务端开发实战：从零实现生产级 Server"
-```
-
-### 代码示例
-
-```go
-// ❌ 不好：片段代码，无法运行
-func example() {
-    // ...
-}
-
-// ✅ 好：完整可运行的示例
-package main
-
-import "fmt"
-
-func main() {
-    result := example()
-    fmt.Println(result)
-}
-
-func example() string {
-    return "Complete working example"
-}
-```
-
-### 内容结构
-
-```
-❌ 平铺直叙，缺少层次
-✅ 清晰的三段式：
-   1. 问题引入（为什么）
-   2. 原理解析（是什么）
-   3. 实战应用（怎么做）
-```
-
----
-
-## 🆘 常见问题
-
-**Q1: 写作遇到瓶颈怎么办？**
-
-A: 
-1. 先写大纲，不追求完美
-2. 参考 CONTENT_PLAN.md 中的内容模式
-3. 从小主题开始（Quick Tips）
-4. 暂停一下，看看其他优秀博客找灵感
-
-**Q2: 如何平衡深度与更新频率？**
-
-A:
-- 深度文章：1-2 篇/月（3000+ 字）
-- 中等文章：2-3 篇/月（1500-3000 字）
-- 快速分享：1-2 篇/月（<1500 字）
-
-**Q3: 如何选择下一篇文章主题？**
-
-A: 参考优先级：
-1. 读者反馈和问题
-2. 正在学习的新技术
-3. 工作中解决的实际问题
-4. CONTENT_PLAN.md 中的规划主题
-
-**Q4: 文章发布后发现错误怎么办？**
-
-A: 
-1. 立即修正（技术错误零容忍）
-2. 在文章顶部添加更新说明
-3. 保持版本历史（Git）
-
----
-
-## 🎉 开始你的第一篇文章
+如果正式域名发生变化，可临时指定检查目标：
 
 ```bash
-# 1. 创建文章
-./new-post.sh "你的第一个主题"
-
-# 2. 开始写作
-code content/posts/your-first-topic.md
-
-# 3. 实时预览
-hugo server -D
-
-# 4. 记录进度
-vim CONTENT_TRACKER.md
+SITE_ORIGIN="https://example.com" ./check-seo.sh
 ```
 
-**祝你写作愉快！🚀**
+## 发布
+
+```bash
+git status --short
+git diff --check
+git add public/YYYY/MM/DD/slug/index.html public/index.html public/sitemap.xml CONTENT_TRACKER.md
+git commit -m "Add article: 文章标题"
+git push
+```
+
+推送到 `main` 或 `master` 后，GitHub Actions 会直接上传 `public/`。部署流程不会运行 Hugo，也不会把 Markdown 转换为 HTML。
+
+## 文件速查
+
+| 文件或目录 | 用途 | 是否参与线上发布 |
+| --- | --- | --- |
+| `public/index.html` | 首页和主要文章索引 | 是 |
+| `public/YYYY/MM/DD/slug/index.html` | 正式文章 | 是 |
+| `public/posts/_template/index.html` | 新文章起始模板 | 是，但不作为文章入口 |
+| `public/sitemap.xml` | 搜索引擎 URL 索引 | 是 |
+| `public/index.xml` | RSS（若继续维护） | 是 |
+| `CONTENT_PLAN.md` | 长期选题与内容规划 | 否 |
+| `CONTENT_TRACKER.md` | 写作状态与发布记录 | 否 |
+| `content/`、`themes/`、`hugo.toml` | 历史 Hugo 资料 | 否 |
+
+## 发布前清单
+
+- [ ] 路径严格为 `public/YYYY/MM/DD/slug/index.html`
+- [ ] 页面内容是完整 HTML，不含未替换的 `{{PLACEHOLDER}}`
+- [ ] 视觉方案服务于本篇主题，与其他文章有明确差异
+- [ ] 标题、摘要、发布日期、canonical 和分享元信息正确
+- [ ] canonical 与 `og:url` 均使用 `https://muzig.io` 正式主域
+- [ ] 页面不含 Hugo livereload、`localhost` 或 Google Fonts 外链
+- [ ] 只有一个 `<h1>`，正文标题层级连续
+- [ ] 代码示例已经运行或核对
+- [ ] 图片有尺寸约束和正确 `alt`
+- [ ] 桌面端、移动端和键盘导航可用
+- [ ] 返回首页及站内链接无误
+- [ ] 首页、sitemap 和 RSS（如使用）已经同步
+- [ ] `./check-seo.sh` 没有 FAIL
+- [ ] `CONTENT_TRACKER.md` 已更新为 Published
+
+## 常见问题
+
+### 为什么项目里还存在 Markdown 和 Hugo 文件？
+
+它们记录了旧站点的历史内容和配置，暂不删除。但新文章只编辑 `public/` 下的 HTML，部署也只读取 `public/`。
+
+### 可以复用上一篇文章的样式吗？
+
+可以复用可靠的可访问性和响应式做法，但不要复制成统一皮肤。先确定文章的视觉概念，再调整版式、字体尺度、颜色、图形和交互。
+
+### 如何处理未完成文章？
+
+默认分支里的 `public/` 就是发布内容，没有草稿开关。草稿应留在本地未提交改动或独立分支，完成检查后再合入。
+
+### 发布后发现错误怎么办？
+
+直接修正对应的 `index.html`，必要时在正文中写明更新日期；如果标题或摘要改变，同时更新首页和 sitemap。
 
 ---
 
-💡 **提示**：将本指南加入书签，每次创作前快速浏览一遍。
-
-最后更新：2026-01-16
+最后更新：2026-08-16

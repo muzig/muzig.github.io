@@ -1,6 +1,16 @@
 # 内容发布追踪表
 
-> 更新日期：2026-01-16
+> 规范更新：2026-08-16。下方数量与排期保留为 2026-01-16 的历史规划快照；线上文章以 `public/index.html` 为准。
+
+## 发布路径规则
+
+- 每篇文章的最终产物只能是 `public/YYYY/MM/DD/slug/index.html`。
+- 新建文章使用 `./new-post.sh "标题" english-slug`，之后直接编辑生成的 HTML。
+- 不为新文章创建 `content/posts/*.md`，不使用 Front Matter、Hugo 草稿或 Hugo 构建。
+- canonical 与 `og:url` 使用 `https://muzig.io`，不得提交 Hugo livereload、`localhost` URL 或 Google Fonts 外链。
+- `public/` 会被原样部署；未完成稿保留在本地未提交改动或独立分支中。
+- 进入 Review 前，在备注中记录最终 HTML 路径和视觉概念。
+- 标记 Published 前，必须更新首页、sitemap、RSS（如继续维护），并运行 `./check-seo.sh`。
 
 ## 📊 2026 年内容发布状态
 
@@ -31,9 +41,10 @@
 ## 状态说明
 
 - 💡 **Idea** - 选题确定
-- 📝 **Drafting** - 撰写中
+- 📝 **Drafting** - 在目标 `index.html` 中撰写内容
+- 🎨 **Designing** - 为本篇内容完成独立视觉和响应式设计
 - 🔍 **Review** - 审阅修改中
-- ✅ **Published** - 已发布
+- ✅ **Published** - HTML、首页入口和索引已发布
 - ⏸️ **Paused** - 暂停
 - ❌ **Cancelled** - 取消
 
@@ -90,6 +101,8 @@
 
 ## 📚 已发布文章归档
 
+归档表用于保留编辑历史。实际 URL 应指向日期目录下的单文件 HTML；旧 `content/` 文件或 `/posts/...` 路径不再作为新文章来源。
+
 ### 2025 年
 
 | 发布日期   | 文章标题                   | 系列     | 阅读量 | 备注 |
@@ -141,7 +154,9 @@
 2. **每月规划**：根据本表更新下月计划
 3. **季度总结**：Review 目标完成度，调整策略
 4. **灵感记录**：随时添加到「创作灵感池」
+5. **路径登记**：文章进入 Drafting 后，在备注中写入 `public/YYYY/MM/DD/slug/index.html`
+6. **发布核对**：确认页面采用独立视觉、首页可达、SEO 检查通过后再标记 Published
 
 ---
 
-最后更新：2026-01-16
+最后更新：2026-08-16
