@@ -1,17 +1,20 @@
 # Muzig · Digital Field Notes
 
-一个不使用统一文章主题的静态技术博客。每篇文章都是一份独立、可直接发布的单文件 HTML；内容和视觉可以一起演进。
+Muzig 是一个由 Astro 生成纯静态 HTML 的中文技术博客。公共结构由组件维护，每篇文章仍可通过 `design` 字段选择不同视觉主题；历史 Hugo 内容仅作为资料保留，不参与构建。
 
-## 目录约定
+## 发布结构
 
 ```text
-public/
-├── index.html                         # 首页与文章索引
-├── posts/_template/index.html         # 新文章起始模板
-└── YYYY/MM/DD/article-slug/index.html # 独立文章
+src/content/blog/       # 新文章 Markdown / MDX
+src/layouts/            # 公共页面与文章骨架
+src/components/         # 导航、页脚等公共组件
+src/styles/             # 公共视觉系统
+public/                 # 字体、图片、脚本和站点验证文件
+legacy-pages/           # 暂未迁移的旧 HTML 页面
+dist/                   # Astro 构建出的唯一部署产物（不提交）
 ```
 
-`public/` 是线上站点的唯一发布源。`content/`、Hugo 配置和主题仅作为旧内容存档保留，不再参与部署。
+`content/`、`themes/`、`archetypes/`、`resources/` 和 `hugo.toml` 属于历史 Hugo 系统。不要用 Hugo 覆盖 `public/` 或 `dist/`。
 
 ## 新建文章
 
@@ -19,25 +22,55 @@ public/
 ./new-post.sh "文章标题" english-url-slug
 ```
 
-脚本会创建一份包含完整 HTML、内联 CSS 和 SEO 元信息的文章。生成后：
+脚本会在 `src/content/blog/` 创建 Markdown 草稿，并生成稳定的日期 URL。完成内容和元数据后，将 `draft` 改为 `false` 即可发布。首页、RSS 和 Sitemap 会自动更新。
 
-1. 直接编辑对应的 `index.html`，并按主题自由调整视觉。
-2. 在 `public/index.html` 的文章网格中增加入口。
-3. 本地预览：
+核心元数据：
 
-```bash
-python3 -m http.server 8080 -d public
+```yaml
+title: 文章标题
+description: 一句话说明文章解决的问题
+publishedAt: 2026-09-01T10:00:00+08:00
+draft: true
+category: AI工程
+articleType: 深度解析
+tags: [Astro, AI工程]
+design: standard
+path: /2026/09/01/english-url-slug/
+legacyUrls: []
+featured: false
 ```
 
-访问 <http://localhost:8080>。
+`design` 支持 `standard`、`editorial` 和 `manifesto`。极特殊页面可以直接创建独立 `.astro` 页面或使用 MDX 组件。
 
-## 发布
+## 本地开发
 
-推送到 `main` 或 `master` 后，GitHub Actions 会直接部署 `public/`，不会再运行 Hugo 或覆盖手工 HTML。
+```bash
+npm install
+npm run dev
+```
 
-## 单文件原则
+`npm run dev` 只预览 Astro 管理的页面。要同时检查旧 HTML 兼容层：
 
-- 页面逻辑和页面专属样式放在同一个 HTML 文件中。
-- 可以引用站内公共字体或图片；关键阅读体验不依赖构建工具。
-- 每篇文章应保留返回首页的入口、移动端布局、页面标题和 description。
-- 视觉无需统一，但导航语义与可访问性应保持可靠。
+```bash
+npm run build
+npm run preview
+```
+
+## 验证与发布
+
+```bash
+npm run check
+```
+
+该命令会检查 Astro 类型、重新构建 `dist/`，并验证 UTF-8、首页元信息、旧文章 URL、RSS、Sitemap、草稿排除和 `/posts/*` 兼容重定向。
+
+推送到 `main` 或 `master` 后，GitHub Actions 使用 Node.js 构建并部署 `dist/`。旧 HTML 通过 `scripts/copy-legacy.mjs` 复制到构建结果；路径冲突会直接中止构建，防止旧页面覆盖 Astro 页面。
+
+## 渐进迁移规则
+
+- 新文章只写入 `src/content/blog/`。
+- 旧日期 URL 在迁移前保持不变。
+- 迁移某篇旧文章时，从 `legacy-pages/` 删除对应 HTML，并在内容文件中继续使用原 `path`。
+- `legacy-pages/posts/*` 只生成指向 canonical 日期 URL 的轻量重定向。
+- `noindex` 旧草稿和 `legacy-pages/posts/_template/` 不会进入 `dist/`。
+- 不要手工编辑或提交 `dist/`。
