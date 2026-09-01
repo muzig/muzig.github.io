@@ -1,0 +1,69 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  publishedAt?: Date;
+  updatedAt?: Date;
+  tags?: string[];
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonical = new URL(Astro.url.pathname, Astro.site).href,
+  type = 'website',
+  publishedAt,
+  updatedAt,
+  tags = [],
+  bodyClass = '',
+} = Astro.props;
+const fullTitle = title.includes('Muzig') ? title : `${title} · Muzig`;
+const jsonLd = type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  inLanguage: 'zh-CN',
+  datePublished: publishedAt?.toISOString(),
+  dateModified: (updatedAt ?? publishedAt)?.toISOString(),
+  mainEntityOfPage: canonical,
+  url: canonical,
+  keywords: tags,
+  author: { '@type': 'Person', name: 'Muzig' },
+} : null;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f0eee7" />
+    <meta name="google-site-verification" content="cjUeAB94_LgGaOQ3rk5sUy6wCk-o8N85tKvKJ98-ifM" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    {publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
+    {updatedAt && <meta property="article:modified_time" content={updatedAt.toISOString()} />}
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/images/tag.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" href="/index.xml" title="Muzig 的技术博客" />
+    <title>{fullTitle}</title>
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @font-face{font-family:Arvo;src:url('/fonts/Arvo.woff2') format('woff2');font-display:swap}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;-webkit-font-smoothing:antialiased}a{color:inherit}button,input{font:inherit}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>

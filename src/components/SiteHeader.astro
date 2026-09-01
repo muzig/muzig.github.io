@@ -1,0 +1,25 @@
+---
+interface Props {
+  issue?: string;
+}
+
+const { issue = 'DIGITAL FIELD NOTES' } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Muzig 首页">
+    <span class="brand-mark" aria-hidden="true"></span>
+    MUZIG / FIELD NOTES
+  </a>
+  <nav aria-label="主要导航">
+    <span>{issue}</span>
+    <a href="/#writing">写作</a>
+    <a href="https://github.com/muzig" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </nav>
+</header>
+
+<style>
+  .site-header{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid currentColor;font:12px Arvo,"PingFang SC",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:14px;font-weight:700}.brand-mark{width:13px;height:13px;background:#e1432f;transform:rotate(45deg)}nav{display:flex;align-items:center;gap:clamp(18px,3vw,46px)}nav span{color:var(--muted,#716f67)}nav a{text-decoration:none}nav a:hover{text-decoration:underline;text-underline-offset:4px}
+  @media(max-width:620px){.site-header{height:64px}nav span,nav a:first-of-type{display:none}nav{gap:16px}}
+</style>

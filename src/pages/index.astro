@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import legacyPosts from '../data/legacy-posts.json';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/home.css';
+
+const generated = await getCollection('blog', ({ data }) => !data.draft);
+const posts = [
+  ...generated.map(({ data }) => ({
+    title: data.title,
+    description: data.description,
+    publishedAt: data.publishedAt.toISOString().slice(0, 10),
+    category: data.category,
+    articleType: data.articleType,
+    url: data.path,
+    featured: data.featured,
+    legacy: false,
+  })),
+  ...legacyPosts,
+].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+
+const topics = [...new Set(posts.map((post) => post.category))];
+const latest = posts.at(0)?.publishedAt.slice(0, 7).replace('-', '.') ?? '2026.03';
+const formatDate = (value: string) => value.replaceAll('-', '.');
+const cardClass = (index: number, featured: boolean) => {
+  if (index === 0 || featured) return 'story featured';
+  if ([3, 4, 9, 15, 16, 21, 26, 29].includes(index)) return `story wide${index % 3 === 0 ? ' edge' : ''}`;
+  return `story${(index + 1) % 3 === 0 ? ' edge' : ''}`;
+};
+---
+
+<BaseLayout
+  title="Muzig · Digital Field Notes"
+  description="Muzig 的独立技术写作：AI Agent、工程系统、Go 与编程语言。内容驱动结构，每个主题保留自己的视觉表达。"
+  canonical="https://muzig.io/"
+>
+  <div class="home-shell">
+    <SiteHeader issue={`ISSUE ${latest}`} />
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="reveal"><div class="eyebrow">Independent technical writing · Shanghai</div><h1 id="hero-title">Ideas need<br />their own<br /><em>shape.</em></h1></div>
+        <aside class="hero-note reveal"><strong>{posts.length}</strong><p>纯静态 HTML，生成式内容流水线。公共结构保持可靠，每篇文章仍可选择自己的视觉语言。</p><a class="down" href="#writing"><span aria-hidden="true">↓</span> 浏览全部文章</a></aside>
+      </section>
+      <section class="manifesto" aria-label="本站说明"><div class="manifesto-label">A small manifesto<br />关于这个站</div><div class="manifesto-text"><p>内容不该被同一个模板压平。这里让结构自动生成，同时为每个主题保留 <mark>its own shape</mark>。</p></div></section>
+      <section class="work" id="writing">
+        <div class="work-head"><h2>Selected<br />writing</h2><label class="controls"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="search" type="search" placeholder="搜索标题或主题…" aria-label="搜索文章" /></label></div>
+        <div class="filters" role="group" aria-label="按主题筛选">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">全部</button>
+          {topics.map((topic) => <button class="filter" type="button" data-filter={topic} aria-pressed="false">{topic}</button>)}
+        </div>
+        <div class="grid" id="stories">
+          {posts.map((post, index) => (
+            <a class={cardClass(index, post.featured)} data-topic={post.category} href={post.url} style={`--hue:${(index * 43 + 145) % 360}`}>
+              <div class="story-top"><span class="story-no">{String(index + 1).padStart(2, '0')}{index === 0 ? ' / Latest' : ''}</span><span>{post.category} · {formatDate(post.publishedAt)}</span></div>
+              <h3>{post.title}</h3>
+              <div class="story-foot"><span>{post.description || post.articleType}</span><span class="arrow">↗</span></div>
+            </a>
+          ))}
+        </div>
+        <p class="empty" id="empty">没有找到匹配的文章。换个关键词试试。</p>
+      </section>
+    </main>
+    <SiteFooter />
+  </div>
+  <script>
+    const search = document.querySelector<HTMLInputElement>('#search');
+    const filters = [...document.querySelectorAll<HTMLButtonElement>('.filter')];
+    const stories = [...document.querySelectorAll<HTMLElement>('.story')];
+    const empty = document.querySelector<HTMLElement>('#empty');
+    let topic = 'all';
+    const update = () => {
+      const query = search?.value.trim().toLocaleLowerCase('zh-CN') ?? '';
+      let visible = 0;
+      stories.forEach((story) => {
+        const show = (topic === 'all' || story.dataset.topic === topic) && (!query || story.textContent?.toLocaleLowerCase('zh-CN').includes(query));
+        story.hidden = !show;
+        if (show) visible += 1;
+      });
+      if (empty) empty.style.display = visible ? 'none' : 'block';
+    };
+    filters.forEach((button) => button.addEventListener('click', () => {
+      topic = button.dataset.filter ?? 'all';
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      update();
+    }));
+    search?.addEventListener('input', update);
+  </script>
+</BaseLayout>

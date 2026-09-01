@@ -1,0 +1,302 @@
+[
+  {
+    "title": "6 个反直觉的 Agent 工程原则",
+    "description": "当模型更聪明，工程方法反而需要更克制。",
+    "publishedAt": "2026-03-05",
+    "category": "AI Agent",
+    "articleType": "当模型更聪明，工程方法反而需要更克制。",
+    "url": "/2026/03/05/6个反直觉的agent工程原则/",
+    "featured": true,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw 小白入门指南：从人工智障到专属助理",
+    "description": "Guide",
+    "publishedAt": "2026-03-04",
+    "category": "AI Agent",
+    "articleType": "Guide",
+    "url": "/2026/03/04/openclaw-小白入门指南从人工智障到专属助理的进阶之路/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "从 Vibe Coding 到 Agentic Engineering：40 天进化之路",
+    "description": "Field report",
+    "publishedAt": "2026-03-04",
+    "category": "AI Agent",
+    "articleType": "Field report",
+    "url": "/2026/03/04/从-vibe-coding-到-agentic-engineeringai-agent-的-40-天进化之路/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "AI 不一定让打工人变惨：工程师视角的经济逻辑",
+    "description": "Economics",
+    "publishedAt": "2026-03-03",
+    "category": "工程系统",
+    "articleType": "Economics",
+    "url": "/2026/03/03/ai-不一定让打工人变惨工程师视角的经济逻辑/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw ACP Agents：打通 Claude Code、Codex、Gemini CLI",
+    "description": "Architecture / Tooling",
+    "publishedAt": "2026-02-28",
+    "category": "AI Agent",
+    "articleType": "Architecture / Tooling",
+    "url": "/2026/02/28/openclaw-acp-agents打通-claude-codecodexgemini-cli-的终极方案/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Karpathy microGPT：200 行纯 Python 实现完整 GPT",
+    "description": "Deep dive",
+    "publishedAt": "2026-02-28",
+    "category": "编程语言",
+    "articleType": "Deep dive",
+    "url": "/2026/02/28/karpathy-microgpt200行纯python实现完整gpt/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "当 Andrej Karpathy 开始“编程一个研究组织”",
+    "description": "Research systems",
+    "publishedAt": "2026-02-28",
+    "category": "AI Agent",
+    "articleType": "Research systems",
+    "url": "/2026/02/28/当-andrej-karpathy-开始编程一个研究组织/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "AI 编程进入第三阶段：从“写代码”到“建工厂”",
+    "description": "Perspective",
+    "publishedAt": "2026-02-27",
+    "category": "AI 编程",
+    "articleType": "Perspective",
+    "url": "/2026/02/27/ai-编程进入第三阶段从写代码到建工厂/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "编程，在过去两个月里变得面目全非",
+    "description": "Essay",
+    "publishedAt": "2026-02-26",
+    "category": "AI 编程",
+    "articleType": "Essay",
+    "url": "/2026/02/26/编程在过去两个月里变得面目全非/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Agent-Orchestrated Development：从写代码的人到编排系统的人",
+    "description": "Systems thinking",
+    "publishedAt": "2026-02-17",
+    "category": "工程系统",
+    "articleType": "Systems thinking",
+    "url": "/2026/02/17/agent-orchestrated-development从写代码的人到编排系统的人/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw 修复 Python venv 导致的文件描述符耗尽问题",
+    "description": "Troubleshooting",
+    "publishedAt": "2026-02-06",
+    "category": "工程系统",
+    "articleType": "Troubleshooting",
+    "url": "/2026/02/06/openclaw-修复-python-venv-导致的文件描述符耗尽问题/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Unity 程序集系统详解：从 Go 语言视角理解 asmdef / asmref",
+    "description": "Architecture",
+    "publishedAt": "2026-02-05",
+    "category": "工程系统",
+    "articleType": "Architecture",
+    "url": "/2026/02/05/unity-程序集系统详解从-go-语言视角理解-asmdef/asmref/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw 多 Agent 架构：打造你的 AI 协作团队",
+    "description": "Multi-agent",
+    "publishedAt": "2026-02-05",
+    "category": "AI Agent",
+    "articleType": "Multi-agent",
+    "url": "/2026/02/05/openclaw-多-agent-架构深度解析打造你的-ai-协作团队/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "QMD：OpenClaw 的本地语义搜索解决方案",
+    "description": "Local search",
+    "publishedAt": "2026-02-04",
+    "category": "AI Agent",
+    "articleType": "Local search",
+    "url": "/2026/02/04/qmdopenclaw-的本地语义搜索解决方案/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "llama.cpp vs vLLM：边缘部署与云端服务的架构抉择",
+    "description": "Inference",
+    "publishedAt": "2026-02-03",
+    "category": "工程系统",
+    "articleType": "Inference",
+    "url": "/2026/02/03/llama.cpp-vs-vllm边缘部署与云端服务的架构抉择/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw Node 执行权限配置详解",
+    "description": "Security / Config",
+    "publishedAt": "2026-02-03",
+    "category": "工程系统",
+    "articleType": "Security / Config",
+    "url": "/2026/02/03/openclaw-node-执行权限配置详解/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw 架构揭秘：1 个大脑，N 个手脚",
+    "description": "Architecture",
+    "publishedAt": "2026-02-03",
+    "category": "AI Agent",
+    "articleType": "Architecture",
+    "url": "/2026/02/03/openclaw-架构揭秘1个大脑-n个手脚ai-这么玩才香/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw 工作区设计：两级 Memory 与目录组织",
+    "description": "Workspace",
+    "publishedAt": "2026-02-02",
+    "category": "AI Agent",
+    "articleType": "Workspace",
+    "url": "/2026/02/02/openclaw-工作区设计两级-memory-与目录组织最佳实践/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Claude Code 团队使用技巧：10 个核心实践",
+    "description": "Practice",
+    "publishedAt": "2026-02-02",
+    "category": "AI 编程",
+    "articleType": "Practice",
+    "url": "/2026/02/02/claude-code-团队使用技巧10-个核心实践/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "MCP vs LangChain vs Function Calling：AI 集成方案深度对比",
+    "description": "Comparison",
+    "publishedAt": "2026-01-31",
+    "category": "工程系统",
+    "articleType": "Comparison",
+    "url": "/2026/01/31/mcp-vs-langchain-vs-function-callingai-集成方案深度对比/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "OpenClaw：AI Agent 的自主操作系统",
+    "description": "Introduction",
+    "publishedAt": "2026-01-31",
+    "category": "AI Agent",
+    "articleType": "Introduction",
+    "url": "/2026/01/31/openclawai-agent-的自主操作系统/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Clawdbot：基于 Claude AI 构建智能对话机器人",
+    "description": "Conversational AI",
+    "publishedAt": "2026-01-30",
+    "category": "AI Agent",
+    "articleType": "Conversational AI",
+    "url": "/2026/01/30/clawdbot基于-claude-ai-构建智能对话机器人/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Multi-Agent 系统：AI 协作的未来与实战指南",
+    "description": "Foundations",
+    "publishedAt": "2026-01-29",
+    "category": "AI Agent",
+    "articleType": "Foundations",
+    "url": "/2026/01/29/multi-agent-系统ai-协作的未来与实战指南/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "编程语言核心要素：性能与演进的关键评估维度",
+    "description": "Foundations",
+    "publishedAt": "2025-08-15",
+    "category": "编程语言",
+    "articleType": "Foundations",
+    "url": "/2025/08/15/编程语言核心要素性能与演进的关键评估维度/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "编程语言设计组成解析",
+    "description": "Language design",
+    "publishedAt": "2025-08-15",
+    "category": "编程语言",
+    "articleType": "Language design",
+    "url": "/2025/08/15/编程语言设计组成解析/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "编程语言运行流程剖析",
+    "description": "Compiler / Runtime",
+    "publishedAt": "2025-08-15",
+    "category": "编程语言",
+    "articleType": "Compiler / Runtime",
+    "url": "/2025/08/15/编程语言运行流程剖析/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Go 语言设计组成深度解析",
+    "description": "Language design",
+    "publishedAt": "2025-08-15",
+    "category": "Go",
+    "articleType": "Language design",
+    "url": "/2025/08/15/go-语言设计组成深度解析/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "Go 版本升级检查指南",
+    "description": "Best practice",
+    "publishedAt": "2025-08-15",
+    "category": "Go",
+    "articleType": "Best practice",
+    "url": "/2025/08/15/go-版本升级检查指南/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "官方 Go 工具链中的 MCP 实现",
+    "description": "Deep dive",
+    "publishedAt": "2025-04-25",
+    "category": "Go",
+    "articleType": "Deep dive",
+    "url": "/2025/04/25/深度解析官方-go-语言工具链中的-mcpmodel-context-protocol实现/",
+    "featured": false,
+    "legacy": true
+  },
+  {
+    "title": "MCP（Model Context Protocol）",
+    "description": "Protocol foundations",
+    "publishedAt": "2025-04-03",
+    "category": "工程系统",
+    "articleType": "Protocol foundations",
+    "url": "/2025/04/03/mcpmodel-context-protocol/",
+    "featured": false,
+    "legacy": true
+  }
+]
