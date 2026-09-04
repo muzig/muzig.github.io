@@ -24,7 +24,7 @@ export async function GET(context: { site?: URL }) {
   return rss({
     title: 'Muzig 的技术博客',
     description: 'AI 工程、Agent 工具链、MCP、Go 工程、编程语言与 LLM 系统。',
-    site: context.site ?? new URL('https://muzig.io'),
+    site: context.site ?? new URL('https://muzig.github.io'),
     items,
     customData: '<language>zh-CN</language>',
   });

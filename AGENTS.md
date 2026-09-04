@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository is the source for `Muzig`, a technical blog published at `https://muzig.io`.
+This repository is the source for `Muzig`, a technical blog currently published at `https://muzig.github.io`.
 
 ## Purpose
 
@@ -72,7 +72,7 @@ These systems are not required to stay synchronized. Do not assume that changing
 - Maintain a working return link to the homepage, responsive behavior, accessible navigation, a meaningful page title, and a meta description.
 - Do not manually update the homepage, RSS, or Sitemap for Astro content; they are generated from the collection.
 - Keep drafts marked `draft: true`; drafts must not enter `dist/`.
-- Preserve the canonical domain `https://muzig.io`; do not reintroduce `muzig.github.io` in active pages or configuration.
+- Use `https://muzig.github.io` as the canonical domain while the former `muzig.io` domain is inactive.
 - Do not hand-edit or commit `dist/`.
 
 ## Historical Hugo Content Rules

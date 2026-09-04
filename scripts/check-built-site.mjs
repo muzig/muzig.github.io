@@ -42,8 +42,7 @@ const home = await readFile(join(dist, 'index.html'), 'utf8');
 assert(home.includes('<!DOCTYPE html>') || home.includes('<!doctype html>'), '首页缺少 HTML5 doctype');
 assert(home.includes('<html lang="zh-CN">'), '首页缺少 zh-CN lang');
 assert(home.includes('<meta name="description"'), '首页缺少 description');
-assert(home.includes('<link rel="canonical" href="https://muzig.io/">'), '首页 canonical 不正确');
-assert(!home.includes('muzig.github.io'), '首页重新引入了旧域名');
+assert(home.includes('<link rel="canonical" href="https://muzig.github.io/">'), '首页 canonical 不正确');
 assert((home.match(/class="story(?:\s|\")/g) ?? []).length === expectedPostCount, '首页文章卡片数量不正确');
 
 for (const post of legacyPosts) {
@@ -61,9 +60,15 @@ const rss = await readFile(join(dist, 'index.xml'), 'utf8');
 assert((rss.match(/<item>/g) ?? []).length === expectedPostCount, 'RSS 的已发布文章数量不正确');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 assert((sitemap.match(/<url>/g) ?? []).length === expectedPostCount + 1, 'Sitemap 的 URL 数量不正确');
-assert(sitemap.includes('https://muzig.io/'), 'Sitemap 缺少首页');
+assert(sitemap.includes('https://muzig.github.io/'), 'Sitemap 缺少首页');
 const robots = await readFile(join(dist, 'robots.txt'), 'utf8');
-assert(robots.includes('Sitemap: https://muzig.io/sitemap.xml'), 'robots.txt 未指向正式 Sitemap');
+assert(robots.includes('Sitemap: https://muzig.github.io/sitemap.xml'), 'robots.txt 未指向正式 Sitemap');
+
+const publicTextFiles = files.filter((path) => /\.(?:html|xml|txt)$/.test(path));
+for (const path of publicTextFiles) {
+  const source = await readFile(path, 'utf8');
+  assert(!source.includes('muzig.io'), `${relative(dist, path)} 仍引用已弃用域名`);
+}
 
 assert(!files.includes(join(dist, 'posts', '_template', 'index.html')), '旧 HTML 模板被发布');
 
