@@ -13,7 +13,7 @@ public/YYYY/MM/DD/slug/index.html
 对应 URL 为：
 
 ```text
-https://muzig.io/YYYY/MM/DD/slug/
+https://muzig.github.io/YYYY/MM/DD/slug/
 ```
 
 如果以后启用自定义域名，必须一次性同步所有 canonical、Open Graph URL、`robots.txt`、`sitemap.xml` 和 Search Console 资源，不能混用多个主域名。
@@ -27,12 +27,12 @@ https://muzig.io/YYYY/MM/DD/slug/
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="清楚说明文章解决什么问题，避免堆砌关键词。">
 
-<link rel="canonical" href="https://muzig.io/YYYY/MM/DD/slug/">
+<link rel="canonical" href="https://muzig.github.io/YYYY/MM/DD/slug/">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="文章标题">
 <meta property="og:description" content="与正文一致的分享摘要">
-<meta property="og:url" content="https://muzig.io/YYYY/MM/DD/slug/">
+<meta property="og:url" content="https://muzig.github.io/YYYY/MM/DD/slug/">
 <meta property="article:published_time" content="YYYY-MM-DDTHH:MM:SS+08:00">
 
 <title>文章标题 · Muzig</title>
@@ -52,7 +52,7 @@ https://muzig.io/YYYY/MM/DD/slug/
   "datePublished": "YYYY-MM-DDTHH:MM:SS+08:00",
   "dateModified": "YYYY-MM-DDTHH:MM:SS+08:00",
   "author": { "@type": "Person", "name": "Muzig" },
-  "mainEntityOfPage": "https://muzig.io/YYYY/MM/DD/slug/"
+  "mainEntityOfPage": "https://muzig.github.io/YYYY/MM/DD/slug/"
 }
 </script>
 ```
@@ -105,7 +105,7 @@ SEO 不要求页面长得一致；清晰语义、可访问性、性能和内容�
 User-agent: *
 Allow: /
 
-Sitemap: https://muzig.io/sitemap.xml
+Sitemap: https://muzig.github.io/sitemap.xml
 ```
 
 Google Search Console 的 HTML 验证文件直接放在 `public/` 根目录：
@@ -114,7 +114,7 @@ Google Search Console 的 HTML 验证文件直接放在 `public/` 根目录：
 public/googlexxxxxxxxxxxxxxxx.html
 ```
 
-不要放到旧的 `static/`，因为部署不会再复制该目录。部署后先在正式域名打开验证文件，再在 Search Console 提交 `https://muzig.io/sitemap.xml`。
+不要放到旧的 `static/`，因为部署不会再复制该目录。部署后先在正式域名打开验证文件，再在 Search Console 提交 `https://muzig.github.io/sitemap.xml`。
 
 Bing Webmaster Tools 也提交同一个正式 sitemap。
 

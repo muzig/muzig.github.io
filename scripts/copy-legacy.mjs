@@ -6,6 +6,8 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const sourceRoot = resolve(root, 'legacy-pages');
 const outputRoot = resolve(root, 'dist');
 const generatedRootFiles = new Set(['index.html', 'index.xml', 'robots.txt', 'sitemap.xml']);
+const legacySiteUrl = 'https://muzig.io';
+const currentSiteUrl = 'https://muzig.github.io';
 let copied = 0;
 let redirected = 0;
 let skipped = 0;
@@ -23,6 +25,12 @@ async function exists(path) {
 
 function isNoindex(source) {
   return /<meta[^>]+(?:name=["']robots["'][^>]+content=["'][^"']*noindex|content=["'][^"']*noindex[^>]+name=["']robots["'])[^>]*>/i.test(source);
+}
+
+function rewriteLegacyDomain(source) {
+  return source
+    .replaceAll(legacySiteUrl, currentSiteUrl)
+    .replaceAll('https:\\/\\/muzig.io', 'https:\\/\\/muzig.github.io');
 }
 
 function redirectDocument(target) {
@@ -50,7 +58,7 @@ async function copyEntry(sourcePath) {
 
   const outputPath = join(outputRoot, relativePath);
   if (normalized.endsWith('.html')) {
-    const source = await readFile(sourcePath, 'utf8');
+    const source = rewriteLegacyDomain(await readFile(sourcePath, 'utf8'));
     if (isNoindex(source)) {
       skipped += 1;
       return;
@@ -64,6 +72,24 @@ async function copyEntry(sourcePath) {
       redirected += 1;
       return;
     }
+    if (await exists(outputPath)) {
+      throw new Error(`旧页面与 Astro 生成结果冲突：${normalized}`);
+    }
+    await mkdir(dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, source, 'utf8');
+    copied += 1;
+    return;
+  }
+
+  if (normalized.endsWith('.xml') || normalized.endsWith('.txt')) {
+    const source = rewriteLegacyDomain(await readFile(sourcePath, 'utf8'));
+    if (await exists(outputPath)) {
+      throw new Error(`旧页面与 Astro 生成结果冲突：${normalized}`);
+    }
+    await mkdir(dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, source, 'utf8');
+    copied += 1;
+    return;
   }
 
   if (await exists(outputPath)) {

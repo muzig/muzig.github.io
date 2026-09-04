@@ -11,7 +11,7 @@ export async function GET() {
     ...legacyPosts.map((post) => ({ url: post.url, modified: new Date(`${post.publishedAt}T10:00:00+08:00`) })),
   ];
   const body = pages.map(({ url, modified }) => {
-    const loc = escapeXml(new URL(url, 'https://muzig.io').href);
+    const loc = escapeXml(new URL(url, 'https://muzig.github.io').href);
     const lastmod = modified ? `<lastmod>${modified.toISOString()}</lastmod>` : '';
     return `  <url><loc>${loc}</loc>${lastmod}</url>`;
   }).join('\n');
