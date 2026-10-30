@@ -42,6 +42,17 @@ featured: false
 
 `design` 支持 `standard`、`editorial` 和 `manifesto`。极特殊页面可以直接创建独立 `.astro` 页面或使用 MDX 组件。
 
+## 首页（个人主页）
+
+首页按 X 网页版的三栏结构做成英文个人主页：左侧导航、中间是封面、头像、简介、Now 和文章时间线，右侧是 About、Series 和 Topics。设计规格见 `docs/superpowers/specs/2026-10-30-x-style-profile-home-design.md`。
+
+- 个人信息只改 `src/data/profile.json`：简介、链接、Now、Start here 文章列表和系列英文名。
+- 旧文章在 `src/data/legacy-posts.json` 中需要 `titleEn`、`excerptEn`；`readMinutes`、`series`、`topicEn` 由 `scripts/enrich-legacy-posts.mjs` 生成，脚本不会覆盖已有翻译。
+- 新文章可在 front matter 中填写 `titleEn`、`excerptEn`，阅读时长在构建时自动计算。
+- 缺少英文标题或摘要、或 Start here 指向不存在的文章时，构建会失败。
+- 首页不展示任何虚构数据（点赞、浏览量、评论数）。AI 读者评论区上线前，相关区块保持隐藏。
+- 首页使用 `lang="en"`；文章页保持中文。
+
 ## 本地开发
 
 ```bash

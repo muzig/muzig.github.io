@@ -55,6 +55,9 @@ These systems are not required to stay synchronized. Do not assume that changing
 - Deployment workflow: `.github/workflows/hugo.yml`
 - Current workflow and page conventions: `README.md`
 - New article template: `src/content/blog/_template.md`
+- Homepage profile data: `src/data/profile.json`
+- Legacy post index and English metadata: `src/data/legacy-posts.json`
+- Homepage design: `docs/superpowers/specs/2026-10-30-x-style-profile-home-design.md`
 
 ### Historical Hugo archive
 
@@ -66,7 +69,8 @@ These systems are not required to stay synchronized. Do not assume that changing
 
 ## Astro Working Rules
 
-- Default to Chinese for user-facing content unless the task clearly requires English.
+- Default to Chinese for user-facing content unless the task clearly requires English. The homepage (profile page) UI and its post titles/excerpts are in English; article pages stay in Chinese.
+- The homepage is an X-style personal profile page. Edit author information in `src/data/profile.json`, not in components. Never show invented engagement numbers (likes, views, reply counts).
 - Prefer Markdown or MDX under `src/content/blog/` for new content.
 - Put shared structure in components and layouts; keep genuinely page-specific design close to the article or its dedicated layout.
 - Maintain a working return link to the homepage, responsive behavior, accessible navigation, a meaningful page title, and a meta description.
