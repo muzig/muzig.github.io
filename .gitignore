@@ -4,3 +4,5 @@ dist/
 .DS_Store
 output/playwright/
 .playwright-cli/
+
+.superpowers/
